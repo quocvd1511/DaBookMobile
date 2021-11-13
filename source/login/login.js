@@ -12,25 +12,25 @@ export default function Login()
             <View>
 
                 <View style={{alignSelf: 'center'}}>
-                    <Image style={{width: 100, height: 100}} source={require('../asset/icon/logo.png')}/>
+                    <Image style={{width: 120, height: 120}} source={require('../asset/icon/logo.png')}/>
                     <Text style={{marginBottom: 20, fontSize: 20, fontWeight: 'bold'}}>Đăng nhập</Text>
                 </View>
 
                 <View>
-                    <Text>Tên đăng nhập</Text>
+                    
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                         <View style={styles.icon_input}>
-                            <Image style={{height: 20, width: 20, marginLeft: 5, tintColor: 'white'}} source={require('../asset/icon/user1.png')}/>
+                            <Image style={{height: 20, width: 20, marginLeft: 5, tintColor: '#333'}} source={require('../asset/icon/user1.png')}/>
                         </View>
                         <TextInput style={styles.text_input} placeholder='Tên đăng nhập'></TextInput>
                     </View>
                 </View>
 
                 <View style={{marginTop:20}}>
-                    <Text>Mật khẩu</Text>
+                    
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                         <View style={styles.icon_input}>
-                            <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'white'}} source={require('../asset/icon/password.png')}/>
+                            <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333'}} source={require('../asset/icon/password.png')}/>
                         </View>
                         <TextInput style={styles.pass_input} placeholder='Mật khẩu'></TextInput>
                     </View>
@@ -47,16 +47,17 @@ export default function Login()
                 <Pressable
                     style={styles.button_login}
                     >
-                    <Text style={{fontSize: 18, fontWeight: 'bold', color: 'white'}}>Xác Nhận</Text>
+                    <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white'}}>Xác Nhận</Text>
+                </Pressable>
+                
+                <Pressable
+                    style={styles.button_login_fb}
+                    >
+                    <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white'}}>Đăng nhập với Facebook</Text>
+                    
                 </Pressable>
 
                 <View style={{marginTop: 50}}>
-                    <Text>Đăng nhập với</Text>
-                </View>
-                
-                <Image style={styles.icon_facebook} source={require('../asset/icon/facebook.png')}/>
-
-                <View style={{marginTop: 60}}>
                     <Text>Chưa có tài khoản? Đăng ký ngay</Text>
                 </View>
 
@@ -66,16 +67,16 @@ export default function Login()
 
 const styles= StyleSheet.create({
     main:{
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#63B8FF',
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
     },
 
     text_input:{
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#fff',
         width: 285,
-        fontSize: 15,
+        fontSize: 16,
         height: 40,
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
@@ -93,10 +94,10 @@ const styles= StyleSheet.create({
     },
 
     pass_input:{
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#fff',
         width: 285,
         height: 40,
-        fontSize: 15,
+        fontSize: 16,
         borderTopRightRadius: 10,
         borderBottomRightRadius: 10,
         justifyContent:'center',
@@ -118,7 +119,29 @@ const styles= StyleSheet.create({
         fontSize: 15,
         marginTop: 15,
         width: 300,
-        height: 50,
+        height: 40,
+        alignItems:'center',
+        justifyContent:'center',
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 9,
+        },
+        shadowOpacity: 0.48,
+        shadowRadius: 11.95,
+        
+        elevation: 18,
+    },
+
+    button_login_fb:{
+        backgroundColor: '#3A5A98',
+        width: 300,
+        borderRadius: 30,
+        fontSize: 15,
+        marginTop: 15,
+        width: 300,
+        height: 40,
         alignItems:'center',
         justifyContent:'center',
 
@@ -134,7 +157,7 @@ const styles= StyleSheet.create({
     },
 
     icon_input:{
-        backgroundColor:'dodgerblue',
+        backgroundColor:'#fff',
         height:40, 
         justifyContent: 'center',
         alignItems:'center',

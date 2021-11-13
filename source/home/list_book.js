@@ -2,21 +2,24 @@ import * as React from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimensions, ScrollView,LogBox } from 'react-native';
 import axios from 'axios';
 
+const DATA = [
+  {tensach:"Harry Potter và Đứa trẻ bị nguyền rủa", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"}
+]
 
-function ListBook() 
+function ListBook()
 {
   //---------Kết nối Database lấy dữ liệu-------------------------    
-  const [DATA,setDATA] = React.useState([])
-  React.useEffect(() => 
-  {
-    async function fetchData(){
-      const request = await axios.get('http://192.168.1.4:3000/')
-      setDATA(request.data)
-      return request.data
-    }
-    fetchData();
+  // const [DATA,setDATA] = React.useState([])
+  // React.useEffect(() => 
+  // {
+  //   async function fetchData(){
+  //     const request = await axios.get('http://192.168.1.4:3000/')
+  //     setDATA(request.data)
+  //     return request.data
+  //   }
+  //   fetchData();
 
-  },['http://192.168.1.4:3000/'])
+  // },['http://192.168.1.4:3000/'])
 
   //---------------------------------------------------------------
 
