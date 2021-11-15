@@ -3,6 +3,7 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimen
 import axios from 'axios';
 
 const DATA = [
+  {tensach:"Harry Potter và Đứa trẻ bị nguyền rủa", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"},
   {tensach:"Harry Potter và Đứa trẻ bị nguyền rủa", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"}
 ]
 

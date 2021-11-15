@@ -4,12 +4,12 @@ import { Dimensions, StyleSheet, Text, View, Image } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 
 const {width} = Dimensions.get("window")
-const height = width * 0.5
+const height = width * 0.4
 
 let list_slide=[
-    'https://wallpaperaccess.com/full/1782494.jpg',
-    'https://wallpaperforu.com/wp-content/uploads/2020/08/vector-wallpaper-20082715094222-scaled.jpg',
-    'https://wallpaperaccess.com/full/215574.jpg'
+    <Image source={require('../asset/icon/banner6.png')}/>,
+    <Image source={require('../asset/icon/banner7.png')}/>,
+    <Image source={require('../asset/icon/banner8.png')}/>
 ]
 
 export default function Slider()
@@ -19,20 +19,14 @@ export default function Slider()
             <ScrollView 
                 horizontal 
                 pagingEnabled 
-                style={{width,height}}
+                style={{width, height}}
                 showsHorizontalScrollIndicator={false}
                 >
-                {
-                    list_slide.map((image, index) => (
-                        <Image
-                            key={index}
-                            source={{uri: image}}
-                            style={{width,height}}
-                            />
-                    ))
-                }
+                <Image style={{width, height}} source={require('../asset/icon/banner6.png')}/>
+                <Image style={{width, height}} source={require('../asset/icon/banner7.png')}/>
+                <Image style={{width, height}} source={require('../asset/icon/banner8.png')}/>
             </ScrollView>
-            <View style={{flexDirection: 'row', position:'absolute',bottom:0, alignSelf:'center'}}>
+            <View style={{flexDirection: 'row', position:'absolute', bottom:0, alignSelf:'center'}}>
                 {
                     list_slide.map((i,k) => (
                         <Text key={k} style={{color:'white',margin: 10}}>⬤</Text>

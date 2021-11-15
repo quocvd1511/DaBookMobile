@@ -29,7 +29,7 @@ export default function TabRanks() {
     screenOptions={
     {
       tabBarScrollEnabled: true,
-      tabBarStyle: {backgroundColor: 'dodgerblue', height: 35, justifyContent: 'center'}
+      tabBarStyle: {backgroundColor: 'dodgerblue', height: 35, justifyContent: 'center',}
     }}
     >
       <Tab.Screen name="Tất cả" component={ListRank} />

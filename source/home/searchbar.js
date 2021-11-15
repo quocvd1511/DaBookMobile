@@ -11,9 +11,9 @@ export default function SearchBar() {
     return(
         <View style={styles.main}>
                 <Image style={styles.logo} source={require('../asset/icon/logo.png')}/>
-                <TextInput style={styles.text_input} placeholder='Tìm kiếm sách của bạn...'></TextInput>
+                <TextInput style={styles.text_input} placeholder='  Tìm kiếm sách của bạn...'></TextInput>
                 <Pressable style={styles.button}>
-                    <Image style={{height:35, width: 35, tintColor:'white'}} source={require('../asset/icon/icon_search.png')}/>
+                    <Image style={{height:38, width: 38, tintColor:'white', marginRight: 10,}} source={require('../asset/icon/icon_search.png')}/>
                 </Pressable>
         </View>
     )
@@ -22,16 +22,17 @@ export default function SearchBar() {
 
 const styles=StyleSheet.create({
     main:{
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#1A94FF',
         padding:5,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
     },
     logo:{
-        height: 50,
-        width: 50,
+        height: 68,
+        width: 68,
         marginRight: 10,
+        marginLeft: 10,
     },
     search_input:{
         flexDirection: 'row',
@@ -40,11 +41,12 @@ const styles=StyleSheet.create({
 
     text_input:{
         backgroundColor: 'white',
-        width: 250,
+        width: 230,
         height: 30,
         right: 5,
-        borderRadius: 5,
-        padding: 5
+        borderRadius: 30,
+        padding: 6,
+      
     },
 
     button:{
