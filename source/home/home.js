@@ -18,7 +18,6 @@ export default function HomeScreen() {
             <ListTop/>
             <Slider/>
             <ListTopSale/>
-            <ListHint/>
             <ListBook/>
         </ScrollView>
     </View>
