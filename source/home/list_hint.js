@@ -1,18 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimensions, ScrollView } from 'react-native';
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const DATA = [
-{id :1, name: 'Harry Potter And Something Else I Known', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
-{id :2, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
-{id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
-{id:4, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
-{id:5, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
-{id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
-];
 
+<<<<<<< HEAD
 const Item = ({ name,price,img }) => (
   <View>
       <View style={styles.item}>
@@ -24,21 +14,36 @@ const Item = ({ name,price,img }) => (
 );
 
 const ListHint = () => 
+=======
+function ListHint() 
+>>>>>>> 23318e498f19a863572e681c75d97bad9a1800ae
 {
-  const renderItem = ({ item}) => (
-    <Item name={item.name} price={item.price} img={item.img}/>
-  );
+  const [Book, setBook] = useState([
+    {id :1, name: 'Harry Potter And Something Else I Known', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
+    {id :2, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
+    {id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
+    {id:4, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
+    {id:5, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
+    {id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
+  ])
 
   return (
       <View style={styles.container}>
       <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15}}>Gợi ý giành cho bạn</Text>
-      <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        scrollEnabled={true}
-        horizontal
-      />
+      <ScrollView horizontal={true}>
+        {
+          Book.map((item) => {
+            return(
+              <View key={item.id}>
+                <View style={styles.item}>
+                  <Image style={{height:150, width:100}} source={{uri:item.img}}/>
+                </View>
+                <Text style={styles.name_item}>{item.name}</Text>
+              </View>
+            )
+          })
+        }
+      </ScrollView>
     </View>
   );
 }
