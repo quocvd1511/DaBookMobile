@@ -19,7 +19,6 @@ const Item = ({ name,price,img }) => (
         <Image style={{height:150, width:100}} source={{uri:img}}/>
       </View>
       <Text style={styles.name_item}>{name}</Text>
-
   </View>
   
 );
