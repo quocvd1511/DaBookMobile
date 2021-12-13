@@ -28,12 +28,47 @@ export default function book_detail_home(){
         {id:5, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
         {id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
     ])
+
+    const [detail_book, setdetail_book] = useState(
+        {id :1, 
+        name: 'Tuổi trẻ đáng giá bao nhiêu ?', 
+        price:'79.000 đ', 
+        img:'https://nld.mediacdn.vn/2018/3/24/sach-1521858607292758740290.jpg',
+        tacgia: 'Rosie Nguyễn',
+        theloai:'Động lực',
+        nhaXB: 'Nhà xuất bán trẻ',
+        namSX:'2019',
+        ngonngu: 'Tiếng Việt',
+        hinhthuc: 'Bìa mềm',
+        tomtat: 'Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu',
+        soluong: 1,
+    },
+    )
+
+    function quantyplus(){
+        temp = detail_book.soluong + 1
+        setdetail_book(prevState =>({
+            ...prevState,
+            soluong: temp
+        }))
+    }
+
+    function quantyminus(){
+        if (detail_book.soluong >= 2){
+            temp = detail_book.soluong - 1
+            setdetail_book(prevState =>({
+            ...prevState,
+            soluong: temp
+        }))
+        } 
+    }
+    
     return(
         <ScrollView style = {styles.views}>
             <Image style = {styles.image} source={{uri:'https://nld.mediacdn.vn/2018/3/24/sach-1521858607292758740290.jpg'}}/>
             <View style = {styles.view}>
-                <Text style = {styles.name}>Tuổi trẻ đáng giá bao nhiêu?</Text>
-                <Text style = {styles.newprice}>79.000 đ     <Text style = {styles.price}>107.000 đ</Text></Text>
+                <Text style = {styles.name}>{detail_book.name}</Text>
+                <Text style = {styles.newprice}>{detail_book.price}     <Text style = {styles.price}>107.000 đ</Text></Text>
                 <View style = {styles.viewstar}>
                     <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
                     <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
@@ -51,10 +86,13 @@ export default function book_detail_home(){
                             marginBottom={-5}
                             marginTop={-5}
                             borderTopLeftRadius={5}
-                            borderBottomLeftRadius={5}>
-                            <Text style={{color:'#fff', fontSize: 20, margin: 5, textAlign:'center'}} >+</Text>
+                            borderBottomLeftRadius={5}
+                            onPress={quantyminus}>
+                            <Text style={{color:'#fff', fontSize: 25, marginBottom: 6, textAlign:'center'}} >-</Text>
                         </Pressable>
-                        <TextInput style={{width: 40, color:'#000', height: 39, fontSize: 16, textAlign:'center', borderWidth: 1, borderStyle: 'solid',borderColor: '#FF6600'}}>1</TextInput>
+                        
+                        <Text style={{width: 40, color:'#000', height: 39.5, fontSize: 17, lineHeight:40, textAlign:'center', alignItems:'center', borderWidth: 1, borderStyle: 'solid', borderColor: '#FF6600'}}>{detail_book.soluong}</Text>
+                        
                         <Pressable 
                             backgroundColor={'#FF6600'}
                             width={40}
@@ -62,8 +100,9 @@ export default function book_detail_home(){
                             marginBottom={-5}
                             marginTop={-5}
                             borderTopRightRadius={5}
-                            borderBottomRightRadius={5}>
-                            <Text style={{color:'#fff', fontSize: 25, marginBottom: 6, textAlign:'center'}} >-</Text>
+                            borderBottomRightRadius={5}
+                            onPress={quantyplus}>
+                            <Text style={{color:'#fff', fontSize: 20, margin: 5, textAlign:'center'}} >+</Text>
                         </Pressable>
                     </View>
                     <View>
@@ -96,22 +135,22 @@ export default function book_detail_home(){
                 <Text style={{margin: 10, color:'black', fontWeight:'500',fontSize:16}}>Thông tin sách</Text>
                 <View style = {styles.bookdetail_infos}>
                     <Text style = {styles.bookdetail_info}> Tên sách</Text>
-                    <Text style={{maxWidth: 220,}}>Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu</Text>
+                    <Text style={{maxWidth: 220,}}>{detail_book.name}</Text>
                 </View>
 
                 <View style = {styles.bookdetail_infos}>
                     <Text style = {styles.bookdetail_info}> Tác giả</Text>
-                    <Text>Rosie Nguyễn</Text>
+                    <Text>{detail_book.tacgia}</Text>
                 </View >
                 
                 <View style = {styles.bookdetail_infos}>
                     <Text style = {styles.bookdetail_info}> Thể loại</Text>
-                    <Text>Động lực</Text>
+                    <Text>{detail_book.theloai}</Text>
                 </View>
 
                 <View style = {styles.bookdetail_infos}>
                     <Text style = {styles.bookdetail_info}> Nhà XB</Text>
-                    <Text>Nhà xuất bản trẻ</Text>
+                    <Text>{detail_book.nhaXB}</Text>
                 </View>
 
                 <View style = {styles.bookdetail_infos}>
@@ -121,18 +160,18 @@ export default function book_detail_home(){
 
                 <View style = {styles.bookdetail_infos}>
                     <Text style = {styles.bookdetail_info}> Ngôn ngữ</Text>
-                    <Text>Tiếng Việt</Text>
+                    <Text>{detail_book.ngonngu}</Text>
                 </View>
 
                 <View style = {styles.bookdetail_infos}>
                     <Text style = {styles.bookdetail_info}> Hình thức bìa</Text>
-                    <Text>Bìa mềm</Text>
+                    <Text>{detail_book.hinhthuc}</Text>
                 </View>
          
                 <View>
                     <Text style={{margin: 10, color:'black', fontWeight:'500',fontSize:14}}>Tóm tắt</Text>
-                    <Text style={{marginRight: 7, marginLeft: 3,}}>Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu
-                    Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu
+                    <Text style={{marginRight: 7, marginLeft: 3,}}>
+                        {detail_book.tomtat}
                     </Text>
                 </View>
             </View>
@@ -152,7 +191,7 @@ export default function book_detail_home(){
                                 numberOfLines={2}
                                 ellipsizeMode='tail'>{item.name}</Text>
                                 <View style={styles.viewinfo}>
-                                    <Text style={styles.newprice}>179.000 đ</Text>
+                                    <Text style={styles.bprice}>179.000 đ</Text>
                                 </View>
                             </View>
                         </View>
@@ -312,7 +351,7 @@ const styles = StyleSheet.create({
         height: 50,
     },
 
-    newprice: {
+    bprice: {
         color: 'red',
         marginLeft: 4,
         marginRight: 30,

@@ -7,7 +7,9 @@ function ListBook()
 {
   const [Book, setBook] = useState([
       {key: '1', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa Harry Potter và Đứa trẻ bị nguyền rủa ", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"},
-      {key: '2', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"}
+      {key: '2', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"},
+      {key: '3', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa Harry Potter và Đứa trẻ bị nguyền rủa ", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"},
+      {key: '4', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"}
   ])
   //---------Kết nối Database lấy dữ liệu-------------------------    
   // const [Book,setBook] = React.useState([])
@@ -33,19 +35,19 @@ function ListBook()
             return(
               <View style={styles.item}>
                 <Image style={styles.image} source={{uri:item.hinhanh}}/>
+                <View style={styles.sale_off}>
+                  <Text style={styles.sale_off_percent}>27%</Text>
+                </View>
                 <View  style={{paddingLeft:5 }}>
                   <Text style={styles.book_name}
                         numberOfLines={2}
                         ellipsizeMode='tail'>{item.tensach}</Text>
-                  <Text></Text>
-                  
                   <View style={{margin:10, marginTop:-4, flexDirection:'row', alignItems:'flex-start'}}>
                     <Image style={{height:24,width:24,tintColor:'dodgerblue'}} source={require('../asset/icon/cost.png')}/>
                     <Text style={styles.book_price}>  {item.giaban} đ</Text>
                   </View>
                 </View>
               </View>
-
             )
           })
           }
@@ -92,6 +94,24 @@ const styles = StyleSheet.create({
     height: (windowWidth - 18) /2,
     width: (windowWidth - 18) /2,
   },
+
+  sale_off :{
+    marginTop: 0,
+    marginRight: 0,
+    width: 40,
+    height: 36,
+    textAlign:'center',
+    backgroundColor: '#ffd83f',
+  },
+
+  sale_off_percent :{
+    color: '#EE4D2D',
+    marginTop: 3,
+    fontWeight: '600',
+    fontSize: 12,
+    lineHeight: 12,
+  },
+
 
   book_name: {
     fontWeight: '500', 
