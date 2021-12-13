@@ -1,12 +1,31 @@
 import * as React from 'react'
-import {View,Text, Image,StyleSheet, Pressable} from 'react-native'
+import {View,Text, Image,StyleSheet, Pressable, ToastAndroid} from 'react-native'
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import CheckBox from '@react-native-community/checkbox';
 import { TextInput } from 'react-native-gesture-handler'
-
+import axios from 'axios';
 
 export default function Login()
 {
+    const [Username,  setUsername] = React.useState('')
+    const [Password, setPassword] = React.useState('')
+    const [User,setUser] = React.useState([])
+
+
+    async function fetchData(){
+        const request = await axios.post('http://192.168.1.9:3000',{
+            username: Username,
+            password: Password,
+      })
+      console.log("Ten dang nhap: "+Username)
+      console.log("Mat khau: "+ Password)
+      setUser(request.data)
+      ToastAndroid.show(request.data, ToastAndroid.SHORT)
+      console.log(User)
+    }
+
+
+
     return(
         <View  style={styles.main}>
             <View>
@@ -22,7 +41,7 @@ export default function Login()
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20, marginLeft: 5, tintColor: '#333'}} source={require('../asset/icon/user1.png')}/>
                         </View>
-                        <TextInput style={styles.text_input} placeholder='Tên đăng nhập'></TextInput>
+                        <TextInput style={styles.text_input} onChangeText={text => setUsername(text)} placeholder='Tên đăng nhập'></TextInput>
                     </View>
                 </View>
 
@@ -32,7 +51,7 @@ export default function Login()
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333'}} source={require('../asset/icon/password.png')}/>
                         </View>
-                        <TextInput style={styles.pass_input} placeholder='Mật khẩu'></TextInput>
+                        <TextInput style={styles.pass_input} onChangeText={text => setPassword(text)} placeholder='Mật khẩu'></TextInput>
                     </View>
                 </View>
 
@@ -46,6 +65,7 @@ export default function Login()
 
                 <Pressable
                     style={styles.button_login}
+                    onPress={fetchData}
                     >
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white'}}>Xác Nhận</Text>
                 </Pressable>
