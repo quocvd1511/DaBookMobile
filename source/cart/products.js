@@ -21,8 +21,8 @@ class ListProduct extends Component {
         {id :2, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg', amountTaken: 4},
         {id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg', amountTaken: 2},
         {id:4, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg', amountTaken: 1},
-        // {id:5, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg', amountTaken: 3},
-        // {id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg', amountTaken: 3},
+        {id:5, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg', amountTaken: 3},
+        {id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg', amountTaken: 3},
         ],
       ids: [],
     };
@@ -125,7 +125,7 @@ class ListProduct extends Component {
         <View style={styles.bottomView}>
           <View style={styles.textBottom}>
           <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
-          <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>50000 đ</Text>
+          <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>0 đ</Text>
           </View>
           <TouchableOpacity style={styles.buyButton}>
               <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Mua Hàng</Text>
@@ -186,7 +186,6 @@ const styles = StyleSheet.create({
     backgroundColor:'#C2FFF9',
     bottom: 0,
     alignItems: 'center',
-    flex: 1,
   },
   textBottom: {
     fontWeight: '600',
