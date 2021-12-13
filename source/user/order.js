@@ -18,7 +18,7 @@ export default function Order()
                 </View>
 
                 <View style={styles.main_category}>
-                    <Image style={styles.each_category_icon} source={require('../asset/icon/delivery.png')}/>
+                    <Image style={styles.each_category_icon} source={require('../asset/icon/confirm.png')}/>
                     <Text>Chờ xác nhận</Text>
                 </View>
             </View>
