@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimensions, ScrollView } from 'react-native';
 
 
-<<<<<<< HEAD
 const Item = ({ name,price,img }) => (
   <View>
       <View style={styles.item}>
@@ -14,9 +13,6 @@ const Item = ({ name,price,img }) => (
 );
 
 const ListHint = () => 
-=======
-function ListHint() 
->>>>>>> 76ea2ba3e697a8a91db6422144abea482e343479
 {
   const [Book, setBook] = useState([
     {id :1, name: 'Harry Potter And Something Else I Known', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
