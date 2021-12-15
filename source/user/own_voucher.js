@@ -5,9 +5,9 @@ export default function OwnVoucher()
 {
     return(
         <View>
-            <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15,marginTop: 40}}>Voucher sở hữu</Text>
+            <Text style={{paddingLeft: 5, color:'black', fontWeight:'600', fontSize:15, margin: 10}}>Voucher sở hữu</Text>
             <View style={styles.voucher_button}>
-                <Image style={styles.icon_style} source={require('../asset/icon/freeship.png')}/>
+                <Image style={styles.icon_free} source={require('../asset/icon/freeship.png')}/>
                 <Text style={styles.text_style}>Voucher Free Ship</Text>
             </View>
             <View style={styles.voucher_button}>
@@ -20,7 +20,7 @@ export default function OwnVoucher()
 
 const styles=StyleSheet.create({
     main:{
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#FFCC99',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -33,12 +33,11 @@ const styles=StyleSheet.create({
         },
         shadowOpacity: 0.36,
         shadowRadius: 6.68,
-        
         elevation: 11,
     },
 
     voucher_button:{
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#FFCC99',
         flexDirection: 'row',
         alignItems: 'center',
         marginLeft:10,
@@ -53,11 +52,16 @@ const styles=StyleSheet.create({
         },
         shadowOpacity: 0.36,
         shadowRadius: 6.68,
-        
         elevation: 11,
     },
 
-
+    icon_free: {
+        height: 35,
+        width: 35,
+        marginRight: 10,
+        marginLeft:15,
+        tintColor: '#333',
+    },
 
     each_category_icon:{
         height: 40, 
@@ -70,17 +74,21 @@ const styles=StyleSheet.create({
         margin: 15,
     },
 
-    icon_style:
-    {
+    icon_style:{
         height: 30,
         width: 30,
         marginRight: 10,
         marginLeft:15,
+        tintColor: '#333',
     },
 
     text_style:{
-        fontSize: 15,
-        fontWeight: 'bold',
+        paddingLeft: 5,
+        color:'black',
+        fontWeight:'600',
+        fontSize:15,
+        marginTop: 5,        
+        marginBottom: 5,
     }
 
 })

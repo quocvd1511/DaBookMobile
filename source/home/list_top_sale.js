@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     width: 125,
     height: 125,
-    paddingtop: 0,
+    paddingTop: 0,
     bordertopleftradius: 2,
     bordertoprightradius: 2,
   },
