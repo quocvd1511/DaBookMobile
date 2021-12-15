@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
 
   item: {
     position: 'relative',
-    width: (windowWidth - 18) /2,
+    width: (windowWidth - 14) /2,
     paddingTop: 10,
     marginTop: 5,
     backgroundColor: 'white',

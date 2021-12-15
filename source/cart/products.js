@@ -92,13 +92,13 @@ class ListProduct extends Component {
               </Text>
             </View>
             <View style={{flexDirection:'row', alignItems:'center',  marginRight: 0, padding: 10 }}>
-                           <TouchableOpacity onPress={()=>this.onChangeQual(index,false)}>
-                             <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
-                           </TouchableOpacity>
-                           <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:18}}>{item.amountTaken}</Text>
-                           <TouchableOpacity onPress={()=>this.onChangeQual(index,true)}>
-                             <Icon name="ios-add-circle" size={30} color={"#33c37d"} />
-                           </TouchableOpacity>
+              <TouchableOpacity onPress={()=>this.onChangeQual(index,false)}>
+                <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
+              </TouchableOpacity>
+              <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:18}}>{item.amountTaken}</Text>
+              <TouchableOpacity onPress={()=>this.onChangeQual(index,true)}>
+                <Icon name="ios-add-circle" size={30} color={"#33c37d"} />
+              </TouchableOpacity>
             </View>
           </View>
           <TouchableOpacity style={{flexDirection:'row', alignItems:'center',  marginRight: 0, paddingLeft: 50 }}>

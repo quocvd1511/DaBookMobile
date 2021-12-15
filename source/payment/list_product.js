@@ -7,105 +7,43 @@ import {
   Image,
   SafeAreaView,
   FlatList,
+  Dimensions
 } from 'react-native';
-import { CheckBox } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 
+
+const windowWidth = Dimensions.get('window').width;
 class ListProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
       calls: [
-        {id :1, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg', amountTaken: 3},
+        {id :1, name: 'Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg', amountTaken: 3},
         {id :2, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg', amountTaken: 4},
         {id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg', amountTaken: 2},
         {id:4, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg', amountTaken: 1},
-        {id:5, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg', amountTaken: 3},
-        {id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg', amountTaken: 3},
         ],
       ids: [],
     };
   }
 
-//   isChecked = (itemId) => {
-//     const isThere = this.state.ids.includes(itemId);
-//     return isThere;
-//   };
-
-//   toggleChecked = (itemId) => {
-//     const ids = [...this.state.ids, itemId];
-
-//     if (this.isChecked(itemId)) {
-//       this.setState({
-//         ...this.state,
-//         ids: this.state.ids.filter((id) => id !== itemId),
-//       });
-//     } else {
-//       this.setState({
-//         ...this.state,
-//         ids,
-//       });
-//     }
-//   };
-
-//   onChangeQual(index,type)
-//   {
-//     const calls = this.state.calls
-//     let cantd = calls[index].amountTaken;
-
-//     if (type) {
-//      cantd = cantd + 1
-//      calls[index].amountTaken = cantd
-//      this.setState({calls:calls})
-//     }
-//     else if (type==false&&cantd>=2){
-//      cantd = cantd - 1
-//      calls[index].amountTaken = cantd
-//      this.setState({calls:calls})
-//     }
-//     else if (type==false&&cantd==1){
-//       calls.splice(index,1)
-//      this.setState({calls:calls})
-//     } 
-//   }
-
   renderItem = ({ item, index }) => {
     return (
       <TouchableOpacity>
         <View style={styles.row}>
-        {/* <CheckBox
-            // iconRight
-            checkedIcon="check-square"
-            uncheckedIcon="square-o"
-            checked={this.isChecked(item.id)}
-            onPress={() => this.toggleChecked(item.id)}
-          /> */}
         <Image source={{uri:item.img}} style={styles.imageStyle} />
           <View>
             <View style={styles.nameContainer}>
-              <Text style={styles.nameTxt}>{item.name}</Text>
+              <Text style={styles.nameTxt}  
+                  numberOfLines={2}
+                  ellipsizeMode='tail'>{item.name}</Text>
             </View>
             <View style={styles.end}>
-              <Text style={styles.priceStyle}>
-              {item.price} đ
-              </Text>
-              <Text>Số lượng: {item.amountTaken}</Text>
+              <Text>SL: {item.amountTaken}</Text>
+              <Text style={styles.priceStyle}>{item.price} đ</Text>
             </View>
-
-            {/* <View style={{flexDirection:'row', alignItems:'center',  marginRight: 0, padding: 10 }}>
-                           <TouchableOpacity onPress={()=>this.onChangeQual(index,false)}>
-                             <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
-                           </TouchableOpacity>
-                           <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:18}}>{item.amountTaken}</Text>
-                           <TouchableOpacity onPress={()=>this.onChangeQual(index,true)}>
-                             <Icon name="ios-add-circle" size={30} color={"#33c37d"} />
-                           </TouchableOpacity>
-            </View> */}
+            
           </View>
-          {/* <TouchableOpacity style={{flexDirection:'row', alignItems:'center',  marginRight: 0, paddingLeft: 50 }}>
-                <Icon name="trash" size={25} color={"#33c37d"} />
-          </TouchableOpacity> */}
         </View>
       </TouchableOpacity>
     );
@@ -115,7 +53,12 @@ class ListProduct extends Component {
   render() {
     return (
       <SafeAreaView>
-        <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
+        <Text style={{paddingLeft: 10, color:'black', fontWeight:'700',fontSize:20,marginTop: 10, marginBottom: 5}}>Thông tin giỏ hàng</Text>
+        <Text style={{height: 90, padding: 10, paddingTop:0, paddingBottom:0, backgroundColor:'#CCFFCC', color:'#339900', fontWeight:'500',fontSize:16, marginTop: 5, marginBottom: 5, borderRadius: 5,borderStyle: 'solid', borderWidth: 1, borderColor: '#00CC00'}}>
+          <Image style={styles.icon_dabookdeli} source={require('../asset/icon/dabook_deli.png')}/>
+          Giao hàng trong vòng 5 ngày
+        </Text>
+
         <FlatList style={{marginBottom: 55}}
           extraData={this.state}
           data={this.state.calls}
@@ -135,6 +78,7 @@ class ListProduct extends Component {
         </View>
       </SafeAreaView>
       
+      
     );
   }
 }
@@ -143,43 +87,61 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor: '#dcdcdc',
-    backgroundColor: '#fff',
+    borderColor: '#1da1f2',
+    backgroundColor: '#f0f8ff',
     borderBottomWidth: 1,
     padding: 10,
     paddingLeft: 0,
+    paddingRight: 0,
   
   },
+
   nameContainer: {
     flexDirection: 'row',
-    justifyContent: 'center',
-    // width: 270,
   },
+
   nameTxt: {
     marginLeft: 10,
+    width: 200,
     fontWeight: '600',
-    color: '#222',
-    fontSize: 20,
+    color: '#333',
+    fontSize: 18,
   },
+
   end: {
+    marginLeft: 10,
+    marginTop: 6,
+    display:'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
+
   priceStyle: {
     fontWeight: '600',
     color: 'red',
-    paddingLeft: 5,
     width: 90,
+    marginRight: 0,
     alignItems: 'center',
-    marginTop: 3,
     borderRadius: 3,
-    fontSize: 18,
+    fontSize: 17,
   },
+
   imageStyle: {
-    width: 85, 
-    height: 120, 
-    marginRight: 20,
-    marginLeft: 20,
+    resizeMode: 'contain',
+    width: 100, 
+    height: 100, 
+    marginRight: 0,
+    marginLeft: 10,
   },
+
+  icon_dabookdeli: {
+    resizeMode: 'contain',
+    width: 130, 
+    height: 56, 
+    marginTop: -5,
+  },
+
   bottomView:{
     flexDirection: 'row',
     position: 'absolute',
@@ -189,12 +151,14 @@ const styles = StyleSheet.create({
     bottom: 0,
     alignItems: 'center',
   },
+
   textBottom: {
     fontWeight: '600',
     paddingLeft: 30,
     fontSize: 25,
     marginRight: 130,
   },
+
   buyButton: {
     backgroundColor: '#FFE652',
     width: 150,
