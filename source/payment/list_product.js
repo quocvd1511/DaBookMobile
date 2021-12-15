@@ -28,59 +28,59 @@ class ListProduct extends Component {
     };
   }
 
-  isChecked = (itemId) => {
-    const isThere = this.state.ids.includes(itemId);
-    return isThere;
-  };
+//   isChecked = (itemId) => {
+//     const isThere = this.state.ids.includes(itemId);
+//     return isThere;
+//   };
 
-  toggleChecked = (itemId) => {
-    const ids = [...this.state.ids, itemId];
+//   toggleChecked = (itemId) => {
+//     const ids = [...this.state.ids, itemId];
 
-    if (this.isChecked(itemId)) {
-      this.setState({
-        ...this.state,
-        ids: this.state.ids.filter((id) => id !== itemId),
-      });
-    } else {
-      this.setState({
-        ...this.state,
-        ids,
-      });
-    }
-  };
+//     if (this.isChecked(itemId)) {
+//       this.setState({
+//         ...this.state,
+//         ids: this.state.ids.filter((id) => id !== itemId),
+//       });
+//     } else {
+//       this.setState({
+//         ...this.state,
+//         ids,
+//       });
+//     }
+//   };
 
-  onChangeQual(index,type)
-  {
-    const calls = this.state.calls
-    let cantd = calls[index].amountTaken;
+//   onChangeQual(index,type)
+//   {
+//     const calls = this.state.calls
+//     let cantd = calls[index].amountTaken;
 
-    if (type) {
-     cantd = cantd + 1
-     calls[index].amountTaken = cantd
-     this.setState({calls:calls})
-    }
-    else if (type==false&&cantd>=2){
-     cantd = cantd - 1
-     calls[index].amountTaken = cantd
-     this.setState({calls:calls})
-    }
-    else if (type==false&&cantd==1){
-      calls.splice(index,1)
-     this.setState({calls:calls})
-    } 
-  }
+//     if (type) {
+//      cantd = cantd + 1
+//      calls[index].amountTaken = cantd
+//      this.setState({calls:calls})
+//     }
+//     else if (type==false&&cantd>=2){
+//      cantd = cantd - 1
+//      calls[index].amountTaken = cantd
+//      this.setState({calls:calls})
+//     }
+//     else if (type==false&&cantd==1){
+//       calls.splice(index,1)
+//      this.setState({calls:calls})
+//     } 
+//   }
 
   renderItem = ({ item, index }) => {
     return (
       <TouchableOpacity>
         <View style={styles.row}>
-        <CheckBox
+        {/* <CheckBox
             // iconRight
             checkedIcon="check-square"
             uncheckedIcon="square-o"
             checked={this.isChecked(item.id)}
             onPress={() => this.toggleChecked(item.id)}
-          />
+          /> */}
         <Image source={{uri:item.img}} style={styles.imageStyle} />
           <View>
             <View style={styles.nameContainer}>
@@ -90,8 +90,10 @@ class ListProduct extends Component {
               <Text style={styles.priceStyle}>
               {item.price} đ
               </Text>
+              <Text>Số lượng: {item.amountTaken}</Text>
             </View>
-            <View style={{flexDirection:'row', alignItems:'center',  marginRight: 0, padding: 10 }}>
+
+            {/* <View style={{flexDirection:'row', alignItems:'center',  marginRight: 0, padding: 10 }}>
                            <TouchableOpacity onPress={()=>this.onChangeQual(index,false)}>
                              <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
                            </TouchableOpacity>
@@ -99,11 +101,11 @@ class ListProduct extends Component {
                            <TouchableOpacity onPress={()=>this.onChangeQual(index,true)}>
                              <Icon name="ios-add-circle" size={30} color={"#33c37d"} />
                            </TouchableOpacity>
-            </View>
+            </View> */}
           </View>
-          <TouchableOpacity style={{flexDirection:'row', alignItems:'center',  marginRight: 0, paddingLeft: 50 }}>
+          {/* <TouchableOpacity style={{flexDirection:'row', alignItems:'center',  marginRight: 0, paddingLeft: 50 }}>
                 <Icon name="trash" size={25} color={"#33c37d"} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </TouchableOpacity>
     );
@@ -128,7 +130,7 @@ class ListProduct extends Component {
           <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>0 đ</Text>
           </View>
           <TouchableOpacity style={styles.buyButton}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Mua Hàng</Text>
+              <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Thanh toán</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -160,13 +162,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   end: {
-    flexDirection: 'row',
     alignItems: 'center',
   },
   priceStyle: {
     fontWeight: '600',
     color: 'red',
-    paddingLeft: 10,
+    paddingLeft: 5,
     width: 90,
     alignItems: 'center',
     marginTop: 3,
@@ -176,7 +177,8 @@ const styles = StyleSheet.create({
   imageStyle: {
     width: 85, 
     height: 120, 
-    marginRight: 20
+    marginRight: 20,
+    marginLeft: 20,
   },
   bottomView:{
     flexDirection: 'row',

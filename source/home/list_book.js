@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { Component } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimensions, ScrollView,LogBox } from 'react-native';
 //import glamorous, {ThemeProvider} from 'glamorous'
 //import {Div, H2} from 'glamorous'
@@ -57,10 +57,9 @@ function ListBook()
           }
       </ScrollView>
     </View>
-    
-  
-  );
-}
+    );
+  }
+
 
 
 const styles = StyleSheet.create({
