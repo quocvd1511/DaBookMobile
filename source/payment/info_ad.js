@@ -5,20 +5,22 @@ export default function Info()
 {
     return(
         <View>
-            <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 20}}>Thông tin nhận hàng</Text>
-            <View style={styles.main}>
-                <View style={styles.type_user}>
-                <Image style={styles.icon_style} source={require('../asset/icon/location.png')}/>
-                    <Text style={{fontSize: 18}}>Hồng Nguyễn</Text>
-                </View>
+            <Text style={{paddingLeft: 10, color:'black', fontWeight:'700',fontSize:20,marginTop: 20}}>Thông tin nhận hàng</Text>
+            <View style={{backgroundColor:'#fff'}}>
+                <View style={styles.main}>
+                    <View style={styles.type_user}>
+                    <Image style={styles.icon_style} source={require('../asset/icon/location.png')}/>
+                        <Text style={{fontSize: 18}}>Hồng Nguyễn</Text>
+                    </View>
 
-                <View style={styles.type_numberphone}>
-                <Text style={{fontSize: 18}}>SĐT: 0123456777</Text>
+                    <View style={styles.type_numberphone}>
+                    <Text style={{fontSize: 18}}>SĐT: 0123456777</Text>
+                    </View>
                 </View>
-            </View>
-            
-            <View style={styles.address}>
-                <Text style={styles.text_style}>Địa chỉ: phường An phú, thị xã Thuận An, tỉnh Bình Dương</Text>
+                
+                <View style={styles.address}>
+                    <Text style={styles.text_style}>Địa chỉ: phường An phú, thị xã Thuận An, tỉnh Bình Dương</Text>
+                </View>
             </View>
         </View>
     )
@@ -33,7 +35,7 @@ const styles=StyleSheet.create({
     },
 
    address:{
-    backgroundColor: 'white',
+        backgroundColor: 'white',
         flexDirection: 'row',
         alignItems: 'center',
         // marginLeft:10,
@@ -41,7 +43,6 @@ const styles=StyleSheet.create({
         paddingLeft: 30,
         paddingRight: 20,
         marginBottom: 10,
-        
     },
 
     type_user:{
@@ -53,6 +54,7 @@ const styles=StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 20,
     },
+
     type_numberphone:{
         flexDirection: 'row',
         height: 50,
@@ -64,18 +66,18 @@ const styles=StyleSheet.create({
         fontSize: 20,
     },
 
-
     icon_style:
     {
-        height: 30,
-        width: 30,
+        height: 25,
+        width: 25,
         marginRight: 10,
         marginLeft: 15,
+        tintColor: '#1E90FF'
     },
 
     text_style:{
         fontSize: 18,
-        fontWeight: 'bold',
+        fontWeight: '600',
     }
 
 })

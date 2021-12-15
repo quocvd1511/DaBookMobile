@@ -23,7 +23,7 @@ export default function HeaderUser()
 
 const styles=StyleSheet.create({
     main:{
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#00BFFF',
         height: 120,
         flexDirection: 'row',
         alignContent: 'center',

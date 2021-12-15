@@ -5,9 +5,9 @@ export default function Caring()
 {
     return(
         <View>
-            <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15,marginTop: 40}}>Quan Tâm</Text>
+            <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15, margin: 10,}}>Quan Tâm</Text>
             <View style={styles.caring_button}>
-                <Image style={styles.icon_style} source={require('../asset/icon/heart.png')}/>
+                <Image style={styles.icon_heart} source={require('../asset/icon/heart.png')}/>
                 <Text style={styles.text_style}>Sách Đã Thích</Text>
             </View>
             <View style={styles.caring_button}>
@@ -20,7 +20,7 @@ export default function Caring()
 
 const styles=StyleSheet.create({
     main:{
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#FFCC99',
         flexDirection: 'row',
         justifyContent: 'center',
         margin:10,
@@ -32,12 +32,11 @@ const styles=StyleSheet.create({
         },
         shadowOpacity: 0.36,
         shadowRadius: 6.68,
-        
         elevation: 11,
     },
 
     caring_button:{
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#FFCC99',
         flexDirection: 'row',
         alignItems: 'center',
         marginLeft:10,
@@ -52,11 +51,8 @@ const styles=StyleSheet.create({
         },
         shadowOpacity: 0.36,
         shadowRadius: 6.68,
-        
         elevation: 11,
     },
-
-
 
     each_category_icon:{
         height: 40, 
@@ -69,12 +65,19 @@ const styles=StyleSheet.create({
         margin: 15,
     },
 
-    icon_style:
-    {
+    icon_style:{
         height: 30,
         width: 30,
         marginRight: 10,
         marginLeft: 15,
+    },
+
+    icon_heart:{
+        height: 30,
+        width: 30,
+        marginRight: 10,
+        marginLeft: 15,
+        tintColor: 'red'
     },
 
     text_style:{
