@@ -92,6 +92,7 @@ class ListProduct extends Component {
               </Text>
               <Text>Số lượng: {item.amountTaken}</Text>
             </View>
+
             {/* <View style={{flexDirection:'row', alignItems:'center',  marginRight: 0, padding: 10 }}>
                            <TouchableOpacity onPress={()=>this.onChangeQual(index,false)}>
                              <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
@@ -129,7 +130,7 @@ class ListProduct extends Component {
           <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>0 đ</Text>
           </View>
           <TouchableOpacity style={styles.buyButton}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Mua Hàng</Text>
+              <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Thanh toán</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -161,13 +162,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   end: {
-    flexDirection: 'row',
     alignItems: 'center',
   },
   priceStyle: {
     fontWeight: '600',
     color: 'red',
-    paddingLeft: 10,
+    paddingLeft: 5,
     width: 90,
     alignItems: 'center',
     marginTop: 3,
@@ -177,7 +177,8 @@ const styles = StyleSheet.create({
   imageStyle: {
     width: 85, 
     height: 120, 
-    marginRight: 20
+    marginRight: 20,
+    marginLeft: 20,
   },
   bottomView:{
     flexDirection: 'row',
