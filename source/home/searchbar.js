@@ -24,6 +24,7 @@ export default function SearchBar() {
                 </TouchableOpacity>
         </View>
     )
+    console.log(text);
 }
 
 

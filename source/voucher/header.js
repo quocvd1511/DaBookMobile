@@ -15,7 +15,7 @@ export default function Header() {
       </View>
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
         <View style={styles.main_sale}>
-          <Image style={styles.logo_sale_header} source={require('../asset/icon/voucher1.png')}/>
+          <Image style={styles.logo_sale_header} source={require('../asset/icon/My_voucher.png')}/>
           <Text style={{fontWeight:'bold', color:'white'}}>Sale Voucher</Text>
         </View>
 

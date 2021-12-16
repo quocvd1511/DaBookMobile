@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-#Wed Dec 15 19:52:29 ICT 2021
-=======
-#Wed Dec 15 18:21:32 ICT 2021
->>>>>>> ffe68ac4e3ce5fc0133c4b15f84efb82b8fdfc23
+#Thu Dec 16 08:15:37 ICT 2021
 path.3=14/classes.dex
 path.2=0/classes.dex
 path.1=0/classes.dex

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,23 +9,20 @@ import {
   FlatList,
   Dimensions
 } from 'react-native';
+import { RadioButton } from 'react-native-paper';
 
 
 
 const windowWidth = Dimensions.get('window').width;
-class ListProduct extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      calls: [
-        {id :1, name: 'Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg', amountTaken: 3},
-        {id :2, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg', amountTaken: 4},
-        {id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg', amountTaken: 2},
-        {id:4, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg', amountTaken: 1},
-        ],
-      ids: [],
-    };
-  }
+function ListProduct() {
+  const [Book, setBook] = useState([
+    {id :1, name: 'Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg', amountTaken: 3},
+    {id :2, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg', amountTaken: 4},
+    {id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg', amountTaken: 2},
+    {id:4, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg', amountTaken: 1},
+])
+
+const [value, setValue] = React.useState('first');
 
   renderItem = ({ item, index }) => {
     return (
@@ -50,7 +47,7 @@ class ListProduct extends Component {
   };
 
 
-  render() {
+ 
     return (
       <SafeAreaView>
         <Text style={{paddingLeft: 10, color:'black', fontWeight:'700',fontSize:20,marginTop: 10, marginBottom: 5}}>Thông tin giỏ hàng</Text>
@@ -59,17 +56,33 @@ class ListProduct extends Component {
           Giao hàng trong vòng 5 ngày
         </Text>
 
-        <FlatList style={{marginBottom: 55}}
-          extraData={this.state}
-          data={this.state.calls}
+        <FlatList style={{marginBottom: 5}}
+          // extraData={this.state}
+          data={Book}
           keyExtractor={(item) => {
             return `${item.id}`;
           }}
-          renderItem={this.renderItem}
+          renderItem={renderItem}
         />
+         <View style={{backgroundColor: '#FFF'}}>
+        <Text style={{paddingLeft: 10, color:'black', fontWeight:'700',fontSize:20,marginTop: 10, marginBottom: 5}}>Chọn hình thức thanh toán</Text>
+        <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
+        <View style={styles.select_pay}>
+            <RadioButton value="first" />
+            <Image style={styles.icon_pay} source={require('../asset/icon/pay.png')}/> 
+            <Text style={{fontSize: 16, marginLeft: 5}} >Thanh toán bằng tiền mặt</Text>
+        </View>
+        <View style={styles.select_pay}>
+            <RadioButton value="second" />
+            <Image style={styles.icon_paymomo} source={require('../asset/icon/MoMo_Logo.png')}/> 
+            <Text style={{fontSize: 16, marginLeft: 5}} > Thanh toán bằng ví Momo</Text>
+        </View>
+        </RadioButton.Group>
+    </View>
+
         <View style={styles.bottomView}>
           <View style={styles.textBottom}>
-          <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
+          <Text  style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
           <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>0 đ</Text>
           </View>
           <TouchableOpacity style={styles.buyButton}>
@@ -81,7 +94,6 @@ class ListProduct extends Component {
       
     );
   }
-}
 
 const styles = StyleSheet.create({
   row: {
@@ -144,7 +156,7 @@ const styles = StyleSheet.create({
 
   bottomView:{
     flexDirection: 'row',
-    position: 'absolute',
+    // position: 'absolute',
     width: '100%',
     height: 60,
     backgroundColor:'#C2FFF9',
@@ -156,7 +168,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     paddingLeft: 30,
     fontSize: 25,
-    marginRight: 130,
+    marginRight: 190,
   },
 
   buyButton: {
@@ -175,6 +187,27 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.48,
     shadowRadius: 11.95,
     elevation: 18,
+  },
+  select_pay: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 10,
+    marginBottom: 10,
+  },
+
+  icon_pay: {
+    resizeMode: 'contain',
+    width: 54, 
+    height: 54, 
+    marginTop: 5,
+  },
+
+  icon_paymomo: {
+      resizeMode: 'contain',
+      width: 40, 
+      height: 40, 
+      marginTop: 0,
+      marginLeft: 6,
   }
   
 });

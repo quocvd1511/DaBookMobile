@@ -3,14 +3,13 @@ import { Text, View, ScrollView } from 'react-native';
 import HeaderCart from './header_pm';
 import ListProduct from './list_product';
 import Info_User from './info_ad';
-import Select from './select_pay';
 
 export default function UserScreen() {
     return (
       <ScrollView>
         <HeaderCart/>
         <Info_User/>
-        <Select/>
+        {/* <Select/> */}
         <ListProduct/>
       </ScrollView>
     );
