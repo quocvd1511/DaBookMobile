@@ -5,7 +5,6 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimen
 //import {MapTag, ColorProfile} from 'glamorous'
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-import book_detail_home from '../book_detail/book_detail';
 const windowWidth = Dimensions.get('window').width;
 
 
@@ -53,7 +52,7 @@ function ListBook()
                     <Image style={{height:22,width:22,tintColor:'dodgerblue'}} source={require('../asset/icon/cost.png')}/>
                     <Text style={styles.book_price}> {item.giaban}000 đ</Text>
                     <View style={styles.sale_off}>
-                      <Text style={styles.sale_off_percent}> -15%</Text>
+                      <Text style={styles.sale_off_percent}> -{item.giamgia}%</Text>
                     </View>
                   </View>
                 </View>

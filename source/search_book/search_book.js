@@ -56,7 +56,7 @@ export default function SearchBook(){
     }
     fetchData();
 
-    },['http://192.168.43.180:3000/search/name'])
+    },['http://192.168.43.180:3000/search/' + name])
 
 	 console.log(Book);
     
@@ -70,7 +70,7 @@ export default function SearchBook(){
           Book.map((item)=>
           {
             return(
-              <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('book_detail')}>
+              <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
                 <Image style={styles.image} source={{uri:item.hinhanh}}/>
                 <View  style={{paddingLeft:5 }}>
                   <Text style={styles.book_name}

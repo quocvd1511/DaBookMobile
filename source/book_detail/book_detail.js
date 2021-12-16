@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Pressable, Text, TextInput, StatusBar, Image, Dimensions, ScrollView } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Pressable, Text, TextInput, StatusBar, Image, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 
@@ -28,42 +28,40 @@ export default function book_detail_home(){
   const tensach = route.params.tensach;
   console.log(tensach);
 
-//     const [Book, setBook]  = useState([])
-//     React.useEffect(() => 
-//   {
-//     async function fetchData(){
-//       const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
-//       setBook(request.data)
-//       return request.data
-//     }
-//     fetchData();
-
-//     },['http://192.168.43.180:3000/chitietsach'])
+    const [Book, setBook]  = useState([])
+    React.useEffect(() => 
+  {
+    async function fetchData(){
+      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
+      setBook(request.data.list_book)
+      return request.data.list_book
+    }
+    fetchData();
+    },['http://192.168.43.180:3000/chitietsach'])
 
 //     console.log()
 
-const [Book, setBook] = useState([
-    {id :1, name: 'Harry Potter And Something Else I Known', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
-    {id :2, name: 'Harry Potter và Bảo bối tử thần', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
-    {id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
-    {id:4, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
-    {id:5, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
-    {id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
-])
+// const [Book, setBook] = useState([
+//     {id :1, name: 'Harry Potter And Something Else I Known', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
+//     {id :2, name: 'Harry Potter và Bảo bối tử thần', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
+//     {id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
+//     {id:4, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
+//     {id:5, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
+//     {id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
+// ])
 
     const [detail_book, setdetail_book]  = useState([])
     React.useEffect(() => 
   {
     async function fetchData(){
       const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
-      setdetail_book(request.data)
-      return request.data
+      setdetail_book(request.data.book)
+      return request.data.book
     }
     fetchData();
+    },['http://192.168.43.180:3000/chitietsach' + tensach])
 
-    },['http://192.168.43.180:3000/chitietsach'])
-
-	 console.log(detail_book[0]);
+	 console.log(detail_book);
 
     function quantyplus(){
         temp = detail_book.soluong + 1
@@ -199,7 +197,7 @@ const [Book, setBook] = useState([
                 {
                     Book.map((item) => {
                     return(
-                        <View>
+                        <TouchableOpacity onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
                             <View style={styles.item}>
                                 <Image style={styles.img} source={{uri:item.hinhanh}}/>
                                 <Text 
@@ -210,7 +208,7 @@ const [Book, setBook] = useState([
                                     <Text style={styles.bprice}>{item.giaban}000 đ</Text>
                                 </View>
                             </View>
-                        </View>
+                        </TouchableOpacity>
                     )
                     })
                 }
