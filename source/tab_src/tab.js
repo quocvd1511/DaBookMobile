@@ -4,6 +4,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import HomeScreen from '../home/home';
+// import SearchScreen fr
 import RankScreen from '../rank/rank';
 import VoucherScreen from '../voucher/voucher';
 import UserScreen from '../user/user';

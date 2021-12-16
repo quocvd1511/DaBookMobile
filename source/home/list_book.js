@@ -1,34 +1,40 @@
 import React, { Component } from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimensions, ScrollView,LogBox } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimensions, ScrollView,LogBox, TouchableOpacity } from 'react-native';
 //import glamorous, {ThemeProvider} from 'glamorous'
 //import {Div, H2} from 'glamorous'
 //import {MapTag, ColorProfile} from 'glamorous'
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
+import book_detail_home from '../book_detail/book_detail';
 const windowWidth = Dimensions.get('window').width;
+
+
 
 function ListBook()
 {
-  const [Book, setBook] = React.useState([
-      {key: '1', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa Harry Potter và Đứa trẻ bị nguyền rủa ", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"},
-      {key: '2', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"},
-      {key: '3', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa Harry Potter và Đứa trẻ bị nguyền rủa ", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"},
-      {key: '4', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"}
-  ])
+  // const [Book, setBook] = useState([
+  //     {key: '1', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa Harry Potter và Đứa trẻ bị nguyền rủa ", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"},
+  //     {key: '2', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"},
+  //     {key: '3', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa Harry Potter và Đứa trẻ bị nguyền rủa ", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"},
+  //     {key: '4', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"}
+  // ])
 
   //---------Kết nối Database lấy dữ liệu-------------------------    
-  // const [Book,setBook] = React.useState([])
-  // React.useEffect(() => 
-  // {
-  //   async function fetchData(){
-  //     const request = await axios.get('http://192.168.1.9:3000/')
-  //     setBook(request.data)
-  //     return request.data
-  //   }
-  //   fetchData();
+  const [Book,setBook] = React.useState([])
+  React.useEffect(() => 
+  {
+    async function fetchData(){
+      const request = await axios.get('http://192.168.43.180:3000/')
+      setBook(request.data)
+      return request.data
+    }
+    fetchData();
 
-  //  },['http://192.168.1.9:3000/'])
+  },['http://192.168.43.180:3000/'])
   //---------------------------------------------------------------
-   //console.log(Book)
+   console.log(Book)
+
+   const navigation = useNavigation(); 
    return (
     <View style={{backgroundColor:'#f3f3f3'}}>
       <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15,marginTop: 30}}>Tất cả các sách</Text>
@@ -37,7 +43,7 @@ function ListBook()
           Book.map((item)=>
           {
             return(
-              <View style={styles.item}>
+              <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('book_detail')}>
                 <Image style={styles.image} source={{uri:item.hinhanh}}/>
                 <View  style={{paddingLeft:5 }}>
                   <Text style={styles.book_name}
@@ -45,13 +51,13 @@ function ListBook()
                         ellipsizeMode='tail'>{item.tensach}</Text>
                   <View style={{margin:10, marginTop:6, flexDirection:'row', alignItems:'center'}}>
                     <Image style={{height:22,width:22,tintColor:'dodgerblue'}} source={require('../asset/icon/cost.png')}/>
-                    <Text style={styles.book_price}> {item.giaban} đ</Text>
+                    <Text style={styles.book_price}> {item.giaban}000 đ</Text>
                     <View style={styles.sale_off}>
                       <Text style={styles.sale_off_percent}> -15%</Text>
                     </View>
                   </View>
                 </View>
-              </View>
+              </TouchableOpacity>
             )
           })
           }
@@ -59,7 +65,6 @@ function ListBook()
     </View>
     );
   }
-
 
 
 const styles = StyleSheet.create({

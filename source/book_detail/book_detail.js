@@ -19,7 +19,9 @@ const fontWeights = [
     "900"
   ];
 
-export default function book_detail_home(){
+export default function book_detail_home({navigation}){
+
+    
     const [Book, setBook] = useState([
         {id :1, name: 'Harry Potter And Something Else I Known', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
         {id :2, name: 'Harry Potter và Bảo bối tử thần', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
