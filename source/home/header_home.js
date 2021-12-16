@@ -8,7 +8,6 @@ export default function HeaderHome()
     return(
         <View>
             <SearchBar/>
-            <TabType/>
         </View>
     )
 }
