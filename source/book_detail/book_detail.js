@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Pressable, Text, TextInput, StatusBar, Image, Dimensions, ScrollView } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import axios from 'axios';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -19,33 +21,49 @@ const fontWeights = [
     "900"
   ];
 
-export default function book_detail_home({navigation}){
+export default function book_detail_home(){
 
-    
-    const [Book, setBook] = useState([
-        {id :1, name: 'Harry Potter And Something Else I Known', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
-        {id :2, name: 'Harry Potter và Bảo bối tử thần', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
-        {id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
-        {id:4, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
-        {id:5, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
-        {id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
-    ])
+  const navigation = useNavigation();
+  const route = useRoute();
+  const tensach = route.params.tensach;
+  console.log(tensach);
 
-    const [detail_book, setdetail_book] = useState(
-        {id :1, 
-        name: 'Tuổi trẻ đáng giá bao nhiêu ?', 
-        price:'79.000 đ', 
-        img:'https://nld.mediacdn.vn/2018/3/24/sach-1521858607292758740290.jpg',
-        tacgia: 'Rosie Nguyễn',
-        theloai:'Động lực',
-        nhaXB: 'Nhà xuất bán trẻ',
-        namSX:'2019',
-        ngonngu: 'Tiếng Việt',
-        hinhthuc: 'Bìa mềm',
-        tomtat: 'Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu Tuổi trẻ đáng giá bao nhiêu',
-        soluong: 1,
-    },
-    )
+//     const [Book, setBook]  = useState([])
+//     React.useEffect(() => 
+//   {
+//     async function fetchData(){
+//       const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
+//       setBook(request.data)
+//       return request.data
+//     }
+//     fetchData();
+
+//     },['http://192.168.43.180:3000/chitietsach'])
+
+//     console.log()
+
+const [Book, setBook] = useState([
+    {id :1, name: 'Harry Potter And Something Else I Known', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
+    {id :2, name: 'Harry Potter và Bảo bối tử thần', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
+    {id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
+    {id:4, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
+    {id:5, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
+    {id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
+])
+
+    const [detail_book, setdetail_book]  = useState([])
+    React.useEffect(() => 
+  {
+    async function fetchData(){
+      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
+      setdetail_book(request.data)
+      return request.data
+    }
+    fetchData();
+
+    },['http://192.168.43.180:3000/chitietsach'])
+
+	 console.log(detail_book);
 
     function quantyplus(){
         temp = detail_book.soluong + 1
@@ -67,10 +85,11 @@ export default function book_detail_home({navigation}){
     
     return(
         <ScrollView style = {styles.views}>
-            <Image style = {styles.image} source={{uri:'https://nld.mediacdn.vn/2018/3/24/sach-1521858607292758740290.jpg'}}/>
+            <Image style = {styles.image} source={{uri:detail_book.hinhanh}}/>
             <View style = {styles.view}>
-                <Text style = {styles.name}>{detail_book.name}</Text>
-                <Text style = {styles.newprice}>{detail_book.price}     <Text style = {styles.price}>107.000 đ</Text></Text>
+                <Text style = {styles.name}>{detail_book.tensach}</Text>
+                <Text style = {styles.newprice}>{detail_book.giaban}000 đ     
+                <Text style = {styles.price}>  {detail_book.giagoc} </Text></Text>
                 <View style = {styles.viewstar}>
                     <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
                     <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
@@ -93,7 +112,7 @@ export default function book_detail_home({navigation}){
                             <Text style={{color:'#fff', fontSize: 25, marginBottom: 6, textAlign:'center'}} >-</Text>
                         </Pressable>
                         
-                        <Text style={{width: 40, color:'#000', height: 39.5, fontSize: 17, lineHeight:40, textAlign:'center', alignItems:'center', borderWidth: 1, borderStyle: 'solid', borderColor: '#FF6600'}}>{detail_book.soluong}</Text>
+                        <Text style={{width: 40, color:'#000', height: 39.5, fontSize: 17, lineHeight:40, textAlign:'center', alignItems:'center', borderWidth: 1, borderStyle: 'solid', borderColor: '#FF6600'}}>1</Text>
                         
                         <Pressable 
                             backgroundColor={'#FF6600'}
@@ -137,7 +156,7 @@ export default function book_detail_home({navigation}){
                 <Text style={{margin: 10, color:'black', fontWeight:'500',fontSize:16}}>Thông tin sách</Text>
                 <View style = {styles.bookdetail_infos}>
                     <Text style = {styles.bookdetail_info}> Tên sách</Text>
-                    <Text style={{maxWidth: 220,}}>{detail_book.name}</Text>
+                    <Text style={{maxWidth: 220,}}>{detail_book.tensach}</Text>
                 </View>
 
                 <View style = {styles.bookdetail_infos}>
@@ -152,12 +171,12 @@ export default function book_detail_home({navigation}){
 
                 <View style = {styles.bookdetail_infos}>
                     <Text style = {styles.bookdetail_info}> Nhà XB</Text>
-                    <Text>{detail_book.nhaXB}</Text>
+                    <Text>{detail_book.nxb}</Text>
                 </View>
 
                 <View style = {styles.bookdetail_infos}>
                     <Text style = {styles.bookdetail_info}> Năm XB</Text>
-                    <Text>2019</Text>
+                    <Text>{detail_book.namxb}</Text>
                 </View>
 
                 <View style = {styles.bookdetail_infos}>
@@ -173,7 +192,7 @@ export default function book_detail_home({navigation}){
                 <View>
                     <Text style={{margin: 10, color:'black', fontWeight:'500',fontSize:14}}>Tóm tắt</Text>
                     <Text style={{marginRight: 7, marginLeft: 3,}}>
-                        {detail_book.tomtat}
+                        {detail_book.mota}
                     </Text>
                 </View>
             </View>
@@ -185,15 +204,15 @@ export default function book_detail_home({navigation}){
                 {
                     Book.map((item) => {
                     return(
-                        <View key={item.id}>
+                        <View>
                             <View style={styles.item}>
-                                <Image style={styles.img} source={{uri:item.img}}/>
+                                <Image style={styles.img} source={{uri:item.hinhanh}}/>
                                 <Text 
                                 style={styles.name_item}
                                 numberOfLines={2}
-                                ellipsizeMode='tail'>{item.name}</Text>
+                                ellipsizeMode='tail'>{item.tensach}</Text>
                                 <View style={styles.viewinfo}>
-                                    <Text style={styles.bprice}>179.000 đ</Text>
+                                    <Text style={styles.bprice}>{item.giaban}000 đ</Text>
                                 </View>
                             </View>
                         </View>
@@ -257,7 +276,7 @@ const styles = StyleSheet.create({
 
     price: {
         color: '#666',
-        marginLeft: 100,
+        marginLeft: 120,
         marginRight: 10,
         fontSize: 15,
         fontWeight: fontWeights[6],
