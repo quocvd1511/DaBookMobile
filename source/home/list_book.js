@@ -24,13 +24,17 @@ function ListBook()
   React.useEffect(() => 
   {
     async function fetchData(){
+<<<<<<< HEAD
       const request = await axios.get('http://192.168.43.180:3000/')
+=======
+      const request = await axios.get('http://192.168.1.5:3000/')
+>>>>>>> 0cba031f48306cef0efd76e7d1e1658e768960de
       setBook(request.data.books)
       return request.data.books
     }
     fetchData();
 
-  },['http://192.168.43.180:3000/'])
+  },['http://192.168.1.5:3000/'])
   //---------------------------------------------------------------
    console.log(Book)
 
@@ -50,7 +54,7 @@ function ListBook()
                         ellipsizeMode='tail'>{item.tensach}</Text>
                   <View style={{margin:10, marginTop:6, flexDirection:'row', alignItems:'center'}}>
                     <Image style={{height:22,width:22,tintColor:'dodgerblue'}} source={require('../asset/icon/cost.png')}/>
-                    <Text style={styles.book_price}> {item.giaban}000 đ</Text>
+                    <Text style={styles.book_price}> {item.giaban}.000 đ</Text>
                     <View style={styles.sale_off}>
                       <Text style={styles.sale_off_percent}> -{item.giamgia}%</Text>
                     </View>
@@ -76,9 +80,9 @@ const styles = StyleSheet.create({
 
   item: {
     position: 'relative',
-    width: (windowWidth - 14) /2,
+    width: (windowWidth - 12) /2,
     paddingTop: 10,
-    marginTop: 5,
+    marginTop: 2,
     backgroundColor: 'white',
     margin: 3,
     borderRadius: 3,
@@ -129,6 +133,7 @@ const styles = StyleSheet.create({
     fontSize: 14, 
     color: 'black',
     lineHeight: 20,
+    minHeight: 40,
     margin: 10,
     marginBottom: 0,
   },

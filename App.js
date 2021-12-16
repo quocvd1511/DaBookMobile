@@ -24,9 +24,17 @@ export default function App() {
 
   return (
     <NavigationContainer>
+<<<<<<< HEAD
       <Stack.Navigator>
       <Stack.Screen
       name='TabScreen'
+=======
+      <Stack.Navigator
+      screenOptions={{headerShown: false}}
+      >
+      <Stack.Screen 
+      name='TabScreen' 
+>>>>>>> 0cba031f48306cef0efd76e7d1e1658e768960de
       component={TabScreen}/>
       <Stack.Screen
         name='Home'
