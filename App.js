@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import Home from './source/home/home';
 import book_detail from './source/book_detail/book_detail';
 import SearchBook from './source/search_book/search_book';
+import Voucher from './source/voucher/voucher';
 
 const Stack = createStackNavigator();
 export default function App() {
@@ -32,6 +33,9 @@ export default function App() {
         name='SearchBook'
         component={SearchBook}/>
       </Stack.Navigator>
+      <Stack.Screen 
+        name='Voucher'
+        component={Voucher}/>
     </NavigationContainer>
   );
 

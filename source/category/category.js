@@ -3,7 +3,7 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimen
 import axios from 'axios';
 const windowWidth = Dimensions.get('window').width;
 
-export default function book_detail_home(){
+export default function category(){
   const [Book, setBook] = useState([
   {key: '1', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa Harry Potter và Đứa trẻ bị nguyền rủa ", giaban: "179.000", hinhanh:"https://www.nxbtre.com.vn/Images/Book/nxbtre_full_11592017_085924.jpg", tacgia:"J.K Rowling"},
   {key: '2', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa", giaban: "179.000", hinhanh:"https://www.nxbtre.com.vn/Images/Book/nxbtre_full_29292017_042903.jpg", tacgia:"J.K Rowling"},
