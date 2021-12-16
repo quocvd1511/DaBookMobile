@@ -18,13 +18,12 @@ export default function SearchBar() {
                      onChangeText={text => setText(text)}
                      value={text}
                 ></TextInput>
-                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SearchBook', {text: text})}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('SearchBook', {name: text})}>
                     <Image style={{height:38, width: 38, tintColor:'white', marginRight: 10,}} source={require('../asset/icon/icon_search.png')} 
                      />
                 </TouchableOpacity>
         </View>
     )
-    console.log(text);
 }
 
 
