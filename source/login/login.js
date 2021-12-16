@@ -3,6 +3,7 @@ import {View,Text, Image,StyleSheet, Pressable, ToastAndroid} from 'react-native
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import CheckBox from '@react-native-community/checkbox';
 import { TextInput } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
 export default function Login()
@@ -10,20 +11,22 @@ export default function Login()
     const [Username,  setUsername] = React.useState('')
     const [Password, setPassword] = React.useState('')
     const [User,setUser] = React.useState([])
+    const navigation = useNavigation();
 
-
-    async function fetchData(){
+    async function checkLogin(){
         const request = await axios.post('http://192.168.1.9:3000',{
             username: Username,
             password: Password,
       })
-      console.log("Ten dang nhap: "+Username)
-      console.log("Mat khau: "+ Password)
-      setUser(request.data)
-      ToastAndroid.show(request.data, ToastAndroid.SHORT)
-      console.log(User)
+      console.log(request.data)
+      if(request.data.status==='Failed')
+      {
+        ToastAndroid.show("Thông tin đăng nhập không chính xác", ToastAndroid.SHORT)
+      } else{
+        ToastAndroid.show("Xác thực thành công", ToastAndroid.SHORT)
+        navigation.navigate('TabScreen',{user_session: request.data.user_session})
+      }
     }
-
 
 
     return(
@@ -65,7 +68,7 @@ export default function Login()
 
                 <Pressable
                     style={styles.button_login}
-                    onPress={fetchData}
+                    onPress={checkLogin}
                     >
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white'}}>Xác Nhận</Text>
                 </Pressable>

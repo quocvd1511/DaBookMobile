@@ -9,6 +9,7 @@ import Rank from './source/rank/Vanhoc';
 import book_detail from './source/book_detail/book_detail';
 import SearchBook from './source/search_book/search_book';
 import Voucher from './source/voucher/voucher';
+import Login from './source/login/login';
 
 // import ListRank from './source/rank/list_rank';
 
@@ -24,17 +25,14 @@ export default function App() {
 
   return (
     <NavigationContainer>
-<<<<<<< HEAD
-      <Stack.Navigator>
-      <Stack.Screen
-      name='TabScreen'
-=======
       <Stack.Navigator
       screenOptions={{headerShown: false}}
       >
+      <Stack.Screen
+        name='Login'
+        component={Login}/>
       <Stack.Screen 
       name='TabScreen' 
->>>>>>> 0cba031f48306cef0efd76e7d1e1658e768960de
       component={TabScreen}/>
       <Stack.Screen
         name='Home'
