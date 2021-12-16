@@ -63,8 +63,11 @@ export default function book_detail_home(){
 
 	 console.log(detail_book);
 
+
+    const[temp, settemp] = useState(1)
+    
     function quantyplus(){
-        temp = detail_book.soluong + 1
+        settemp(temp+1)
         setdetail_book(prevState =>({
             ...prevState,
             soluong: temp
@@ -72,8 +75,9 @@ export default function book_detail_home(){
     }
 
     function quantyminus(){
-        if (detail_book.soluong >= 2){
-            temp = detail_book.soluong - 1
+        if (detail_book.soluong >= 2)
+        {
+            settemp(temp - 1)
             setdetail_book(prevState =>({
             ...prevState,
             soluong: temp
@@ -110,7 +114,7 @@ export default function book_detail_home(){
                             <Text style={{color:'#fff', fontSize: 25, marginBottom: 6, textAlign:'center'}} >-</Text>
                         </Pressable>
                         
-                        <Text style={{width: 40, color:'#000', height: 39.5, fontSize: 17, lineHeight:40, textAlign:'center', alignItems:'center', borderWidth: 1, borderStyle: 'solid', borderColor: '#FF6600'}}>1</Text>
+                        <Text style={{width: 40, color:'#000', height: 39.5, fontSize: 17, lineHeight:40, textAlign:'center', alignItems:'center', borderWidth: 1, borderStyle: 'solid', borderColor: '#FF6600'}}>{temp}</Text>
                         
                         <Pressable 
                             backgroundColor={'#FF6600'}
