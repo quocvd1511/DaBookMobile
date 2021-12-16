@@ -11,6 +11,13 @@ const windowWidth = Dimensions.get('window').width;
 
 function ListBook()
 {
+  
+
+  const navigation = useNavigation(); 
+
+  // React.useLayoutEffect(() => {
+  //   navigation.setOptions({headerShown: false});
+  // }, [navigation]);
 
   //---------Kết nối Database lấy dữ liệu-------------------------    
   const [Book,setBook] = React.useState([])
@@ -18,8 +25,8 @@ function ListBook()
   {
     async function fetchData(){
       const request = await axios.get('http://192.168.43.180:3000/')
-      setBook(request.data)
-      return request.data
+      setBook(request.data.books)
+      return request.data.books
     }
     fetchData();
 
@@ -27,7 +34,6 @@ function ListBook()
   //---------------------------------------------------------------
    console.log(Book)
 
-   const navigation = useNavigation(); 
    return (
     <View style={{backgroundColor:'#f3f3f3', flex:1}}>
       <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15,marginTop: 30}}>Tất cả các sách</Text>
