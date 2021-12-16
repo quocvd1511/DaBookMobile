@@ -63,7 +63,7 @@ const [Book, setBook] = useState([
 
     },['http://192.168.43.180:3000/chitietsach'])
 
-	 console.log(detail_book);
+	 console.log(detail_book[0]);
 
     function quantyplus(){
         temp = detail_book.soluong + 1
@@ -172,11 +172,6 @@ const [Book, setBook] = useState([
                 <View style = {styles.bookdetail_infos}>
                     <Text style = {styles.bookdetail_info}> Nhà XB</Text>
                     <Text>{detail_book.nxb}</Text>
-                </View>
-
-                <View style = {styles.bookdetail_infos}>
-                    <Text style = {styles.bookdetail_info}> Năm XB</Text>
-                    <Text>{detail_book.namxb}</Text>
                 </View>
 
                 <View style = {styles.bookdetail_infos}>

@@ -1,7 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native';
 import * as React from 'react'
-import { Dimensions, StyleSheet, Text, View, Image } from 'react-native'
+import { Dimensions, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+
 
 const {width} = Dimensions.get("window")
 const height = width * 0.4
@@ -14,9 +16,11 @@ let list_slide=[
 
 export default function Slider()
 {
+    const navigation = useNavigation(); 
+
     return(
-        <View>
-            <ScrollView 
+        <TouchableOpacity onPress={() => navigation.navigate('Voucher')}>
+            <ScrollView
                 horizontal 
                 pagingEnabled 
                 style={{width, height}}
@@ -33,6 +37,6 @@ export default function Slider()
                     ))
                 }
             </View>
-        </View>
+            </TouchableOpacity>
     )
 }

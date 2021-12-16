@@ -82,7 +82,8 @@ const styles=StyleSheet.create({
 
     text_style:{
         fontSize: 15,
-        fontWeight: 'bold',
+        fontWeight: '600',
+        color: '#333'
     }
 
 })
