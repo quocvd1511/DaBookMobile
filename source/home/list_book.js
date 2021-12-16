@@ -36,7 +36,7 @@ function ListBook()
 
    const navigation = useNavigation(); 
    return (
-    <View style={{backgroundColor:'#f3f3f3'}}>
+    <View style={{backgroundColor:'#f3f3f3', flex:1}}>
       <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15,marginTop: 30}}>Tất cả các sách</Text>
       <ScrollView contentContainerStyle={styles.container}>
           {
