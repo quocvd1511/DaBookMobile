@@ -13,7 +13,7 @@ export default function Login()
 
 
     async function fetchData(){
-        const request = await axios.post('http://192.168.1.9:3000',{
+        const request = await axios.post('http://192.168.1.5:3000',{
             username: Username,
             password: Password,
       })
@@ -32,7 +32,7 @@ export default function Login()
 
                 <View style={{alignSelf: 'center'}}>
                     <Image style={{width: 120, height: 120}} source={require('../asset/icon/logo.png')}/>
-                    <Text style={{marginBottom: 20, fontSize: 20, fontWeight: 'bold'}}>Đăng nhập</Text>
+                    <Text style={{marginBottom: 20, fontSize: 20, fontWeight: 'bold',}}>Đăng nhập</Text>
                 </View>
 
                 <View>

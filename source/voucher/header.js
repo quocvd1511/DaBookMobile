@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
       width: 80,
       marginLeft: 5,
       marginTop:20,
-      textAlign: 'center',
+      alignContent:'center',
+      // textAlign: 'center',
       tintColor:'#FFF68F',
     },
 

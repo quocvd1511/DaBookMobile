@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Pressable, Text, TextInput, StatusBar, Image, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
+import TabScreens from '../tab_src/tab';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -28,6 +29,7 @@ export default function book_detail_home(){
   const tensach = route.params.tensach;
   console.log(tensach);
 
+    // Lấy danh sách sách liên quan
     const [Book, setBook]  = useState([])
     React.useEffect(() => 
   {
@@ -39,17 +41,8 @@ export default function book_detail_home(){
     fetchData();
     },['http://192.168.1.5:3000/chitietsach'])
 
-//     console.log()
 
-// const [Book, setBook] = useState([
-//     {id :1, name: 'Harry Potter And Something Else I Known', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
-//     {id :2, name: 'Harry Potter và Bảo bối tử thần', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
-//     {id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
-//     {id:4, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
-//     {id:5, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
-//     {id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
-// ])
-
+    // Lấy dữ liệu của chi tiết sách
     const [detail_book, setdetail_book]  = useState([])
     React.useEffect(() => 
   {
@@ -98,7 +91,7 @@ export default function book_detail_home(){
                     <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
                     <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
                     <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
-                    <Text style={{ fontWeight:'400', fontSize:15}}>    4.8 (27 đánh giá) </Text>
+                    <Text style={{ fontWeight:'400', fontSize:15}}> 4.8 (27 đánh giá) </Text>
                 </View>
                 <View style = {styles.button}>
                     <View style = {styles.quantity}>
@@ -230,6 +223,7 @@ export default function book_detail_home(){
                     <Text style={{ fontWeight:'400', fontSize:15}}>    4.8/5 (27 đánh giá) </Text>
                 </View>
             </View>
+            
         </ScrollView>
     )
 

@@ -1,39 +1,63 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimensions, ScrollView } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const flexDirections = ['row', 'row-reverse', 'column', 'column-reverse'];
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
+const fontWeights = [
+  "normal",
+  "bold",
+  "100",
+  "200",
+  "300",
+  "400",
+  "500",
+  "600",
+  "700",
+  "800",
+  "900"
+];
 
 function ListTop() 
 {
-  const [Book, setBook] = useState([
-    {id :1, name: 'Harry Potter And Something Else I Known', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
-    {id :2, name: 'Harry Potter và Bảo bối tử thần', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
-    {id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
-    {id:4, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
-    {id:5, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
-    {id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
-  ])
+  
+  const navigation = useNavigation(); 
+  const [Book,setBook] = React.useState([])
+  React.useEffect(() => 
+  {
+    async function fetchData(){
+      const request = await axios.get('http://192.168.1.5:3000/')
+      setBook(request.data.flash_sales)
+      return request.data.flash_sales
+    }
+    fetchData();
 
+  },['http://192.168.1.5:3000/'])
   return (
       <View style={styles.container}>
-      <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15}}>Top Rating</Text>
+      <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15}}>Top Sale</Text>
+
       <ScrollView horizontal={true}>
         {
           Book.map((item) => {
             return(
-              <View key={item.id}>
+              <TouchableOpacity onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
                 <View style={styles.item}>
-                  <Image style={styles.img} source={{uri:item.img}}/>
+                  <Image style={styles.img} source={{uri:item.hinhanh}}/>
                   <Text 
                   style={styles.name_item}
                   numberOfLines={2}
-                  ellipsizeMode='tail'>{item.name}</Text>
-                  <Text style={styles.newprice}>179.000 đ</Text>
+                  ellipsizeMode='tail'>{item.tensach}</Text>
+                  <Text style={styles.newprice}>{item.giaban}000 đ</Text>
+                  <Text style = {styles.price}>  {item.giagoc} </Text>
+                  <View style={styles.sale_off}>
+                      <Text style={styles.sale_off_percent}> -{item.giamgia}%</Text>
+                    </View>
                 </View>
-              </View>
+              </TouchableOpacity>
             )
           })
           
@@ -62,6 +86,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     borderRadius: 3,
     marginBottom: 10,
+    alignItems: 'center',
   },
 
   img: {
@@ -89,11 +114,21 @@ const styles = StyleSheet.create({
 
   newprice: {
     color: 'red',
-    marginLeft: 4,
-    marginRight: 30,
+    // marginLeft: 4,
+    // marginRight: 30,
+    alignItems: 'center',
+    alignContent: 'center',
     fontSize: 14,
     fontWeight: '500',
   },
+  price: {
+    color: '#666',
+    alignItems: 'center',
+    alignContent: 'center',
+    fontSize: 10,
+    fontWeight: fontWeights[6],
+    textDecorationLine: 'line-through',
+},
 
   name_item:{
     padding: 5,
@@ -109,6 +144,27 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 32,
+  },
+  sale_off :{
+    width: 50 ,
+    height: 25,
+    backgroundColor: '#FFE652',
+    fontWeight: 600,
+    // marginLeft: 8,
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#EE4D2D',
+    borderRadius: 3,
+  },
+  
+  sale_off_percent :{
+    color: '#EE4D2D',
+    marginTop: 3,
+    fontWeight: '800',
+    fontSize: 12,
+    lineHeight: 17,
+    textAlign:'center',
+    alignItems: 'center',
   },
 });
 
