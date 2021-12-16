@@ -13,7 +13,7 @@ export default function user_detail()
     return(
         <ImageBackground source={require('../asset/icon/land3.jpg')} style={{width: '100%', height: '100%'}}>
               <View style={{justifyContent: 'center'}}>
-                <Text style={{fontSize: 20, color: 'black', fontWeight: 'bold', marginLeft: 5}}>THÔNG TIN CÁ NHÂN</Text>
+                <Text style={{fontSize: 20, color: '#fff', fontWeight: 'bold', marginLeft: 5, marginTop: 10, marginBottom: 0,}}>THÔNG TIN CÁ NHÂN</Text>
             </View>
             <View style={styles.bodypart}>
                 <View style={styles.line}>
@@ -35,13 +35,13 @@ export default function user_detail()
                 <View style={styles.line_address}>
                     <Text style={styles.tiletext_address}>Địa chỉ</Text>
                     <View style={{marginLeft: 10}}>
-                        <Text>Tỉnh/Thành phố</Text>
+                        <Text style={{fontWeight: '600', marginTop: 5}}>Tỉnh/Thành phố</Text>
                         <TextInput style={styles.textinput_2}/>
-                        <Text>Quận/Huyện</Text>
+                        <Text style={{fontWeight: '600'}}>Quận/Huyện</Text>
                         <TextInput style={styles.textinput_2}/>
-                        <Text>Phường/Xã</Text>
+                        <Text style={{fontWeight: '600'}}>Phường/Xã</Text>
                         <TextInput style={styles.textinput_2}/>
-                        <Text>Chi tiết</Text>
+                        <Text style={{fontWeight: '600'}}>Chi tiết</Text>
                         <TextInput style={styles.textinput_2}/>
                     </View>
                 </View>  
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         width: windowWidth,
         height: 600,
         borderTopRightRadius: 20,
-        marginTop: 20,
+        marginTop: 10,
     },
 
     img:{
@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
     tiletext:{
         paddingTop: 12.5,
         paddingBottom: 12.5,
-        width: 100,
+        fontSize: 15,
+        width: 110,
         color: 'black',
         backgroundColor: 'dodgerblue',
         paddingLeft: 5,
@@ -137,8 +138,10 @@ const styles = StyleSheet.create({
     tiletext_address:{
         paddingTop: 12.5,
         paddingBottom: 12.5,
+        fontSize: 18,
+        fontWeight: '600',
         width: 350,
-        color: 'black',
+        color: '#fff',
         backgroundColor: 'dodgerblue',
         borderTopRightRadius: 20,
         paddingLeft: 5,

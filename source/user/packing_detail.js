@@ -17,43 +17,32 @@ export default function Header() {
               <ScrollView>
               <View style={styles.main}>
               <Image style={styles.logo_header} source={require('../asset/icon/packing.png')}/>
-              <Text style={styles.text_header}>Các đơn hàng đang đóng gói</Text>
+              <Text style={styles.text_header}>Đơn hàng đang đóng gói</Text>
               </View>
                 {
                 Book.map((item) => {
                     return(
                     <View key={item.id} style={styles.item}>
                         <View style={{flexDirection:'row', alignItems: 'center'}}>  
-                            <View style={{backgroundColor: 'dodgerblue', padding: 25, borderRadius:5, margin: 5}}>
+                            <View style={{backgroundColor: 'dodgerblue', padding: 25, borderRadius:5, margin: 10}}>
                                 <Image style={{height:50, width:50,tintColor: 'white'}} source={require('../asset/icon/packing.png')}/>
                             </View>
 
                             <View style={{marginLeft:10}}>
-                                <Text style={{color:'black', fontSize: 12}}>ID đơn hàng: {item.id}</Text>
-                                <Text style={{color:'black', fontSize: 12}}>Ngày đặt hàng: {item.ngaydathang}</Text>
-                                <Text style={{color: 'black', fontSize: 12}}>Giá trị đơn hàng: {item.value}</Text>
+                                {/* <Text style={{color:'black', fontSize: 12}}>ID đơn hàng: {item.id}</Text> */}
+                                <Text style={{color:'black', fontSize: 16,}}>Ngày đặt hàng: {item.ngaydathang}</Text>
+                                <Text style={{color: 'black', fontSize: 16}}>Giá tiền: {item.value}</Text>
+                                <View style={{backgroundColor:'dodgerblue', margin:24, justifyContent:'center', borderRadius: 5, width: 100, marginBottom: 0, marginLeft: 90}}>
+                                  <Pressable
+                                    width={100}
+                                    padding={5}
+                                    alignItems={'center'}
+                                  >
+                                    <Text style={{color:'#fff', fontWeight:'500', fontSize: 15 }}>Chi Tiết</Text>
+                                  </Pressable>
+                                </View>
                             </View>
-                        </View>
-                        <View style={{flexDirection: 'row', paddingTop: 10, paddingBottom: 10, alignSelf: 'center'}}>
-                            <View style={{backgroundColor:'dodgerblue', margin:10, justifyContent:'center', borderRadius: 5}}>
-                              <Pressable
-                                width={150}
-                                padding={5}
-                                alignItems={'center'}
-                              >
-                                <Text style={{color:'black'}}>Chi Tiết</Text>
-                              </Pressable>
-                            </View>
-
-                            <View style={{backgroundColor:'dodgerblue', margin: 10, justifyContent:'center', borderRadius: 5}}>
-                              <Pressable
-                                width={150}
-                                padding={5}
-                                alignItems={'center'}
-                              >
-                                <Text style={{color:'black'}}>Hủy</Text>
-                              </Pressable>
-                            </View>
+                            
                         </View>
                        
                     </View>
@@ -126,7 +115,7 @@ const styles = StyleSheet.create({
     text_header:{
         marginLeft: 20,
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 18,
         color:'white'
     },
 

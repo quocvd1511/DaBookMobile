@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 
     type_user:{
         flexDirection: 'row',
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#00BFFF',
         height: 50,
         width:'50%',
         borderRadius: 5,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 
     user_point:{
         flexDirection: 'row',
-        backgroundColor: 'dodgerblue',
+        backgroundColor: '#00BFFF',
         height: 50,
         width:'40%',
         borderRadius: 5,

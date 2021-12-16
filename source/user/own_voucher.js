@@ -84,7 +84,7 @@ const styles=StyleSheet.create({
 
     text_style:{
         paddingLeft: 5,
-        color:'black',
+        color:'#333',
         fontWeight:'600',
         fontSize:15,
         marginTop: 5,        
