@@ -42,7 +42,7 @@ export default function TabRanks() {
       tabBarStyle: {backgroundColor: 'dodgerblue', height: 35, justifyContent: 'center',}
     }}
     >
-      <Tab.Screen name="Văn học" component={VanHoc}/>
+      <Tab.Screen name="Văn học" component={VanHoc} />
       <Tab.Screen name="Trinh Thám" component={TrinhTham} />
       <Tab.Screen name="Hài hước" component={HaiHuoc} />
       <Tab.Screen name="Tuổi teen" component={TuoiTeen} />

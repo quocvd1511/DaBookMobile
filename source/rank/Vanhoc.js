@@ -34,7 +34,7 @@ return (
       Book.map((item)=>
       {
         return(
-          <TouchableOpacity onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
+          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
             <Image style={styles.image} source={{uri:item.hinhanh}}/>
             <View  style={{paddingLeft:5 }}>
               <Text style={styles.book_name}
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
-
+    
     elevation: 4,
 
   },
@@ -117,7 +117,6 @@ const styles = StyleSheet.create({
   },
 
   book_name: {
-    width: 200,
     fontWeight: '500', 
     fontSize: 14, 
     color: 'black',

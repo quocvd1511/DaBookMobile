@@ -34,12 +34,12 @@ export default function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.5:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
       setBook(request.data.list_book)
       return request.data.list_book
     }
     fetchData();
-    },['http://192.168.1.5:3000/chitietsach'])
+    },['http://192.168.43.180:3000/chitietsach'])
 
 
     // Lấy dữ liệu của chi tiết sách
@@ -47,12 +47,12 @@ export default function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.5:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
       setdetail_book(request.data.book)
       return request.data.book
     }
     fetchData();
-    },['http://192.168.1.5:3000/chitietsach' + tensach])
+    },['http://192.168.43.180:3000/chitietsach' + tensach])
 
 	 console.log(detail_book);
 
@@ -127,8 +127,14 @@ export default function book_detail_home(){
                             height={40}
                             marginBottom={-5}
                             marginTop={-5}
-                            borderRadius={5}>
+                            borderRadius={5}
+                            
+                            >
+                            <TouchableOpacity 
+                            onPress={()=>}
+                            >
                             <Text style={{color:'#fff', fontSize: 17, margin: 5, marginTop:7, textAlign:'center'}} >  Thêm vào giỏ hàng  </Text>
+                            </TouchableOpacity>
                         </Pressable>
                     </View>
                 </View>

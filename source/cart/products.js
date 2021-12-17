@@ -7,9 +7,12 @@ import {
   Image,
   SafeAreaView,
   FlatList,
+  Dimensions
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
+const windowWidth = Dimensions.get('window').width;
+
 
 
 class ListProduct extends Component {
@@ -181,7 +184,7 @@ const styles = StyleSheet.create({
   bottomView:{
     flexDirection: 'row',
     position: 'absolute',
-    width: '100%',
+    width: windowWidth,
     height: 60,
     backgroundColor:'#C2FFF9',
     bottom: 0,
@@ -191,7 +194,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     paddingLeft: 30,
     fontSize: 25,
-    marginRight: 130,
+    marginRight: (windowWidth - 280),
   },
   buyButton: {
     backgroundColor: '#FFE652',

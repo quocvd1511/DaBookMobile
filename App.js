@@ -5,7 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack'
 import TabScreen from './source/tab_src/tab';
 import { useEffect } from 'react';
 import Home from './source/home/home';
-import Rank from './source/rank/Vanhoc';
+import Rank from './source/rank/tabs_rank';
 import book_detail from './source/book_detail/book_detail';
 import SearchBook from './source/search_book/search_book';
 import Voucher from './source/voucher/voucher';
@@ -24,18 +24,11 @@ export default function App() {
 
   return (
     <NavigationContainer>
-<<<<<<< HEAD
-      <Stack.Navigator>
-      <Stack.Screen
-      name='TabScreen'
-=======
       <Stack.Navigator
-      screenOptions={{headerShown: false}}
-      >
+      screenOptions={{headerShown: false}}>
       <Stack.Screen 
-      name='TabScreen' 
->>>>>>> 0cba031f48306cef0efd76e7d1e1658e768960de
-      component={TabScreen}/>
+        name='TabScreen' 
+        component={TabScreen}/>
       <Stack.Screen
         name='Home'
         component={Home}/>
