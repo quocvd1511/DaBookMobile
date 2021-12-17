@@ -20,7 +20,7 @@ function ListTopSale()
 
   return (
       <View style={styles.container}>
-        <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15}}>Top </Text>
+        <Text style={{padding:10, color:'red', fontWeight:'600',fontSize:18, backgroundColor: '#fff', textAlign: 'center', marginTop:5}}>Top sách bán chạy </Text>
         <ScrollView horizontal={true}>
           {
             Book.map((item) => {
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 5,
     borderRadius: 3,
-    marginBottom: 10,
+    marginBottom: 0,
   },
 
   img: {

@@ -38,7 +38,10 @@ function ListTop()
   },['http://192.168.1.5:3000/'])
   return (
       <View style={styles.container}>
-      <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15}}>Top Sale</Text>
+        <View style = {styles.flash_sale}>
+          <Image style = {styles.flash} source={require('../asset/icon/flash.png')}/>  
+          <Text style={{paddingLeft: 5, color:'red', fontWeight:'600',fontSize:18,}}>FLASH SALE</Text>
+        </View>
 
       <ScrollView horizontal={true}>
         {
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 5,
     borderRadius: 3,
-    marginBottom: 10,
+    marginBottom: 5,
     alignItems: 'center',
   },
 
@@ -103,7 +106,20 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: flexDirections[0],
     backgroundColor: '#E0FFFF',
-    marginBottom: 10,
+    marginBottom: 5,
+  },
+
+  flash_sale: {
+    justifyContent:'center',
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: flexDirections[0],
+    backgroundColor: '#fff',
+  },
+
+  flash: {
+    width: 80,
+    height: 80,
   },
 
   icon:{

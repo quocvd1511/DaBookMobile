@@ -36,7 +36,7 @@ function ListBook()
 
    return (
     <View style={{backgroundColor:'#f3f3f3', flex:1}}>
-      <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15,marginTop: 30}}>Tất cả các sách</Text>
+      <Text style={{padding: 10, color:'blue', fontWeight:'600',fontSize:18, marginTop: 5, backgroundColor:'#fff', textAlign:'center'}}>Tất cả các sách</Text>
       <ScrollView contentContainerStyle={styles.container}>
           {
           Book.map((item)=>
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: (windowWidth - 12) /2,
     paddingTop: 10,
-    marginTop: 2,
+    marginTop: 5,
     backgroundColor: 'white',
     margin: 3,
     borderRadius: 3,
