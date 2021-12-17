@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {View,Text, Image,StyleSheet, Pressable, ToastAndroid} from 'react-native'
+import {View,Text, Image,StyleSheet, Pressable, ToastAndroid, Keyboard} from 'react-native'
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import CheckBox from '@react-native-community/checkbox';
 import { TextInput } from 'react-native-gesture-handler'
@@ -11,22 +11,48 @@ export default function Logup()
     const [Username,  setUsername] = React.useState('')
     const [Phonenumber, setPhoneNumber] = React.useState('')
     const [Password, setPassword] = React.useState('')
+    const [ConPassword, setConPassword] = React.useState('')
     const [User,setUser] = React.useState([])
-
 
     async function fetchData()
     {
-        // if(Username === '' || Password === '' || Phonenumber === '' || )
-        const request = await axios.post('http://192.168.1.9:3000',{
+        if(Username === '' || Password === '' || Phonenumber === '' || ConPassword === '')
+        {
+            ToastAndroid.show('Vui lòng nhập đầy đủ thông tin', ToastAndroid.SHORT)
+        }
+        else if(Password != ConPassword)
+        {
+            ToastAndroid.show('Mật khẩu xác nhận không trùng khớp', ToastAndroid.SHORT)
+        }
+        else if(isNaN(Phonenumber))
+        {
+            ToastAndroid.show('Số điện thoại không hợp lệ', ToastAndroid.SHORT)
+        }
+        const request = await axios.post('http://192.168.1.9:3000/signup',{
             username: Username,
             phonenumber: Phonenumber,
             password: Password,
-      })
-      console.log("Ten dang nhap: "+Username)
-      console.log("Mat khau: "+ Password)
-      setUser(request.data)
-      ToastAndroid.show(request.data, ToastAndroid.SHORT)
-      console.log(User)
+        })
+        if(request.data.status==="Existed")
+        {
+            ToastAndroid.show('Tài khoản đã tồn tại', ToastAndroid.SHORT)
+            setUsername('')
+            setConPassword('')
+            setPassword('')
+            setPhoneNumber('')
+        }
+        else
+        {
+            console.log(request.data)
+            ToastAndroid.show('Đăng ký tài khoản thành công', ToastAndroid.SHORT)
+            setUsername('')
+            setConPassword('')
+            setPassword('')
+            setPhoneNumber('')
+            navigation.navigate('TabScreen',{user_session: request.data.user_session})
+
+        }
+        console.log(request.data)
     }
 
     const navigation = useNavigation()
@@ -47,7 +73,7 @@ export default function Logup()
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20, marginLeft: 5, tintColor: '#333'}} source={require('../asset/icon/user1.png')}/>
                         </View>
-                        <TextInput style={styles.text_input} onChangeText={text => setUsername(text)} placeholder='Tên đăng nhập'></TextInput>
+                        <TextInput value={Username} style={styles.text_input} onChangeText={text => setUsername(text)} placeholder='Tên đăng nhập'></TextInput>
                     </View>
                 </View>
 
@@ -57,7 +83,7 @@ export default function Logup()
                         <View style={styles.icon_input}>
                             <Image style={{height: 23, width: 23, marginLeft: 5, tintColor: '#333'}} source={require('../asset/icon/phone.png')}/>
                         </View>
-                        <TextInput style={styles.text_input} onChangeText={text => setPhoneNumber(text)} placeholder='Số điện thoại'></TextInput>
+                        <TextInput value={Phonenumber} style={styles.text_input} onChangeText={text => setPhoneNumber(text)} placeholder='Số điện thoại'></TextInput>
                     </View>
                 </View>
 
@@ -67,7 +93,7 @@ export default function Logup()
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333'}} source={require('../asset/icon/password.png')}/>
                         </View>
-                        <TextInput style={styles.pass_input} onChangeText={text => setPassword(text)} placeholder='Mật khẩu'></TextInput>
+                        <TextInput value={Password} style={styles.pass_input} onChangeText={text => setPassword(text)} placeholder='Mật khẩu'></TextInput>
                     </View>
                 </View>
 
@@ -77,7 +103,7 @@ export default function Logup()
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333',}} source={require('../asset/icon/password.png')}/>
                         </View>
-                        <TextInput style={styles.pass_input} onChangeText={text => setPassword(text)} placeholder='Mật khẩu'></TextInput>
+                        <TextInput value={ConPassword} style={styles.pass_input} onChangeText={text => setConPassword(text)} placeholder='Mật khẩu'></TextInput>
                     </View>
                 </View>
 

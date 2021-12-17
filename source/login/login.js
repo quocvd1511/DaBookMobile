@@ -8,6 +8,9 @@ import axios from 'axios';
 
 export default function Login()
 {
+    const [txtUsername, settxtUsername] = React.useState('')
+    const [txtPassowrd, settxtPassword] = React.useState('')
+
     const [Username,  setUsername] = React.useState('')
     const [Password, setPassword] = React.useState('')
     const [User,setUser] = React.useState([])
@@ -29,6 +32,8 @@ export default function Login()
         if(request.data.status==='Failed')
         {
             ToastAndroid.show("Thông tin đăng nhập không chính xác", ToastAndroid.SHORT)
+            setUsername('')
+            setPassword('')
         } else{
             ToastAndroid.show("Xác thực thành công", ToastAndroid.SHORT)
             setUsername('')
@@ -36,6 +41,11 @@ export default function Login()
             navigation.navigate('TabScreen',{user_session: request.data.user_session})
         }
     }
+    }
+
+    function ClearVal(val)
+    {
+        val=''
     }
 
 
@@ -54,7 +64,7 @@ export default function Login()
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20, marginLeft: 5, tintColor: '#333'}} source={require('../asset/icon/user1.png')}/>
                         </View>
-                        <TextInput style={styles.text_input} onChangeText={text => setUsername(text)} placeholder='Tên đăng nhập'></TextInput>
+                        <TextInput value={Username} style={styles.text_input} onChangeText={text => setUsername(text)} placeholder='Tên đăng nhập'></TextInput>
                     </View>
                 </View>
 
@@ -64,7 +74,7 @@ export default function Login()
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333'}} source={require('../asset/icon/password.png')}/>
                         </View>
-                        <TextInput secureTextEntry={true} style={styles.pass_input} onChangeText={text => setPassword(text)} placeholder='Mật khẩu'></TextInput>
+                        <TextInput value={Password} secureTextEntry={true} style={styles.pass_input} onChangeText={text => setPassword(text)} placeholder='Mật khẩu'></TextInput>
                     </View>
                 </View>
 
