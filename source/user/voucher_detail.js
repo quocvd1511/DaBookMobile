@@ -4,7 +4,7 @@ import { BackgroundImage } from 'react-native-elements/dist/config';
 import { color } from 'react-native-reanimated';
 
 
-export default function Header() {
+export default function VoucherDetail() {
     const [Book, setBook] = React.useState([
     
         {id :2, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},

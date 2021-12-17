@@ -10,6 +10,7 @@ import book_detail from './source/book_detail/book_detail';
 import SearchBook from './source/search_book/search_book';
 import Voucher from './source/voucher/voucher';
 import Login from './source/login/login';
+import Logup from './source/login/logup';
 
 // import ListRank from './source/rank/list_rank';
 
@@ -31,6 +32,9 @@ export default function App() {
       <Stack.Screen
         name='Login'
         component={Login}/>
+      <Stack.Screen
+        name='Logup'
+        component={Logup}/>
       <Stack.Screen 
       name='TabScreen' 
       component={TabScreen}/>

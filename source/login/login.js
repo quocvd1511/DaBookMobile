@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {View,Text, Image,StyleSheet, Pressable, ToastAndroid} from 'react-native'
+import {View,Text, Image,StyleSheet, Pressable, ToastAndroid, Keyboard} from 'react-native'
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import CheckBox from '@react-native-community/checkbox';
 import { TextInput } from 'react-native-gesture-handler'
@@ -14,18 +14,28 @@ export default function Login()
     const navigation = useNavigation();
 
     async function checkLogin(){
-        const request = await axios.post('http://192.168.1.5:3000',{
-            username: Username,
-            password: Password,
-      })
-      console.log(request.data)
-      if(request.data.status==='Failed')
+        Keyboard.dismiss()
+        if(Username ==='' || Password ==='')
+        {
+            ToastAndroid.show('Vui lòng nhập đầy đủ thông tin', ToastAndroid.SHORT)
+        }
+      else
       {
-        ToastAndroid.show("Thông tin đăng nhập không chính xác", ToastAndroid.SHORT)
-      } else{
-        ToastAndroid.show("Xác thực thành công", ToastAndroid.SHORT)
-        navigation.navigate('TabScreen',{user_session: request.data.user_session})
-      }
+        const request = await axios.post('http://192.168.1.9:3000',{
+                username: Username,
+                password: Password,
+        })
+        console.log(request.data)
+        if(request.data.status==='Failed')
+        {
+            ToastAndroid.show("Thông tin đăng nhập không chính xác", ToastAndroid.SHORT)
+        } else{
+            ToastAndroid.show("Xác thực thành công", ToastAndroid.SHORT)
+            setUsername('')
+            setPassword('')
+            navigation.navigate('TabScreen',{user_session: request.data.user_session})
+        }
+    }
     }
 
 
@@ -54,7 +64,7 @@ export default function Login()
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333'}} source={require('../asset/icon/password.png')}/>
                         </View>
-                        <TextInput style={styles.pass_input} onChangeText={text => setPassword(text)} placeholder='Mật khẩu'></TextInput>
+                        <TextInput secureTextEntry={true} style={styles.pass_input} onChangeText={text => setPassword(text)} placeholder='Mật khẩu'></TextInput>
                     </View>
                 </View>
 
@@ -80,8 +90,14 @@ export default function Login()
                     
                 </Pressable>
 
-                <View style={{marginTop: 50}}>
-                    <Text>Chưa có tài khoản? Đăng ký ngay</Text>
+                <View style={{marginTop: 50, alignItems:'center'}}>
+                    <Text>Chưa có tài khoản?</Text>
+                    <Pressable
+                        marginTop={5}
+                        onPress={() => {navigation.navigate('Logup')}}
+                    >
+                        <Text>Đăng ký ngay</Text>
+                    </Pressable>
                 </View>
 
         </View>

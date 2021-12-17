@@ -4,6 +4,7 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import CheckBox from '@react-native-community/checkbox';
 import { TextInput } from 'react-native-gesture-handler'
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Logup()
 {
@@ -13,8 +14,10 @@ export default function Logup()
     const [User,setUser] = React.useState([])
 
 
-    async function fetchData(){
-        const request = await axios.post('http://192.168.1.5:3000',{
+    async function fetchData()
+    {
+        // if(Username === '' || Password === '' || Phonenumber === '' || )
+        const request = await axios.post('http://192.168.1.9:3000',{
             username: Username,
             phonenumber: Phonenumber,
             password: Password,
@@ -26,6 +29,7 @@ export default function Logup()
       console.log(User)
     }
 
+    const navigation = useNavigation()
 
 
     return(
@@ -92,8 +96,14 @@ export default function Logup()
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white',}}>Đăng ký</Text>
                 </Pressable>
 
-                <View style={{marginTop: 30}}>
-                    <Text>Bạn đã có tài khoản? Đăng nhập</Text>
+                <View style={{marginTop: 30, alignItems: 'center'}}>
+                    <Text>Bạn đã có tài khoản?</Text>
+                    <Pressable
+                        marginTop={5}
+                        onPress={() =>{navigation.navigate('Login')}}
+                    >
+                        <Text>Đăng nhập</Text>
+                    </Pressable>
                 </View>
 
         </View>
