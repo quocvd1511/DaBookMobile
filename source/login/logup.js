@@ -3,30 +3,29 @@ import {View,Text, Image,StyleSheet, Pressable, ToastAndroid} from 'react-native
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import CheckBox from '@react-native-community/checkbox';
 import { TextInput } from 'react-native-gesture-handler'
-import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
-export default function Login()
+export default function Logup()
 {
     const [Username,  setUsername] = React.useState('')
+    const [Phonenumber, setPhoneNumber] = React.useState('')
     const [Password, setPassword] = React.useState('')
     const [User,setUser] = React.useState([])
-    const navigation = useNavigation();
 
-    async function checkLogin(){
+
+    async function fetchData(){
         const request = await axios.post('http://192.168.1.5:3000',{
             username: Username,
+            phonenumber: Phonenumber,
             password: Password,
       })
-      console.log(request.data)
-      if(request.data.status==='Failed')
-      {
-        ToastAndroid.show("Thông tin đăng nhập không chính xác", ToastAndroid.SHORT)
-      } else{
-        ToastAndroid.show("Xác thực thành công", ToastAndroid.SHORT)
-        navigation.navigate('TabScreen',{user_session: request.data.user_session})
-      }
+      console.log("Ten dang nhap: "+Username)
+      console.log("Mat khau: "+ Password)
+      setUser(request.data)
+      ToastAndroid.show(request.data, ToastAndroid.SHORT)
+      console.log(User)
     }
+
 
 
     return(
@@ -35,11 +34,11 @@ export default function Login()
 
                 <View style={{alignSelf: 'center'}}>
                     <Image style={{width: 120, height: 120}} source={require('../asset/icon/logo.png')}/>
-                    <Text style={{marginBottom: 20, fontSize: 20, fontWeight: 'bold',}}>Đăng nhập</Text>
+                    <Text style={{marginBottom: 20, fontSize: 20, marginTop: -5, fontWeight: 'bold', textAlign: 'center', color: '#fff'}}>Đăng ký</Text>
                 </View>
 
                 <View>
-                    
+                    <Text style={{marginBottom:5, marginTop: 10, color: '#000', fontSize: 14 }}> Nhập tên tài khoản</Text>
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20, marginLeft: 5, tintColor: '#333'}} source={require('../asset/icon/user1.png')}/>
@@ -48,8 +47,18 @@ export default function Login()
                     </View>
                 </View>
 
-                <View style={{marginTop:20}}>
-                    
+                <View>
+                    <Text style={{marginBottom:5, marginTop: 10, color: '#000', fontSize: 14 }}> Nhập số điện thoại</Text>
+                    <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                        <View style={styles.icon_input}>
+                            <Image style={{height: 23, width: 23, marginLeft: 5, tintColor: '#333'}} source={require('../asset/icon/phone.png')}/>
+                        </View>
+                        <TextInput style={styles.text_input} onChangeText={text => setPhoneNumber(text)} placeholder='Số điện thoại'></TextInput>
+                    </View>
+                </View>
+
+                <View>
+                    <Text style={{marginBottom:5, marginTop: 10, color: '#000', fontSize: 14 }}> Nhập mật khẩu</Text>
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333'}} source={require('../asset/icon/password.png')}/>
@@ -58,30 +67,33 @@ export default function Login()
                     </View>
                 </View>
 
-                <Text style={{marginTop: 15, alignSelf: 'flex-end'}}>Quên mật khẩu ?</Text>
+                <View>
+                    <Text style={{marginBottom:5, marginTop: 10, color: '#000', fontSize: 14 }}> Xác nhận mật khẩu</Text>
+                    <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                        <View style={styles.icon_input}>
+                            <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333',}} source={require('../asset/icon/password.png')}/>
+                        </View>
+                        <TextInput style={styles.pass_input} onChangeText={text => setPassword(text)} placeholder='Mật khẩu'></TextInput>
+                    </View>
+                </View>
 
-                <View style={{marginTop: 10, flexDirection: 'row', alignItems:'center'}}>
+                {/* <Text style={{marginTop: 15, alignSelf: 'flex-end'}}>Quên mật khẩu ?</Text> */}
+
+                {/* <View style={{marginTop: 10, flexDirection: 'row', alignItems:'center'}}>
                     <CheckBox/>
                     <Text>Duy trì đăng nhập</Text>
-        </View>
+                </View> */}
         </View>
 
                 <Pressable
                     style={styles.button_login}
-                    onPress={checkLogin}
+                    onPress={fetchData}
                     >
-                    <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white'}}>Xác Nhận</Text>
-                </Pressable>
-                
-                <Pressable
-                    style={styles.button_login_fb}
-                    >
-                    <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white'}}>Đăng nhập với Facebook</Text>
-                    
+                    <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white',}}>Đăng ký</Text>
                 </Pressable>
 
-                <View style={{marginTop: 50}}>
-                    <Text>Chưa có tài khoản? Đăng ký ngay</Text>
+                <View style={{marginTop: 30}}>
+                    <Text>Bạn đã có tài khoản? Đăng nhập</Text>
                 </View>
 
         </View>
@@ -94,10 +106,13 @@ const styles= StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1,
+    
     },
 
     text_input:{
         backgroundColor: '#fff',
+        color: '#333',
+        textDecorationLine:'none',
         width: 285,
         fontSize: 16,
         height: 40,
@@ -118,6 +133,8 @@ const styles= StyleSheet.create({
 
     pass_input:{
         backgroundColor: '#fff',
+        color: '#333',
+        textDecorationLine:'none',
         width: 285,
         height: 40,
         fontSize: 16,
@@ -140,7 +157,7 @@ const styles= StyleSheet.create({
         width: 300,
         borderRadius: 30,
         fontSize: 15,
-        marginTop: 15,
+        marginTop: 25,
         width: 300,
         height: 40,
         alignItems:'center',
