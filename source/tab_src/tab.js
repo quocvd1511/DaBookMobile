@@ -9,6 +9,7 @@ import CategoryScreen from '../rank/rank';
 import VoucherScreen from '../voucher/voucher';
 import UserScreen from '../user/user';
 import CartScreen from '../cart/cart';
+import StackUserScreen from '../user/stack_navigator_user'
 
 const Tab = createMaterialBottomTabNavigator();
 //
@@ -96,7 +97,7 @@ export default function TabScreen() {
           <Tab.Screen name="Category" component={CategoryScreen} />
           <Tab.Screen name="Voucher" component={VoucherScreen} />
           <Tab.Screen name="Cart" component={CartScreen} />
-          <Tab.Screen name="User" component={UserScreen} />
+          <Tab.Screen name="User" component={StackUserScreen} />
         </Tab.Navigator>
     );
   }
