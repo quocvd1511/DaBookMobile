@@ -10,12 +10,16 @@ import ShippingDetail from './shipping_detail';
 import ConfirmDetail from './confirm_detail';
 import HistoryLookup from './history_lookup';
 import VoucherDetail from './voucher_detail';
+import Login from '../login/login';
+import { useRoute } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 export default function StackUserScreen() {
 
   // const navigation = useNavigation(); 
-
+  const route = useRoute()
+  // console.log("Thông tin từ Stack")
+  // console.log(route)
   useEffect(() => {
     //LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     LogBox.ignoreLogs(['Reanimated 2']);
@@ -28,7 +32,7 @@ export default function StackUserScreen() {
       >
       <Stack.Screen
         name='UserScreen'
-        component={UserScreen}/>
+        component={UserScreen} initialParams={{username: route.params.username}}/>
       <Stack.Screen
         name='UserDetail'
         component={user_detail}/>
