@@ -1,17 +1,10 @@
 {
     "logs": [
         {
-<<<<<<< HEAD
             "outputFile": "D:\\Mobile\\React\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hr\\values-hr.xml",
             "map": [
                 {
                     "source": "C:\\Users\\TanTh\\.gradle\\caches\\transforms-3\\5646db46e2cfb43e7b3d42f3054c498c\\transformed\\core-1.5.0\\res\\values-hr\\values-hr.xml",
-=======
-            "outputFile": "D:\\mobile\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hr\\values-hr.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\vdq1511\\.gradle\\caches\\transforms-3\\5646db46e2cfb43e7b3d42f3054c498c\\transformed\\core-1.5.0\\res\\values-hr\\values-hr.xml",
->>>>>>> 6624f221518b23de8810fc8a132a421047895345
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
