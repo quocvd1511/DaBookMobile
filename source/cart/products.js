@@ -19,7 +19,7 @@ class ListProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      calls: [
+      Book: [
         {id :1, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg', amountTaken: 3},
         {id :2, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg', amountTaken: 4},
         {id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg', amountTaken: 2},
@@ -30,6 +30,8 @@ class ListProduct extends Component {
       ids: [],
     };
   }
+
+  
 
   isChecked = (itemId) => {
     const isThere = this.state.ids.includes(itemId);
@@ -54,22 +56,22 @@ class ListProduct extends Component {
 
   onChangeQual(index,type)
   {
-    const calls = this.state.calls
-    let cantd = calls[index].amountTaken;
+    const Book = this.state.Book
+    let cantd = Book[index].amountTaken;
 
     if (type) {
      cantd = cantd + 1
-     calls[index].amountTaken = cantd
-     this.setState({calls:calls})
+     Book[index].amountTaken = cantd
+     this.setState({Book:Book})
     }
     else if (type==false&&cantd>=2){
      cantd = cantd - 1
-     calls[index].amountTaken = cantd
-     this.setState({calls:calls})
+     Book[index].amountTaken = cantd
+     this.setState({Book:Book})
     }
     else if (type==false&&cantd==1){
-      calls.splice(index,1)
-     this.setState({calls:calls})
+      Book.splice(index,1)
+     this.setState({Book:Book})
     } 
   }
 
@@ -98,7 +100,7 @@ class ListProduct extends Component {
               <TouchableOpacity onPress={()=>this.onChangeQual(index,false)}>
                 <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
               </TouchableOpacity>
-              <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:18}}>{item.amountTaken}</Text>
+              <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:15}}>{item.amountTaken}</Text>
               <TouchableOpacity onPress={()=>this.onChangeQual(index,true)}>
                 <Icon name="ios-add-circle" size={30} color={"#33c37d"} />
               </TouchableOpacity>
@@ -119,7 +121,7 @@ class ListProduct extends Component {
         <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
         <FlatList style={{marginBottom: 55}}
           extraData={this.state}
-          data={this.state.calls}
+          data={this.state.Book}
           keyExtractor={(item) => {
             return `${item.id}`;
           }}
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontWeight: '600',
     color: '#222',
-    fontSize: 20,
+    fontSize: 15,
   },
   end: {
     flexDirection: 'row',
@@ -174,7 +176,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 3,
     borderRadius: 3,
-    fontSize: 18,
+    fontSize: 15,
   },
   imageStyle: {
     width: 85, 

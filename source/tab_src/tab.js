@@ -90,7 +90,6 @@ export default function TabScreen() {
           tabBarInactiveTintColor: 'black',
         })
       }
-        
         >
           <Tab.Screen name="Home" component={HomeScreen} />
           <Tab.Screen name="Category" component={CategoryScreen} />

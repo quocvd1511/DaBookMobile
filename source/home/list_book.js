@@ -11,13 +11,8 @@ const windowWidth = Dimensions.get('window').width;
 
 function ListBook()
 {
-  
 
   const navigation = useNavigation(); 
-
-  // React.useLayoutEffect(() => {
-  //   navigation.setOptions({headerShown: false});
-  // }, [navigation]);
 
   //---------Kết nối Database lấy dữ liệu-------------------------    
   const [Book,setBook] = React.useState([])
@@ -30,7 +25,7 @@ function ListBook()
     }
     fetchData();
 
-  },['http://192.168.1.5:3000/'])
+  },['http://192.168.43.180:3000/'])
   //---------------------------------------------------------------
    console.log(Book)
 

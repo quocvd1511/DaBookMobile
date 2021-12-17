@@ -131,7 +131,7 @@ export default function book_detail_home(){
                             
                             >
                             <TouchableOpacity 
-                            onPress={()=>}
+                            // onPress={()=>}
                             >
                             <Text style={{color:'#fff', fontSize: 17, margin: 5, marginTop:7, textAlign:'center'}} >  Thêm vào giỏ hàng  </Text>
                             </TouchableOpacity>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import VanHoc from './Vanhoc';
@@ -10,6 +10,7 @@ import NgonTinh from './Ngontinh';
 import KinhDi from './Kinhdi';
 import HaiHuoc from './Haihuoc';
 import PhongSu from './Phongsu';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 
 function HomeScreen() {
@@ -39,7 +40,7 @@ export default function TabRanks() {
     screenOptions={
     {
       tabBarScrollEnabled: true,
-      tabBarStyle: {backgroundColor: 'dodgerblue', height: 35, justifyContent: 'center',}
+      tabBarStyle: {backgroundColor: '#fff', height: 40, justifyContent: 'center',}
     }}
     >
       <Tab.Screen name="Văn học" component={VanHoc} />
