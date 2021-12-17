@@ -16,6 +16,7 @@ export default function Logup()
 
     async function fetchData()
     {
+        Keyboard.dismiss()
         if(Username === '' || Password === '' || Phonenumber === '' || ConPassword === '')
         {
             ToastAndroid.show('Vui lòng nhập đầy đủ thông tin', ToastAndroid.SHORT)

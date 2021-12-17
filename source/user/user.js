@@ -1,11 +1,15 @@
 import * as React from 'react';
 import { Text, View, ScrollView, StyleSheet, Image , Pressable} from 'react-native';
 import { Avatar } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-export default function UserScreen() {
-
+export default function UserScreen() 
+{
+  const route = useRoute()
   const navigation = useNavigation()
+  const [username,setusername] = React.useState(route.params.username)
+  // console.log('Những cái hay')
+  // console.log(route)
 
   return (
     <ScrollView>
@@ -19,7 +23,7 @@ export default function UserScreen() {
             />
             </View>
             <View style={styles.name_point}>
-                <Text style={styles.username}>Doremon Đã Căng</Text>
+                <Text style={styles.username}>{username}</Text>
                 <Text>Điểm tích lũy: 100000000</Text>
             </View>
         </View>
@@ -29,7 +33,7 @@ export default function UserScreen() {
         <View style={styles.main_user_account}>
           <Pressable
             style={styles.type_user}
-            onPress={() => navigation.navigate('UserDetail')}
+            onPress={() => navigation.navigate('UserDetail',{username: username})}
           >
                   <Image style={styles.icon_style_user} source={require('../asset/icon/user.png')}/>
                   <Text style={{fontWeight: 'bold', color: 'white'}}>Thông Tin Cá Nhân</Text>
@@ -37,6 +41,7 @@ export default function UserScreen() {
 
           <Pressable
             style={styles.user_point}
+            onPress={() => navigation.navigate('Login')}
           >
                   <Image style={styles.icon_style_user} source={require('../asset/icon/logout.png')}/>
                   <Text style={{fontWeight: 'bold', color: 'white'}}>Đăng Xuất</Text>

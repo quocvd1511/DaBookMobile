@@ -10,12 +10,16 @@ import VoucherScreen from '../voucher/voucher';
 import UserScreen from '../user/user';
 import CartScreen from '../cart/cart';
 import StackUserScreen from '../user/stack_navigator_user'
+import { useRoute } from '@react-navigation/native';
 
 const Tab = createMaterialBottomTabNavigator();
 //
 //fa-solid:shopping-cart
   
 export default function TabScreen() {
+    const route = useRoute()
+    const [username,setusername]= React.useState(route.params.user_session.username)
+    console.log(username)
     return (
         <Tab.Navigator
          screenOptions={({route}) => ({
@@ -97,7 +101,7 @@ export default function TabScreen() {
           <Tab.Screen name="Category" component={CategoryScreen} />
           <Tab.Screen name="Voucher" component={VoucherScreen} />
           <Tab.Screen name="Cart" component={CartScreen} />
-          <Tab.Screen name="User" component={StackUserScreen} />
+          <Tab.Screen name="User" component={StackUserScreen} initialParams={{username}}/>
         </Tab.Navigator>
     );
   }
