@@ -28,6 +28,7 @@ export default function book_detail_home(){
   const route = useRoute();
   const tensach = route.params.tensach;
   const username = 'hongcute';
+  const [detail_book, setdetail_book]  = useState('')
   console.log(tensach);
 
     // Lấy danh sách sách liên quan
@@ -35,25 +36,24 @@ export default function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.1.9:3000/chitietsach/' + tensach )
       setBook(request.data.list_book)
       return request.data.list_book
     }
     fetchData();
-    },['http://192.168.43.180:3000/chitietsach'])
+    },['http://192.168.1.9:3000/chitietsach'])
 
 
     // Lấy dữ liệu của chi tiết sách
-    const [detail_book, setdetail_book]  = useState([])
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.1.9:3000/chitietsach/' + tensach )
       setdetail_book(request.data.book)
       return request.data.book
     }
     fetchData();
-    },['http://192.168.43.180:3000/chitietsach' + tensach])
+    },['http://192.168.1.9:3000/chitietsach' + tensach])
 
 	 console.log(detail_book);
 
@@ -81,7 +81,7 @@ export default function book_detail_home(){
 
     function addProduct(quantity){
         if(username != ' '){
-            const request = axios.get('http://192.168.43.180:3000/themgiohang/' + username + '/' + detail_book.tensach
+            const request = axios.get('http://192.168.1.9:3000/themgiohang/' + username + '/' + detail_book.tensach
             + '/' + detail_book.giaban + '/' + detail_book.hinhanh
            + '/' + quantity);
            console.log(request.data);
@@ -207,7 +207,8 @@ export default function book_detail_home(){
                 <Text style={{margin: 10, marginBottom: 5, color:'black', fontWeight:'600',fontSize:15}}>  Sản phẩm tương tự </Text>
                 <ScrollView horizontal={true}>
                 {
-                    Book.map((item) => {
+                    Book.map((item) => 
+                    {
                     return(
                         <TouchableOpacity onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
                             <View style={styles.item}>

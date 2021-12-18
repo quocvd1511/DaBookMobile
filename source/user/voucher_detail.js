@@ -2,10 +2,16 @@ import * as React from 'react';
 import { Text, View, StyleSheet,Image, ScrollView, Pressable, ImageBackground} from 'react-native';
 import { BackgroundImage } from 'react-native-elements/dist/config';
 import { color } from 'react-native-reanimated';
+import axios from 'axios';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
+export default function VoucherDetail() 
+{
+    const navigation = useNavigation()
+    const route = useRoute()
+    console.log(route)
 
-export default function VoucherDetail() {
-    const [Book, setBook] = React.useState([
+    const [Voucher, setVoucher] = React.useState([
     
         {id :2, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
         {id :4, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
@@ -17,7 +23,34 @@ export default function VoucherDetail() {
         {id :12, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
         {id :13, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
         {id :14, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
+        // {id :11, name: 'Free Ship', price:'100%', img:'https://cdn.shopify.com/s/files/1/0194/4221/products/shipping-free-512_grande.png?v=1587611827'},
       ])
+
+      React.useEffect(() => 
+      {
+        async function fetchData()
+      {
+          const request = await axios.get('http://192.168.1.9:3000/danhsachvoucher?'+"matk"+"="+route.params.username)
+          console.log(request.data)
+          for(var i=0;i<request.data.length;i++)
+          {
+              request.data[i].ngaykt = request.data[i].ngaykt.toString("dd/mm/yyyy")
+              if(request.data[i].loai==='Sale')
+              {
+                request.data[i].img='https://www.pngrepo.com/png/222733/512/voucher-coupon.png'
+              } else
+              {
+                request.data[i].img='https://cdn.shopify.com/s/files/1/0194/4221/products/shipping-free-512_grande.png?v=1587611827'
+              }
+          }
+          setVoucher(request.data)
+      }
+
+      fetchData()
+    
+      },['http://192.168.1.9:3000/'])
+
+
   return (
     <ImageBackground source={require('../asset/icon/land.png')} style={{width: '100%', height: '100%'}}>
           <View style={styles.container}>
@@ -27,7 +60,7 @@ export default function VoucherDetail() {
                   <Text style={styles.text_header}>Voucher Free Ship của bạn</Text>
                 </View>
                   {
-                  Book.map((item) => {
+                  Voucher.map((item) => {
                       return(
                       <View key={item.id} style={styles.item}>
                           <View style={{backgroundColor: '#320d3e', padding: 25, borderRadius:5}}>
@@ -35,8 +68,9 @@ export default function VoucherDetail() {
                           </View>
 
                           <View style={{margin:10}}>
-                              <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>Giảm: {item.price}</Text>
-                              <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>HSD: 12/12/3000</Text>
+                              <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>Nội dung: {item.noidung}</Text>
+                              <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>Giảm: {item.phantram}%</Text>
+                              <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>HSD: {item.ngaykt}</Text>
                           </View>
 
                         

@@ -9,7 +9,7 @@ export default function UserScreen()
   const navigation = useNavigation()
   const [username,setusername] = React.useState(route.params.username)
   // console.log('Những cái hay')
-  // console.log(route)
+   //console.log(route)
 
   return (
     <ScrollView>
@@ -54,7 +54,7 @@ export default function UserScreen()
             <View style={styles.main_order}>
             <Pressable
                 style={styles.main_category}
-                onPress={() => navigation.navigate('ConfirmDetail')}>
+                onPress={() => navigation.navigate('ConfirmDetail',{username: username})}>
                 <View style={styles.main_category}>
                     <Image style={styles.each_category_icon} source={require('../asset/icon/confirm.png')}/>
                     <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5}}>Chờ xác nhận</Text>
@@ -63,7 +63,7 @@ export default function UserScreen()
 
               <Pressable
                 style={styles.main_category}
-                onPress={() => navigation.navigate('PackingDetail')}
+                onPress={() => navigation.navigate('PackingDetail',{username: username})}
               >
                       <Image style={styles.each_category_icon} source={require('../asset/icon/packing.png')}/>
                       <Text style={{paddingRight: 5, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5, marginLeft: -5}}> Đang đóng gói</Text>
@@ -71,7 +71,7 @@ export default function UserScreen()
 
               <Pressable
                 style={styles.main_category}
-                onPress={() => navigation.navigate('ShippingDetail')}
+                onPress={() => navigation.navigate('ShippingDetail',{username: username})}
               >
                     <Image style={styles.each_category_icon} source={require('../asset/icon/delivery.png')}/>
                     <Text style={{paddingRight: 10, color:'#555', fontWeight:'600',fontSize:14, marginTop: 5}}>Vận chuyển</Text>
@@ -93,7 +93,7 @@ export default function UserScreen()
             <Text style={{paddingLeft: 5, color:'black', fontWeight:'600', fontSize:15, margin: 10}}>Voucher sở hữu</Text>
             <Pressable
               style={styles.searching_history}
-              onPress={() => navigation.navigate('VoucherDetail')}
+              onPress={() => navigation.navigate('VoucherDetail',{username: username})}
             >
                 <Image style={styles.icon_style_voucher} source={require('../asset/icon/sale.png')}/>
                 <Text style={styles.text_style_voucher}>Voucher của bạn</Text>

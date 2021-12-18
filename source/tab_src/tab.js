@@ -102,7 +102,7 @@ export default function TabScreen() {
           <Tab.Screen name="Category" component={CategoryScreen} />
           <Tab.Screen name="Voucher" component={VoucherScreen} />
           <Tab.Screen name="Cart" component={CartScreen} initialParams={{username: user_session}}/>
-          <Tab.Screen name="User" component={StackUserScreen} />
+          <Tab.Screen name="User" component={StackUserScreen} initialParams={{username: user_session.username}}/>
         </Tab.Navigator>
     );
   }
