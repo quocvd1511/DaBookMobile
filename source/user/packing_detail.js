@@ -3,7 +3,7 @@ import { Text, View, StyleSheet,Image, ScrollView, Pressable} from 'react-native
 import { color } from 'react-native-reanimated';
 
 
-export default function Header() {
+export default function PackingDetail() {
     const [Book, setBook] = React.useState([
     
         {id :2, ngaydathang: '1/1/2000', value:'100000'},

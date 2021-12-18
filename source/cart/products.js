@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -11,40 +12,69 @@ import {
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useNavigation, useRoute} from '@react-navigation/native';
 const windowWidth = Dimensions.get('window').width;
 
 
 
+// const navigation = useNavigation(); 
+
+// function GetData(){
+//   const route = useRoute();
+//     const username = route.params.username;
+//     return username;
+// }
+
 class ListProduct extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
-      Book: [
-        {id :1, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg', amountTaken: 3},
-        {id :2, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg', amountTaken: 4},
-        {id:3, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg', amountTaken: 2},
-        {id:4, name: 'Harry Potter 1', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg', amountTaken: 1},
-        {id:5, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg', amountTaken: 3},
-        {id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg', amountTaken: 3},
-        ],
+      Book:null,
+      Giohang: null,
+      Total: 0,
       ids: [],
     };
   }
 
-  
+  // Lấy dữ liệu cho Giohang
+  getDataGH(){
+    const Book = this.state.Book;
+    this.setState({Giohang: Book["giohang"]})
+  }
 
+  // Tạo giá trị cho biến username
+  getParams(){
+    const { navigation } = this.props;
+    const username = 'hongcute'
+    return username;
+  }
+
+  // Lấy dữ liệu giỏ hàng của khách hàng
+  async componentDidMount() {
+    const username = this.getParams();
+    console.log(username);
+    const request = await axios.get('http://192.168.43.180:3000/chitietgiohang/' + username);
+    const data = request.data.thongtintk;
+    console.log(data);
+    this.setState({ Book: data})
+    this.getDataGH();
+}
+
+// Checkbox
   isChecked = (itemId) => {
     const isThere = this.state.ids.includes(itemId);
     return isThere;
   };
 
-  toggleChecked = (itemId) => {
+  toggleChecked = (itemId, index) => {
     const ids = [...this.state.ids, itemId];
-
     if (this.isChecked(itemId)) {
       this.setState({
         ...this.state,
-        ids: this.state.ids.filter((id) => id !== itemId),
+        ids: this.state.ids.filter(
+          (id) => id !== itemId),
+        
       });
     } else {
       this.setState({
@@ -52,28 +82,53 @@ class ListProduct extends Component {
         ids,
       });
     }
+    this.SumTotal(index);
   };
 
+  // Tính tổng tiền sản phẩm đã check
+  SumTotal(index){
+    let Giohang = this.state.Giohang;
+    let gia = Giohang[index].giaban
+    let soluong = Giohang[index].soluong
+    const total = this.state.Total;
+    let new_total = total + gia*soluong
+    this.setState({Total:new_total})
+  }
+
+  // Tăng giảm số lượng
   onChangeQual(index,type)
   {
-    const Book = this.state.Book
-    let cantd = Book[index].amountTaken;
+    const Giohang = this.state.Giohang
+    let cantd = Giohang[index].soluong;
 
     if (type) {
      cantd = cantd + 1
-     Book[index].amountTaken = cantd
-     this.setState({Book:Book})
+     Giohang[index].soluong = cantd
+     this.setState({Giohang:Giohang})
     }
     else if (type==false&&cantd>=2){
      cantd = cantd - 1
-     Book[index].amountTaken = cantd
-     this.setState({Book:Book})
+     Giohang[index].soluong = cantd
+     this.setState({Giohang:Giohang})
     }
     else if (type==false&&cantd==1){
       Book.splice(index,1)
-     this.setState({Book:Book})
+     this.setState({Giohang:Giohang})
     } 
   }
+
+  // Xóa sản phẩm khỏi giỏ hàng
+  removeBook(index) {
+    var array = [...this.state.Giohang]; // make a separate copy of the array
+     let Giohang = this.state.Giohang;
+    let tensach = Giohang[index].tensach
+    let username = this.getParams();
+    array.splice(index, 1);
+    this.setState({Giohang: array});
+    const response = axios.get('http://192.168.43.180:3000/xoasanpham/' + username + "/" + tensach);
+    const data = response.data;
+  }
+
 
   renderItem = ({ item, index }) => {
     return (
@@ -83,31 +138,33 @@ class ListProduct extends Component {
             // iconRight
             checkedIcon="check-square"
             uncheckedIcon="square-o"
-            checked={this.isChecked(item.id)}
-            onPress={() => this.toggleChecked(item.id)}
+            checked={this.isChecked(item.tensach)}
+            onPress={() => this.toggleChecked(item.tensach, index)}
           />
-        <Image source={{uri:item.img}} style={styles.imageStyle} />
+        <Image source={{uri:item.hinhanh}} style={styles.imageStyle} />
           <View>
             <View style={styles.nameContainer}>
-              <Text style={styles.nameTxt}>{item.name}</Text>
+              <Text style={styles.nameTxt}>{item.tensach}</Text>
             </View>
             <View style={styles.end}>
               <Text style={styles.priceStyle}>
-              {item.price} đ
+              {item.giaban}000 đ
               </Text>
             </View>
             <View style={{flexDirection:'row', alignItems:'center',  marginRight: 0, padding: 10 }}>
               <TouchableOpacity onPress={()=>this.onChangeQual(index,false)}>
                 <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
               </TouchableOpacity>
-              <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:15}}>{item.amountTaken}</Text>
+
+              <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:15}}>{item.soluong}</Text>
+
               <TouchableOpacity onPress={()=>this.onChangeQual(index,true)}>
                 <Icon name="ios-add-circle" size={30} color={"#33c37d"} />
               </TouchableOpacity>
             </View>
           </View>
-          <TouchableOpacity style={{flexDirection:'row', alignItems:'center',  marginRight: 0, paddingLeft: 50 }}>
-                <Icon name="trash" size={25} color={"#33c37d"} />
+          <TouchableOpacity style={{flexDirection:'row', alignItems:'center',  marginRight: 0, paddingLeft: 50 }} onPress={() => this.removeBook(index)}>
+                <Icon name="trash" size={25} color={"#33c37d"}/>
           </TouchableOpacity>
         </View>
       </TouchableOpacity>
@@ -115,13 +172,14 @@ class ListProduct extends Component {
   };
 
 
-  render() {
+  render() {    
+    const { navigation } = this.props;
     return (
       <SafeAreaView>
         <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
         <FlatList style={{marginBottom: 55}}
           extraData={this.state}
-          data={this.state.Book}
+          data={this.state.Giohang}
           keyExtractor={(item) => {
             return `${item.id}`;
           }}
@@ -130,9 +188,9 @@ class ListProduct extends Component {
         <View style={styles.bottomView}>
           <View style={styles.textBottom}>
           <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
-          <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>0 đ</Text>
+          <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{this.state.Total} đ</Text>
           </View>
-          <TouchableOpacity style={styles.buyButton}>
+          <TouchableOpacity style={styles.buyButton} onPress={() => this.props.navigation.navigate('Payment')}>
               <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Mua Hàng</Text>
           </TouchableOpacity>
         </View>
@@ -163,6 +221,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#222',
     fontSize: 15,
+    width: 100,
   },
   end: {
     flexDirection: 'row',

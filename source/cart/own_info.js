@@ -1,24 +1,48 @@
 import * as React from 'react';
 import { Text, View, StyleSheet,Image } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import axios from 'axios';
 
 export default function Info()
 {
+    const navigation = useNavigation();
+    const route = useRoute();
+    // const username = route.params.username;
+    const username = 'hongcute';
+    console.log(username);
+    
+    const [User,setUser] = React.useState([])
+    React.useEffect(() => 
+  {
+    async function fetchData(){
+      const request = await axios.get('http://192.168.43.180:3000/chitietgiohang/' + username)
+      setUser(request.data.thongtintk)
+      return request.data.thongtintk
+    }
+    fetchData();
+    },['http://192.168.43.180:3000/chitietgiohang/' + username])
+
+	 console.log(User);
+
     return(
         <View>
-            <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 20}}>Thông tin nhận hàng</Text>
+            <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 10, marginBottom:10,}}>Thông tin nhận hàng</Text>
             <View style={styles.main}>
                 <View style={styles.type_user}>
                 <Image style={styles.icon_style} source={require('../asset/icon/location.png')}/>
-                    <Text style={{fontSize: 18}}>Hồng Nguyễn</Text>
+                    <Text style={{fontSize: 18}}>{User.matk}</Text>
                 </View>
 
                 <View style={styles.type_numberphone}>
-                <Text style={{fontSize: 18}}>SĐT: 0123456777</Text>
+                <Text style={{fontSize: 18}}>SĐT: {User.sodt}</Text>
                 </View>
             </View>
             
             <View style={styles.address}>
-                <Text style={styles.text_style}>Địa chỉ: phường An phú, thị xã Thuận An, tỉnh Bình Dương</Text>
+                <Text style={styles.text_style}>Địa chỉ: {User.diachigoc}</Text>
+            </View>
+            <View style={{backgroundColor: '#fff', padding: 10}}>
+                <Text style={styles.change}>Thay đổi</Text>
             </View>
         </View>
     )
@@ -33,14 +57,15 @@ const styles=StyleSheet.create({
     },
 
    address:{
-    backgroundColor: 'white',
+        backgroundColor: 'white',
         flexDirection: 'row',
         alignItems: 'center',
         // marginLeft:10,
         // marginRight:10,
+        
         paddingLeft: 30,
         paddingRight: 20,
-        marginBottom: 10,
+        marginBottom: 0,
         
     },
 
@@ -67,15 +92,24 @@ const styles=StyleSheet.create({
 
     icon_style:
     {
-        height: 30,
-        width: 30,
+        height: 25,
+        width: 25,
         marginRight: 10,
         marginLeft: 15,
+        tintColor: '#1E90FF'
     },
 
     text_style:{
         fontSize: 18,
-        fontWeight: 'bold',
+        lineHeight: 32,
+        fontWeight: '600',
+    },
+
+    change: {
+        fontSize: 16,
+        color: '#1E90FF',
+        fontWeight: '500',
+        marginLeft: 20,
     }
 
 })

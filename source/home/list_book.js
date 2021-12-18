@@ -31,7 +31,7 @@ function ListBook()
 
    return (
     <View style={{backgroundColor:'#f3f3f3', flex:1}}>
-      <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15,marginTop: 30}}>Tất cả các sách</Text>
+      <Text style={{padding: 10, color:'blue', fontWeight:'600',fontSize:18, marginTop: 5, backgroundColor:'#fff', textAlign:'center'}}>Tất cả các sách</Text>
       <ScrollView contentContainerStyle={styles.container}>
           {
           Book.map((item)=>
@@ -45,7 +45,7 @@ function ListBook()
                         ellipsizeMode='tail'>{item.tensach}</Text>
                   <View style={{margin:10, marginTop:6, flexDirection:'row', alignItems:'center'}}>
                     <Image style={{height:22,width:22,tintColor:'dodgerblue'}} source={require('../asset/icon/cost.png')}/>
-                    <Text style={styles.book_price}> {item.giaban}.000 đ</Text>
+                    <Text style={styles.book_price}> {item.giaban}đ</Text>
                     <View style={styles.sale_off}>
                       <Text style={styles.sale_off_percent}> -{item.giamgia}%</Text>
                     </View>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: (windowWidth - 12) /2,
     paddingTop: 10,
-    marginTop: 2,
+    marginTop: 5,
     backgroundColor: 'white',
     margin: 3,
     borderRadius: 3,

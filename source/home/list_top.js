@@ -38,10 +38,13 @@ function ListTop()
   },['http://192.168.43.180:3000/'])
   return (
       <View style={styles.container}>
-      <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15}}>Top Sale</Text>
+        <View style = {styles.flash_sale}>
+          <Image style = {styles.flash} source={require('../asset/icon/flash.png')}/>  
+          <Text style={{paddingLeft: 5, color:'red', fontWeight:'600',fontSize:18,}}>FLASH SALE</Text>
+        </View>
 
       <ScrollView horizontal={true}>
-        {
+        { 
           Book.map((item) => {
             return(
               <TouchableOpacity onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
@@ -51,7 +54,7 @@ function ListTop()
                   style={styles.name_item}
                   numberOfLines={2}
                   ellipsizeMode='tail'>{item.tensach}</Text>
-                  <Text style={styles.newprice}>{item.giaban}000 đ</Text>
+                  <Text style={styles.newprice}>{item.giaban} đ</Text>
                   <Text style = {styles.price}>  {item.giagoc} </Text>
                   <View style={styles.sale_off}>
                       <Text style={styles.sale_off_percent}> -{item.giamgia}%</Text>
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 5,
     borderRadius: 3,
-    marginBottom: 10,
+    marginBottom: 5,
     alignItems: 'center',
   },
 
@@ -103,7 +106,20 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: flexDirections[0],
     backgroundColor: '#E0FFFF',
-    marginBottom: 10,
+    marginBottom: 5,
+  },
+
+  flash_sale: {
+    justifyContent:'center',
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: flexDirections[0],
+    backgroundColor: '#fff',
+  },
+
+  flash: {
+    width: 80,
+    height: 80,
   },
 
   icon:{

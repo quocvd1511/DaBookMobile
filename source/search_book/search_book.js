@@ -27,25 +27,7 @@ export default function SearchBook(){
   const route = useRoute();
   const name = route.params.name;
   console.log(name);
-    
-    // const [Book, setBook] = useState([
-    //     {id :1, name: 'Harry Potter And Something Else I Known', price:'100000', hinhanh:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
-    //     {id :2, name: 'Harry Potter và Bảo bối tử thần', price:'100000', hinhanh:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
-    //     {id:3, name: 'Harry Potter 3', price:'100000', hinhanh:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
-    //     {id:4, name: 'Harry Potter 1', price:'100000', hinhanh:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
-    //     {id:5, name: 'Harry Potter 2', price:'100000', hinhanh:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
-    //     {id: 6, name: 'Harry Potter 3', price:'100000', hinhanh:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
-    // ])
-
-    // const [Book, setBook] = useState([
-    //       {key: '1', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa Harry Potter và Đứa trẻ bị nguyền rủa ", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"},
-    //       {key: '2', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"},
-    //       {key: '3', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa Harry Potter và Đứa trẻ bị nguyền rủa ", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"},
-    //       {key: '4', tensach:"Harry Potter và Đứa trẻ bị nguyền rủa", giaban: "179.000", hinhanh:"https://cf.shopee.vn/file/4374236c87df1591d108fee35c25f414", tacgia:"J.K Rowling"}
-    //   ])
-	
-
-
+  
     const [Book,setBook] = React.useState([])
     React.useEffect(() => 
   {
@@ -78,7 +60,7 @@ export default function SearchBook(){
                         ellipsizeMode='tail'>{item.tensach}</Text>
                   <View style={{margin:10, marginTop:6, flexDirection:'row', alignItems:'center'}}>
                     <Image style={{height:22,width:22,tintColor:'dodgerblue'}} source={require('../asset/icon/cost.png')}/>
-                    <Text style={styles.book_price}> {item.giaban}000 đ</Text>
+                    <Text style={styles.book_price}> {item.giaban} đ</Text>
                     <View style={styles.sale_off}>
                       <Text style={styles.sale_off_percent}> -15%</Text>
                     </View>

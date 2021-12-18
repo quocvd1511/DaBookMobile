@@ -10,6 +10,9 @@ import book_detail from './source/book_detail/book_detail';
 import SearchBook from './source/search_book/search_book';
 import Voucher from './source/voucher/voucher';
 import Login from './source/login/login';
+import Logup from './source/login/logup';
+import Payment from './source/payment/payment'
+import Cart from './source/cart/cart';
 
 // import ListRank from './source/rank/list_rank';
 
@@ -27,9 +30,12 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator
       screenOptions={{headerShown: false}}>
-      {/* <Stack.Screen
+      <Stack.Screen
         name='Login'
-        component={Login}/> */}
+        component={Login}/>
+      <Stack.Screen
+        name='Logup'
+        component={Logup}/>
       <Stack.Screen 
       name='TabScreen' 
       component={TabScreen}/>
@@ -48,6 +54,12 @@ export default function App() {
       <Stack.Screen 
         name='Voucher'
         component={Voucher}/>
+      <Stack.Screen 
+        name='Cart' 
+        component={Cart}/>
+       <Stack.Screen 
+        name='Payment' 
+        component={Payment}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -77,6 +77,7 @@ const styles=StyleSheet.create({
 
     text_style:{
         fontSize: 18,
+        tintColor: '#1E90FF',
         fontWeight: '600',
     }
 
