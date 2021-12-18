@@ -1,11 +1,15 @@
 import * as React from 'react';
 import { Text, View, ScrollView, StyleSheet, Image , Pressable} from 'react-native';
 import { Avatar } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-export default function UserScreen() {
-
+export default function UserScreen() 
+{
+  const route = useRoute()
   const navigation = useNavigation()
+  const [username,setusername] = React.useState(route.params.username)
+  // console.log('Những cái hay')
+  // console.log(route)
 
   return (
     <ScrollView>
@@ -19,7 +23,7 @@ export default function UserScreen() {
             />
             </View>
             <View style={styles.name_point}>
-                <Text style={styles.username}>Doremon Đã Căng</Text>
+                <Text style={styles.username}>{username}</Text>
                 <Text>Điểm tích lũy: 100000000</Text>
             </View>
         </View>
@@ -29,7 +33,7 @@ export default function UserScreen() {
         <View style={styles.main_user_account}>
           <Pressable
             style={styles.type_user}
-            onPress={() => navigation.navigate('UserDetail')}
+            onPress={() => navigation.navigate('UserDetail',{username: username})}
           >
                   <Image style={styles.icon_style_user} source={require('../asset/icon/user.png')}/>
                   <Text style={{fontWeight: 'bold', color: 'white'}}>Thông Tin Cá Nhân</Text>
@@ -37,6 +41,7 @@ export default function UserScreen() {
 
           <Pressable
             style={styles.user_point}
+            onPress={() => navigation.navigate('Login')}
           >
                   <Image style={styles.icon_style_user} source={require('../asset/icon/logout.png')}/>
                   <Text style={{fontWeight: 'bold', color: 'white'}}>Đăng Xuất</Text>
@@ -47,12 +52,21 @@ export default function UserScreen() {
         <View>
             <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15, margin: 10, marginBottom: 0, marginTop: 20}}>Đơn hàng của tôi</Text>
             <View style={styles.main_order}>
+            <Pressable
+                style={styles.main_category}
+                onPress={() => navigation.navigate('ConfirmDetail')}>
+                <View style={styles.main_category}>
+                    <Image style={styles.each_category_icon} source={require('../asset/icon/confirm.png')}/>
+                    <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5}}>Chờ xác nhận</Text>
+                </View>
+              </Pressable>
+
               <Pressable
                 style={styles.main_category}
                 onPress={() => navigation.navigate('PackingDetail')}
               >
                       <Image style={styles.each_category_icon} source={require('../asset/icon/packing.png')}/>
-                      <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 5}}>Đang đóng gói</Text>
+                      <Text style={{paddingRight: 5, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5, marginLeft: -5}}> Đang đóng gói</Text>
               </Pressable>
 
               <Pressable
@@ -60,18 +74,7 @@ export default function UserScreen() {
                 onPress={() => navigation.navigate('ShippingDetail')}
               >
                     <Image style={styles.each_category_icon} source={require('../asset/icon/delivery.png')}/>
-                    <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 5}}>Vận chuyển</Text>
-              </Pressable>
-              
-              <Pressable
-                style={styles.main_category}
-                onPress={() => navigation.navigate('ConfirmDetail')}
-              >
-
-                <View style={styles.main_category}>
-                    <Image style={styles.each_category_icon} source={require('../asset/icon/confirm.png')}/>
-                    <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 5}}>Chờ xác nhận</Text>
-                </View>
+                    <Text style={{paddingRight: 10, color:'#555', fontWeight:'600',fontSize:14, marginTop: 5}}>Vận chuyển</Text>
               </Pressable>
 
             </View>
@@ -80,7 +83,7 @@ export default function UserScreen() {
               onPress={() => navigation.navigate('HistoryLookup')}
             >
                   <Image style={styles.icon_style} source={require('../asset/icon/history.png')}/>
-                  <Text style={{paddingLeft: 5, color:'#555', fontWeight:'600',fontSize:15,marginTop: 5, marginBottom: 5,}}>Tra cứu lịch sử đơn hàng</Text>
+                  <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 5, marginBottom: 3,marginRight: 5}}>Tra cứu lịch sử đơn hàng</Text>
             </Pressable>
         </View>
 
@@ -246,7 +249,7 @@ each_category_icon:{
 main_category:{
   justifyContent:'center',
   alignItems:'center',
-  margin: 15,
+  margin: 10,
 },
 
 icon_style:

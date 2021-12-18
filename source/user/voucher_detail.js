@@ -39,17 +39,7 @@ export default function VoucherDetail() {
                               <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>HSD: 12/12/3000</Text>
                           </View>
 
-                          {/* <Pressable
-                              backgroundColor={'dodgerblue'}
-                              padding={5}
-                              paddingLeft={20}
-                              paddingRight={20}
-                              borderRadius={5}
-                              marginLeft={50}
-                              marginTop={45}
-                          >
-                              <Text style={{color:'white'}}>Lưu</Text>
-                          </Pressable> */}
+                        
                       </View>
                       )
                   })
