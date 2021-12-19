@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #Sun Dec 19 11:08:55 ICT 2021
+=======
+#Sun Dec 19 08:57:10 ICT 2021
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
 path.3=14/classes.dex
 path.2=0/classes.dex
 path.1=0/classes.dex
@@ -7,10 +11,19 @@ path.0=classes.dex
 renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
+<<<<<<< HEAD
 base.4=D\:\\CODE_APP_DABOOK\\DaBookMobile\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
 renamed.0=classes.dex
 base.3=D\:\\CODE_APP_DABOOK\\DaBookMobile\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
 base.2=D\:\\CODE_APP_DABOOK\\DaBookMobile\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.1=D\:\\CODE_APP_DABOOK\\DaBookMobile\\android\\app\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
 base.0=D\:\\CODE_APP_DABOOK\\DaBookMobile\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+=======
+base.4=D\:\\Mobile\\React\\DaBookMobile\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\7\\classes.dex
+renamed.0=classes.dex
+base.3=D\:\\Mobile\\React\\DaBookMobile\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\14\\classes.dex
+base.2=D\:\\Mobile\\React\\DaBookMobile\\android\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
+base.1=D\:\\Mobile\\React\\DaBookMobile\\android\\app\\build\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
+base.0=D\:\\Mobile\\React\\DaBookMobile\\android\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
 path.4=7/classes.dex

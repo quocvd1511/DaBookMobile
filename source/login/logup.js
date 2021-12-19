@@ -29,7 +29,7 @@ export default function Logup()
         {
             ToastAndroid.show('Số điện thoại không hợp lệ', ToastAndroid.SHORT)
         }
-        const request = await axios.post('http://192.168.43.180:3000/signup',{
+        const request = await axios.post('http://192.168.1.5:3000/signup',{
             username: Username,
             phonenumber: Phonenumber,
             password: Password,
@@ -115,23 +115,40 @@ export default function Logup()
                     <Text>Duy trì đăng nhập</Text>
                 </View> */}
         </View>
+            <Pressable
+                style={
+                    ({pressed}) =>[{
 
+                        opacity: pressed ? 0.5:1
+                    },
+                    button_login
+                ]}
+                onPress={fetchData}
+                >
+                <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white',}}>Đăng ký</Text>
+            </Pressable>
+
+            <View style={{marginTop: 30, alignItems: 'center'}}>
+                <Text>Bạn đã có tài khoản?</Text>
                 <Pressable
-                    style={styles.button_login}
-                    onPress={fetchData}
-                    >
-                    <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white',}}>Đăng ký</Text>
-                </Pressable>
+                    style={
+                        ({pressed}) =>[{
 
-                <View style={{marginTop: 30, alignItems: 'center'}}>
-                    <Text>Bạn đã có tài khoản?</Text>
-                    <Pressable
-                        marginTop={5}
-                        onPress={() =>{navigation.navigate('Login')}}
+                            opacity: pressed ? 0.5:1
+                        },
+                        // marginTop=5
+                    ]}
+                    onPress={() =>{navigation.navigate('Login')}}
                     >
-                        <Text>Đăng nhập</Text>
-                    </Pressable>
-                </View>
+                    <Text>Đăng nhập</Text>
+                </Pressable>
+                {/* <Pressable
+                    marginTop={5}
+                    onPress={() =>{navigation.navigate('Login')}}
+                >
+                    <Text>Đăng nhập</Text>
+                </Pressable> */}
+            </View>
 
         </View>
     )

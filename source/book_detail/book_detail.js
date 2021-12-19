@@ -36,24 +36,41 @@ export default function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
+<<<<<<< HEAD
       const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
+=======
+      const request = await axios.get('http://192.168.1.5:3000/chitietsach/' + tensach )
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
       setBook(request.data.list_book)
       return request.data.list_book
     }
     fetchData();
+<<<<<<< HEAD
     },['http://192.168.43.180:3000/chitietsach'])
+=======
+    },['http://192.168.1.5:3000/chitietsach'])
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
 
 
     // Lấy dữ liệu của chi tiết sách
     React.useEffect(() => 
   {
     async function fetchData(){
+<<<<<<< HEAD
       const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
+=======
+      const request = await axios.get('http://192.168.1.5:3000/chitietsach/' + tensach )
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
       setdetail_book(request.data.book)
       return request.data.book
     }
     fetchData();
+<<<<<<< HEAD
     },['http://192.168.43.180:3000/chitietsach' + tensach])
+=======
+    },['http://192.168.1.5:3000/chitietsach' + tensach])
+
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
 	 console.log(detail_book);
 
         
@@ -78,10 +95,23 @@ export default function book_detail_home(){
         } 
     }
 
+<<<<<<< HEAD
     function addProduct(soluong){
             console.log(username + ' ' + detail_book.tensach + ' ' + soluong)
             const request = axios.get('http://192.168.43.180:3000/themgiohang/' + username + '/' + detail_book.tensach + '/' + soluong);
            console.log(request.status);
+=======
+    function addProduct(quantity){
+        if(username != ' '){
+            const request = axios.get('http://192.168.1.5:3000/themgiohang/' + username + '/' + detail_book.tensach
+            + '/' + detail_book.giaban + '/' + detail_book.hinhanh
+           + '/' + quantity);
+           console.log(request.data);
+        }else{
+            ToastAndroid.show("Đăng nhập đi bạn", ToastAndroid.SHORT)
+        }
+
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
     }
     
     return(
@@ -101,33 +131,35 @@ export default function book_detail_home(){
                 </View>
                 <View style = {styles.button}>
                     <View style = {styles.quantity}>
-                        <Pressable 
-                            backgroundColor={'#FF6600'}
-                            width={40}
-                            height={40}
-                            marginBottom={-5}
-                            marginTop={-5}
-                            borderTopLeftRadius={5}
-                            borderBottomLeftRadius={5}
-                            onPress={quantyminus}>
+                        <Pressable
+                            style={
+                                ({pressed}) =>[{
+
+                                    opacity: pressed ? 0.5:1
+                                },
+                                styles.qtyminus
+                            ]}
+                            onPress={quantyminus}
+                            >
                             <Text style={{color:'#fff', fontSize: 25, marginBottom: 6, textAlign:'center'}} >-</Text>
-                        </Pressable>
-                        
+                        </Pressable>                       
                         <Text style={{width: 40, color:'#000', height: 39.5, fontSize: 17, lineHeight:40, textAlign:'center', alignItems:'center', borderWidth: 1, borderStyle: 'solid', borderColor: '#FF6600'}}>{temp}</Text>
-                        
-                        <Pressable 
-                            backgroundColor={'#FF6600'}
-                            width={40}
-                            height={40}
-                            marginBottom={-5}
-                            marginTop={-5}
-                            borderTopRightRadius={5}
-                            borderBottomRightRadius={5}
-                            onPress={quantyplus}>
+                        <Pressable
+                            style={
+                                ({pressed}) =>[{
+
+                                    opacity: pressed ? 0.5:1
+                                },
+                                styles.qtyplus
+                            ]}
+                            onPress={quantyplus}
+                            >
                             <Text style={{color:'#fff', fontSize: 20, margin: 5, textAlign:'center'}} >+</Text>
                         </Pressable>
+                        
                     </View>
                     <View>
+<<<<<<< HEAD
                     <TouchableOpacity 
                             // backgroundColor={'#ff424e'}
                             // height={40}
@@ -135,6 +167,17 @@ export default function book_detail_home(){
                             // marginTop={-5}
                             // borderRadius={5}
                             style={styles.buyButton}
+=======
+                        <Pressable
+                            style={
+                                ({pressed}) =>[{
+
+                                    opacity: pressed ? 0.5:1
+                                },
+                                styles.add_cart
+                            ]}
+                            onPress={addProduct(temp)}
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
                             >
                             <Text style={{color:'#fff', fontSize: 17, margin: 5, marginTop:7, textAlign:'center'}} onPress={() => addProduct(temp)}>  Thêm vào giỏ hàng  </Text>
                         </TouchableOpacity>
@@ -255,6 +298,34 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 20,
         fontWeight: fontWeights[7],
+    },
+
+    add_cart: {
+        backgroundColor: '#ff424e',
+        height: 40,
+        marginBottom: -5,
+        marginTop: -5,
+        borderRadius: 5,
+    },
+
+    qtyminus: {
+        backgroundColor:'#FF6600',
+        width: 40,
+        height: 40,
+        marginBottom: -5,
+        marginTop: -5,
+        borderTopLeftRadius: 5,
+        borderBottomLeftRadius: 5,
+    },
+
+    qtyplus: {
+        backgroundColor:'#FF6600',
+        width: 40,
+        height: 40,
+        marginBottom: -5,
+        marginTop: -5,
+        borderTopRightRadius:5,
+        borderBottomRightRadius:5,
     },
 
     image:{

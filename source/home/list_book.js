@@ -20,13 +20,21 @@ function ListBook()
   React.useEffect(() => 
   {
     async function fetchData(){
+<<<<<<< HEAD
       const request = await axios.get('http://192.168.43.180:3000/')
+=======
+      const request = await axios.get('http://192.168.1.5:3000/')
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
       setBook(request.data.books)
       return request.data.books
     }
     fetchData();
 
+<<<<<<< HEAD
   },['http://192.168.43.180:3000/'])
+=======
+  },['http://192.168.1.5:3000/'])
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
   //---------------------------------------------------------------
    console.log(Book)
 

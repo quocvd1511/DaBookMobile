@@ -1,15 +1,13 @@
 import * as React from 'react';
 import { Text, View, ScrollView } from 'react-native';
-import HeaderCart from './header_cart';
-import ListProduct from './products copy';
-import Info_User from './own_info';
+import ListProduct_New from './products';
 
 export default function UserScreen() {
     return (
-      <ScrollView>
-        <HeaderCart/>
-        <Info_User/>
-        <ListProduct/>
-      </ScrollView>
+      // <ScrollView>
+      <View style={{flex: 1}}>
+          <ListProduct_New/>
+      </View>
+      // </ScrollView>
     );
   }

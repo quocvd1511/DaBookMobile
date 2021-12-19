@@ -39,15 +39,15 @@ export default function HistoryLookup()
                             <View style={styles.main}>
                                 <View style={styles.type_user}>
                                     <Image style={styles.icon_style} source={require('../asset/icon/location.png')}/>
-                                    <Text style={{fontSize: 16}}>Hồng Nguyễn</Text>
+                                    <Text style={{fontSize: 16, color: '#444'}}>Hồng Nguyễn</Text>
                                 </View>
 
                                 <View style={styles.type_numberphone}>
-                                    <Text style={{fontSize: 16}}>SĐT: 0123456777</Text>
+                                    <Text style={{fontSize: 16, color: '#444'}}>SĐT: 0123456777</Text>
                                 </View>
                             </View>
                             <View style={styles.address}>
-                                <Text style={{fontSize: 16}}>Địa chỉ: phường An phú, thị xã Thuận An, tỉnh Bình Dương</Text>
+                                <Text style={{fontSize: 16, color: '#444'}}>Địa chỉ: phường An phú, thị xã Thuận An, tỉnh Bình Dương</Text>
                             </View>
                         </View>
                     <View style={styles.deli_dabook}>

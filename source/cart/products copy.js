@@ -48,6 +48,7 @@ function ListProduct_New()
     //   ListProduct[i].SoLuong=1
     // }
 
+<<<<<<< HEAD
     const[temp, settemp] = useState(0)
 
     function TangSoLuong(index)
@@ -58,6 +59,53 @@ function ListProduct_New()
         setProduct(ListProduct)
         console.log(ListProduct)
         settemp(temp - 1)
+=======
+
+  // Lấy dữ liệu cho Giohang
+  getDataGH(){
+    const Book = this.state.Book;
+    this.setState({Giohang: Book["giohang"]})
+  }
+
+  // Tạo giá trị cho biến username
+  getParams(){
+    const { navigation } = this.props;
+    const username = 'hongcute' 
+    return username;
+  }
+
+  // Lấy dữ liệu giỏ hàng của khách hàng
+  async componentDidMount()
+   {
+    const username = this.getParams();
+    const request = await axios.get('http://192.168.1.9:3000/chitietgiohang/' + username);
+    const data = request.data.thongtintk;
+    console.log(data);
+    this.setState({ Book: data})
+    this.getDataGH();
+}
+
+// Checkbox
+  isChecked = (itemId) => {
+    const isThere = this.state.ids.includes(itemId);
+    return isThere;
+  };
+
+  toggleChecked = (itemId, index) => {
+    const ids = [...this.state.ids, itemId];
+    if (this.isChecked(itemId)) {
+      this.setState({
+        ...this.state,
+        ids: this.state.ids.filter(
+          (id) => id !== itemId),
+        
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        ids,
+      });
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
     }
 
     function GiamSoLuong(index)
@@ -140,8 +188,49 @@ function ListProduct_New()
               </TouchableOpacity>
             </View>
           </View>
+<<<<<<< HEAD
           
         );
+=======
+          <TouchableOpacity style={{flexDirection:'row', alignItems:'center',  marginRight: 0, paddingLeft: 50 }} onPress={() => this.removeBook(index)}>
+                <Icon name="trash" size={25} color={"#33c37d"}/>
+          </TouchableOpacity>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
+
+  render() {    
+    const { navigation } = this.props;
+    console.log(this.props)
+    return (
+      <SafeAreaView>
+        <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
+        {/* ----------------------------------------------------------- */}
+        <FlatList style={{marginBottom: 55}}
+          extraData={this.state}
+          data={this.state.Giohang}
+          keyExtractor={(item) => {
+            return `${item.id}`;
+          }}
+          renderItem={this.renderItem}
+        />
+        {/* ---------------------------------------------------------------------- */}
+        <View style={styles.bottomView}>
+          <View style={styles.textBottom}>
+          <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
+          <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{this.state.Total} đ</Text>
+          </View>
+          <TouchableOpacity style={styles.buyButton} onPress={() => this.props.navigation.navigate('Payment')}>
+              <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Mua Hàng</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+      
+    );
+  }
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
 }
 
 const styles = StyleSheet.create({
