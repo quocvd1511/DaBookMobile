@@ -29,13 +29,13 @@ function ListTop()
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.5:3000/')
+      const request = await axios.get('http://192.168.43.180:3000/')
       setBook(request.data.flash_sales)
       return request.data.flash_sales
     }
     fetchData();
 
-  },['http://192.168.1.5:3000/'])
+  },['http://192.168.43.180:3000/'])
   return (
       <View style={styles.container}>
         <View style = {styles.flash_sale}>
@@ -44,7 +44,7 @@ function ListTop()
         </View>
 
       <ScrollView horizontal={true}>
-        {
+        { 
           Book.map((item) => {
             return(
               <TouchableOpacity onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
@@ -54,7 +54,7 @@ function ListTop()
                   style={styles.name_item}
                   numberOfLines={2}
                   ellipsizeMode='tail'>{item.tensach}</Text>
-                  <Text style={styles.newprice}>{item.giaban}000 đ</Text>
+                  <Text style={styles.newprice}>{item.giaban} đ</Text>
                   <Text style = {styles.price}>  {item.giagoc} </Text>
                   <View style={styles.sale_off}>
                       <Text style={styles.sale_off_percent}> -{item.giamgia}%</Text>

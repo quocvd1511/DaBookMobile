@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Pressable, Text, TextInput, StatusBar, Image, Dimensions, ScrollView, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Pressable, Text, TextInput, StatusBar, Image, Dimensions, ScrollView, TouchableOpacity, ToastAndroid } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import TabScreens from '../tab_src/tab';
@@ -27,6 +27,8 @@ export default function book_detail_home(){
   const navigation = useNavigation();
   const route = useRoute();
   const tensach = route.params.tensach;
+  const username = 'hongcute';
+  const [detail_book, setdetail_book]  = useState('')
   console.log(tensach);
 
     // Lấy danh sách sách liên quan
@@ -43,7 +45,6 @@ export default function book_detail_home(){
 
 
     // Lấy dữ liệu của chi tiết sách
-    const [detail_book, setdetail_book]  = useState([])
     React.useEffect(() => 
   {
     async function fetchData(){
@@ -77,13 +78,25 @@ export default function book_detail_home(){
         }))
         } 
     }
+
+    function addProduct(quantity){
+        if(username != ' '){
+            const request = axios.get('http://192.168.1.9:3000/themgiohang/' + username + '/' + detail_book.tensach
+            + '/' + detail_book.giaban + '/' + detail_book.hinhanh
+           + '/' + quantity);
+           console.log(request.data);
+        }else{
+            ToastAndroid.show("Đăng nhập đi bạn", ToastAndroid.SHORT)
+        }
+
+    }
     
     return(
         <ScrollView style = {styles.views}>
             <Image style = {styles.image} source={{uri:detail_book.hinhanh}}/>
             <View style = {styles.view}>
                 <Text style = {styles.name}>{detail_book.tensach}</Text>
-                <Text style = {styles.newprice}>{detail_book.giaban}000 đ     
+                <Text style = {styles.newprice}>{detail_book.giaban} đ     
                 <Text style = {styles.price}>  {detail_book.giagoc} </Text></Text>
                 <View style = {styles.viewstar}>
                     <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
@@ -127,8 +140,10 @@ export default function book_detail_home(){
                             height={40}
                             marginBottom={-5}
                             marginTop={-5}
-                            borderRadius={5}>
-                            <Text style={{color:'#fff', fontSize: 17, margin: 5, marginTop:7, textAlign:'center'}} >  Thêm vào giỏ hàng  </Text>
+                            borderRadius={5}
+                            onPress={addProduct(temp)}
+                            >
+                            <Text style={{color:'#fff', fontSize: 17, margin: 5, marginTop:7, textAlign:'center'}}>  Thêm vào giỏ hàng  </Text>
                         </Pressable>
                     </View>
                 </View>
@@ -192,17 +207,18 @@ export default function book_detail_home(){
                 <Text style={{margin: 10, marginBottom: 5, color:'black', fontWeight:'600',fontSize:15}}>  Sản phẩm tương tự </Text>
                 <ScrollView horizontal={true}>
                 {
-                    Book.map((item) => {
+                    Book.map((item) => 
+                    {
                     return(
                         <TouchableOpacity onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
                             <View style={styles.item}>
                                 <Image style={styles.img} source={{uri:item.hinhanh}}/>
-                                <Text 
+                                <Text
                                 style={styles.name_item}
                                 numberOfLines={2}
                                 ellipsizeMode='tail'>{item.tensach}</Text>
                                 <View style={styles.viewinfo}>
-                                    <Text style={styles.bprice}>{item.giaban}000 đ</Text>
+                                    <Text style={styles.bprice}>{item.giaban} đ</Text>
                                 </View>
                             </View>
                         </TouchableOpacity>
@@ -223,7 +239,6 @@ export default function book_detail_home(){
                     <Text style={{ fontWeight:'400', fontSize:15}}>    4.8/5 (27 đánh giá) </Text>
                 </View>
             </View>
-            
         </ScrollView>
     )
 
@@ -388,4 +403,3 @@ const styles = StyleSheet.create({
     },
 
 })
-

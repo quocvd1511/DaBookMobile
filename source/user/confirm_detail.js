@@ -1,16 +1,39 @@
 import * as React from 'react';
 import { Text, View, StyleSheet,Image, ScrollView, Pressable} from 'react-native';
 import { color } from 'react-native-reanimated';
+import { useNavigation,useRoute } from '@react-navigation/native';
+import axios from 'axios';
 
 
-export default function ConfirmDetail() {
-    const [Book, setBook] = React.useState([
+export default function ConfirmDetail() 
+{
+
+  const route = useRoute()
+  const navigation = useNavigation()
+  console.log('hello')
     
-        {id :2, ngaygiaohang: '1/1/2000', value:'100000'},
-        {id :3, ngaygiaohang: '1/1/2000', value:'100000'},
-        {id :4, ngaygiaohang: '1/1/2000', value:'100000'},
-        {id :5, ngaygiaohang: '1/1/2000', value:'100000'},
+    const [Book, setBook] = React.useState([
       ])
+
+      React.useEffect(() => 
+      {
+        async function fetchData()
+      {
+          const request = await axios.get('http://192.168.1.9:3000/danhsachdonhang?'+"matk"+"="+route.params.username+"&"+"tinhtrang="+"chờ xác nhận")
+          console.log(request.data)
+          for(var i=0;i<request.data.length;i++)
+          {
+              request.data[i].ngaylap = request.data[i].ngaylap.toString("dd/mm/yyyy")
+          }
+          setBook(request.data)
+          //console.log(request.data)
+      }
+
+      fetchData()
+    
+      },['http://192.168.1.9:3000/'])
+
+
   return (
     <View>
         <View style={styles.main}>
@@ -32,13 +55,14 @@ export default function ConfirmDetail() {
 
                             <View style={{marginLeft:10}}>
                                 {/* <Text style={{color:'black', fontSize: 12}}>ID đơn hàng: {item.id}</Text> */}
-                                <Text style={{color:'black', fontSize: 16,}}>Ngày đặt hàng: {item.ngaydathang}</Text>
-                                <Text style={{color: 'black', fontSize: 16}}>Giá tiền: {item.value}</Text>
+                                <Text style={{color:'black', fontSize: 16,}}>Ngày đặt hàng: {item.ngaylap}</Text>
+                                <Text style={{color: 'black', fontSize: 16}}>Giá tiền: {item.tongtien}</Text>
                                 <View style={{backgroundColor:'dodgerblue', margin:24, justifyContent:'center', borderRadius: 5, width: 100, marginBottom: 0, marginLeft: 90}}>
                                   <Pressable
                                     width={100}
                                     padding={5}
                                     alignItems={'center'}
+                                    onPress={() => navigation.navigate('HistoryLookup',{madh: item.madh})}
                                   >
                                     <Text style={{color:'#fff', fontWeight:'500', fontSize: 15 }}>Chi Tiết</Text>
                                   </Pressable>

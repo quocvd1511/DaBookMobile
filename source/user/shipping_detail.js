@@ -1,16 +1,28 @@
 import * as React from 'react';
 import { Text, View, StyleSheet,Image, ScrollView, Pressable} from 'react-native';
 import { color } from 'react-native-reanimated';
-
+import axios from 'axios';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function ShippingDetail() {
-    const [Book, setBook] = React.useState([
+    const route = useRoute()
+    const navigation = useNavigation()
+    const [Book, setBook] = React.useState([])
+
+      React.useEffect(() => 
+      {
+        async function fetchData()
+      {
+          const request = await axios.get('http://192.168.1.9:3000/danhsachdonhang?'+"matk"+"="+route.params.username+"&"+"tinhtrang="+"đang vận chuyển")
+          setBook(request.data)
+          //console.log(request.data)
+      }
+
+      fetchData()
     
-        {id :2, ngaydathang: '1/1/2000', value:'100000'},
-        {id :3, ngaydathang: '1/1/2000', value:'100000'},
-        {id :4, ngaydathang: '1/1/2000', value:'100000'},
-        {id :5, ngaydathang: '1/1/2000', value:'100000'},
-      ])
+      },['http://192.168.1.9:3000/'])
+
+
   return (
     <View>
         <View style={styles.container}>
@@ -30,8 +42,8 @@ export default function ShippingDetail() {
 
                             <View style={{marginLeft:10}}>
                                 {/* <Text style={{color:'black', fontSize: 12}}>ID đơn hàng: {item.id}</Text> */}
-                                <Text style={{color:'black', fontSize: 16,}}>Ngày đặt hàng: {item.ngaydathang}</Text>
-                                <Text style={{color: 'black', fontSize: 16}}>Giá trị đơn hàng: {item.value}</Text>
+                                <Text style={{color:'black', fontSize: 16,}}>Ngày đặt hàng: {item.ngaylap}</Text>
+                                <Text style={{color: 'black', fontSize: 16}}>Giá trị đơn hàng: {item.tongtien}</Text>
                                 <View style={{backgroundColor:'dodgerblue', margin:24, justifyContent:'center', borderRadius: 5, width: 100, marginBottom: 0, marginLeft: 90}}>
                                   <Pressable
                                     width={100}

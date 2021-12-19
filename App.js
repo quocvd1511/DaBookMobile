@@ -5,12 +5,14 @@ import {createStackNavigator} from '@react-navigation/stack'
 import TabScreen from './source/tab_src/tab';
 import { useEffect } from 'react';
 import Home from './source/home/home';
-import Rank from './source/rank/Vanhoc';
+import Rank from './source/rank/tabs_rank';
 import book_detail from './source/book_detail/book_detail';
 import SearchBook from './source/search_book/search_book';
 import Voucher from './source/voucher/voucher';
 import Login from './source/login/login';
 import Logup from './source/login/logup';
+import Payment from './source/payment/payment'
+import Cart from './source/cart/cart';
 
 // import ListRank from './source/rank/list_rank';
 
@@ -27,8 +29,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-      screenOptions={{headerShown: false}}
-      >
+      screenOptions={{headerShown: false}}>
       <Stack.Screen
         name='Login'
         component={Login}/>
@@ -53,6 +54,12 @@ export default function App() {
       <Stack.Screen 
         name='Voucher'
         component={Voucher}/>
+      <Stack.Screen 
+        name='Cart' 
+        component={Cart}/>
+       <Stack.Screen 
+        name='Payment' 
+        component={Payment}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

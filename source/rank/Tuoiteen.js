@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function TuoiTeen(){
+function TuoiTeen(){
   
   const navigation = useNavigation(); 
   //---------Kết nối Database lấy dữ liệu-------------------------    
@@ -17,13 +17,13 @@ export default function TuoiTeen(){
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.5:3000/theloai/' + value)
+      const request = await axios.get('http://192.168.43.180:3000/theloai/' + value)
       setBook(request.data.books)
       return request.data.books
     }
     fetchData();
 
-  },['http://192.168.1.5:3000/'])
+  },['http://192.168.43.180:3000/'])
   //---------------------------------------------------------------
    console.log(Book)
 
@@ -34,15 +34,15 @@ return (
       Book.map((item)=>
       {
         return(
-          <TouchableOpacity onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
-            <Image style={styles.image} source={{uri:item.hinhanh}}/>
+          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
+          <Image style={styles.image} source={{uri:item.hinhanh}}/>
             <View  style={{paddingLeft:5 }}>
               <Text style={styles.book_name}
                     numberOfLines={2}
                     ellipsizeMode='tail'>{item.tensach}</Text>
               <View style={{margin:10, marginTop:6, flexDirection:'row', alignItems:'center'}}>
                 <Image style={{height:22,width:22,tintColor:'dodgerblue'}} source={require('../asset/icon/cost.png')}/>
-                <Text style={styles.book_price}> {item.giaban}000 đ</Text>
+                <Text style={styles.book_price}> {item.giaban} đ</Text>
                 <View style={styles.sale_off}>
                   <Text style={styles.sale_off_percent}> -{item.giamgia}%</Text>
                 </View>
@@ -117,7 +117,6 @@ const styles = StyleSheet.create({
   },
 
   book_name: {
-    width: 200,
     fontWeight: '500', 
     fontSize: 14, 
     color: 'black',
@@ -136,3 +135,5 @@ const styles = StyleSheet.create({
   },
 
 })
+
+export default TuoiTeen;

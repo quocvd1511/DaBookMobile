@@ -24,7 +24,7 @@ export default function Login()
         }
       else
       {
-        const request = await axios.post('http://192.168.1.5:3000',{
+        const request = await axios.post('http://192.168.1.9:3000',{
                 username: Username,
                 password: Password,
         })
@@ -39,6 +39,7 @@ export default function Login()
             setUsername('')
             setPassword('')
             navigation.navigate('TabScreen',{user_session: request.data.user_session})
+            // navigation.navigate('book_detail',{user_session: request.data.user_session})
         }
     }
     }
@@ -109,7 +110,6 @@ export default function Login()
                         <Text>Đăng ký ngay</Text>
                     </Pressable>
                 </View>
-
         </View>
     )
 } 
@@ -125,6 +125,8 @@ const styles= StyleSheet.create({
     text_input:{
         backgroundColor: '#fff',
         width: 285,
+        color: '#333',
+        textDecorationLine:'none',
         fontSize: 16,
         height: 40,
         borderTopRightRadius: 10,
@@ -145,6 +147,8 @@ const styles= StyleSheet.create({
     pass_input:{
         backgroundColor: '#fff',
         width: 285,
+        color: '#333',
+        textDecorationLine:'none',
         height: 40,
         fontSize: 16,
         borderTopRightRadius: 10,

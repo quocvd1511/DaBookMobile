@@ -11,26 +11,21 @@ const windowWidth = Dimensions.get('window').width;
 
 function ListBook()
 {
-  
 
   const navigation = useNavigation(); 
-
-  // React.useLayoutEffect(() => {
-  //   navigation.setOptions({headerShown: false});
-  // }, [navigation]);
 
   //---------Kết nối Database lấy dữ liệu-------------------------    
   const [Book,setBook] = React.useState([])
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.5:3000/')
+      const request = await axios.get('http://192.168.1.9:3000/')
       setBook(request.data.books)
       return request.data.books
     }
     fetchData();
 
-  },['http://192.168.1.5:3000/'])
+  },['http://192.168.1.9:3000/'])
   //---------------------------------------------------------------
    console.log(Book)
 
@@ -50,7 +45,7 @@ function ListBook()
                         ellipsizeMode='tail'>{item.tensach}</Text>
                   <View style={{margin:10, marginTop:6, flexDirection:'row', alignItems:'center'}}>
                     <Image style={{height:22,width:22,tintColor:'dodgerblue'}} source={require('../asset/icon/cost.png')}/>
-                    <Text style={styles.book_price}> {item.giaban}.000 đ</Text>
+                    <Text style={styles.book_price}> {item.giaban}đ</Text>
                     <View style={styles.sale_off}>
                       <Text style={styles.sale_off_percent}> -{item.giamgia}%</Text>
                     </View>
