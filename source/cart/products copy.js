@@ -37,6 +37,7 @@ class ListProduct extends Component {
     };
   }
 
+
   // Lấy dữ liệu cho Giohang
   getDataGH(){
     const Book = this.state.Book;
@@ -46,15 +47,15 @@ class ListProduct extends Component {
   // Tạo giá trị cho biến username
   getParams(){
     const { navigation } = this.props;
-    const username = 'hongcute'
+    const username = 'hongcute' 
     return username;
   }
 
   // Lấy dữ liệu giỏ hàng của khách hàng
-  async componentDidMount() {
+  async componentDidMount()
+   {
     const username = this.getParams();
-    console.log(username);
-    const request = await axios.get('http://192.168.43.180:3000/chitietgiohang/' + username);
+    const request = await axios.get('http://192.168.1.9:3000/chitietgiohang/' + username);
     const data = request.data.thongtintk;
     console.log(data);
     this.setState({ Book: data})
@@ -174,9 +175,11 @@ class ListProduct extends Component {
 
   render() {    
     const { navigation } = this.props;
+    console.log(this.props)
     return (
       <SafeAreaView>
         <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
+        {/* ----------------------------------------------------------- */}
         <FlatList style={{marginBottom: 55}}
           extraData={this.state}
           data={this.state.Giohang}
@@ -185,6 +188,7 @@ class ListProduct extends Component {
           }}
           renderItem={this.renderItem}
         />
+        {/* ---------------------------------------------------------------------- */}
         <View style={styles.bottomView}>
           <View style={styles.textBottom}>
           <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
