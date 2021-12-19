@@ -17,7 +17,7 @@ export default function HaiHuoc(){
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.43.180:3000/theloai/' + value)
+      const request = await axios.get('http://192.168.1.9:3000/theloai/' + value)
       setBook(request.data.books)
       return request.data.books
     }
