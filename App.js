@@ -22,8 +22,10 @@ export default function App() {
   // const navigation = useNavigation(); 
 
   useEffect(() => {
-    //LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
+    LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     LogBox.ignoreLogs(['Reanimated 2']);
+    LogBox.ignoreLogs(['Possible Unhandled Promise Rejection'])
+    LogBox.ignoreLogs(['Each child in a list should have a unique "key" prop'])
   }, [])
 
   return (
