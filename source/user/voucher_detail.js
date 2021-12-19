@@ -26,29 +26,6 @@ export default function VoucherDetail()
         // {id :11, name: 'Free Ship', price:'100%', img:'https://cdn.shopify.com/s/files/1/0194/4221/products/shipping-free-512_grande.png?v=1587611827'},
       ])
 
-      React.useEffect(() => 
-      {
-        async function fetchData()
-      {
-          const request = await axios.get('http://192.168.1.9:3000/danhsachvoucher?'+"matk"+"="+route.params.username)
-          console.log(request.data)
-          for(var i=0;i<request.data.length;i++)
-          {
-              request.data[i].ngaykt = request.data[i].ngaykt.toString("dd/mm/yyyy")
-              if(request.data[i].loai==='Sale')
-              {
-                request.data[i].img='https://www.pngrepo.com/png/222733/512/voucher-coupon.png'
-              } else
-              {
-                request.data[i].img='https://cdn.shopify.com/s/files/1/0194/4221/products/shipping-free-512_grande.png?v=1587611827'
-              }
-          }
-          setVoucher(request.data)
-      }
-
-      fetchData()
-    
-      },['http://192.168.1.9:3000/'])
 
 
   return (

@@ -32,19 +32,31 @@ export default function UserScreen()
 
         <View style={styles.main_user_account}>
           <Pressable
-            style={styles.type_user}
-            onPress={() => navigation.navigate('UserDetail',{username: username})}
-          >
-                  <Image style={styles.icon_style_user} source={require('../asset/icon/user.png')}/>
-                  <Text style={{fontWeight: 'bold', color: 'white'}}>Thông Tin Cá Nhân</Text>
-          </Pressable>
+            style={
+                ({pressed}) =>[{
 
+                    opacity: pressed ? 0.5:1
+                },
+                styles.type_user
+            ]}
+            onPress={() => navigation.navigate('UserDetail',{username: username})}
+            >
+              <Image style={styles.icon_style_user} source={require('../asset/icon/user.png')}/>
+              <Text style={{fontWeight: 'bold', color: 'white'}}>Thông Tin Cá Nhân</Text>
+          </Pressable>
+          
           <Pressable
-            style={styles.user_point}
+            style={
+                ({pressed}) =>[{
+
+                    opacity: pressed ? 0.5:1
+                },
+                styles.user_point
+            ]}
             onPress={() => navigation.navigate('Login')}
-          >
-                  <Image style={styles.icon_style_user} source={require('../asset/icon/logout.png')}/>
-                  <Text style={{fontWeight: 'bold', color: 'white'}}>Đăng Xuất</Text>
+            >
+              <Image style={styles.icon_style_user} source={require('../asset/icon/logout.png')}/>
+              <Text style={{fontWeight: 'bold', color: 'white'}}>Đăng Xuất</Text>
           </Pressable>
         </View>
 
@@ -52,38 +64,60 @@ export default function UserScreen()
         <View>
             <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15, margin: 10, marginBottom: 0, marginTop: 20}}>Đơn hàng của tôi</Text>
             <View style={styles.main_order}>
-            <Pressable
-                style={styles.main_category}
-                onPress={() => navigation.navigate('ConfirmDetail',{username: username})}>
-                <View style={styles.main_category}>
-                    <Image style={styles.each_category_icon} source={require('../asset/icon/confirm.png')}/>
-                    <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5}}>Chờ xác nhận</Text>
-                </View>
+              <Pressable
+                style={
+                    ({pressed}) =>[{
+
+                        opacity: pressed ? 0.5:1
+                    },
+                    styles.main_category
+                ]}
+                onPress={() => navigation.navigate('ConfirmDetail',{username: username})}
+                >
+                <Image style={styles.each_category_icon} source={require('../asset/icon/confirm.png')}/>
+                <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5}}>Chờ xác nhận</Text>
               </Pressable>
 
               <Pressable
-                style={styles.main_category}
+                style={
+                    ({pressed}) =>[{
+
+                        opacity: pressed ? 0.5:1
+                    },
+                    styles.main_category
+                ]}
                 onPress={() => navigation.navigate('PackingDetail',{username: username})}
-              >
-                      <Image style={styles.each_category_icon} source={require('../asset/icon/packing.png')}/>
-                      <Text style={{paddingRight: 5, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5, marginLeft: -5}}> Đang đóng gói</Text>
+                >
+                <Image style={styles.each_category_icon} source={require('../asset/icon/packing.png')}/>
+                <Text style={{paddingRight: 5, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5, marginLeft: -5}}> Đang đóng gói</Text>
               </Pressable>
 
               <Pressable
-                style={styles.main_category}
-                onPress={() => navigation.navigate('ShippingDetail',{username: username})}
-              >
-                    <Image style={styles.each_category_icon} source={require('../asset/icon/delivery.png')}/>
-                    <Text style={{paddingRight: 10, color:'#555', fontWeight:'600',fontSize:14, marginTop: 5}}>Vận chuyển</Text>
-              </Pressable>
+                style={
+                    ({pressed}) =>[{
 
+                        opacity: pressed ? 0.5:1
+                    },
+                    styles.main_category
+                ]}
+                onPress={() => navigation.navigate('ShippingDetail',{username: username})}
+                >
+                <Image style={styles.each_category_icon} source={require('../asset/icon/delivery.png')}/>
+                <Text style={{paddingRight: 10, color:'#555', fontWeight:'600',fontSize:14, marginTop: 5}}>Vận chuyển</Text>
+              </Pressable>
             </View>
             <Pressable
-              style={styles.searching_history}
+              style={
+                  ({pressed}) =>[{
+
+                      opacity: pressed ? 0.5:1
+                  },
+                  styles.searching_history
+              ]}
               onPress={() => navigation.navigate('HistoryLookup')}
-            >
-                  <Image style={styles.icon_style} source={require('../asset/icon/history.png')}/>
-                  <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 5, marginBottom: 3,marginRight: 5}}>Tra cứu lịch sử đơn hàng</Text>
+              >
+              <Image style={styles.icon_style} source={require('../asset/icon/history.png')}/>
+              <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 5, marginBottom: 3,marginRight: 5}}>Tra cứu lịch sử đơn hàng</Text>
             </Pressable>
         </View>
 
@@ -92,9 +126,15 @@ export default function UserScreen()
         <View>
             <Text style={{paddingLeft: 5, color:'black', fontWeight:'600', fontSize:15, margin: 10}}>Voucher sở hữu</Text>
             <Pressable
-              style={styles.searching_history}
+              style={
+                  ({pressed}) =>[{
+
+                      opacity: pressed ? 0.5:1
+                  },
+                  styles.searching_history
+              ]}
               onPress={() => navigation.navigate('VoucherDetail',{username: username})}
-            >
+              >
                 <Image style={styles.icon_style_voucher} source={require('../asset/icon/sale.png')}/>
                 <Text style={styles.text_style_voucher}>Voucher của bạn</Text>
             </Pressable>
