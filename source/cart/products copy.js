@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -13,7 +13,11 @@ import {
 import { CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation, useRoute} from '@react-navigation/native';
+import ListProduct from './products copy';
+import { ScrollView } from 'react-native-gesture-handler';
 const windowWidth = Dimensions.get('window').width;
+import HeaderCart from '../payment/header_pm';
+import Info from '../payment/info_ad';
 
 
 
@@ -25,18 +29,37 @@ const windowWidth = Dimensions.get('window').width;
 //     return username;
 // }
 
-class ListProduct extends Component {
+function ListProduct_New()
+{
+    const [ListProduct, setProduct] = useState([
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1},
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1},
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1},
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1},
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1},
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1},
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1}
+    ])
+    //---------------Xu ly So luong------------------------
+    //const [SoLuong, setSoLuong] = useState(1)
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      Book:null,
-      Giohang: null,
-      Total: 0,
-      ids: [],
-    };
-  }
+    // for(var i=0;i<ListProduct.length;i++)
+    // {
+    //   ListProduct[i].SoLuong=1
+    // }
 
+<<<<<<< HEAD
+    const[temp, settemp] = useState(0)
+
+    function TangSoLuong(index)
+    {
+        let soluong = ListProduct[index].SoLuong;
+        soluong = soluong + 1;
+        ListProduct[index].SoLuong = soluong;
+        setProduct(ListProduct)
+        console.log(ListProduct)
+        settemp(temp - 1)
+=======
 
   // Lấy dữ liệu cho Giohang
   getDataGH(){
@@ -82,88 +105,93 @@ class ListProduct extends Component {
         ...this.state,
         ids,
       });
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
     }
-    this.SumTotal(index);
-  };
 
-  // Tính tổng tiền sản phẩm đã check
-  SumTotal(index){
-    let Giohang = this.state.Giohang;
-    let gia = Giohang[index].giaban
-    let soluong = Giohang[index].soluong
-    const total = this.state.Total;
-    let new_total = total + gia*soluong
-    this.setState({Total:new_total})
-  }
-
-  // Tăng giảm số lượng
-  onChangeQual(index,type)
-  {
-    const Giohang = this.state.Giohang
-    let cantd = Giohang[index].soluong;
-
-    if (type) {
-     cantd = cantd + 1
-     Giohang[index].soluong = cantd
-     this.setState({Giohang:Giohang})
+    function GiamSoLuong(index)
+    {
+      ListProduct[index].SoLuong-=1
+      setProduct(ListProduct)
+      settemp(temp - 1)
     }
-    else if (type==false&&cantd>=2){
-     cantd = cantd - 1
-     Giohang[index].soluong = cantd
-     this.setState({Giohang:Giohang})
-    }
-    else if (type==false&&cantd==1){
-      Book.splice(index,1)
-     this.setState({Giohang:Giohang})
-    } 
-  }
-
-  // Xóa sản phẩm khỏi giỏ hàng
-  removeBook(index) {
-    var array = [...this.state.Giohang]; // make a separate copy of the array
-     let Giohang = this.state.Giohang;
-    let tensach = Giohang[index].tensach
-    let username = this.getParams();
-    array.splice(index, 1);
-    this.setState({Giohang: array});
-    const response = axios.get('http://192.168.43.180:3000/xoasanpham/' + username + "/" + tensach);
-    const data = response.data;
-  }
-
-
-  renderItem = ({ item, index }) => {
-    return (
-      <TouchableOpacity>
-        <View style={styles.row}>
-        <CheckBox
-            // iconRight
-            checkedIcon="check-square"
-            uncheckedIcon="square-o"
-            checked={this.isChecked(item.tensach)}
-            onPress={() => this.toggleChecked(item.tensach, index)}
-          />
-        <Image source={{uri:item.hinhanh}} style={styles.imageStyle} />
+    //------------------------------------------------------
+        return (
           <View>
-            <View style={styles.nameContainer}>
-              <Text style={styles.nameTxt}>{item.tensach}</Text>
-            </View>
-            <View style={styles.end}>
-              <Text style={styles.priceStyle}>
-              {item.giaban} đ
-              </Text>
-            </View>
-            <View style={{flexDirection:'row', alignItems:'center',  marginRight: 0, padding: 10 }}>
-              <TouchableOpacity onPress={()=>this.onChangeQual(index,false)}>
-                <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
-              </TouchableOpacity>
+            {/* ----------------------------------------------------------- */}
+            <ScrollView>
+              <HeaderCart/>
+              <Info/>
+              <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
+              {
+                  ListProduct.map((item,index, temp) =>
+                    {
+                      return(
+                        <TouchableOpacity>
+                        <View style={styles.row}>
+                        <CheckBox
+                            // iconRight
+                            checkedIcon="check-square"
+                            uncheckedIcon="square-o"
+                            //checked={}
+                           // onPress={}
+                          />
+                        <Image source={{uri:item.hinhanh}} style={styles.imageStyle} />
+                          <View>
+                            <View style={styles.nameContainer}>
+                              <Text style={styles.nameTxt}>{item.tensach}</Text>
+                            </View>
+                            <View style={styles.end}>
+                              <Text style={styles.priceStyle}>
+                              {item.giaban} đ
+                              </Text>
+                            </View>
+                            <View style={{flexDirection:'row', alignItems:'center',  marginRight: 0, padding: 10 }}>
+                              <TouchableOpacity 
+                              onPress={() => GiamSoLuong(index)}
+                              >
+                                <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
+                              </TouchableOpacity>
 
-              <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:15}}>{item.soluong}</Text>
+                              <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:15}}>{temp = ListProduct[index].SoLuong}</Text>
 
-              <TouchableOpacity onPress={()=>this.onChangeQual(index,true)}>
-                <Icon name="ios-add-circle" size={30} color={"#33c37d"} />
+                              <TouchableOpacity 
+                              onPress={() => TangSoLuong(index)}
+                              >
+                                <Icon name="ios-add-circle" size={30} color={"#33c37d"} />
+                              </TouchableOpacity>
+                            </View>
+                          </View>
+
+                          <TouchableOpacity style={{flexDirection:'row', alignItems:'center',  marginRight: 0, paddingLeft: 50 }} 
+                            //onPress={GiamSoLuong}
+                            >
+                                <Icon name="trash" size={25} color={"#33c37d"}/>
+                          </TouchableOpacity>
+                        </View>
+                      </TouchableOpacity>
+                      )
+                       
+                  })
+              }
+            </ScrollView>
+            {/* ---------------------------------------------------------------------- */}
+
+            <View style={styles.bottomView}>
+              <View style={styles.textBottom}>
+              <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
+              <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>1000 đ</Text>
+              </View>
+              <TouchableOpacity style={styles.buyButton} 
+              //onPress={() => this.props.navigation.navigate('Payment')}
+              >
+                  <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Mua Hàng</Text>
               </TouchableOpacity>
             </View>
           </View>
+<<<<<<< HEAD
+          
+        );
+=======
           <TouchableOpacity style={{flexDirection:'row', alignItems:'center',  marginRight: 0, paddingLeft: 50 }} onPress={() => this.removeBook(index)}>
                 <Icon name="trash" size={25} color={"#33c37d"}/>
           </TouchableOpacity>
@@ -202,6 +230,7 @@ class ListProduct extends Component {
       
     );
   }
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
 }
 
 const styles = StyleSheet.create({
@@ -281,4 +310,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default ListProduct;
+export default ListProduct_New

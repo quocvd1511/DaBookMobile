@@ -35,7 +35,6 @@ const Tab = createMaterialTopTabNavigator();
 
 export default function TabRanks() {
   return (
-
     <Tab.Navigator
     screenOptions={
     {

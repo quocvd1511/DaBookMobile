@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, ScrollView, StyleSheet, Image , Pressable} from 'react-native';
+import { Text, View, ScrollView, StyleSheet, Image , Pressable, ImageBackground} from 'react-native';
 import { Avatar } from 'react-native-elements';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
@@ -12,155 +12,173 @@ export default function UserScreen()
    //console.log(route)
 
   return (
-    <ScrollView>
-      {/* //-----Header User--------------------------------------------- */}
-       <View style={styles.main_header}>
-            <View style={styles.avatar}>
-            <Avatar
-                rounded
-                source={require('../asset/icon/doremon.png')}
-                size={80}
-            />
+    <View style={{backgroundColor:'#B0E2FF'}}>
+      <ScrollView>
+        {/* //-----Header User--------------------------------------------- */}
+        <View style={styles.main_header}>
+              <View style={styles.avatar}>
+              <Avatar
+                  rounded
+                  source={require('../asset/icon/doremon.png')}
+                  size={80}
+              />
+              </View>
+              <View style={styles.name_point}>
+                  <Text style={styles.username}>{username}</Text>
+                  <Text style={styles.userpoint}>Điểm tích lũy: 100000000</Text>
+              </View>
+          </View>
+
+          {/* //---------Button thong tin ca nhan, dang xuat---------------------- */}
+
+          <View style={styles.main_user_account}>
+            <Pressable
+              style={
+                  ({pressed}) =>[{
+
+                      opacity: pressed ? 0.5:1
+                  },
+                  styles.type_user
+              ]}
+              onPress={() => navigation.navigate('UserDetail',{username: username})}
+              >
+                <Image style={styles.icon_style_user} source={require('../asset/icon/user.png')}/>
+                <Text style={{fontWeight: 'bold', color: '#fff'}}>Thông Tin Cá Nhân</Text>
+            </Pressable>
+            
+            <Pressable
+              style={
+                  ({pressed}) =>[{
+
+                      opacity: pressed ? 0.5:1
+                  },
+                  styles.user_point
+              ]}
+              onPress={() => navigation.navigate('Login')}
+              >
+                <Image style={styles.icon_style_user} source={require('../asset/icon/logout.png')}/>
+                <Text style={{fontWeight: 'bold', color: '#fff'}}>Đăng Xuất</Text>
+            </Pressable>
+          </View>
+
+          {/* //-----Order--------------------------------------------------------- */}
+          <View>
+              <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15, margin: 10, marginBottom: 0, marginTop: 20}}>Đơn hàng của tôi</Text>
+              <View style={styles.main_order}>
+                <Pressable
+                  style={
+                      ({pressed}) =>[{
+
+                          opacity: pressed ? 0.5:1
+                      },
+                      styles.main_category
+                  ]}
+                  onPress={() => navigation.navigate('ConfirmDetail',{username: username})}
+                  >
+                  <Image style={styles.each_category_icon} source={require('../asset/icon/confirm.png')}/>
+                  <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5}}>Chờ xác nhận</Text>
+                </Pressable>
+
+                <Pressable
+                  style={
+                      ({pressed}) =>[{
+
+                          opacity: pressed ? 0.5:1
+                      },
+                      styles.main_category
+                  ]}
+                  onPress={() => navigation.navigate('PackingDetail',{username: username})}
+                  >
+                  <Image style={styles.each_category_icon} source={require('../asset/icon/packing.png')}/>
+                  <Text style={{paddingRight: 5, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5, marginLeft: -5}}> Đang đóng gói</Text>
+                </Pressable>
+
+                <Pressable
+                  style={
+                      ({pressed}) =>[{
+
+                          opacity: pressed ? 0.5:1
+                      },
+                      styles.main_category
+                  ]}
+                  onPress={() => navigation.navigate('ShippingDetail',{username: username})}
+                  >
+                  <Image style={styles.each_category_icon} source={require('../asset/icon/delivery.png')}/>
+                  <Text style={{paddingRight: 10, color:'#555', fontWeight:'600',fontSize:14, marginTop: 5}}>Vận chuyển</Text>
+                </Pressable>
+              {/* </View>
+              <Pressable
+                style={
+                    ({pressed}) =>[{
+
+                        opacity: pressed ? 0.5:1
+                    },
+                    styles.searching_history
+                ]}
+                onPress={() => navigation.navigate('HistoryLookup')}
+                >
+                <Image style={styles.icon_style} source={require('../asset/icon/history.png')}/>
+                <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 5, marginBottom: 3,marginRight: 5}}>Tra cứu lịch sử đơn hàng</Text>
+              </Pressable>
+          </View> */}
+
             </View>
-            <View style={styles.name_point}>
-                <Text style={styles.username}>{username}</Text>
-                <Text>Điểm tích lũy: 100000000</Text>
-            </View>
+            <Pressable
+             style={
+              ({pressed}) =>[{
+
+                  opacity: pressed ? 0.5:1
+              },
+              styles.searching_history
+          ]}
+          onPress={() => navigation.navigate('HistoryLookup')}
+              style={styles.searching_history}
+              onPress={() => navigation.navigate('HistoryLookup',{username: username})}
+            >
+                  <Image style={styles.icon_style} source={require('../asset/icon/history.png')}/>
+                  <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 5, marginBottom: 3,marginRight: 5}}>Tra cứu lịch sử đơn hàng</Text>
+            </Pressable>
         </View>
 
-        {/* //---------Button thong tin ca nhan, dang xuat---------------------- */}
+          <View>
+              <Text style={{paddingLeft: 5, color:'black', fontWeight:'600', fontSize:15, margin: 10}}>Voucher sở hữu</Text>
+              <Pressable
+                style={
+                    ({pressed}) =>[{
 
-        <View style={styles.main_user_account}>
-          <Pressable
-            style={
-                ({pressed}) =>[{
-
-                    opacity: pressed ? 0.5:1
-                },
-                styles.type_user
-            ]}
-            onPress={() => navigation.navigate('UserDetail',{username: username})}
-            >
-              <Image style={styles.icon_style_user} source={require('../asset/icon/user.png')}/>
-              <Text style={{fontWeight: 'bold', color: 'white'}}>Thông Tin Cá Nhân</Text>
-          </Pressable>
+                        opacity: pressed ? 0.5:1
+                    },
+                    styles.searching_history
+                ]}
+                onPress={() => navigation.navigate('VoucherDetail',{username: username})}
+                >
+                  <Image style={styles.icon_style_voucher} source={require('../asset/icon/sale.png')}/>
+                  <Text style={styles.text_style_voucher}>Voucher của bạn</Text>
+              </Pressable>
+          </View>
           
-          <Pressable
-            style={
-                ({pressed}) =>[{
-
-                    opacity: pressed ? 0.5:1
-                },
-                styles.user_point
-            ]}
-            onPress={() => navigation.navigate('Login')}
-            >
-              <Image style={styles.icon_style_user} source={require('../asset/icon/logout.png')}/>
-              <Text style={{fontWeight: 'bold', color: 'white'}}>Đăng Xuất</Text>
-          </Pressable>
-        </View>
-
-        {/* //-----Order--------------------------------------------------------- */}
+        {/* //=====================Caring---------------------------- */}
         <View>
-            <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15, margin: 10, marginBottom: 0, marginTop: 20}}>Đơn hàng của tôi</Text>
-            <View style={styles.main_order}>
-              <Pressable
-                style={
-                    ({pressed}) =>[{
+              <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15, margin: 10,}}>Quan Tâm</Text>
+              <View style={styles.caring_button_caring}>
+                  <Image style={styles.icon_heart_caring} source={require('../asset/icon/heart.png')}/>
+                  <Text style={styles.text_style_caring}>Sách Đã Thích</Text>
+              </View>
+              <View style={styles.caring_button_caring}>
+                  <Image style={styles.icon_style_caring} source={require('../asset/icon/watch.png')}/>
+                  <Text style={styles.text_style_caring}>Sách Đã Xem</Text>
+              </View>
+          </View>
 
-                        opacity: pressed ? 0.5:1
-                    },
-                    styles.main_category
-                ]}
-                onPress={() => navigation.navigate('ConfirmDetail',{username: username})}
-                >
-                <Image style={styles.each_category_icon} source={require('../asset/icon/confirm.png')}/>
-                <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5}}>Chờ xác nhận</Text>
-              </Pressable>
-
-              <Pressable
-                style={
-                    ({pressed}) =>[{
-
-                        opacity: pressed ? 0.5:1
-                    },
-                    styles.main_category
-                ]}
-                onPress={() => navigation.navigate('PackingDetail',{username: username})}
-                >
-                <Image style={styles.each_category_icon} source={require('../asset/icon/packing.png')}/>
-                <Text style={{paddingRight: 5, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5, marginLeft: -5}}> Đang đóng gói</Text>
-              </Pressable>
-
-              <Pressable
-                style={
-                    ({pressed}) =>[{
-
-                        opacity: pressed ? 0.5:1
-                    },
-                    styles.main_category
-                ]}
-                onPress={() => navigation.navigate('ShippingDetail',{username: username})}
-                >
-                <Image style={styles.each_category_icon} source={require('../asset/icon/delivery.png')}/>
-                <Text style={{paddingRight: 10, color:'#555', fontWeight:'600',fontSize:14, marginTop: 5}}>Vận chuyển</Text>
-              </Pressable>
-            </View>
-            <Pressable
-              style={
-                  ({pressed}) =>[{
-
-                      opacity: pressed ? 0.5:1
-                  },
-                  styles.searching_history
-              ]}
-              onPress={() => navigation.navigate('HistoryLookup')}
-              >
-              <Image style={styles.icon_style} source={require('../asset/icon/history.png')}/>
-              <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 5, marginBottom: 3,marginRight: 5}}>Tra cứu lịch sử đơn hàng</Text>
-            </Pressable>
-        </View>
-
-        {/* //-------------------------Voucher--------------------------------- */}
-
-        <View>
-            <Text style={{paddingLeft: 5, color:'black', fontWeight:'600', fontSize:15, margin: 10}}>Voucher sở hữu</Text>
-            <Pressable
-              style={
-                  ({pressed}) =>[{
-
-                      opacity: pressed ? 0.5:1
-                  },
-                  styles.searching_history
-              ]}
-              onPress={() => navigation.navigate('VoucherDetail',{username: username})}
-              >
-                <Image style={styles.icon_style_voucher} source={require('../asset/icon/sale.png')}/>
-                <Text style={styles.text_style_voucher}>Voucher của bạn</Text>
-            </Pressable>
-        </View>
-        
-      {/* //=====================Caring---------------------------- */}
-      <View>
-            <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15, margin: 10,}}>Quan Tâm</Text>
-            <View style={styles.caring_button_caring}>
-                <Image style={styles.icon_heart_caring} source={require('../asset/icon/heart.png')}/>
-                <Text style={styles.text_style_caring}>Sách Đã Thích</Text>
-            </View>
-            <View style={styles.caring_button_caring}>
-                <Image style={styles.icon_style_caring} source={require('../asset/icon/watch.png')}/>
-                <Text style={styles.text_style_caring}>Sách Đã Xem</Text>
-            </View>
-        </View>
-
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 
 
 const styles=StyleSheet.create({
   main_header:{
-      backgroundColor: '#00BFFF',
+      backgroundColor: '#1E90FF',
       height: 120,
       flexDirection: 'row',
       alignContent: 'center',
@@ -168,13 +186,15 @@ const styles=StyleSheet.create({
   },
 
   username:{
-      fontSize: 18,
-      fontWeight: 'bold'
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: '#fff'
   },
 
-  point:{
-      fontSize: 15,
-      fontWeight: 'bold'
+  userpoint:{
+      fontSize: 17,
+      fontWeight: 'bold',
+      color: '#fff'
   },
 
   avatar:{
@@ -195,7 +215,7 @@ const styles=StyleSheet.create({
 
 type_user:{
     flexDirection: 'row',
-    backgroundColor: '#00BFFF',
+    backgroundColor: '#1E90FF',
     height: 50,
     width:'50%',
     borderRadius: 5,
@@ -215,7 +235,7 @@ type_user:{
 
 user_point:{
     flexDirection: 'row',
-    backgroundColor: '#00BFFF',
+    backgroundColor:'#1E90FF',
     height: 50,
     width:'40%',
     borderRadius: 5,
@@ -242,7 +262,7 @@ icon_style_user:
 //--------------------------------
 
 main_order:{
-  backgroundColor: '#FFCC99',
+  backgroundColor: '#FFF',
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'center',
@@ -259,7 +279,7 @@ main_order:{
 },
 
 searching_history:{
-  backgroundColor: '#FFCC99',
+  backgroundColor: '#FFF',
   flexDirection: 'row',
   alignItems: 'center',
   marginLeft:10,
@@ -309,7 +329,7 @@ text_style:{
 //------------------------------
 
 main_voucher:{
-  backgroundColor: '#FFCC99',
+  backgroundColor: '#FFF',
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'center',
@@ -326,7 +346,7 @@ main_voucher:{
 },
 
 voucher_button_voucher:{
-  backgroundColor: '#FFCC99',
+  backgroundColor: '#FFF',
   flexDirection: 'row',
   alignItems: 'center',
   marginLeft:10,
@@ -382,7 +402,7 @@ text_style_voucher:{
 
 //-------------Caring------------------
 main_caring:{
-  backgroundColor: '#FFCC99',
+  backgroundColor: '#FFF',
   flexDirection: 'row',
   justifyContent: 'center',
   margin:10,
@@ -398,7 +418,7 @@ main_caring:{
 },
 
 caring_button_caring:{
-  backgroundColor: '#FFCC99',
+  backgroundColor: '#FFF',
   flexDirection: 'row',
   alignItems: 'center',
   marginLeft:10,

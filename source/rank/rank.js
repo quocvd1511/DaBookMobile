@@ -7,7 +7,6 @@ import TabRanks from './tabs_rank';
 export default function RankScreen() {
     return (
     <NavigationContainer independent={true}>
-      <SearchBar/>
       <TabRanks/>
     </NavigationContainer>
     );

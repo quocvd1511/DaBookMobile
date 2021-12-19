@@ -4,7 +4,7 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimen
 //import {Div, H2} from 'glamorous'
 //import {MapTag, ColorProfile} from 'glamorous'
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 const windowWidth = Dimensions.get('window').width;
 
 
@@ -13,7 +13,8 @@ function ListBook()
 {
 
   const navigation = useNavigation(); 
-
+  const route = useRoute();
+  const username = route.params.username;
   //---------Kết nối Database lấy dữ liệu-------------------------    
   const [Book,setBook] = React.useState([])
   React.useEffect(() => 
@@ -26,6 +27,7 @@ function ListBook()
     fetchData();
 
   },['http://192.168.1.9:3000/'])
+
   //---------------------------------------------------------------
    console.log(Book)
 
@@ -37,7 +39,7 @@ function ListBook()
           Book.map((item)=>
           {
             return(
-              <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
+              <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('book_detail', {tensach: item.tensach, username: username})}>
                 <Image style={styles.image} source={{uri:item.hinhanh}}/>
                 <View  style={{paddingLeft:5 }}>
                   <Text style={styles.book_name}

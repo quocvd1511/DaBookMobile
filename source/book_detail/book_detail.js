@@ -27,7 +27,7 @@ export default function book_detail_home(){
   const navigation = useNavigation();
   const route = useRoute();
   const tensach = route.params.tensach;
-  const username = 'hongcute';
+  const username = route.params.username;
   const [detail_book, setdetail_book]  = useState('')
   console.log(tensach);
 
@@ -36,12 +36,12 @@ export default function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.5:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
       setBook(request.data.list_book)
       return request.data.list_book
     }
     fetchData();
-    },['http://192.168.1.5:3000/chitietsach'])
+    },['http://192.168.43.180:3000/chitietsach'])
 
 
     // Lấy dữ liệu của chi tiết sách
@@ -57,10 +57,10 @@ export default function book_detail_home(){
 
 	 console.log(detail_book);
 
-
-    const[temp, settemp] = useState(1)
-    
+        
+     const[temp, settemp] = useState(1)
     function quantyplus(){
+        console.log('Hihihihihi')
         settemp(temp+1)
         setdetail_book(prevState =>({
             ...prevState,
@@ -146,9 +146,10 @@ export default function book_detail_home(){
                             ]}
                             onPress={addProduct(temp)}
                             >
-                            <Text style={{color:'#fff', fontSize: 17, margin: 5, marginTop:7, textAlign:'center'}}>  Thêm vào giỏ hàng  </Text>
+                            <Text style={{color:'#fff', fontSize: 17, margin: 5, marginTop:7, textAlign:'center'}} onPress={() => addProduct(temp)}>  Thêm vào giỏ hàng  </Text>
+                        
                         </Pressable>
-                    </View>
+                        </View>
                 </View>
                 <View>
 
@@ -432,5 +433,22 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 32,
     },
+    buyButton: {
+        backgroundColor:'#ff424e',
+        width: 170,
+        borderRadius: 6,
+        fontSize: 20,
+        height: 40,
+        alignItems: 'center',
+        justifyContent:'center',
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 9,
+        // },
+        // shadowOpacity: 0.48,
+        // shadowRadius: 11.95,
+        // elevation: 18,
+      }
 
 })

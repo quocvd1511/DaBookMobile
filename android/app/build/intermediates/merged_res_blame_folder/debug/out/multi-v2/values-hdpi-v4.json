@@ -1,10 +1,24 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vdq1511\\.gradle\\caches\\transforms-3\\69a29bf10bcc958f91385ad904e935b2\\transformed\\appcompat-1.3.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+=======
+<<<<<<< HEAD
+            "outputFile": "D:\\CODE_APP_DABOOK\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-3\\69a29bf10bcc958f91385ad904e935b2\\transformed\\appcompat-1.3.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+=======
+            "outputFile": "D:\\Mobile\\React\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-hdpi-v4\\values-hdpi-v4.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\TanTh\\.gradle\\caches\\transforms-3\\69a29bf10bcc958f91385ad904e935b2\\transformed\\appcompat-1.3.0\\res\\values-hdpi-v4\\values-hdpi-v4.xml",
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
+>>>>>>> d59457a1df37df3206db06d0d400be59fad36586
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

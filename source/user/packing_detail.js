@@ -161,31 +161,33 @@ const styles = StyleSheet.create({
     //-------
     container: {
         padding:10
+    },
+
+    item: {
+      backgroundColor: 'white',
+      // height:100,
+      marginTop:5,
+      marginBottom:5,
+      marginLeft:5,
+      marginRight:5,
+      borderRadius:5,
+      paddingLeft: 0,
+      paddingRight:0,
+      //flexDirection: 'row',
+      flex:0.8,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2,
       },
-      item: {
-        backgroundColor: 'white',
-        // height:100,
-        marginTop:5,
-        marginBottom:5,
-        marginLeft:5,
-        marginRight:5,
-        borderRadius:5,
-        paddingLeft: 0,
-        paddingRight:0,
-        //flexDirection: 'row',
-        flex:0.8,
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-        
-        elevation: 4,
+      shadowOpacity: 0.23,
+      shadowRadius: 2.62,
+      
+      elevation: 4,
+  
+    },
     
-      },
-      title: {
-        fontSize: 32,
-      },
+    title: {
+      fontSize: 32,
+    },
 })

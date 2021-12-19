@@ -1,10 +1,24 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vdq1511\\.gradle\\caches\\transforms-3\\94ecee73d302f93903038c0fd7a3667d\\transformed\\material-1.1.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
+=======
+<<<<<<< HEAD
+            "outputFile": "D:\\CODE_APP_DABOOK\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-3\\94ecee73d302f93903038c0fd7a3667d\\transformed\\material-1.1.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
+=======
+            "outputFile": "D:\\Mobile\\React\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\TanTh\\.gradle\\caches\\transforms-3\\94ecee73d302f93903038c0fd7a3667d\\transformed\\material-1.1.0\\res\\values-w360dp-port-v13\\values-w360dp-port-v13.xml",
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
+>>>>>>> d59457a1df37df3206db06d0d400be59fad36586
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
