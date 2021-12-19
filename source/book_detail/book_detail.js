@@ -36,24 +36,24 @@ export default function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.9:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.1.5:3000/chitietsach/' + tensach )
       setBook(request.data.list_book)
       return request.data.list_book
     }
     fetchData();
-    },['http://192.168.1.9:3000/chitietsach'])
+    },['http://192.168.1.5:3000/chitietsach'])
 
 
     // Lấy dữ liệu của chi tiết sách
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.9:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.1.5:3000/chitietsach/' + tensach )
       setdetail_book(request.data.book)
       return request.data.book
     }
     fetchData();
-    },['http://192.168.1.9:3000/chitietsach' + tensach])
+    },['http://192.168.1.5:3000/chitietsach' + tensach])
 
 	 console.log(detail_book);
 
@@ -81,7 +81,7 @@ export default function book_detail_home(){
 
     function addProduct(quantity){
         if(username != ' '){
-            const request = axios.get('http://192.168.1.9:3000/themgiohang/' + username + '/' + detail_book.tensach
+            const request = axios.get('http://192.168.1.5:3000/themgiohang/' + username + '/' + detail_book.tensach
             + '/' + detail_book.giaban + '/' + detail_book.hinhanh
            + '/' + quantity);
            console.log(request.data);
@@ -108,39 +108,42 @@ export default function book_detail_home(){
                 </View>
                 <View style = {styles.button}>
                     <View style = {styles.quantity}>
-                        <Pressable 
-                            backgroundColor={'#FF6600'}
-                            width={40}
-                            height={40}
-                            marginBottom={-5}
-                            marginTop={-5}
-                            borderTopLeftRadius={5}
-                            borderBottomLeftRadius={5}
-                            onPress={quantyminus}>
+                        <Pressable
+                            style={
+                                ({pressed}) =>[{
+
+                                    opacity: pressed ? 0.5:1
+                                },
+                                styles.qtyminus
+                            ]}
+                            onPress={quantyminus}
+                            >
                             <Text style={{color:'#fff', fontSize: 25, marginBottom: 6, textAlign:'center'}} >-</Text>
-                        </Pressable>
-                        
+                        </Pressable>                       
                         <Text style={{width: 40, color:'#000', height: 39.5, fontSize: 17, lineHeight:40, textAlign:'center', alignItems:'center', borderWidth: 1, borderStyle: 'solid', borderColor: '#FF6600'}}>{temp}</Text>
-                        
-                        <Pressable 
-                            backgroundColor={'#FF6600'}
-                            width={40}
-                            height={40}
-                            marginBottom={-5}
-                            marginTop={-5}
-                            borderTopRightRadius={5}
-                            borderBottomRightRadius={5}
-                            onPress={quantyplus}>
+                        <Pressable
+                            style={
+                                ({pressed}) =>[{
+
+                                    opacity: pressed ? 0.5:1
+                                },
+                                styles.qtyplus
+                            ]}
+                            onPress={quantyplus}
+                            >
                             <Text style={{color:'#fff', fontSize: 20, margin: 5, textAlign:'center'}} >+</Text>
                         </Pressable>
+                        
                     </View>
                     <View>
-                        <Pressable 
-                            backgroundColor={'#ff424e'}
-                            height={40}
-                            marginBottom={-5}
-                            marginTop={-5}
-                            borderRadius={5}
+                        <Pressable
+                            style={
+                                ({pressed}) =>[{
+
+                                    opacity: pressed ? 0.5:1
+                                },
+                                styles.add_cart
+                            ]}
                             onPress={addProduct(temp)}
                             >
                             <Text style={{color:'#fff', fontSize: 17, margin: 5, marginTop:7, textAlign:'center'}}>  Thêm vào giỏ hàng  </Text>
@@ -262,6 +265,34 @@ const styles = StyleSheet.create({
         color: 'black',
         fontSize: 20,
         fontWeight: fontWeights[7],
+    },
+
+    add_cart: {
+        backgroundColor: '#ff424e',
+        height: 40,
+        marginBottom: -5,
+        marginTop: -5,
+        borderRadius: 5,
+    },
+
+    qtyminus: {
+        backgroundColor:'#FF6600',
+        width: 40,
+        height: 40,
+        marginBottom: -5,
+        marginTop: -5,
+        borderTopLeftRadius: 5,
+        borderBottomLeftRadius: 5,
+    },
+
+    qtyplus: {
+        backgroundColor:'#FF6600',
+        width: 40,
+        height: 40,
+        marginBottom: -5,
+        marginTop: -5,
+        borderTopRightRadius:5,
+        borderBottomRightRadius:5,
     },
 
     image:{

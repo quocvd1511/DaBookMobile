@@ -24,7 +24,7 @@ export default function Login()
         }
       else
       {
-        const request = await axios.post('http://192.168.1.9:3000',{
+        const request = await axios.post('http://192.168.1.5:3000',{
                 username: Username,
                 password: Password,
         })
@@ -88,17 +88,28 @@ export default function Login()
         </View>
 
                 <Pressable
-                    style={styles.button_login}
+                    style={
+                        ({pressed}) =>[{
+    
+                            opacity: pressed ? 0.5:1
+                        },
+                        styles.button_login
+                    ]}
                     onPress={checkLogin}
                     >
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white'}}>Xác Nhận</Text>
                 </Pressable>
-                
+
                 <Pressable
-                    style={styles.button_login_fb}
+                    style={
+                        ({pressed}) =>[{
+    
+                            opacity: pressed ? 0.5:1
+                        },
+                        styles.button_login_fb
+                    ]}
                     >
                     <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white'}}>Đăng nhập với Facebook</Text>
-                    
                 </Pressable>
 
                 <View style={{marginTop: 50, alignItems:'center'}}>
@@ -125,6 +136,8 @@ const styles= StyleSheet.create({
     text_input:{
         backgroundColor: '#fff',
         width: 285,
+        color: '#333',
+        textDecorationLine:'none',
         fontSize: 16,
         height: 40,
         borderTopRightRadius: 10,
@@ -145,6 +158,8 @@ const styles= StyleSheet.create({
     pass_input:{
         backgroundColor: '#fff',
         width: 285,
+        color: '#333',
+        textDecorationLine:'none',
         height: 40,
         fontSize: 16,
         borderTopRightRadius: 10,
