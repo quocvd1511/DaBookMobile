@@ -29,25 +29,25 @@ export default function VoucherDetail()
 
 
   return (
-    <ImageBackground source={require('../asset/icon/land.png')} style={{width: '100%', height: '100%'}}>
+    <View style={{backgroundColor:'#B0E2FF'}}>
           <View style={styles.container}>
               <ScrollView>
                 <View style={styles.main}>
                   <Image style={styles.logo_header} source={require('../asset/icon/sale.png')}/>
-                  <Text style={styles.text_header}>Voucher Free Ship của bạn</Text>
+                  <Text style={styles.text_header}>Voucher của bạn</Text>
                 </View>
                   {
                   Voucher.map((item) => {
                       return(
                       <View key={item.id} style={styles.item}>
-                          <View style={{backgroundColor: '#320d3e', padding: 25, borderRadius:5}}>
-                              <Image style={{height:50, width:50,tintColor: '#ffd79d'}} source={{uri:item.img}}/>
+                          <View style={{backgroundColor: 'dodgerblue', padding: 25, borderRadius:5, margin: 10}}>
+                              <Image style={{height:50, width:50, tintColor: '#ffd79d'}} source={{uri:item.img}}/>
                           </View>
 
                           <View style={{margin:10}}>
-                              <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>Nội dung: {item.noidung}</Text>
-                              <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>Giảm: {item.phantram}%</Text>
-                              <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>HSD: {item.ngaykt}</Text>
+                              <Text style={{color: 'black', fontSize: 16, fontWeight: 'bold'}}>Nội dung: {item.noidung}</Text>
+                              <Text style={{color: 'black', fontSize: 16, fontWeight: 'bold'}}>Giảm: {item.phantram}%</Text>
+                              <Text style={{color: 'black', fontSize: 16, fontWeight: 'bold'}}>HSD: {item.ngaykt}</Text>
                           </View>
 
                         
@@ -57,7 +57,7 @@ export default function VoucherDetail()
                   }
               </ScrollView>
       </View>
-    </ImageBackground>
+    </View>
     
   );
 }
@@ -65,7 +65,7 @@ export default function VoucherDetail()
 
 const styles = StyleSheet.create({
     main:{
-        backgroundColor: '#d902ee',
+        backgroundColor: '#1E90FF',
         height: 100,
         borderRadius: 5,
         flexDirection: 'row',
@@ -116,12 +116,13 @@ const styles = StyleSheet.create({
         height: 80,
         width: 80,
         marginLeft: 5,
+        tintColor: '#fff'
     },
 
     text_header:{
         marginLeft: 12,
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 20,
         color:'black',
     },
 
@@ -154,36 +155,34 @@ const styles = StyleSheet.create({
 
     //-------
     container: {
-        padding:10
+      padding:10
+    },
+    item: {
+      flexDirection:'row', 
+      alignItems: 'center',
+      backgroundColor: 'white',
+      // height:100,
+      marginTop:5,
+      marginBottom:5,
+      marginLeft:5,
+      marginRight:5,
+      borderRadius:5,
+      paddingLeft: 0,
+      paddingRight:0,
+      //flexDirection: 'row',
+      flex:0.8,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2,
       },
-      item: {
-        backgroundColor: '#f162ff',
-        height:100,
-        marginTop:10,
-        marginBottom:5,
-        marginLeft:5,
-        marginRight:5,
-        borderRadius:5,
-        paddingLeft: 0,
-        paddingRight:0,
-        flexDirection: 'row',
-        alignItems: 'center',
-        flex:0.8,
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
-        
-        elevation: 4,
-
-        borderWidth: 2,
-        borderColor: '#320d3e'
-    
-      },
-      title: {
-        fontSize: 32,
-      },
+      shadowOpacity: 0.23,
+      shadowRadius: 2.62,
+      
+      elevation: 4,
+  
+    },
+    title: {
+      fontSize: 32,
+    },
 })
