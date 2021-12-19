@@ -1,11 +1,18 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Dimensions, Image, Pressable } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import { Text, View, StyleSheet, Dimensions, Image, Pressable, Touchable } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 const windowWidth = Dimensions.get('window').width;
 import axios from 'axios';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function VoucherScreen() {
-  console.log('Voucher')
+
+  const navigation = useNavigation();
+  const route = useRoute();
+  const username = route.params.username;
+  console.log(username)
+
+
   const [Voucher, setVoucher] = React.useState([
     {id :1, name: 'Vận chuyển', price:'100%', img:'https://cdn.shopify.com/s/files/1/0194/4221/products/shipping-free-512_grande.png?v=1587611827'},
     {id :2, name: 'Sale', price:'10%', img:'https://cdn2.iconfinder.com/data/icons/solid-black-labels/128/sale_copy-512.png'},
@@ -21,7 +28,7 @@ export default function VoucherScreen() {
       {
         async function fetchData()
       {
-          const request = await axios.get('http://192.168.1.9:3000/danhsachvoucher_all')
+          const request = await axios.get('http://192.168.43.180:3000/danhsachvoucher_all')
           console.log(request.data)
           for(var i=0;i<request.data.length;i++)
           {
@@ -39,8 +46,13 @@ export default function VoucherScreen() {
       }
       fetchData()
     
-      },['http://192.168.1.9:3000/'])
+      },['http://192.168.43.180:3000/'])
 
+      function addVoucher(index){
+        console.log(username + ' ' + Voucher[index].manhap)
+        const request = axios.get('http://192.168.43.180:3000/luukhuyenmai/' + username + '/' + Voucher[index].makm + '/' + Voucher[index].manhap);
+       console.log(request.status);
+}
 
   return (
     <ScrollView>
@@ -69,7 +81,7 @@ export default function VoucherScreen() {
       <View style={styles.container}>
       <ScrollView>
         {
-          Voucher.map((item) => {
+          Voucher.map((item, index) => {
             return(
               <View key={item.id} style={styles.item}>
                   <View style={{backgroundColor: '#33CC00', padding: 20, marginLeft: 5, borderRadius:5}}>
@@ -79,18 +91,19 @@ export default function VoucherScreen() {
                   <View style={{marginLeft:10}}>
                       <Text style={{color:'black', fontSize: 14}}>{item.loai}</Text>
                       <Text style={{color: 'black', fontSize: 15, fontWeight: 'bold'}}>Giảm {item.phantram}</Text>
-                      <Text style={{color: 'black', fontSize: 12}}>Cho đơn từ {item.dieukien}000 đ</Text>
+                      <Text style={{color: 'black', fontSize: 12}}>Mã Nhập {item.manhap}</Text>
                       <Text style={{color: 'black', fontSize: 12}}>HSD: {item.ngaykt}</Text>
                   </View>
-
+                
                   <Pressable
                     backgroundColor={'dodgerblue'}
                     padding={5}
                     paddingLeft={20}
                     paddingRight={20}
                     borderRadius={5}
-                    marginLeft={30}
+                    marginLeft={25}
                     marginTop={45}
+                    onPress={()=>addVoucher(index)}
                   >
                     <Text style={{color:'white', fontSize: 16, fontWeight: '500'}}>Lưu</Text>
                   </Pressable>

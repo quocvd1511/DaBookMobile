@@ -19,7 +19,7 @@ const Tab = createMaterialBottomTabNavigator();
 export default function TabScreen() {
 
   const route = useRoute();
-  const user_session = route.params.user_session;
+  const user_session = route.params.username;
   console.log(user_session);
 
     return (
@@ -98,11 +98,11 @@ export default function TabScreen() {
         })
       }
         >
-          <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Category" component={CategoryScreen} />
-          <Tab.Screen name="Voucher" component={VoucherScreen} />
+          <Tab.Screen name="Home" component={HomeScreen} initialParams={{username: user_session}} />
+          <Tab.Screen name="Category" component={CategoryScreen} initialParams={{username: user_session}}/>
+          <Tab.Screen name="Voucher" component={VoucherScreen} initialParams={{username: user_session}}/>
           <Tab.Screen name="Cart" component={CartScreen} initialParams={{username: user_session}}/>
-          <Tab.Screen name="User" component={StackUserScreen} initialParams={{username: user_session.username}}/>
+          <Tab.Screen name="User" component={StackUserScreen} initialParams={{username: user_session}}/>
         </Tab.Navigator>
     );
   }

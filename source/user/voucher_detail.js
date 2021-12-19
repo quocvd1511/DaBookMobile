@@ -9,24 +9,25 @@ export default function VoucherDetail()
 {
     const navigation = useNavigation()
     const route = useRoute()
-    console.log(route)
+    const username = route.params.username;
+    console.log(username +   'VoucherDetail')
 
-    const [Voucher, setVoucher] = React.useState([
+    const [Voucher, setVoucher] = React.useState([])
+
+      React.useEffect(() => 
+      {
+        async function fetchData(){
+          const request = await axios.get('http://192.168.43.180:3000/danhsachvoucher/' + username)
+          // const User = request.data.khuyenmai;
+          // const Voucher = User["danhsach_km"];
+          setVoucher(request.data.khuyenmai)
+          return request.data.khuyenmai
+        }
+        fetchData();
     
-        {id :2, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
-        {id :4, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
-        {id :6, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
-        {id :8, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
-        {id :9, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
-        {id :10, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
-        {id :11, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
-        {id :12, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
-        {id :13, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
-        {id :14, name: 'Sale', price:'100%', img:'https://www.pngrepo.com/png/222733/512/voucher-coupon.png'},
-        // {id :11, name: 'Free Ship', price:'100%', img:'https://cdn.shopify.com/s/files/1/0194/4221/products/shipping-free-512_grande.png?v=1587611827'},
-      ])
+      },['http://192.168.43.180:3000/'])
 
-
+      console.log(Voucher)
 
   return (
     <ImageBackground source={require('../asset/icon/land.png')} style={{width: '100%', height: '100%'}}>
@@ -46,15 +47,13 @@ export default function VoucherDetail()
 
                           <View style={{margin:10}}>
                               <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>Nội dung: {item.noidung}</Text>
+                              <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>Mã nhập: {item.manhap}</Text>
                               <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>Giảm: {item.phantram}%</Text>
                               <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>HSD: {item.ngaykt}</Text>
                           </View>
-
-                        
                       </View>
                       )
-                  })
-                  }
+                  })}
               </ScrollView>
       </View>
     </ImageBackground>

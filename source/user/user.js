@@ -80,7 +80,7 @@ export default function UserScreen()
             </View>
             <Pressable
               style={styles.searching_history}
-              onPress={() => navigation.navigate('HistoryLookup')}
+              onPress={() => navigation.navigate('HistoryLookup',{username: username})}
             >
                   <Image style={styles.icon_style} source={require('../asset/icon/history.png')}/>
                   <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 5, marginBottom: 3,marginRight: 5}}>Tra cứu lịch sử đơn hàng</Text>

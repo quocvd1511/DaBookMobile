@@ -1,8 +1,33 @@
 import * as React from 'react';
 import { Text, View, StyleSheet,Image, ScrollView, Pressable, TextInput} from 'react-native';
+import axios from 'axios';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 export default function HistoryLookup()
 {
+
+    const navigation = useNavigation()
+    const route = useRoute()
+    const username = route.params.username;
+    console.log(username +   'VoucherDetail')
+
+    const [Book, setBook] = React.useState([])
+    const [Donhang, setDonhang] = React.useState([])
+
+      React.useEffect(() => 
+      {
+        async function fetchData()
+      {
+          const request = await axios.get('http://192.168.43.180:3000/lichsudonhang?'+"matk"+"="+route.params.username)
+          setDonhang(request.data.donhang)
+          setBook(request.data.books)
+          console.log(request.data.books + " // " + request.data.donhang)
+      }
+
+      fetchData()
+    
+      },['http://192.168.43.180:3000/'])
+
     return(
         <ScrollView>
             <View style={{paddingTop: 20}}>
@@ -30,17 +55,25 @@ export default function HistoryLookup()
                         <Image style={styles.deli_style} source={require('../asset/icon/dabook_deli.png')}/>
                     </View>
                 </View>
-                <View style = {styles.view1}>
-                    <Image style = {styles.img_book} source={{uri:'https://vcdn.tikicdn.com/media/catalog/product/c/o/cover%20thanh%20xuan%20de%20danh.u2487.d20160905.t152805.232712.jpg'}}/>    
-                    <View>
-                        <Text style={styles.book_name} numberOfLines={2}
-                            ellipsizeMode='tail'>Thanh xuân để dành</Text>
-                        <View style={{display: 'flex', flexDirection: 'row', marginTop: 10, marginRight:10,}}>
-                            <Text style = {styles.price}> 240.000 đ </Text>
-                            <Text style={styles.newprice}>210.000 đ</Text>
+
+            {
+                Book.map((item) => {
+                    return(
+                        <View style = {styles.view1}>
+                        <Image style = {styles.img_book} source={{uri:'https://vcdn.tikicdn.com/media/catalog/product/c/o/cover%20thanh%20xuan%20de%20danh.u2487.d20160905.t152805.232712.jpg'}}/>    
+                        <View>
+                            <Text style={styles.book_name} numberOfLines={2}
+                                ellipsizeMode='tail'>{item.tensach}</Text>
+                            <View style={{display: 'flex', flexDirection: 'row', marginTop: 10, marginRight:10,}}>
+                                <Text style = {styles.price}> 240.000 đ </Text>
+                                <Text style={styles.newprice}>210.000 đ</Text>
+                            </View>
                         </View>
                     </View>
-                </View>
+                    )
+                })
+            }
+
                 <View style = {styles.view1}>
                     <Image style = {styles.img_book} source={{uri:'https://inthienhang.com/wp-content/uploads/2020/03/bia-sach-co-font-chu-dep-278x400.jpg'}}/>    
                     <View>

@@ -24,10 +24,11 @@ export default function Login()
         }
       else
       {
-        const request = await axios.post('http://192.168.1.9:3000',{
+        const request = await axios.post('http://192.168.43.180:3000',{
                 username: Username,
                 password: Password,
         })
+
         console.log(request.data)
         if(request.data.status==='Failed')
         {
@@ -38,7 +39,7 @@ export default function Login()
             ToastAndroid.show("Xác thực thành công", ToastAndroid.SHORT)
             setUsername('')
             setPassword('')
-            navigation.navigate('TabScreen',{user_session: request.data.user_session})
+            navigation.navigate('TabScreen',{username: Username})
             // navigation.navigate('book_detail',{user_session: request.data.user_session})
         }
     }
