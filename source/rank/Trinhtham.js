@@ -17,21 +17,13 @@ export default function TrinhTham(){
   React.useEffect(() => 
   {
     async function fetchData(){
-<<<<<<< HEAD
       const request = await axios.get('http://192.168.1.9:3000/theloai/' + value)
-=======
-      const request = await axios.get('http://192.168.1.5:3000/theloai/' + value)
->>>>>>> ad455ee27470e3b2262c865fd90a491dadfd04b0
       setBook(request.data.books)
       return request.data.books
     }
     fetchData();
 
-<<<<<<< HEAD
   },['http://192.168.1.9:3000/'])
-=======
-  },['http://192.168.1.5:3000/'])
->>>>>>> ad455ee27470e3b2262c865fd90a491dadfd04b0
   //---------------------------------------------------------------
    console.log(Book)
 

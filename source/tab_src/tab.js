@@ -10,6 +10,7 @@ import VoucherScreen from '../voucher/voucher';
 import UserScreen from '../user/user';
 import CartScreen from '../cart/cart';
 import StackUserScreen from '../user/stack_navigator_user'
+import StackCartScreen from '../cart/stack_cart_payment';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -101,7 +102,7 @@ export default function TabScreen() {
           <Tab.Screen name="Home" component={HomeScreen} />
           <Tab.Screen name="Category" component={CategoryScreen} />
           <Tab.Screen name="Voucher" component={VoucherScreen} />
-          <Tab.Screen name="Cart" component={CartScreen} initialParams={{username: user_session}}/>
+          <Tab.Screen name="Cart" component={StackCartScreen} initialParams={{username: user_session}}/>
           <Tab.Screen name="User" component={StackUserScreen} initialParams={{username: user_session.username}}/>
         </Tab.Navigator>
     );

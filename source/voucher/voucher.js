@@ -78,6 +78,7 @@ export default function VoucherScreen() {
 
                   <View style={{marginLeft:10}}>
                       <Text style={{color:'black', fontSize: 14}}>{item.loai}</Text>
+                      <Text style={{color:'black', fontSize: 14}}>{item.noidung}</Text>
                       <Text style={{color: 'black', fontSize: 15, fontWeight: 'bold'}}>Giảm {item.phantram}</Text>
                       <Text style={{color: 'black', fontSize: 12}}>Cho đơn từ {item.dieukien}000 đ</Text>
                       <Text style={{color: 'black', fontSize: 12}}>HSD: {item.ngaykt}</Text>

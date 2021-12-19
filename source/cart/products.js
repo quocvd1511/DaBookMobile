@@ -13,14 +13,8 @@ import {
 import { CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation, useRoute} from '@react-navigation/native';
-import ListProduct from './products copy';
 import { ScrollView } from 'react-native-gesture-handler';
 const windowWidth = Dimensions.get('window').width;
-import HeaderCart from '../payment/header_pm';
-import Info from '../payment/info_ad';
-import { FA5Style } from 'react-native-vector-icons/FontAwesome5';
-
-
 
 // const navigation = useNavigation(); 
 
@@ -32,6 +26,8 @@ import { FA5Style } from 'react-native-vector-icons/FontAwesome5';
 
 function ListProduct_New()
 {
+    const route = useRoute()
+    const navigation = useNavigation()
     const [ListProduct, setProduct] = useState([
       {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1, Pick: false},
       {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1, Pick: false},
@@ -43,21 +39,75 @@ function ListProduct_New()
     ])
     //---------------Xu ly So luong------------------------
     //const [SoLuong, setSoLuong] = useState(1)
+    var username=route.params.username.username
 
-    // for(var i=0;i<ListProduct.length;i++)
-    // {
-    //   ListProduct[i].SoLuong=1
-    // }
+    const [UserInfor, setUserInfor] = useState('')
+    React.useEffect(() => 
+    { 
+      async function fetchData(){
+        const request = await axios.get('http://192.168.1.9:3000/chitiettk?matk='+username)
+        setUserInfor(request.data)
+        setProduct(request.data.giohang)
+        for(var i=0; i<ListProduct.length ;i++)
+        {
+          ListProduct[i].Pick=false
+          ListProduct[i].SoLuong = parseInt(ListProduct[i].SoLuong)
+        }
+      }
+      fetchData();
+  
+    },['http://192.168.1.9:3000/'])
 
     const[temp, settemp] = useState(0)
+    const[TongTien, setTongTien] = useState(0)
+    
+    //console.log(ListProduct)
+    //setProduct(gh)
+
+
+    // console.log(ListProduct)
+    //console.log('Hello')
+    //console.log(ListProduct)
+    //-------------------------Xu Ly-----------------------------------------------------
+    function isChecked(index) 
+    {
+      return ListProduct[index].Pick
+    }
+
+    function Cal(index)
+    {
+      // console.log(isChecked(index))
+      if(isChecked(index))
+      {
+        ListProduct[index].Pick = false
+        //setProduct(ListProduct)
+         console.log(ListProduct[index].Pick)
+        //ListProduct[index].SoLuong===0) ListProduct[index].SoLuong=1
+        setTongTien(TongTien-(parseInt(ListProduct[index].giaban)*ListProduct[index].SoLuong))
+        settemp(temp+1)
+      } else
+      {
+        ListProduct[index].Pick = true
+        //setProduct(ListProduct)
+        console.log(ListProduct[index])
+        // console.log(ListProduct[index].Pick)
+         if(ListProduct[index].SoLuong===0) ListProduct[index].SoLuong=1
+        setTongTien(TongTien+(parseInt(ListProduct[index].giaban)*ListProduct[index].SoLuong))
+        settemp(temp+1)
+      }
+    }
 
     function TangSoLuong(index)
     {
-        let soluong = ListProduct[index].SoLuong;
+        let soluong = parseInt(ListProduct[index].SoLuong);
         soluong = soluong + 1;
         ListProduct[index].SoLuong = soluong;
         setProduct(ListProduct)
-        console.log(ListProduct)
+        if(isChecked(index))
+        {
+          setTongTien(TongTien+parseInt(ListProduct[index].giaban))
+        }
+        //console.log(ListProduct)
         settemp(temp + 1)
     }
 
@@ -67,16 +117,75 @@ function ListProduct_New()
       {
       ListProduct[index].SoLuong-=1
       setProduct(ListProduct)
+      if(isChecked(index))
+        {
+          if(ListProduct[index].SoLuong===0)
+          {
+            ListProduct[index].Pick=false
+          }
+          setTongTien(TongTien-parseInt(ListProduct[index].giaban))
+        }
       settemp(temp - 1)
       }
     }
+
+    function RemoveProduct(index)
+    {
+      if(isChecked(index))
+      {
+        setTongTien(TongTien-ListProduct[index].SoLuong*parseInt(ListProduct[index].giaban))
+      }
+      ListProduct.splice(index,1)
+      //console.log(ListProduct)
+      settemp(temp+1)
+    }
+
+
+    function SolveProduct()
+    {
+      var BuyedProduct =[]
+      var SoLuong=0
+      for(var i=0;i<ListProduct.length;i++)
+      {
+        if(ListProduct[i].Pick)
+        {
+          BuyedProduct[SoLuong] = ListProduct[i]
+          SoLuong+=1
+        }
+      }
+      navigation.navigate('Payment',{BuyedProduct,TongTien,UserInfor})
+    }
     //------------------------------------------------------
         return (
-          <View>
+          <View style={{flex:1}}>
             {/* ----------------------------------------------------------- */}
             <ScrollView>
-              <HeaderCart/>
-              <Info/>
+
+              {/* //------------------------- */}
+
+              <View>
+                  <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 10, marginBottom:10,}}>Thông tin nhận hàng</Text>
+                  <View style={styles.main_info}>
+                      <View style={styles.type_user}>
+                      <Image style={styles.icon_style} source={require('../asset/icon/location.png')}/>
+                          <Text style={{fontSize: 18}}>{UserInfor.hoten}</Text>
+                      </View>
+
+                      <View style={styles.type_numberphone}>
+                      <Text style={{fontSize: 18}}>SĐT: {UserInfor.sodt}</Text>
+                      </View>
+                  </View>
+                  
+                  <View style={styles.address}>
+                      <Text style={styles.text_style}>Địa chỉ: {UserInfor.diachigoc}</Text>
+                  </View>
+                  <View style={{backgroundColor: '#fff', padding: 10}}>
+                      <Text style={styles.change}>Thay đổi</Text>
+                  </View>
+                </View>
+              
+
+              {/* //-------------------------- */}
               <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
               {
                   ListProduct.map((item,index) =>
@@ -88,8 +197,8 @@ function ListProduct_New()
                             // iconRight
                             checkedIcon="check-square"
                             uncheckedIcon="square-o"
-                            //checked={()}
-                           // onPress={(checked) => checked =true}
+                            checked={ListProduct[index].Pick}
+                            onPress={() => Cal(index)}
                           />
                         <Image source={{uri:item.hinhanh}} style={styles.imageStyle} />
                           <View>
@@ -119,7 +228,7 @@ function ListProduct_New()
                           </View>
 
                           <TouchableOpacity style={{flexDirection:'row', alignItems:'center',  marginRight: 0, paddingLeft: 50 }} 
-                            //onPress={GiamSoLuong}
+                            onPress={() => RemoveProduct(index)}
                             >
                                 <Icon name="trash" size={25} color={"#33c37d"}/>
                           </TouchableOpacity>
@@ -135,10 +244,10 @@ function ListProduct_New()
             <View style={styles.bottomView}>
               <View style={styles.textBottom}>
               <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
-              <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>1000 đ</Text>
+              <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{TongTien} đ</Text>
               </View>
               <TouchableOpacity style={styles.buyButton} 
-              //onPress={() => this.props.navigation.navigate('Payment')}
+                onPress={SolveProduct}
               >
                   <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Mua Hàng</Text>
               </TouchableOpacity>
@@ -221,7 +330,72 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.48,
     shadowRadius: 11.95,
     elevation: 18,
-  }
+  },
+
+  //-------------------------------
+  main_info:{
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+},
+
+address:{
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    alignItems: 'center',
+    // marginLeft:10,
+    // marginRight:10,
+    
+    paddingLeft: 30,
+    paddingRight: 20,
+    marginBottom: 0,
+    
+},
+
+type_user:{
+    flexDirection: 'row',
+    height: 50,
+    width:'50%',
+    justifyContent:'center',
+    alignItems: 'center',
+    fontWeight: 'bold',
+    fontSize: 20,
+},
+type_numberphone:{
+    flexDirection: 'row',
+    height: 50,
+    width:'50%',
+    justifyContent:'center',
+    alignItems: 'center',
+    marginRight:10,
+    fontWeight: 'bold',
+    fontSize: 20,
+},
+
+
+icon_style:
+{
+    height: 25,
+    width: 25,
+    marginRight: 10,
+    marginLeft: 15,
+    tintColor: '#1E90FF'
+},
+
+text_style:{
+    fontSize: 18,
+    lineHeight: 32,
+    fontWeight: '600',
+},
+
+change: {
+    fontSize: 16,
+    color: '#1E90FF',
+    fontWeight: '500',
+    marginLeft: 20,
+}
+
   
 });
 
