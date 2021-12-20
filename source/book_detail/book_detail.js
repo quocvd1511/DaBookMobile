@@ -29,31 +29,39 @@ export default function book_detail_home(){
   const tensach = route.params.tensach;
   const username = route.params.username;
   const [detail_book, setdetail_book]  = useState('')
-  console.log(tensach);
+  console.log("Hellooooooooooooooooooooooooooooooooooooooooooooooo"+username);
 
     // Lấy danh sách sách liên quan
     const [Book, setBook]  = useState([])
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.1.9:3000/chitietsach/' + tensach )
       setBook(request.data.list_book)
       return request.data.list_book
     }
     fetchData();
-    },['http://192.168.43.180:3000/chitietsach'])
+    },['http://192.168.1.9:3000/chitietsach'])
 
 
     // Lấy dữ liệu của chi tiết sách
     React.useEffect(() => 
   {
     async function fetchData(){
+<<<<<<< HEAD
       const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
+=======
+      const request = await axios.get('http://192.168.1.9:3000/chitietsach/' + tensach )
+>>>>>>> f8721f6aca60b15b70861e34304603e3cbd4d4eb
       setdetail_book(request.data.book)
       return request.data.book
     }
     fetchData();
+<<<<<<< HEAD
     },['http://192.168.43.180:3000/chitietsach' + tensach])
+=======
+    },['http://192.168.1.9:3000/chitietsach' + tensach])
+>>>>>>> f8721f6aca60b15b70861e34304603e3cbd4d4eb
 	 console.log(detail_book);
 
         
@@ -80,7 +88,7 @@ export default function book_detail_home(){
 
     function addProduct(soluong){
             console.log(username + ' ' + detail_book.tensach + ' ' + soluong)
-            const request = axios.get('http://192.168.43.180:3000/themgiohang/' + username + '/' + detail_book.tensach + '/' + soluong);
+            const request = axios.get('http://192.168.1.9:3000/themgiohang/' + username + '/' + detail_book.tensach + '/' + soluong);
            console.log(request.status);
     }
     

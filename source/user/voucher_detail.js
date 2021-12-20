@@ -48,10 +48,9 @@ export default function VoucherDetail()
                           </View>
 
                           <View style={{margin:10}}>
-                              <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>Nội dung: {item.noidung}</Text>
-                              <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>Mã nhập: {item.manhap}</Text>
-                              <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>Giảm: {item.phantram}%</Text>
-                              <Text style={{color: 'black', fontSize: 12, fontWeight: 'bold'}}>HSD: {item.ngaykt}</Text>
+                              <Text style={{color: 'black', fontSize: 16, fontWeight: 'bold'}}>Nội dung: {item.noidung}</Text>
+                              <Text style={{color: 'black', fontSize: 16, fontWeight: 'bold'}}>Giảm: {item.phantram}%</Text>
+                              <Text style={{color: 'black', fontSize: 16, fontWeight: 'bold'}}>HSD: {item.ngaykt}</Text>
                           </View>
                       </View>
                       )

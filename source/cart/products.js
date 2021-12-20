@@ -39,13 +39,15 @@ function ListProduct_New()
     ])
     //---------------Xu ly So luong------------------------
     //const [SoLuong, setSoLuong] = useState(1)
-    var username=route.params.username.username
+    var username=route.params.username
+    console.log('skdslkadjlkasjdlkasjdlkasjdlksjlkdjaslkdjlaksjdlka'+username)
 
     const [UserInfor, setUserInfor] = useState('')
     React.useEffect(() => 
     { 
       async function fetchData(){
         const request = await axios.get('http://192.168.1.9:3000/chitiettk?matk='+username)
+        console.log(request.data)
         setUserInfor(request.data)
         setProduct(request.data.giohang)
         for(var i=0; i<ListProduct.length ;i++)
