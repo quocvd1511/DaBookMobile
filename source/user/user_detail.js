@@ -2,16 +2,36 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Image, Dimensions, Pressable, ImageBackground } from 'react-native';
 
 import { Avatar } from 'react-native-elements/dist/avatar/Avatar';
-import { TextInput } from 'react-native-gesture-handler';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import { useRoute } from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 
+
 export default function user_detail()
 {
+
+    
+    const route = useRoute()
+    const username = route.params.username
+    const [UserInfor, setUserInfor] = React.useState('')
+    // async function fetchData()
+    // {
+    //     const request = await axios.post('http://192.168.1.9:3000/signup',{
+    //         username: Username,
+    //         phonenumber: Phonenumber,
+    //         password: Password,
+    //         name: Name,
+    //     })
+    // }
+
+
     return(
+            
         <ImageBackground source={require('../asset/icon/land3.jpg')} style={{width: '100%', height: '100%'}}>
+            <ScrollView>
               <View style={{justifyContent: 'center'}}>
                 <Text style={{fontSize: 20, color: '#fff', fontWeight: 'bold', marginLeft: 5, marginTop: 10, marginBottom: 0,}}>THÔNG TIN CÁ NHÂN</Text>
             </View>
@@ -63,6 +83,7 @@ export default function user_detail()
                 </View>
 
             </View>  
+            </ScrollView>
         </ImageBackground>
         
     )

@@ -161,6 +161,8 @@ function ListProduct_New()
       navigation.navigate('Payment',{BuyedProduct,TongTien,UserInfor})
     }
     //------------------------------------------------------
+    if(ListProduct)
+    {
         return (
           <SafeAreaView style={{flex:1}}>
             {/* ----------------------------------------------------------- */}
@@ -246,7 +248,7 @@ function ListProduct_New()
                           </TouchableOpacity>
                         </View>
                       )
-                       
+                      
                   })
               }
             </ScrollView>
@@ -266,6 +268,67 @@ function ListProduct_New()
           </SafeAreaView>
           
         );
+    } else
+      {
+        return (
+            <SafeAreaView style={{flex:1}}>
+              {/* ----------------------------------------------------------- */}
+              <ScrollView
+                refreshControl=
+                {
+                  <RefreshControl/>
+                }
+              >
+
+
+                {/* //------------------------- */}
+
+                <View>
+                    <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 10, marginBottom:10,}}>Thông tin nhận hàng</Text>
+                    <View style={styles.main_info}>
+                        <View style={styles.type_user}>
+                        <Image style={styles.icon_style} source={require('../asset/icon/location.png')}/>
+                            <Text style={{fontSize: 18}}>{UserInfor.hoten}</Text>
+                        </View>
+
+                        <View style={styles.type_numberphone}>
+                        <Text style={{fontSize: 18}}>SĐT: {UserInfor.sodt}</Text>
+                        </View>
+                    </View>
+                    
+                    <View style={styles.address}>
+                        <Text style={styles.text_style}>Địa chỉ: {UserInfor.diachigoc}</Text>
+                    </View>
+                    <View style={{backgroundColor: '#fff', padding: 10}}>
+                        <Text style={styles.change}>Thay đổi</Text>
+                    </View>
+                  </View>
+                
+
+                {/* //-------------------------- */}
+                <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
+                {
+                     <Text style={{alignSelf: 'center'}}>Chưa có sản phẩm nào trong giỏ hành nha</Text>
+                }
+              </ScrollView>
+              {/* ---------------------------------------------------------------------- */}
+
+              <View style={styles.bottomView}>
+                <View style={styles.textBottom}>
+                <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
+                <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{TongTien} đ</Text>
+                </View>
+                <TouchableOpacity style={styles.buyButton} 
+                  onPress={SolveProduct}
+                >
+                    <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Mua Hàng</Text>
+                </TouchableOpacity>
+              </View>
+            </SafeAreaView>
+            
+          );
+      }
+          
 }
 
 const styles = StyleSheet.create({
