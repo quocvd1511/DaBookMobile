@@ -29,7 +29,7 @@ export default function book_detail_home(){
   const tensach = route.params.tensach;
   const username = route.params.username;
   const [detail_book, setdetail_book]  = useState('')
-  console.log("Hellooooooooooooooooooooooooooooooooooooooooooooooo"+username);
+  //console.log("Hellooooooooooooooooooooooooooooooooooooooooooooooo"+username);
 
     // Lấy danh sách sách liên quan
     const [Book, setBook]  = useState([])

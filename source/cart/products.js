@@ -8,7 +8,8 @@ import {
   Image,
   SafeAreaView,
   FlatList,
-  Dimensions
+  Dimensions,
+  RefreshControl
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -40,23 +41,25 @@ function ListProduct_New()
     //---------------Xu ly So luong------------------------
     //const [SoLuong, setSoLuong] = useState(1)
     var username=route.params.username
-    console.log('skdslkadjlkasjdlkasjdlkasjdlksjlkdjaslkdjlaksjdlka'+username)
+    //console.log('skdslkadjlkasjdlkasjdlkasjdlksjlkdjaslkdjlaksjdlka'+username)
 
     const [UserInfor, setUserInfor] = useState('')
     React.useEffect(() => 
-    { 
-      async function fetchData(){
-        const request = await axios.get('http://192.168.1.9:3000/chitiettk?matk='+username)
-        console.log(request.data)
+    {
+      navigation.addListener('state', 
+      async () => {
+        var request = await axios.get('http://192.168.1.9:3000/chitiettk?matk='+username)
+        //console.log(request.data)
         setUserInfor(request.data)
         setProduct(request.data.giohang)
+
         for(var i=0; i<ListProduct.length ;i++)
         {
           ListProduct[i].Pick=false
           ListProduct[i].SoLuong = parseInt(ListProduct[i].SoLuong)
         }
-      }
-      fetchData();
+      })
+      //fetchData();
   
     },['http://192.168.1.9:3000/'])
 
@@ -159,9 +162,15 @@ function ListProduct_New()
     }
     //------------------------------------------------------
         return (
-          <View style={{flex:1}}>
+          <SafeAreaView style={{flex:1}}>
             {/* ----------------------------------------------------------- */}
-            <ScrollView>
+            <ScrollView
+              refreshControl=
+              {
+                <RefreshControl/>
+              }
+            >
+
 
               {/* //------------------------- */}
 
@@ -193,7 +202,6 @@ function ListProduct_New()
                   ListProduct.map((item,index) =>
                     {
                       return(
-                        <TouchableOpacity>
                         <View style={styles.row}>
                         <CheckBox
                             // iconRight
@@ -202,7 +210,9 @@ function ListProduct_New()
                             checked={ListProduct[index].Pick}
                             onPress={() => Cal(index)}
                           />
+                        <TouchableOpacity>
                         <Image source={{uri:item.hinhanh}} style={styles.imageStyle} />
+                        </TouchableOpacity>
                           <View>
                             <View style={styles.nameContainer}>
                               <Text style={styles.nameTxt}>{item.tensach}</Text>
@@ -235,7 +245,6 @@ function ListProduct_New()
                                 <Icon name="trash" size={25} color={"#33c37d"}/>
                           </TouchableOpacity>
                         </View>
-                      </TouchableOpacity>
                       )
                        
                   })
@@ -254,7 +263,7 @@ function ListProduct_New()
                   <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Mua Hàng</Text>
               </TouchableOpacity>
             </View>
-          </View>
+          </SafeAreaView>
           
         );
 }
