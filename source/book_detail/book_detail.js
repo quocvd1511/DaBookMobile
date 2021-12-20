@@ -133,7 +133,7 @@ export default function book_detail_home(){
                             style={
                                 ({pressed}) =>[{
 
-                                    opacity: pressed ? 0.5:1
+                                    opacity: pressed ? 0.25:1
                                 },
                                 styles.add_cart
                             ]}
@@ -262,8 +262,8 @@ const styles = StyleSheet.create({
     add_cart: {
         backgroundColor: '#ff424e',
         height: 40,
-        marginBottom: -5,
-        marginTop: -5,
+        // marginBottom: -5,
+        // marginTop: -5,
         borderRadius: 5,
     },
 
