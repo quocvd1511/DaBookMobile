@@ -49,7 +49,7 @@ function ListProduct_New()
     {
       navigation.addListener('state', 
       async () => {
-        var request = await axios.get('http://192.168.1.5:3000/chitiettk?matk='+username)
+        var request = await axios.get('http://192.168.1.9:3000/chitiettk?matk='+username)
         //console.log(request.data)
         setUserInfor(request.data)
         if (request.data.giohang)
@@ -65,7 +65,7 @@ function ListProduct_New()
       })
       //fetchData();
   
-    },['http://192.168.1.5:3000/'])
+    },['http://192.168.1.9:3000/'])
 
     const[temp, settemp] = useState(0)
     const[TongTien, setTongTien] = useState(0)
