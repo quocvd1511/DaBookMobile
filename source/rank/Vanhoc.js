@@ -5,25 +5,29 @@ import { FlatList } from 'react-native-gesture-handler';
 import { StyleSheet, Image,Dimensions, TouchableOpacity} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 
 export default function VanHoc(){
   
   const navigation = useNavigation(); 
+  const route = useRoute()
+  const username = route.params.username;
+  console.log(username)
   //---------Kết nối Database lấy dữ liệu-------------------------    
   const [Book,setBook] = React.useState([])
   const value = 'Tác Phẩm Kinh Điển';
+
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.9:3000/theloai/' + value)
+      const request = await axios.get('http://192.168.43.180:3000/theloai/' + value)
       setBook(request.data.books)
       return request.data.books
     }
     fetchData();
 
-  },['http://192.168.1.9:3000/'])
+  },['http://192.168.43.180:3000/'])
   //---------------------------------------------------------------
    console.log(Book)
 
@@ -34,7 +38,7 @@ return (
       Book.map((item)=>
       {
         return(
-          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
+          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('book_detail', {tensach: item.tensach, username: username})}>
             <Image style={styles.image} source={{uri:item.hinhanh}}/>
             <View  style={{paddingLeft:5 }}>
               <Text style={styles.book_name}

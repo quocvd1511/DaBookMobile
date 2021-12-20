@@ -95,17 +95,15 @@ export default function VoucherScreen() {
                       <Text style={{color: 'black', fontSize: 12}}>Mã Nhập {item.manhap}</Text>
                       <Text style={{color: 'black', fontSize: 12}}>HSD: {item.ngaykt}</Text>
                   </View>
-                
                   <Pressable
-                    backgroundColor={'dodgerblue'}
-                    padding={5}
-                    paddingLeft={20}
-                    paddingRight={20}
-                    borderRadius={5}
-                    marginLeft={25}
-                    marginTop={45}
-                    onPress={()=>addVoucher(index)}
-                  >
+                    style={
+                        ({pressed}) =>[{
+
+                            opacity: pressed ? 0.5:1
+                        },
+                        styles.button_save
+                    ]}
+                    >
                     <Text style={{color:'white', fontSize: 16, fontWeight: '500'}}>Lưu</Text>
                   </Pressable>
               </View>

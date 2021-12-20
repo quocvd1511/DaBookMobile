@@ -4,6 +4,7 @@ import { BackgroundImage } from 'react-native-elements/dist/config';
 import { color } from 'react-native-reanimated';
 import axios from 'axios';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import { RectButton } from 'react-native-gesture-handler';
 
 export default function VoucherDetail() 
 {
@@ -13,15 +14,17 @@ export default function VoucherDetail()
     console.log(username +   'VoucherDetail')
 
     const [Voucher, setVoucher] = React.useState([])
+    const [User, setUser] = React.useState([])
 
       React.useEffect(() => 
       {
         async function fetchData(){
-          const request = await axios.get('http://192.168.43.180:3000/danhsachvoucher/' + username)
-          // const User = request.data.khuyenmai;
-          // const Voucher = User["danhsach_km"];
-          setVoucher(request.data.khuyenmai)
-          return request.data.khuyenmai
+          const request = await axios.get('http://192.168.43.180:3000/chitiettaikhoan/' + username)
+          setUser(request.data.thongtintk)
+          setVoucher(User["danhsach_km"])
+          return request.data.thongtintk
+          // return request.data.thongtintk
+          console.log(request.data.thongtintk)
         }
         fetchData();
     
@@ -36,7 +39,7 @@ export default function VoucherDetail()
                 <View style={styles.main}>
                   <Image style={styles.logo_header} source={require('../asset/icon/sale.png')}/>
                   <Text style={styles.text_header}>Voucher của bạn</Text>
-                </View>
+                {/* </View>
                   {
                   Voucher.map((item) => {
                       return(
@@ -52,7 +55,8 @@ export default function VoucherDetail()
                           </View>
                       </View>
                       )
-                  })}
+                  })} */}
+                  </View>
               </ScrollView>
       </View>
     </View>

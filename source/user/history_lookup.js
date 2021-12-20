@@ -13,6 +13,7 @@ export default function HistoryLookup()
 
     const [Book, setBook] = React.useState([])
     const [Donhang, setDonhang] = React.useState([])
+    const [Thongtintk, setThongtintk] = React.useState([])
 
       React.useEffect(() => 
       {
@@ -21,33 +22,32 @@ export default function HistoryLookup()
           const request = await axios.get('http://192.168.43.180:3000/lichsudonhang?'+"matk"+"="+route.params.username)
           setDonhang(request.data.donhang)
           setBook(request.data.books)
-          console.log(request.data.books + " // " + request.data.donhang)
+          setThongtintk(request.data.thongtintk)
+          console.log(Book + " // " + Donhang)
       }
-
       fetchData()
-    
       },['http://192.168.43.180:3000/'])
 
     return(
         <ScrollView>
             <View style={{paddingTop: 20}}>
                 <View style={{backgroundColor:'#f0f8ff', borderRadius:5, borderWidth: 1, borderColor: '#1ba8ff', margin:5,}}>
-                    <Text style={styles.text_style}>Mã đơn hàng:  DH11</Text>
-                    <Text style={styles.text_style}>Ngày đặt hàng:  17/12/2021</Text>
-                    <Text style={styles.text_style}>Địa chỉ người nhận:</Text>
+                    <Text style={styles.text_style}>Mã đơn hàng:  {Donhang.madh}</Text>
+                    <Text style={styles.text_style}>Ngày đặt hàng:  {Donhang.ngaylap}</Text>
+                    <Text style={styles.text_style}>Địa chỉ người nhận: {Donhang.thongtindonhang}</Text>
                         <View style={{backgroundColor:'#f0f8ff'}}>
                             <View style={styles.main}>
                                 <View style={styles.type_user}>
                                     <Image style={styles.icon_style} source={require('../asset/icon/location.png')}/>
-                                    <Text style={{fontSize: 16, color: '#444'}}>Hồng Nguyễn</Text>
+                                    <Text style={{fontSize: 16, color: '#444'}}>{Thongtintk.hoten}</Text>
                                 </View>
 
                                 <View style={styles.type_numberphone}>
-                                    <Text style={{fontSize: 16, color: '#444'}}>SĐT: 0123456777</Text>
+                                    <Text style={{fontSize: 16, color: '#444'}}>SĐT: {Thongtintk.sodt}</Text>
                                 </View>
                             </View>
                             <View style={styles.address}>
-                                <Text style={{fontSize: 16, color: '#444'}}>Địa chỉ: phường An phú, thị xã Thuận An, tỉnh Bình Dương</Text>
+                                <Text style={{fontSize: 16, color: '#444'}}>Địa chỉ: {Thongtintk.diachigoc}</Text>
                             </View>
                         </View>
                     <View style={styles.deli_dabook}>
@@ -60,13 +60,13 @@ export default function HistoryLookup()
                 Book.map((item) => {
                     return(
                         <View style = {styles.view1}>
-                        <Image style = {styles.img_book} source={{uri:'https://vcdn.tikicdn.com/media/catalog/product/c/o/cover%20thanh%20xuan%20de%20danh.u2487.d20160905.t152805.232712.jpg'}}/>    
+                        <Image style = {styles.img_book} source={{uri:item.hinhanh}}/>    
                         <View>
                             <Text style={styles.book_name} numberOfLines={2}
                                 ellipsizeMode='tail'>{item.tensach}</Text>
                             <View style={{display: 'flex', flexDirection: 'row', marginTop: 10, marginRight:10,}}>
-                                <Text style = {styles.price}> 240.000 đ </Text>
-                                <Text style={styles.newprice}>210.000 đ</Text>
+                                <Text style = {styles.price}> {item.giagoc} đ </Text>
+                                <Text style={styles.newprice}>{item.giaban} đ</Text>
                             </View>
                         </View>
                     </View>
@@ -74,7 +74,7 @@ export default function HistoryLookup()
                 })
             }
 
-                <View style = {styles.view1}>
+                {/* <View style = {styles.view1}>
                     <Image style = {styles.img_book} source={{uri:'https://inthienhang.com/wp-content/uploads/2020/03/bia-sach-co-font-chu-dep-278x400.jpg'}}/>    
                     <View>
                         <Text style={styles.book_name} numberOfLines={2}
@@ -95,10 +95,10 @@ export default function HistoryLookup()
                             <Text style={styles.newprice}>101.000 đ</Text>
                         </View>
                     </View>
-                </View>
+                </View> */}
                 <View style = {styles.view2}>
-                    <Text style={{fontSize: 16, color: 'blue'}}>3 sản phẩm</Text>
-                    <Text style={{fontSize: 16}}>Thành tiền:<Text style={styles.newprice}> 412.000 đ</Text></Text>
+                    <Text style={{fontSize: 16, color: 'blue'}}>{Donhang.soluongsach} sản phẩm</Text>
+                    <Text style={{fontSize: 16}}>Thành tiền:<Text style={styles.newprice}> {Donhang.tongtien} đ</Text></Text>
                 </View>
                 <View style = {styles.view3}>
                     <Text style={{fontSize: 17, color: 'green'}}>Đang chờ xác nhận</Text>

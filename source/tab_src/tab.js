@@ -5,7 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import HomeScreen from '../home/home';
 // import SearchScreen fr
-import CategoryScreen from '../rank/rank';
+import CategoryScreen from '../rank/tabs_rank';
 import VoucherScreen from '../voucher/voucher';
 import UserScreen from '../user/user';
 import CartScreen from '../cart/cart';
