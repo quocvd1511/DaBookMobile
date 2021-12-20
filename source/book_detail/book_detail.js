@@ -36,7 +36,7 @@ export default function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.9:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
       setBook(request.data.list_book)
       return request.data.list_book
     }
@@ -205,7 +205,7 @@ export default function book_detail_home(){
                     Book.map((item) => 
                     {
                     return(
-                        <TouchableOpacity onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
+                        <TouchableOpacity onPress={() => navigation.navigate('book_detail', {tensach: item.tensach, username: username})}>
                             <View style={styles.item}>
                                 <Image style={styles.img} source={{uri:item.hinhanh}}/>
                                 <Text
