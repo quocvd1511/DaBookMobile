@@ -1,56 +1,49 @@
 import * as React from 'react';
 import { Text, View, StyleSheet,Image, ScrollView, Pressable} from 'react-native';
 import { color } from 'react-native-reanimated';
-import { useNavigation,useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 
 
-export default function ConfirmDetail() 
-{
-
+export default function PackingDetail() {
+  const [Book, setBook] = React.useState([])
+  const [Donhang, setDonhang] = React.useState([])
+  const [Thongtintk, setThongtintk] = React.useState([])
+  const [Soluong, setSoluong] = React.useState([0])
   const route = useRoute()
-  const navigation = useNavigation()
-  console.log('hello')
-    
-    const [Book, setBook] = React.useState([
-      ])
+  const matk = route.params.username
+  const tinhtrang = 'chờ xác nhận'
 
-      React.useEffect(() => 
-      {
-        async function fetchData()
-      {
-          const request = await axios.get('http://192.168.1.9:3000/danhsachdonhang?'+"matk"+"="+route.params.username+"&"+"tinhtrang="+"chờ xác nhận")
-          console.log(request.data)
-          for(var i=0;i<request.data.length;i++)
-          {
-              request.data[i].ngaylap = request.data[i].ngaylap.toString("dd/mm/yyyy")
-          }
-          setBook(request.data)
-          //console.log(request.data)
-      }
+    React.useEffect(() => 
+    {
+      async function fetchData()
+    {
+        const Sum = 0;
+        const request = await axios.get('http://192.168.43.180:3000/danhsachdonhang/' + matk + '/' + tinhtrang)
+        setDonhang(request.data.donhang_x)
+        setThongtintk(request.data.thongtintk)
+        setBook(request.data.book)
+    }
+    fetchData()
+    },['http://192.168.43.180:3000/'])
 
-      fetchData()
-    
-      },['http://192.168.1.9:3000/'])
-
+    console.log(Donhang)
 
   return (
     <View>
-        <View style={styles.main}>
-            <Image style={styles.logo_header} source={require('../asset/icon/confirm.png')}/>
-            <Text style={styles.text_header}>Các đơn hàng đã xác nhận</Text>
-        </View>
-
         <View style={styles.container}>
-            <ScrollView>
+              <ScrollView>
+              <View style={styles.main}>
+              <Image style={styles.logo_header} source={require('../asset/icon/confirm.png')}/>
+              <Text style={styles.text_header}>Đơn hàng chờ xác nhận</Text>
+              </View>
                 {
-                Book.map((item) => 
-                {
+                Donhang.map((item) => {
                     return(
-                      <View key={item.id} style={styles.item}>
+                    <View key={item.id} style={styles.item}>
                         <View style={{flexDirection:'row', alignItems: 'center'}}>  
                             <View style={{backgroundColor: 'dodgerblue', padding: 25, borderRadius:5, margin: 10}}>
-                                <Image style={{height:50, width:50,tintColor: 'white'}} source={require('../asset/icon/confirm.png')}/>
+                                <Image style={{height:50, width:50,tintColor: 'white'}} source={require('../asset/icon/packing.png')}/>
                             </View>
 
                             <View style={{marginLeft:10}}>
@@ -62,15 +55,12 @@ export default function ConfirmDetail()
                                     width={100}
                                     padding={5}
                                     alignItems={'center'}
-                                    onPress={() => navigation.navigate('HistoryLookup',{madh: item.madh})}
                                   >
                                     <Text style={{color:'#fff', fontWeight:'500', fontSize: 15 }}>Chi Tiết</Text>
                                   </Pressable>
                                 </View>
                             </View>
-                            
                         </View>
-                       
                     </View>
                     )
                 })
@@ -88,7 +78,7 @@ const styles = StyleSheet.create({
     main:{
         backgroundColor: 'dodgerblue',
         height: 100,
-        margin: 10,
+        margin: 5,
         borderRadius: 5,
         flexDirection: 'row',
         alignItems: 'center'
@@ -141,7 +131,7 @@ const styles = StyleSheet.create({
     text_header:{
         marginLeft: 20,
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 18,
         color:'white'
     },
 
@@ -175,7 +165,8 @@ const styles = StyleSheet.create({
     //-------
     container: {
         padding:10
-      },
+    },
+
     item: {
       backgroundColor: 'white',
       // height:100,

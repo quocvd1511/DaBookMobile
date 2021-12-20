@@ -8,26 +8,29 @@ export default function HistoryLookup()
 
     const navigation = useNavigation()
     const route = useRoute()
-    const username = route.params.username;
-    console.log(username +   'VoucherDetail')
+    const matk = route.params.username;
+    console.log(matk +   'VoucherDetail')
 
     const [Book, setBook] = React.useState([])
     const [Donhang, setDonhang] = React.useState([])
     const [Thongtintk, setThongtintk] = React.useState([])
+    const [Soluong, setSoluong] = React.useState([0])
 
       React.useEffect(() => 
       {
         async function fetchData()
       {
-          const request = await axios.get('http://192.168.43.180:3000/lichsudonhang?'+"matk"+"="+route.params.username)
-          setDonhang(request.data.donhang)
-          setBook(request.data.books)
+          const Sum = 0;
+          const request = await axios.get('http://192.168.43.180:3000/lichsudonhang/' + matk)
+          setDonhang(request.data.donhang_x)
           setThongtintk(request.data.thongtintk)
-          console.log(Book + " // " + Donhang)
+          setBook(request.data.book)
       }
       fetchData()
       },['http://192.168.43.180:3000/'])
 
+
+      console.log(Book + " // " + Donhang + ' // ' +Thongtintk )
     return(
         <ScrollView>
             <View style={{paddingTop: 20}}>
@@ -65,7 +68,7 @@ export default function HistoryLookup()
                             <Text style={styles.book_name} numberOfLines={2}
                                 ellipsizeMode='tail'>{item.tensach}</Text>
                             <View style={{display: 'flex', flexDirection: 'row', marginTop: 10, marginRight:10,}}>
-                                <Text style = {styles.price}> {item.giagoc} đ </Text>
+                                <Text style = {styles.price}>SL: {item.SoLuong} </Text>
                                 <Text style={styles.newprice}>{item.giaban} đ</Text>
                             </View>
                         </View>
@@ -73,35 +76,12 @@ export default function HistoryLookup()
                     )
                 })
             }
-
-                {/* <View style = {styles.view1}>
-                    <Image style = {styles.img_book} source={{uri:'https://inthienhang.com/wp-content/uploads/2020/03/bia-sach-co-font-chu-dep-278x400.jpg'}}/>    
-                    <View>
-                        <Text style={styles.book_name} numberOfLines={2}
-                            ellipsizeMode='tail'>Nếu anh là truyền thuyết của em đối thoại với ma đối thoại với người</Text>
-                        <View style={{display: 'flex', flexDirection: 'row', marginTop: 10, marginRight:10,}}>
-                            <Text style = {styles.price}> 110.000 đ </Text>
-                            <Text style={styles.newprice}>101.000 đ</Text>
-                        </View>
-                    </View>
-                </View>
-                <View style = {styles.view1}>
-                    <Image style = {styles.img_book} source={{uri:'https://designs.vn/wp-content/images/18-04-2013/Beyond%20the%20cover%20Ng%C3%B4n%20t%C3%ACnh%20%20(14).jpg'}}/>    
-                    <View>
-                        <Text style={styles.book_name} numberOfLines={2}
-                            ellipsizeMode='tail'>Nếu anh là truyền thuyết của em</Text>
-                        <View style={{display: 'flex', flexDirection: 'row', marginTop: 10, marginRight:10,}}>
-                            <Text style = {styles.price}> 110.000 đ </Text>
-                            <Text style={styles.newprice}>101.000 đ</Text>
-                        </View>
-                    </View>
-                </View> */}
                 <View style = {styles.view2}>
                     <Text style={{fontSize: 16, color: 'blue'}}>{Donhang.soluongsach} sản phẩm</Text>
                     <Text style={{fontSize: 16}}>Thành tiền:<Text style={styles.newprice}> {Donhang.tongtien} đ</Text></Text>
                 </View>
                 <View style = {styles.view3}>
-                    <Text style={{fontSize: 17, color: 'green'}}>Đang chờ xác nhận</Text>
+                    <Text style={{fontSize: 17, color: 'green'}}>{Donhang.tinhtrangdonhang}</Text>
                     <Pressable 
                         backgroundColor={'#FF6600'}
                         width={100}
@@ -249,10 +229,9 @@ const styles=StyleSheet.create({
     
     price: {
         color: '#888',
-        marginLeft: 50,
+        // marginLeft: 5,
         marginRight: 10,
         fontSize: 15,
         fontWeight: '500',
-        textDecorationLine: 'line-through',
     },
 })

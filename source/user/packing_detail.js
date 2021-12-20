@@ -6,22 +6,28 @@ import axios from 'axios';
 
 
 export default function PackingDetail() {
-    const route = useRoute()
-    const navigation = useNavigation()
-    const [Book, setBook] = React.useState([])
+  const [Book, setBook] = React.useState([])
+  const [Donhang, setDonhang] = React.useState([])
+  const [Thongtintk, setThongtintk] = React.useState([])
+  const [Soluong, setSoluong] = React.useState([0])
+  const route = useRoute()
+  const matk = route.params.username
+  const tinhtrang = 'đang đóng gói'
 
-      React.useEffect(() => 
-      {
-        async function fetchData()
-      {
-          const request = await axios.get('http://192.168.1.9:3000/danhsachdonhang?'+"matk"+"="+route.params.username+"&"+"tinhtrang="+"đang đóng gói")
-          setBook(request.data)
-          //console.log(request.data)
-      }
+    React.useEffect(() => 
+    {
+      async function fetchData()
+    {
+        const Sum = 0;
+        const request = await axios.get('http://192.168.43.180:3000/danhsachdonhang/' + matk + '/' + tinhtrang)
+        setDonhang(request.data.donhang_x)
+        setThongtintk(request.data.thongtintk)
+        setBook(request.data.book)
+    }
+    fetchData()
+    },['http://192.168.43.180:3000/'])
 
-      fetchData()
-    
-      },['http://192.168.1.9:3000/'])
+    console.log(Donhang)
 
   return (
     <View>
@@ -32,7 +38,7 @@ export default function PackingDetail() {
               <Text style={styles.text_header}>Đơn hàng đang đóng gói</Text>
               </View>
                 {
-                Book.map((item) => {
+                Donhang.map((item) => {
                     return(
                     <View key={item.id} style={styles.item}>
                         <View style={{flexDirection:'row', alignItems: 'center'}}>  
@@ -54,9 +60,7 @@ export default function PackingDetail() {
                                   </Pressable>
                                 </View>
                             </View>
-                            
                         </View>
-                       
                     </View>
                     )
                 })
