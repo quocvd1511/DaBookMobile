@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, Image, Dimensions, Pressable, ImageBackground } from 'react-native';
+import { Text, View, StyleSheet, Image, Dimensions, Pressable, ImageBackground, ToastAndroid } from 'react-native';
 
 import { Avatar } from 'react-native-elements/dist/avatar/Avatar';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
@@ -7,7 +7,7 @@ import { useRoute } from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-
+import axios from 'axios';
 
 
 export default function user_detail()
@@ -16,20 +16,77 @@ export default function user_detail()
     
     const route = useRoute()
     const username = route.params.username
-    const [UserInfor, setUserInfor] = React.useState('')
-    // async function fetchData()
-    // {
-    //     const request = await axios.post('http://192.168.1.9:3000/signup',{
-    //         username: Username,
-    //         phonenumber: Phonenumber,
-    //         password: Password,
-    //         name: Name,
-    //     })
-    // }
+    const [Username, setUsername] = React.useState('')
+    const [Name, setName] = React.useState('')
+    const [Phonenumber, setPhoneNumber] = React.useState('')
+    const [Email, setEmail] = React.useState('')
+    const [Tinh, setTinh] = React.useState('')
+    const [Huyen, setHuyen] = React.useState('')
+    const [Xa, setXa] = React.useState('')
+    const [ChiTiet, setChiTiet] = React.useState('')
+    const [OpenUpdate, setOpenUpdate] = React.useState(false)
+
+    React.useEffect(() => 
+    {
+        async function fetchData(){
+            const request = await axios.get('http://192.168.1.9:3000/chitiettk?matk='+username)
+            setUsername(request.data.matk)
+            setName(request.data.hoten)
+            setPhoneNumber(request.data.sodt)
+            setEmail(request.data.email)
+            setTinh(request.data.diachigoc[0])
+            setHuyen(request.data.diachigoc[1])
+            setXa(request.data.diachigoc[2])
+            setChiTiet(request.data.diachigoc[3])
+            setOpenUpdate(false)
+        }
+        fetchData();
+
+    },['http://192.168.1.9:3000/'])
+
+    async function UpdateThongTinTK(Pattern)
+    {
+        console.log(Pattern)
+        const request = await axios.post('http://192.168.1.9:3000/updatethongtintk',{data: Pattern})
+        ToastAndroid.show(request.data.message, ToastAndroid.SHORT)
+    }
 
 
+    const [temp, settemp] = React.useState(1)
+    console.log(OpenUpdate)
+
+    function UpdateThongTin()
+    {
+        setOpenUpdate(true)
+        //console.log(OpenUpdate)
+        settemp(temp-1)
+    }
+
+    function XuLyXacNhan()
+    {
+        if(OpenUpdate===false)
+        {
+            ToastAndroid.show("Vui lòng chỉnh sửa thông tin trước khi xác nhận thay đổi", ToastAndroid.SHORT)
+        }
+        else
+        {
+            setOpenUpdate(false)
+            const Pattern ={
+                matk: Username,
+                hoten: Name,
+                sodt: Phonenumber,
+                email: Email,
+                diachigoc: [Tinh, Huyen, Xa, ChiTiet],
+            }
+            UpdateThongTinTK(Pattern)
+            //const request = await axios.post('http://192.168.1.9:3000/updatethontintik',{data: Pattern})
+
+
+        }
+    }
+    //setOpenUpdate(false)
+    //console.log(UserInfor)
     return(
-            
         <ImageBackground source={require('../asset/icon/land3.jpg')} style={{width: '100%', height: '100%'}}>
             <ScrollView>
               <View style={{justifyContent: 'center'}}>
@@ -38,31 +95,31 @@ export default function user_detail()
             <View style={styles.bodypart}>
                 <View style={styles.line}>
                     <Text style={styles.tiletext}>Tên đăng nhập</Text>
-                    <TextInput style={styles.textinput}/>
+                    <TextInput editable={OpenUpdate} value={Username} onChangeText={(text) => setUsername(text)} placeholder='Chưa cập nhật' style={styles.textinput}/>
                 </View>
                 <View style={styles.line}>
                     <Text style={styles.tiletext}>Họ và Tên</Text>
-                    <TextInput style={styles.textinput}/>
+                    <TextInput editable={OpenUpdate} value={Name} onChangeText={(text) => setName(text)} placeholder='Chưa cập nhật' style={styles.textinput}/>
                 </View>
                 <View style={styles.line}>
                     <Text style={styles.tiletext}>Số điện thoại</Text>
-                    <TextInput style={styles.textinput}/>
+                    <TextInput editable={OpenUpdate} value={Phonenumber} onChangeText={(text) => setPhoneNumber(text)} placeholder='Chưa cập nhật' style={styles.textinput}/>
                 </View>
                 <View style={styles.line}>
                     <Text style={styles.tiletext}>Địa chỉ email</Text>
-                    <TextInput style={styles.textinput}/>
+                    <TextInput editable={OpenUpdate} value={Email} onChangeText={(text) => setEmail(text)} placeholder='Chưa cập nhật' style={styles.textinput}/>
                 </View>
                 <View style={styles.line_address}>
                     <Text style={styles.tiletext_address}>Địa chỉ</Text>
                     <View style={{marginLeft: 10}}>
                         <Text style={{fontWeight: '600', marginTop: 5}}>Tỉnh/Thành phố</Text>
-                        <TextInput style={styles.textinput_2}/>
+                        <TextInput editable={OpenUpdate} value={Tinh} onChangeText={(text) => setTinh(text)} style={styles.textinput_2} placeholder='Chưa cập nhật' />
                         <Text style={{fontWeight: '600'}}>Quận/Huyện</Text>
-                        <TextInput style={styles.textinput_2}/>
+                        <TextInput editable={OpenUpdate} value={Huyen} onChangeText={(text) => setHuyen(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
                         <Text style={{fontWeight: '600'}}>Phường/Xã</Text>
-                        <TextInput style={styles.textinput_2}/>
+                        <TextInput editable={OpenUpdate} value={Xa} onChangeText={(text) => setXa(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
                         <Text style={{fontWeight: '600'}}>Chi tiết</Text>
-                        <TextInput style={styles.textinput_2}/>
+                        <TextInput editable={OpenUpdate} value={ChiTiet} onChangeText={(text) => setChiTiet(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
                     </View>
                 </View>  
             </View>
@@ -70,15 +127,32 @@ export default function user_detail()
 
                 <View style={styles.button}>
                     <Pressable
+                        style={
+                            ({pressed}) =>[{
+        
+                                opacity: pressed ? 0.5:1
+                            },
+                            //styles.button_login
+                        ]}
+                        onPress={UpdateThongTin}
+                        disabled={false}
                     >
-                            <Text style={{color:'black', fontWeight: 'bold'}}>Cập nhật thông tin</Text>
+                            <Text style={{color:'black', fontWeight: 'bold'}}>Chỉnh sửa thông tin</Text>
                     </Pressable>
                 </View>
 
                 <View style={styles.button}>
                     <Pressable
+                        style={
+                            ({pressed}) =>[{
+        
+                                opacity: pressed ? 0.5:1
+                            },
+                            //styles.button_login
+                        ]}
+                        onPress={XuLyXacNhan}
                     >
-                        <Text style={{color:'black', fontWeight: 'bold'}}>Xác nhận</Text>
+                        <Text style={{color:'black', fontWeight: 'bold'}}>Xác nhận thay đổi</Text>
                     </Pressable>
                 </View>
 
@@ -135,6 +209,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         height: 36,
         width: 230,
+        fontWeight: 'bold'
     },
 
     textinput_2:{
