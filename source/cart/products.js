@@ -49,7 +49,7 @@ function ListProduct_New()
     {
       navigation.addListener('state', 
       async () => {
-        var request = await axios.get('http://192.168.1.9:3000/chitiettk?matk='+username)
+        var request = await axios.get('http://192.168.1.5:3000/chitiettk?matk='+username)
         //console.log(request.data)
         setUserInfor(request.data)
         if (request.data.giohang)
@@ -65,7 +65,7 @@ function ListProduct_New()
       })
       //fetchData();
   
-    },['http://192.168.1.9:3000/'])
+    },['http://192.168.1.5:3000/'])
 
     const[temp, settemp] = useState(0)
     const[TongTien, setTongTien] = useState(0)
@@ -264,13 +264,6 @@ function ListProduct_New()
             </ScrollView>
             {/* ---------------------------------------------------------------------- */}
 
-
-            <View style={styles.View_sum}>
-              <TextInput style={styles.text_input} placeholder='Nhập mã khuyến mãi'></TextInput>
-              <TouchableOpacity style={styles.salebutton} >                                                          
-                  <Text style={{fontSize: 18, fontWeight: '600', color: '#C84B31'}}>Áp dụng</Text>
-              </TouchableOpacity>
-            </View>  
             <View style={styles.bottomView}>
               <View style={styles.textBottom}>
                 <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
@@ -400,18 +393,7 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     flexDirection: 'row',
     width: windowWidth,
-    height: 60,
-    backgroundColor:'#B0E2FF',
-    // #C2FFF9
-    alignItems: 'center',
-  },
-
-  View_sum: {
-    display:'flex',
-    justifyContent:'space-between',
-    flexDirection: 'row',
-    width: windowWidth,
-    height: 50,
+    height: 70,
     backgroundColor:'#B0E2FF',
     // #C2FFF9
     alignItems: 'center',
@@ -426,23 +408,6 @@ const styles = StyleSheet.create({
   buyButton: {
     backgroundColor: '#FFE652',
     width: 140,
-    borderRadius: 6,
-    height: 38,
-    alignItems: 'center',
-    justifyContent:'center',
-    shadowColor: "#000",
-    shadowOffset: {
-        width: 0,
-        height: 9,
-    },
-    shadowOpacity: 0.48,
-    shadowRadius: 11.95,
-    marginRight:20,
-  },
-
-  salebutton: {
-    backgroundColor: '#FFE652',
-    width: 100,
     borderRadius: 6,
     height: 38,
     alignItems: 'center',
@@ -515,19 +480,6 @@ change: {
     color: '#1E90FF',
     fontWeight: '500',
     marginLeft: 20,
-},
-
-text_input:{
-  backgroundColor: '#fff',
-  width: 190,
-  color: '#333',
-  textDecorationLine:'none',
-  fontSize: 16,
-  height: 38,
-  borderRadius: 5,
-  justifyContent:'center',
-  marginLeft: 20,
-  
 },
 
   
