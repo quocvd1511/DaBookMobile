@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack'
 import TabScreen from './source/tab_src/tab';
 import { useEffect } from 'react';
+import { useRoute } from '@react-navigation/native';
 import Home from './source/home/home';
 import Rank from './source/rank/tabs_rank';
 import book_detail from './source/book_detail/book_detail';
@@ -19,7 +20,9 @@ import Cart from './source/cart/cart';
 const Stack = createStackNavigator();
 export default function App() {
 
-  // const navigation = useNavigation(); 
+  // const navigation = useNavigation();
+ 
+
 
   useEffect(() => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);

@@ -48,12 +48,20 @@ export default function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
+<<<<<<< HEAD
+      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
+=======
       const request = await axios.get('http://192.168.1.9:3000/chitietsach/' + tensach )
+>>>>>>> f8721f6aca60b15b70861e34304603e3cbd4d4eb
       setdetail_book(request.data.book)
       return request.data.book
     }
     fetchData();
+<<<<<<< HEAD
+    },['http://192.168.43.180:3000/chitietsach' + tensach])
+=======
     },['http://192.168.1.9:3000/chitietsach' + tensach])
+>>>>>>> f8721f6aca60b15b70861e34304603e3cbd4d4eb
 	 console.log(detail_book);
 
         
