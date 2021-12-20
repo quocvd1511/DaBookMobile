@@ -47,10 +47,10 @@ export default function VoucherDetail()
                               <Image style={{height:50, width:50, tintColor: '#ffd79d'}} source={{uri:item.img}}/>
                           </View>
 
-                          <View style={{margin:10}}>
-                              <Text style={{color: 'black', fontSize: 16, fontWeight: 'bold'}}>Nội dung: {item.noidung}</Text>
-                              <Text style={{color: 'black', fontSize: 16, fontWeight: 'bold'}}>Giảm: {item.phantram}%</Text>
-                              <Text style={{color: 'black', fontSize: 16, fontWeight: 'bold'}}>HSD: {item.ngaykt}</Text>
+                          <View style={{margin:3}}>
+                              <Text style={{color: 'black', fontSize: 16, fontWeight: '500'}}>Nội dung: {item.noidung}</Text>
+                              <Text style={{color: 'black', fontSize: 16, fontWeight: '500'}}>Giảm: {item.phantram}%</Text>
+                              <Text style={{color: 'black', fontSize: 16, fontWeight: '500'}}>HSD: {item.ngaykt}</Text>
                           </View>
                       </View>
                       )
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
 
     text_sale_header:{
       marginLeft: 20,
-      fontWeight: 'bold',
+      fontWeight: '600',
       fontSize: 25,
       color:'white'
     },

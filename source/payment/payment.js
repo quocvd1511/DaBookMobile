@@ -61,7 +61,7 @@ export default function Payment()
 
   async function createBill(){
     console.log('Hello')
-    const request = await axios.post('http://192.168.1.9:3000/taodonhang',{
+    const request = await axios.post('http://192.168.43.180:3000/taodonhang',{
             matk: UserInfor.matk,
             listbuyed: ListBuyed,
             tongtien: TongTien,

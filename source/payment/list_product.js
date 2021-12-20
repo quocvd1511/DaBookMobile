@@ -39,7 +39,6 @@ const [value, setValue] = React.useState('first');
               <Text>SL: {item.amountTaken}</Text>
               <Text style={styles.priceStyle}>{item.price} đ</Text>
             </View>
-            
           </View>
         </View>
       </TouchableOpacity>
