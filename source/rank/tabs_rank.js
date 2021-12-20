@@ -10,12 +10,14 @@ import NgonTinh from './Ngontinh';
 import KinhDi from './Kinhdi';
 import HaiHuoc from './Haihuoc';
 import PhongSu from './Phongsu';
+import book_detail_home from '../book_detail/book_detail';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { useRoute } from '@react-navigation/native';
+
 
 
 function HomeScreen() {
 
-  const navigation = useNavigation(); 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Home!</Text>
@@ -34,6 +36,8 @@ function SettingsScreen() {
 const Tab = createMaterialTopTabNavigator();
 
 export default function TabRanks() {
+  const route = useRoute();
+
   return (
     <Tab.Navigator
     screenOptions={
@@ -42,13 +46,13 @@ export default function TabRanks() {
       tabBarStyle: {backgroundColor: '#fff', height: 40, justifyContent: 'center',}
     }}
     >
-      <Tab.Screen name="Văn học" component={VanHoc} />
-      <Tab.Screen name="Trinh Thám" component={TrinhTham} />
-      <Tab.Screen name="Hài hước" component={HaiHuoc} />
-      <Tab.Screen name="Tuổi teen" component={TuoiTeen} />
-      <Tab.Screen name="Ngôn Tình" component={NgonTinh} />
-      <Tab.Screen name="Kinh dị" component={KinhDi} />
-      <Tab.Screen name="Phóng sự" component={PhongSu} />
+      <Tab.Screen name="Văn học" component={VanHoc} initialParams={username = route.params.username}/>
+      <Tab.Screen name="Trinh Thám" component={TrinhTham} initialParams={username = route.params.username}/>
+      <Tab.Screen name="Tuổi teen" component={TuoiTeen} initialParams={username = route.params.username}/>
+      <Tab.Screen name="Hài hước" component={HaiHuoc} initialParams={username = route.params.username}/>
+      <Tab.Screen name="Ngôn Tình" component={NgonTinh} initialParams={username = route.params.username}/>
+      <Tab.Screen name="Kinh dị" component={KinhDi} initialParams={username = route.params.username}/>
+      <Tab.Screen name="Phóng sự" component={PhongSu} initialParams={username = route.params.username}/>
     </Tab.Navigator>
   );
 }

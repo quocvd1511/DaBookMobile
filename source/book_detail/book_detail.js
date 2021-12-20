@@ -36,41 +36,24 @@ export default function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-<<<<<<< HEAD
       const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
-=======
-      const request = await axios.get('http://192.168.1.5:3000/chitietsach/' + tensach )
->>>>>>> b652d33223fe5906d4855b47755262665eb12849
       setBook(request.data.list_book)
       return request.data.list_book
     }
     fetchData();
-<<<<<<< HEAD
     },['http://192.168.43.180:3000/chitietsach'])
-=======
-    },['http://192.168.1.5:3000/chitietsach'])
->>>>>>> b652d33223fe5906d4855b47755262665eb12849
 
 
     // Lấy dữ liệu của chi tiết sách
     React.useEffect(() => 
   {
     async function fetchData(){
-<<<<<<< HEAD
       const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
-=======
-      const request = await axios.get('http://192.168.1.5:3000/chitietsach/' + tensach )
->>>>>>> b652d33223fe5906d4855b47755262665eb12849
       setdetail_book(request.data.book)
       return request.data.book
     }
     fetchData();
-<<<<<<< HEAD
     },['http://192.168.43.180:3000/chitietsach' + tensach])
-=======
-    },['http://192.168.1.5:3000/chitietsach' + tensach])
-
->>>>>>> b652d33223fe5906d4855b47755262665eb12849
 	 console.log(detail_book);
 
         
@@ -95,23 +78,10 @@ export default function book_detail_home(){
         } 
     }
 
-<<<<<<< HEAD
     function addProduct(soluong){
             console.log(username + ' ' + detail_book.tensach + ' ' + soluong)
             const request = axios.get('http://192.168.43.180:3000/themgiohang/' + username + '/' + detail_book.tensach + '/' + soluong);
            console.log(request.status);
-=======
-    function addProduct(quantity){
-        if(username != ' '){
-            const request = axios.get('http://192.168.1.5:3000/themgiohang/' + username + '/' + detail_book.tensach
-            + '/' + detail_book.giaban + '/' + detail_book.hinhanh
-           + '/' + quantity);
-           console.log(request.data);
-        }else{
-            ToastAndroid.show("Đăng nhập đi bạn", ToastAndroid.SHORT)
-        }
-
->>>>>>> b652d33223fe5906d4855b47755262665eb12849
     }
     
     return(
@@ -159,15 +129,6 @@ export default function book_detail_home(){
                         
                     </View>
                     <View>
-<<<<<<< HEAD
-                    <TouchableOpacity 
-                            // backgroundColor={'#ff424e'}
-                            // height={40}
-                            // marginBottom={-5}
-                            // marginTop={-5}
-                            // borderRadius={5}
-                            style={styles.buyButton}
-=======
                         <Pressable
                             style={
                                 ({pressed}) =>[{
@@ -176,11 +137,10 @@ export default function book_detail_home(){
                                 },
                                 styles.add_cart
                             ]}
-                            onPress={addProduct(temp)}
->>>>>>> b652d33223fe5906d4855b47755262665eb12849
+            
                             >
                             <Text style={{color:'#fff', fontSize: 17, margin: 5, marginTop:7, textAlign:'center'}} onPress={() => addProduct(temp)}>  Thêm vào giỏ hàng  </Text>
-                        </TouchableOpacity>
+                        </Pressable>
                     </View>
                 </View>
                 <View>
