@@ -22,7 +22,7 @@ export default function StackCartScreen()
     //LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     LogBox.ignoreLogs(['Reanimated 2']);
   }, [])
-
+  console.log('Hello'+route.params.name)
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator
