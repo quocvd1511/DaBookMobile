@@ -103,6 +103,7 @@ export default function VoucherScreen() {
                         },
                         styles.button_save
                     ]}
+                    onPress={()=> addVoucher(index)}
                     >
                     <Text style={{color:'white', fontSize: 16, fontWeight: '500'}}>Lưu</Text>
                   </Pressable>

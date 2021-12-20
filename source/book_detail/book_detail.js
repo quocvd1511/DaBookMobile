@@ -48,21 +48,12 @@ export default function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-<<<<<<< HEAD
       const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
-=======
-      const request = await axios.get('http://192.168.1.9:3000/chitietsach/' + tensach )
->>>>>>> 41e70f0a0c0aaf170eceffd1f85b34ac226acade
       setdetail_book(request.data.book)
       return request.data.book
     }
     fetchData();
-<<<<<<< HEAD
     },['http://192.168.43.180:3000/chitietsach' + tensach])
-=======
-    },['http://192.168.1.9:3000/chitietsach' + tensach])
-
->>>>>>> 41e70f0a0c0aaf170eceffd1f85b34ac226acade
 	 console.log(detail_book);
 
         
@@ -87,23 +78,10 @@ export default function book_detail_home(){
         } 
     }
 
-<<<<<<< HEAD
     function addProduct(soluong){
             console.log(username + ' ' + detail_book.tensach + ' ' + soluong)
             const request = axios.get('http://192.168.43.180:3000/themgiohang/' + username + '/' + detail_book.tensach + '/' + soluong);
            console.log(request.status);
-=======
-    function addProduct(quantity){
-        if(username != ' '){
-            const request = axios.get('http://192.168.1.5:3000/themgiohang/' + username + '/' + detail_book.tensach
-            + '/' + detail_book.giaban + '/' + detail_book.hinhanh
-           + '/' + quantity);
-           console.log(request.data);
-        }else{
-            ToastAndroid.show("Đăng nhập đi bạn", ToastAndroid.SHORT)
-        }
-
->>>>>>> 41e70f0a0c0aaf170eceffd1f85b34ac226acade
     }
     
     return(
@@ -159,20 +137,10 @@ export default function book_detail_home(){
                                 },
                                 styles.add_cart
                             ]}
-<<<<<<< HEAD
-            
                             >
                             <Text style={{color:'#fff', fontSize: 17, margin: 5, marginTop:7, textAlign:'center'}} onPress={() => addProduct(temp)}>  Thêm vào giỏ hàng  </Text>
                         </Pressable>
                     </View>
-=======
-                            onPress={addProduct(temp)}
-                            >
-                            <Text style={{color:'#fff', fontSize: 17, margin: 5, marginTop:7, textAlign:'center'}} onPress={() => addProduct(temp)}>  Thêm vào giỏ hàng  </Text>
-                        
-                        </Pressable>
-                        </View>
->>>>>>> 41e70f0a0c0aaf170eceffd1f85b34ac226acade
                 </View>
                 <View>
 
