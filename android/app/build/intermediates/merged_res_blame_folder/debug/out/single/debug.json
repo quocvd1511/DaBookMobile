@@ -1,12 +1,7 @@
 [
     {
-<<<<<<< HEAD
-        "merged": "D:\\Mobile\\DaBookMobile\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
-        "source": "D:\\Mobile\\DaBookMobile\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
-=======
         "merged": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
         "source": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
->>>>>>> 2d878acd570b130120a7df7f7a659f9c7ac7358a
     },
     {
         "merged": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
@@ -41,12 +36,7 @@
         "source": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },
     {
-<<<<<<< HEAD
-        "merged": "D:\\Mobile\\DaBookMobile\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "D:\\Mobile\\DaBookMobile\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
-=======
         "merged": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
         "source": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
->>>>>>> 2d878acd570b130120a7df7f7a659f9c7ac7358a
     }
 ]

@@ -9,13 +9,8 @@
 9        android:targetSdkVersion="30" />
 10
 11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-<<<<<<< HEAD
-11-->D:\Mobile\DaBookMobile\DaBookMobile\android\app\src\debug\AndroidManifest.xml:5:5-77
-11-->D:\Mobile\DaBookMobile\DaBookMobile\android\app\src\debug\AndroidManifest.xml:5:22-75
-=======
 11-->D:\DoAnDiDong\DaBookMobile\android\app\src\debug\AndroidManifest.xml:5:5-77
 11-->D:\DoAnDiDong\DaBookMobile\android\app\src\debug\AndroidManifest.xml:5:22-75
->>>>>>> 2d878acd570b130120a7df7f7a659f9c7ac7358a
 12    <uses-permission android:name="android.permission.INTERNET" />
 12-->D:\DoAnDiDong\DaBookMobile\android\app\src\main\AndroidManifest.xml:4:5-67
 12-->D:\DoAnDiDong\DaBookMobile\android\app\src\main\AndroidManifest.xml:4:22-64
@@ -64,13 +59,8 @@
 33-->D:\DoAnDiDong\DaBookMobile\android\app\src\main\AndroidManifest.xml:20:21-62
 34
 35                <category android:name="android.intent.category.LAUNCHER" />
-<<<<<<< HEAD
-35-->D:\Mobile\DaBookMobile\DaBookMobile\android\app\src\main\AndroidManifest.xml:21:13-73
-35-->D:\Mobile\DaBookMobile\DaBookMobile\android\app\src\main\AndroidManifest.xml:21:23-70
-=======
 35-->D:\DoAnDiDong\DaBookMobile\android\app\src\main\AndroidManifest.xml:21:13-73
 35-->D:\DoAnDiDong\DaBookMobile\android\app\src\main\AndroidManifest.xml:21:23-70
->>>>>>> 2d878acd570b130120a7df7f7a659f9c7ac7358a
 36            </intent-filter>
 37        </activity>
 38    </application>

@@ -10,7 +10,8 @@ import {
   FlatList,
   TextInput,
   Dimensions,
-  RefreshControl
+  RefreshControl,
+  ToastAndroid
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -30,6 +31,7 @@ function ListProduct_New()
 {
     const route = useRoute()
     const navigation = useNavigation()
+
     const [ListProduct, setProduct] = useState([
       {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1, Pick: false},
       {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1, Pick: false},
@@ -45,16 +47,18 @@ function ListProduct_New()
     //console.log('skdslkadjlkasjdlkasjdlkasjdlksjlkdjaslkdjlaksjdlka'+username)
 
     const [UserInfor, setUserInfor] = useState('')
+    const [ListVoucher, setListVoucher] = useState('')
     React.useEffect(() => 
     {
-      navigation.addListener('state', 
-      async () => {
-        var request = await axios.get('http://192.168.1.9:3000/chitiettk?matk='+username)
-        //console.log(request.data)
-        setUserInfor(request.data)
-        if (request.data.giohang)
+      async function fetchData() 
+      {
+        //-----------------------------Lay Thong Tin User---------------
+        var request = await axios.get('http://192.168.1.9:3000/chitiettk_voucher?matk='+username)
+        console.log(request.data)
+        setUserInfor(request.data.taikhoan)
+        if (request.data.taikhoan.giohang)
         {
-          setProduct(request.data.giohang)
+          setProduct(request.data.taikhoan.giohang)
         }
 
         for(var i=0; i<ListProduct.length ;i++)
@@ -62,13 +66,45 @@ function ListProduct_New()
           ListProduct[i].Pick=false
           ListProduct[i].SoLuong = parseInt(ListProduct[i].SoLuong)
         }
-      })
-      //fetchData();
+
+        setListVoucher(request.data.khuyenmai)
+
+        //-------------------------------Lay Thong Voucher--------------------------------------
+      }
+
+      fetchData()
   
     },['http://192.168.1.9:3000/'])
 
-    const[temp, settemp] = useState(0)
     const[TongTien, setTongTien] = useState(0)
+    const[MaNhap, setMaNhap] = useState('')
+    var TempListVoucher = ListVoucher
+    const[temp, settemp] = useState(0)
+
+    // console.log('Temp List Voucher Nèeeeeeeeeeeee')
+    // console.log(TempListVoucher)
+    //console.log(ListProduct)
+
+    function CheckVoucher(MaNhap)
+    {
+        console.log('Check Voucher nè')
+        console.log(TempListVoucher)
+        if(TongTien>0)
+        {
+          var flag=false
+          for(var i=0;i<TempListVoucher.length;i++)
+          {
+            if(TempListVoucher[i].manhap===MaNhap)
+            {
+              flag=true
+              setTongTien(TongTien - (parseInt(TempListVoucher[i].phantram)/100)*TongTien)
+              TempListVoucher[i].manhap+="######"
+              setMaNhap('')
+              settemp(temp-1)
+            } 
+          }
+        } else ToastAndroid.show("Không có sản phẩm nào được chọn", ToastAndroid.SHORT)
+    }
     
     //console.log(ListProduct)
     //setProduct(gh)
@@ -152,17 +188,20 @@ function ListProduct_New()
 
     function SolveProduct()
     {
-      var BuyedProduct =[]
-      var SoLuong=0
-      for(var i=0;i<ListProduct.length;i++)
+      if(TongTien>0)
       {
-        if(ListProduct[i].Pick)
+        var BuyedProduct =[]
+        var SoLuong=0
+        for(var i=0;i<ListProduct.length;i++)
         {
-          BuyedProduct[SoLuong] = ListProduct[i]
-          SoLuong+=1
+          if(ListProduct[i].Pick)
+          {
+            BuyedProduct[SoLuong] = ListProduct[i]
+            SoLuong+=1
+          }
         }
-      }
-      navigation.navigate('Payment',{BuyedProduct,TongTien,UserInfor})
+        navigation.navigate('Payment',{BuyedProduct,TongTien,UserInfor})
+      } else ToastAndroid.show('Không có sản phẩm nào được chọn',ToastAndroid.SHORT)
     }
     //------------------------------------------------------
     if(ListProduct)
@@ -266,8 +305,10 @@ function ListProduct_New()
 
 
             <View style={styles.View_sum}>
-              <TextInput style={styles.text_input} placeholder='Nhập mã khuyến mãi'></TextInput>
-              <TouchableOpacity style={styles.salebutton} >                                                          
+              <TextInput value={MaNhap} onChangeText={(text) => {setMaNhap(text)}} style={styles.text_input} placeholder='Nhập mã khuyến mãi'></TextInput>
+              <TouchableOpacity style={styles.salebutton} 
+                onPress={() => CheckVoucher(MaNhap)}
+              >                                                          
                   <Text style={{fontSize: 18, fontWeight: '600', color: '#C84B31'}}>Áp dụng</Text>
               </TouchableOpacity>
             </View>  
@@ -326,7 +367,7 @@ function ListProduct_New()
                 {/* //-------------------------- */}
                 <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
                 {
-                     <Text style={{alignSelf: 'center'}}>Chưa có sản phẩm nào trong giỏ hành nha</Text>
+                     <Text style={{alignSelf: 'center'}}>Chưa có sản phẩm nào trong giỏ hành nha !!</Text>
                 }
               </ScrollView>
               {/* ---------------------------------------------------------------------- */}

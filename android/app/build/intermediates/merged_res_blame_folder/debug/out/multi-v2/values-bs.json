@@ -1,12 +1,6 @@
 {
     "logs": [
         {
-<<<<<<< HEAD
-            "outputFile": "D:\\Mobile\\DaBookMobile\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-bs\\values-bs.xml",
-            "map": [
-                {
-                    "source": "C:\\Users\\TanTh\\.gradle\\caches\\transforms-3\\5646db46e2cfb43e7b3d42f3054c498c\\transformed\\core-1.5.0\\res\\values-bs\\values-bs.xml",
-=======
             "outputFile": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-bs\\values-bs.xml",
             "map": [
                 {
@@ -21,7 +15,6 @@
                 },
                 {
                     "source": "C:\\Users\\vdq1511\\.gradle\\caches\\transforms-3\\5646db46e2cfb43e7b3d42f3054c498c\\transformed\\core-1.5.0\\res\\values-bs\\values-bs.xml",
->>>>>>> 2d878acd570b130120a7df7f7a659f9c7ac7358a
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
