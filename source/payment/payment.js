@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Text, View, ScrollView, SafeAreaView, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, SafeAreaView, Image, StyleSheet, Dimensions , FlatList, TouchableOpacity } from 'react-native';
 import HeaderCart from './header_pm';
 import ListProduct from './list_product';
 import Info_User from './info_ad';
 import { useRoute, useNavigation} from '@react-navigation/native';
 import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
+const windowWidth = Dimensions.get('window').width;
 
 export default function Payment() 
 {
@@ -61,7 +62,7 @@ export default function Payment()
 
   async function createBill(){
     console.log('Hello')
-    const request = await axios.post('http://192.168.43.180:3000/taodonhang',{
+    const request = await axios.post('http://192.168.1.5:3000/taodonhang',{
             matk: UserInfor.matk,
             listbuyed: ListBuyed,
             tongtien: TongTien,
@@ -132,20 +133,20 @@ export default function Payment()
             <Text style={{fontSize: 16, marginLeft: 5}} > Thanh toán bằng ví Momo</Text>
         </View>
         </RadioButton.Group>
-    </View>
+      </View>
 
-        <View style={styles.bottomView}>
-          <View style={styles.textBottom}>
-          <Text  style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
-          <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{route.params.TongTien} đ</Text>
-          </View>
-          <TouchableOpacity 
-            style={styles.buyButton}
-            onPress={createBill}
-            >
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Thanh toán</Text>
-          </TouchableOpacity>
-        </View>
+            <View style={styles.bottomView}>
+              <View style={styles.textBottom}>
+                <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
+                <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{route.params.TongTien} đ</Text>
+              </View>
+              <View>
+                <TouchableOpacity style={styles.buyButton} 
+                  onPress={createBill}>
+                    <Text style={{fontSize: 18, fontWeight: '600', color: '#C84B31'}}>Thanh toán</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
       </SafeAreaView>
       
       </ScrollView>
@@ -212,12 +213,13 @@ export default function Payment()
     },
   
     bottomView:{
+      display:'flex',
+      justifyContent:'space-between',
       flexDirection: 'row',
-      // position: 'absolute',
-      width: '100%',
+      width: windowWidth,
       height: 60,
-      backgroundColor:'#C2FFF9',
-      bottom: 0,
+      backgroundColor:'#B0E2FF',
+      // #C2FFF9
       alignItems: 'center',
     },
   
@@ -230,10 +232,9 @@ export default function Payment()
   
     buyButton: {
       backgroundColor: '#FFE652',
-      width: 150,
+      width: 140,
       borderRadius: 6,
-      fontSize: 20,
-      height: 40,
+      height: 38,
       alignItems: 'center',
       justifyContent:'center',
       shadowColor: "#000",
@@ -243,8 +244,9 @@ export default function Payment()
       },
       shadowOpacity: 0.48,
       shadowRadius: 11.95,
-      elevation: 18,
+      marginRight:20,
     },
+
     select_pay: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -320,10 +322,11 @@ export default function Payment()
   },
   
   text_style:{
-      fontSize: 18,
-      lineHeight: 32,
-      fontWeight: '600',
-  },
+    fontSize: 18,
+    lineHeight: 32,
+    fontWeight: '600',
+    color: '#333'
+},
   
   change: {
       fontSize: 16,
