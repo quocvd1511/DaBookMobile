@@ -1,5 +1,13 @@
 [
     {
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+        "merged": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+=======
+<<<<<<< HEAD
+>>>>>>> 41e70f0a0c0aaf170eceffd1f85b34ac226acade
         "merged": "D:\\CODE_APP_DABOOK\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
         "source": "D:\\CODE_APP_DABOOK\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
@@ -38,5 +46,54 @@
     {
         "merged": "D:\\CODE_APP_DABOOK\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "D:\\CODE_APP_DABOOK\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+<<<<<<< HEAD
+=======
+=======
+        "merged": "D:\\Mobile\\React\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "D:\\Mobile\\React\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+>>>>>>> d59457a1df37df3206db06d0d400be59fad36586
+    },
+    {
+        "merged": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+<<<<<<< HEAD
+        "merged": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+=======
+        "merged": "D:\\Mobile\\React\\DaBookMobile\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "D:\\Mobile\\React\\DaBookMobile\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+>>>>>>> b652d33223fe5906d4855b47755262665eb12849
+>>>>>>> d59457a1df37df3206db06d0d400be59fad36586
+>>>>>>> 41e70f0a0c0aaf170eceffd1f85b34ac226acade
     }
 ]

@@ -24,7 +24,11 @@ export default function Login()
         }
       else
       {
+<<<<<<< HEAD
         const request = await axios.post('http://192.168.43.180:3000',{
+=======
+        const request = await axios.post('http://192.168.1.9:3000',{
+>>>>>>> 41e70f0a0c0aaf170eceffd1f85b34ac226acade
                 username: Username,
                 password: Password,
         })

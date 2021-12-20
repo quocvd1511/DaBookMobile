@@ -12,6 +12,7 @@ export default function Logup()
     const [Phonenumber, setPhoneNumber] = React.useState('')
     const [Password, setPassword] = React.useState('')
     const [ConPassword, setConPassword] = React.useState('')
+    const [Name, setName] = React.useState('')
     const [User,setUser] = React.useState([])
 
     async function fetchData()
@@ -29,10 +30,11 @@ export default function Logup()
         {
             ToastAndroid.show('Số điện thoại không hợp lệ', ToastAndroid.SHORT)
         }
-        const request = await axios.post('http://192.168.1.5:3000/signup',{
+        const request = await axios.post('http://192.168.1.9:3000/signup',{
             username: Username,
             phonenumber: Phonenumber,
             password: Password,
+            name: Name,
         })
         if(request.data.status==="Existed")
         {
@@ -41,6 +43,7 @@ export default function Logup()
             setConPassword('')
             setPassword('')
             setPhoneNumber('')
+            setName('')
         }
         else
         {
@@ -50,6 +53,7 @@ export default function Logup()
             setConPassword('')
             setPassword('')
             setPhoneNumber('')
+            setName('')
             navigation.navigate('TabScreen',{user_session: request.data.user_session})
 
         }
@@ -89,6 +93,16 @@ export default function Logup()
                 </View>
 
                 <View>
+                    <Text style={{marginBottom:5, marginTop: 10, color: '#000', fontSize: 14 }}> Nhập họ và tên</Text>
+                    <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+                        <View style={styles.icon_input}>
+                            <Image style={{height: 23, width: 23, marginLeft: 5, tintColor: '#333'}} source={require('../asset/icon/user1.png')}/>
+                        </View>
+                        <TextInput value={Name} style={styles.text_input} onChangeText={text => setName(text)} placeholder='Họ và Tên'></TextInput>
+                    </View>
+                </View>
+
+                <View>
                     <Text style={{marginBottom:5, marginTop: 10, color: '#000', fontSize: 14 }}> Nhập mật khẩu</Text>
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                         <View style={styles.icon_input}>
@@ -121,7 +135,7 @@ export default function Logup()
 
                         opacity: pressed ? 0.5:1
                     },
-                    button_login
+                    styles.button_login
                 ]}
                 onPress={fetchData}
                 >

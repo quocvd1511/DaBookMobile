@@ -14,7 +14,8 @@ import { RadioButton } from 'react-native-paper';
 
 
 const windowWidth = Dimensions.get('window').width;
-function ListProduct() {
+function ListProduct() 
+{
   const [Book, setBook] = useState([
     {id :1, name: 'Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter Harry Potter', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg', amountTaken: 3},
     {id :2, name: 'Harry Potter 2', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg', amountTaken: 4},

@@ -5,41 +5,41 @@ import axios from 'axios';
 
 export default function Info()
 {
-    const navigation = useNavigation();
-    const route = useRoute();
-    // const username = route.params.username;
-    const username = 'hongcute';
-    console.log(username);
+//     const navigation = useNavigation();
+//     const route = useRoute();
+//     // const username = route.params.username;
+//     const username = 'hongcute';
+//     console.log(username);
     
-    const [User,setUser] = React.useState([])
-    React.useEffect(() => 
-  {
-    async function fetchData(){
-      const request = await axios.get('http://192.168.43.180:3000/chitietgiohang/' + username)
-      setUser(request.data.thongtintk)
-      return request.data.thongtintk
-    }
-    fetchData();
-    },['http://192.168.43.180:3000/chitietgiohang/' + username])
+//     const [User,setUser] = React.useState([])
+//     React.useEffect(() => 
+//   {
+//     async function fetchData(){
+//       const request = await axios.get('http://192.168.43.180:3000/chitietgiohang/' + username)
+//       setUser(request.data.thongtintk)
+//       return request.data.thongtintk
+//     }
+//     fetchData();
+//     },['http://192.168.43.180:3000/chitietgiohang/' + username])
 
-	 console.log(User);
+// 	 console.log(User);
 
     return(
         <View>
             <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 10, marginBottom:10,}}>Thông tin nhận hàng</Text>
-            <View style={styles.main}>
+            <View style={styles.main_info}>
                 <View style={styles.type_user}>
                 <Image style={styles.icon_style} source={require('../asset/icon/location.png')}/>
-                    <Text style={{fontSize: 18}}>{User.matk}</Text>
+                    <Text style={{fontSize: 18}}>vdq1511</Text>
                 </View>
 
                 <View style={styles.type_numberphone}>
-                <Text style={{fontSize: 18}}>SĐT: {User.sodt}</Text>
+                <Text style={{fontSize: 18}}>SĐT: 111111</Text>
                 </View>
             </View>
             
             <View style={styles.address}>
-                <Text style={styles.text_style}>Địa chỉ: {User.diachigoc}</Text>
+                <Text style={styles.text_style}>Địa chỉ:111111</Text>
             </View>
             <View style={{backgroundColor: '#fff', padding: 10}}>
                 <Text style={styles.change}>Thay đổi</Text>
@@ -49,7 +49,7 @@ export default function Info()
 }
 
 const styles=StyleSheet.create({
-    main:{
+    main_info:{
         backgroundColor: 'white',
         flexDirection: 'row',
         alignItems: 'center',

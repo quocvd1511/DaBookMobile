@@ -10,6 +10,7 @@ import VoucherScreen from '../voucher/voucher';
 import UserScreen from '../user/user';
 import CartScreen from '../cart/cart';
 import StackUserScreen from '../user/stack_navigator_user'
+import StackCartScreen from '../cart/stack_cart_payment';
 import { useNavigation, useRoute } from '@react-navigation/native';
 
 const Tab = createMaterialBottomTabNavigator();
