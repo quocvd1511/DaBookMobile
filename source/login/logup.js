@@ -54,7 +54,7 @@ export default function Logup()
             setPassword('')
             setPhoneNumber('')
             setName('')
-            navigation.navigate('TabScreen',{user_session: request.data.user_session})
+            navigation.navigate('TabScreen',{username: request.data.user_session.username})
 
         }
         console.log(request.data)
@@ -108,7 +108,7 @@ export default function Logup()
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333'}} source={require('../asset/icon/password.png')}/>
                         </View>
-                        <TextInput value={Password} style={styles.pass_input} onChangeText={text => setPassword(text)} placeholder='Mật khẩu'></TextInput>
+                        <TextInput value={Password} secureTextEntry={true} style={styles.pass_input} onChangeText={text => setPassword(text)} placeholder='Mật khẩu'></TextInput>
                     </View>
                 </View>
 
@@ -118,7 +118,7 @@ export default function Logup()
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333',}} source={require('../asset/icon/password.png')}/>
                         </View>
-                        <TextInput value={ConPassword} style={styles.pass_input} onChangeText={text => setConPassword(text)} placeholder='Mật khẩu'></TextInput>
+                        <TextInput value={ConPassword} secureTextEntry={true} style={styles.pass_input} onChangeText={text => setConPassword(text)} placeholder='Mật khẩu'></TextInput>
                     </View>
                 </View>
 

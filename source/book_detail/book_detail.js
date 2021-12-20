@@ -205,7 +205,7 @@ export default function book_detail_home(){
                     Book.map((item) => 
                     {
                     return(
-                        <TouchableOpacity onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
+                        <TouchableOpacity onPress={() => navigation.navigate('book_detail', {tensach: item.tensach, username: username})}>
                             <View style={styles.item}>
                                 <Image style={styles.img} source={{uri:item.hinhanh}}/>
                                 <Text
