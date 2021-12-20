@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { Text, View, ScrollView, SafeAreaView, Image, StyleSheet,TextInput, Dimensions , FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, SafeAreaView, Image, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
 import HeaderCart from './header_pm';
 import ListProduct from './list_product';
 import Info_User from './info_ad';
 import { useRoute, useNavigation} from '@react-navigation/native';
 import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
-const windowWidth = Dimensions.get('window').width;
 
 export default function Payment() 
 {
@@ -62,7 +61,7 @@ export default function Payment()
 
   async function createBill(){
     console.log('Hello')
-    const request = await axios.post('http://192.168.1.5:3000/taodonhang',{
+    const request = await axios.post('http://192.168.1.9:3000/taodonhang',{
             matk: UserInfor.matk,
             listbuyed: ListBuyed,
             tongtien: TongTien,
@@ -78,7 +77,6 @@ export default function Payment()
 
 
     return (
-      <SafeAreaView style={{flex:1}}>
       <ScrollView>
         <HeaderCart/>
         {/* //---------------------------------------------- */}
@@ -105,7 +103,7 @@ export default function Payment()
         {/* <Select/> */}
         
         {/* ----------------------------------------- */}
-      
+      <SafeAreaView>
         <Text style={{paddingLeft: 10, color:'black', fontWeight:'700',fontSize:20,marginTop: 10, marginBottom: 5}}>Thông tin giỏ hàng</Text>
         <Text style={{height: 90, padding: 10, paddingTop:0, paddingBottom:0, backgroundColor:'#CCFFCC', color:'#339900', fontWeight:'500',fontSize:16, marginTop: 5, marginBottom: 5, borderRadius: 5,borderStyle: 'solid', borderWidth: 1, borderColor: '#00CC00'}}>
           <Image style={styles.icon_dabookdeli} source={require('../asset/icon/dabook_deli.png')}/>
@@ -134,42 +132,23 @@ export default function Payment()
             <Text style={{fontSize: 16, marginLeft: 5}} > Thanh toán bằng ví Momo</Text>
         </View>
         </RadioButton.Group>
-      </View>
-      </ScrollView>
-            {/* <View style={styles.bottomView}>
-              <View style={styles.textBottom}>
-                <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
-                <Text  style={{fontSize: 22, fontWeight: 'bold', color: '#C84B31'}}>{route.params.TongTien} đ</Text>
-              </View>
-              <View>
-                <TouchableOpacity style={styles.buyButton} 
-                  onPress={createBill}>
-                    <Text style={{fontSize: 18, fontWeight: '600', color: '#C84B31'}}>Thanh toán</Text>
-                </TouchableOpacity>
-              </View>
-            </View> */}
+    </View>
 
-            <View style={styles.View_sum}>
-              <TextInput style={styles.text_input} placeholder='Nhập mã khuyến mãi'></TextInput>
-              <TouchableOpacity style={styles.salebutton} >                                                          
-                  <Text style={{fontSize: 18, fontWeight: '600', color: '#C84B31'}}>Áp dụng</Text>
-              </TouchableOpacity>
-            </View>  
-            <View style={styles.bottomView}>
-              <View style={styles.textBottom}>
-                <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
-                <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{route.params.TongTien} đ</Text>
-              </View>
-              <View>
-                <TouchableOpacity style={styles.buyButton} 
-                  onPress={createBill}>
-                    <Text style={{fontSize: 18, fontWeight: '600', color: '#C84B31'}}>Thanh toán</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
+        <View style={styles.bottomView}>
+          <View style={styles.textBottom}>
+          <Text  style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
+          <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{route.params.TongTien} đ</Text>
+          </View>
+          <TouchableOpacity 
+            style={styles.buyButton}
+            onPress={createBill}
+            >
+              <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Thanh toán</Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
       
-        
+      </ScrollView>
     );
   }
 
@@ -233,69 +212,39 @@ export default function Payment()
     },
   
     bottomView:{
-      display:'flex',
-      justifyContent:'space-between',
       flexDirection: 'row',
-      width: windowWidth,
+      // position: 'absolute',
+      width: '100%',
       height: 60,
-      backgroundColor:'#B0E2FF',
-      // #C2FFF9
+      backgroundColor:'#C2FFF9',
+      bottom: 0,
       alignItems: 'center',
     },
-  
-    View_sum: {
-      display:'flex',
-      justifyContent:'space-between',
-      flexDirection: 'row',
-      width: windowWidth,
-      height: 50,
-      backgroundColor:'#B0E2FF',
-      // #C2FFF9
-      alignItems: 'center',
-    },
-  
   
     textBottom: {
       fontWeight: '600',
-      paddingLeft: 20,
+      paddingLeft: 30,
       fontSize: 25,
+      marginRight: 190,
     },
   
-    
     buyButton: {
       backgroundColor: '#FFE652',
-      width: 140,
+      width: 150,
       borderRadius: 6,
-      height: 38,
+      fontSize: 20,
+      height: 40,
       alignItems: 'center',
       justifyContent:'center',
       shadowColor: "#000",
       shadowOffset: {
           width: 0,
           height: 9,
+      },
+      shadowOpacity: 0.48,
+      shadowRadius: 11.95,
+      elevation: 18,
     },
-    shadowOpacity: 0.48,
-    shadowRadius: 11.95,
-    marginRight:20,
-  },
-
-  salebutton: {
-    backgroundColor: '#FFE652',
-    width: 100,
-    borderRadius: 6,
-    height: 38,
-    alignItems: 'center',
-    justifyContent:'center',
-    shadowColor: "#000",
-    shadowOffset: {
-        width: 0,
-        height: 9,
-    },
-    shadowOpacity: 0.48,
-    shadowRadius: 11.95,
-    marginRight:20,
-    },
-
     select_pay: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -331,6 +280,8 @@ export default function Payment()
       backgroundColor: 'white',
       flexDirection: 'row',
       alignItems: 'center',
+      // marginLeft:10,
+      // marginRight:10,
       
       paddingLeft: 30,
       paddingRight: 20,
@@ -369,10 +320,9 @@ export default function Payment()
   },
   
   text_style:{
-    fontSize: 18,
-    lineHeight: 32,
-    fontWeight: '600',
-    color: '#333'
+      fontSize: 18,
+      lineHeight: 32,
+      fontWeight: '600',
   },
   
   change: {
@@ -380,21 +330,7 @@ export default function Payment()
       color: '#1E90FF',
       fontWeight: '500',
       marginLeft: 20,
-  },
-
-  text_input:{
-    backgroundColor: '#fff',
-    width: 190,
-    color: '#333',
-    textDecorationLine:'none',
-    fontSize: 16,
-    height: 38,
-    borderRadius: 5,
-    justifyContent:'center',
-    marginLeft: 20,
-
-    
-  },
+  }
     
   });
   
