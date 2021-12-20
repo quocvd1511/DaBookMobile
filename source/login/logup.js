@@ -30,7 +30,7 @@ export default function Logup()
         {
             ToastAndroid.show('Số điện thoại không hợp lệ', ToastAndroid.SHORT)
         }
-        const request = await axios.post('http://192.168.1.9:3000/signup',{
+        const request = await axios.post('http://192.168.1.5:3000/signup',{
             username: Username,
             phonenumber: Phonenumber,
             password: Password,

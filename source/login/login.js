@@ -24,11 +24,7 @@ export default function Login()
         }
       else
       {
-<<<<<<< HEAD
-        const request = await axios.post('http://192.168.43.180:3000',{
-=======
-        const request = await axios.post('http://192.168.1.9:3000',{
->>>>>>> f8721f6aca60b15b70861e34304603e3cbd4d4eb
+        const request = await axios.post('http://192.168.1.5:3000',{
                 username: Username,
                 password: Password,
         })
@@ -75,7 +71,7 @@ export default function Login()
                 </View>
 
                 <View style={{marginTop:20}}>
-                    
+
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333'}} source={require('../asset/icon/password.png')}/>

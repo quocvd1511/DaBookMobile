@@ -36,32 +36,24 @@ export default function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.9:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.1.5:3000/chitietsach/' + tensach )
       setBook(request.data.list_book)
       return request.data.list_book
     }
     fetchData();
-    },['http://192.168.1.9:3000/chitietsach'])
+    },['http://192.168.1.5:3000/chitietsach'])
 
 
     // Lấy dữ liệu của chi tiết sách
     React.useEffect(() => 
   {
     async function fetchData(){
-<<<<<<< HEAD
-      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
-=======
-      const request = await axios.get('http://192.168.1.9:3000/chitietsach/' + tensach )
->>>>>>> f8721f6aca60b15b70861e34304603e3cbd4d4eb
+      const request = await axios.get('http://192.168.1.5:3000/chitietsach/' + tensach )
       setdetail_book(request.data.book)
       return request.data.book
     }
     fetchData();
-<<<<<<< HEAD
-    },['http://192.168.43.180:3000/chitietsach' + tensach])
-=======
-    },['http://192.168.1.9:3000/chitietsach' + tensach])
->>>>>>> f8721f6aca60b15b70861e34304603e3cbd4d4eb
+    },['http://192.168.1.5:3000/chitietsach' + tensach])
 	 console.log(detail_book);
 
         
@@ -88,7 +80,7 @@ export default function book_detail_home(){
 
     function addProduct(soluong){
             console.log(username + ' ' + detail_book.tensach + ' ' + soluong)
-            const request = axios.get('http://192.168.1.9:3000/themgiohang/' + username + '/' + detail_book.tensach + '/' + soluong);
+            const request = axios.get('http://192.168.1.5:3000/themgiohang/' + username + '/' + detail_book.tensach + '/' + soluong);
            console.log(request.status);
     }
     
@@ -199,7 +191,7 @@ export default function book_detail_home(){
          
                 <View>
                     <Text style={{margin: 10, color:'black', fontWeight:'500',fontSize:14}}>Tóm tắt</Text>
-                    <Text style={{marginRight: 7, marginLeft: 3,}}>
+                    <Text style={{marginRight: 7, marginLeft: 3, color: '#333'}}>
                         {detail_book.mota}
                     </Text>
                 </View>

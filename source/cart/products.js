@@ -8,6 +8,7 @@ import {
   Image,
   SafeAreaView,
   FlatList,
+  TextInput,
   Dimensions,
   RefreshControl
 } from 'react-native';
@@ -48,10 +49,13 @@ function ListProduct_New()
     {
       navigation.addListener('state', 
       async () => {
-        var request = await axios.get('http://192.168.1.9:3000/chitiettk?matk='+username)
+        var request = await axios.get('http://192.168.1.5:3000/chitiettk?matk='+username)
         //console.log(request.data)
         setUserInfor(request.data)
-        setProduct(request.data.giohang)
+        if (request.data.giohang)
+        {
+          setProduct(request.data.giohang)
+        }
 
         for(var i=0; i<ListProduct.length ;i++)
         {
@@ -61,7 +65,7 @@ function ListProduct_New()
       })
       //fetchData();
   
-    },['http://192.168.1.9:3000/'])
+    },['http://192.168.1.5:3000/'])
 
     const[temp, settemp] = useState(0)
     const[TongTien, setTongTien] = useState(0)
@@ -179,11 +183,11 @@ function ListProduct_New()
                   <View style={styles.main_info}>
                       <View style={styles.type_user}>
                       <Image style={styles.icon_style} source={require('../asset/icon/location.png')}/>
-                          <Text style={{fontSize: 18}}>{UserInfor.hoten}</Text>
+                          <Text style={{fontSize: 18, color: '#333'}}>{UserInfor.hoten}</Text>
                       </View>
 
                       <View style={styles.type_numberphone}>
-                      <Text style={{fontSize: 18}}>SĐT: {UserInfor.sodt}</Text>
+                      <Text style={{fontSize: 18, color: '#333'}}>SĐT: {UserInfor.sodt}</Text>
                       </View>
                   </View>
                   
@@ -215,35 +219,41 @@ function ListProduct_New()
                         </TouchableOpacity>
                           <View>
                             <View style={styles.nameContainer}>
-                              <Text style={styles.nameTxt}>{item.tensach}</Text>
+                              <Text style={styles.nameTxt} numberOfLines={2}
+                                ellipsizeMode='tail' >{item.tensach}</Text>
                             </View>
                             <View style={styles.end}>
                               <Text style={styles.priceStyle}>
                               {item.giaban} đ
                               </Text>
                             </View>
-                            <View style={{flexDirection:'row', alignItems:'center',  marginRight: 0, padding: 10 }}>
-                              <TouchableOpacity 
-                              onPress={() => GiamSoLuong(index)}
-                              >
-                                <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
-                              </TouchableOpacity>
+                            <View style={{display:'flex', flexDirection:'row', justifyContent: 'space-between',  alignItems:'center',  marginRight: -10, padding: 15, paddingRight: 0 }}>
+                              <View style={{display:'flex', flexDirection:'row', alignItems: 'center'}}>
+                                <TouchableOpacity 
+                                onPress={() => GiamSoLuong(index)}
+                                >
+                                  <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
+                                </TouchableOpacity>
 
-                              <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:15}}>{ListProduct[index].SoLuong}</Text>
+                                <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:15, color: '#333'}}>{ListProduct[index].SoLuong}</Text>
 
-                              <TouchableOpacity 
-                              onPress={() => TangSoLuong(index)}
-                              >
-                                <Icon name="ios-add-circle" size={30} color={"#33c37d"} />
-                              </TouchableOpacity>
+                                <TouchableOpacity 
+                                onPress={() => TangSoLuong(index)}
+                                >
+                                  <Icon name="ios-add-circle" size={30} color={"#33c37d"} />
+                                </TouchableOpacity>
+                              </View>
+
+                              <View>
+                                <TouchableOpacity style={{flexDirection:'row', alignItems:'center',  marginRight: 0 }} 
+                                  onPress={() => RemoveProduct(index)}
+                                  >
+                                      <Icon name="trash" size={25} color={"#33c37d"}/>
+                                </TouchableOpacity>
+                              </View>
                             </View>
                           </View>
 
-                          <TouchableOpacity style={{flexDirection:'row', alignItems:'center',  marginRight: 0, paddingLeft: 50 }} 
-                            onPress={() => RemoveProduct(index)}
-                            >
-                                <Icon name="trash" size={25} color={"#33c37d"}/>
-                          </TouchableOpacity>
                         </View>
                       )
                        
@@ -252,16 +262,24 @@ function ListProduct_New()
             </ScrollView>
             {/* ---------------------------------------------------------------------- */}
 
+
+            <View style={styles.View_sum}>
+              <TextInput style={styles.text_input} placeholder='Nhập mã khuyến mãi'></TextInput>
+              <TouchableOpacity style={styles.salebutton} >                                                          
+                  <Text style={{fontSize: 18, fontWeight: '600', color: '#C84B31'}}>Áp dụng</Text>
+              </TouchableOpacity>
+            </View>  
             <View style={styles.bottomView}>
               <View style={styles.textBottom}>
-              <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
-              <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{TongTien} đ</Text>
+                <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
+                <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{TongTien} đ</Text>
               </View>
-              <TouchableOpacity style={styles.buyButton} 
-                onPress={SolveProduct}
-              >
-                  <Text style={{fontSize: 20, fontWeight: 'bold', color: '#C84B31'}}>Mua Hàng</Text>
-              </TouchableOpacity>
+              <View>
+                <TouchableOpacity style={styles.buyButton} 
+                  onPress={SolveProduct}>
+                    <Text style={{fontSize: 18, fontWeight: '600', color: '#C84B31'}}>Mua Hàng</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </SafeAreaView>
           
@@ -277,6 +295,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 10,
     paddingLeft: 0,
+    paddingRight: 0,
   
   },
   nameContainer: {
@@ -289,7 +308,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#222',
     fontSize: 15,
-    width: 100,
+    width: 150,
   },
   end: {
     flexDirection: 'row',
@@ -306,31 +325,46 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   imageStyle: {
-    width: 85, 
+    width: 120, 
     height: 120, 
-    marginRight: 20
+    marginRight: 0,
+    marginLeft: -20,
+    resizeMode:'contain',
   },
+  
   bottomView:{
+    display:'flex',
+    justifyContent:'space-between',
     flexDirection: 'row',
-    position: 'absolute',
     width: windowWidth,
     height: 60,
-    backgroundColor:'#C2FFF9',
-    bottom: 0,
+    backgroundColor:'#B0E2FF',
+    // #C2FFF9
     alignItems: 'center',
   },
+
+  View_sum: {
+    display:'flex',
+    justifyContent:'space-between',
+    flexDirection: 'row',
+    width: windowWidth,
+    height: 50,
+    backgroundColor:'#B0E2FF',
+    // #C2FFF9
+    alignItems: 'center',
+  },
+
   textBottom: {
     fontWeight: '600',
-    paddingLeft: 30,
+    paddingLeft: 20,
     fontSize: 25,
-    marginRight: (windowWidth - 280),
   },
+
   buyButton: {
     backgroundColor: '#FFE652',
-    width: 150,
+    width: 140,
     borderRadius: 6,
-    fontSize: 20,
-    height: 40,
+    height: 38,
     alignItems: 'center',
     justifyContent:'center',
     shadowColor: "#000",
@@ -340,7 +374,24 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.48,
     shadowRadius: 11.95,
-    elevation: 18,
+    marginRight:20,
+  },
+
+  salebutton: {
+    backgroundColor: '#FFE652',
+    width: 100,
+    borderRadius: 6,
+    height: 38,
+    alignItems: 'center',
+    justifyContent:'center',
+    shadowColor: "#000",
+    shadowOffset: {
+        width: 0,
+        height: 9,
+    },
+    shadowOpacity: 0.48,
+    shadowRadius: 11.95,
+    marginRight:20,
   },
 
   //-------------------------------
@@ -355,13 +406,9 @@ address:{
     backgroundColor: 'white',
     flexDirection: 'row',
     alignItems: 'center',
-    // marginLeft:10,
-    // marginRight:10,
-    
     paddingLeft: 30,
     paddingRight: 20,
     marginBottom: 0,
-    
 },
 
 type_user:{
@@ -384,7 +431,6 @@ type_numberphone:{
     fontSize: 20,
 },
 
-
 icon_style:
 {
     height: 25,
@@ -398,6 +444,7 @@ text_style:{
     fontSize: 18,
     lineHeight: 32,
     fontWeight: '600',
+    color: '#333'
 },
 
 change: {
@@ -405,7 +452,20 @@ change: {
     color: '#1E90FF',
     fontWeight: '500',
     marginLeft: 20,
-}
+},
+
+text_input:{
+  backgroundColor: '#fff',
+  width: 190,
+  color: '#333',
+  textDecorationLine:'none',
+  fontSize: 16,
+  height: 38,
+  borderRadius: 5,
+  justifyContent:'center',
+  marginLeft: 20,
+  
+},
 
   
 });
