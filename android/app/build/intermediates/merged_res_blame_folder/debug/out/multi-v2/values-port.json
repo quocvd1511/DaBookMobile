@@ -1,10 +1,24 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "D:\\DoAnDiDong\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vdq1511\\.gradle\\caches\\transforms-3\\69a29bf10bcc958f91385ad904e935b2\\transformed\\appcompat-1.3.0\\res\\values-port\\values-port.xml",
+=======
+<<<<<<< HEAD
+            "outputFile": "D:\\Mobile\\DaBookMobile\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\TanTh\\.gradle\\caches\\transforms-3\\69a29bf10bcc958f91385ad904e935b2\\transformed\\appcompat-1.3.0\\res\\values-port\\values-port.xml",
+=======
+            "outputFile": "D:\\CODE_APP_DABOOK\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-3\\69a29bf10bcc958f91385ad904e935b2\\transformed\\appcompat-1.3.0\\res\\values-port\\values-port.xml",
+>>>>>>> e45a63301d14d91705d5bcb24399c92231e3f25e
+>>>>>>> c3199d370cc9bd974c25e2530132d68e386e2589
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
