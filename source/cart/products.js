@@ -44,7 +44,7 @@ function ListProduct_New()
     //---------------Xu ly So luong------------------------
     //const [SoLuong, setSoLuong] = useState(1)
     var username=route.params.username
-    //console.log('skdslkadjlkasjdlkasjdlkasjdlksjlkdjaslkdjlaksjdlka'+username)
+    console.log('skdslkadjlkasjdlkasjdlkasjdlksjlkdjaslkdjlaksjdlka'+username)
 
     const [UserInfor, setUserInfor] = useState('')
     const [ListVoucher, setListVoucher] = useState('')
@@ -53,7 +53,7 @@ function ListProduct_New()
       async function fetchData() 
       {
         //-----------------------------Lay Thong Tin User---------------
-        var request = await axios.get('http://192.168.1.9:3000/chitiettk_voucher?matk='+username)
+        var request = await axios.get('http://192.168.1.5:3000/chitiettk_voucher?matk='+username)
         console.log(request.data)
         setUserInfor(request.data.taikhoan)
         if (request.data.taikhoan.giohang)
@@ -74,7 +74,7 @@ function ListProduct_New()
 
       fetchData()
   
-    },['http://192.168.1.9:3000/'])
+    },['http://192.168.1.5:3000/'])
 
     const[TongTien, setTongTien] = useState(0)
     const[MaNhap, setMaNhap] = useState('')
@@ -83,7 +83,7 @@ function ListProduct_New()
 
     // console.log('Temp List Voucher Nèeeeeeeeeeeee')
     // console.log(TempListVoucher)
-    //console.log(ListProduct)
+    console.log(ListProduct)
 
     function CheckVoucher(MaNhap)
     {
