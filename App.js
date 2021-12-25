@@ -21,7 +21,6 @@ const Stack = createStackNavigator();
 export default function App() {
 
   // const navigation = useNavigation();
- 
 
 
   useEffect(() => {
@@ -34,10 +33,10 @@ export default function App() {
   }, [])
 
   return (
-    <NavigationContainer>
+    <NavigationContainer  independent={true}>
       <Stack.Navigator
       screenOptions={{headerShown: false}}>
-      <Stack.Screen
+        <Stack.Screen
         name='Login'
         component={Login}/>
       <Stack.Screen

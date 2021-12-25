@@ -39,6 +39,7 @@ export default function TabRanks() {
   const route = useRoute();
 
   return (
+    // <NavigationContainer independent={true}>
     <Tab.Navigator
     screenOptions={
     {
@@ -46,13 +47,14 @@ export default function TabRanks() {
       tabBarStyle: {backgroundColor: '#fff', height: 40, justifyContent: 'center',}
     }}
     >
-      <Tab.Screen name="Văn học" component={VanHoc} initialParams={username = route.params.username}/>
-      <Tab.Screen name="Trinh Thám" component={TrinhTham} initialParams={username = route.params.username}/>
-      <Tab.Screen name="Tuổi teen" component={TuoiTeen} initialParams={username = route.params.username}/>
-      <Tab.Screen name="Hài hước" component={HaiHuoc} initialParams={username = route.params.username}/>
-      <Tab.Screen name="Ngôn Tình" component={NgonTinh} initialParams={username = route.params.username}/>
-      <Tab.Screen name="Kinh dị" component={KinhDi} initialParams={username = route.params.username}/>
-      <Tab.Screen name="Phóng sự" component={PhongSu} initialParams={username = route.params.username}/>
+      <Tab.Screen name="Văn học" component={VanHoc} initialParams={{username: route.params.username}}/>
+      <Tab.Screen name="Trinh Thám" component={TrinhTham} initialParams={{username: route.params.username}}/>
+      <Tab.Screen name="Tuổi teen" component={TuoiTeen} initialParams={{username: route.params.username}}/>
+      <Tab.Screen name="Hài hước" component={HaiHuoc} initialParams={{username: route.params.username}}/>
+      <Tab.Screen name="Ngôn Tình" component={NgonTinh} initialParams={{username: route.params.username}}/>
+      <Tab.Screen name="Kinh dị" component={KinhDi} initialParams={{username: route.params.username}}/>
+      <Tab.Screen name="Phóng sự" component={PhongSu} initialParams={{username: route.params.username}}/>
     </Tab.Navigator>
+    //  </NavigationContainer>
   );
 }

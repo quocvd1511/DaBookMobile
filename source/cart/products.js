@@ -49,6 +49,8 @@ function ListProduct_New()
 
     const [UserInfor, setUserInfor] = useState('')
     const [ListVoucher, setListVoucher] = useState('')
+    const [refresh, SetRefresh] = useState(false)
+
     React.useEffect(() => 
     {
       async function fetchData() 
@@ -77,6 +79,7 @@ function ListProduct_New()
   
     },['http://192.168.1.5:3000/'])
 
+    console.log(ListProduct)
     const[TongTien, setTongTien] = useState(0)
     const[MaNhap, setMaNhap] = useState('')
     var TempListVoucher = ListVoucher
@@ -204,6 +207,14 @@ function ListProduct_New()
         navigation.navigate('Payment',{BuyedProduct,TongTien,UserInfor,ListVoucher})
       } else ToastAndroid.show('Không có sản phẩm nào được chọn',ToastAndroid.SHORT)
     }
+
+    function pullMe(){
+        SetRefresh(true)
+        
+        setTimeout(() => {                                                                
+          SetRefresh(false)
+        },1000)
+    }
     //------------------------------------------------------
     if(ListProduct)
     {
@@ -213,11 +224,11 @@ function ListProduct_New()
             <ScrollView
               refreshControl=
               {
-                <RefreshControl/>
+                <RefreshControl
+                refreshing={refresh}
+                onRefresh={()=> pullMe()}/>
               }
             >
-
-
               {/* //------------------------- */}
 
               <View>
@@ -291,7 +302,7 @@ function ListProduct_New()
                                   <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
                                 </TouchableOpacity>
 
-                                <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:15, color: '#333'}}>{ListProduct[index].SoLuong}</Text>
+                                <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:15, color: '#333'}}>{ListProduct[index].soluong}</Text>
 
                                 <TouchableOpacity 
                                 onPress={() => TangSoLuong(index)}
@@ -339,10 +350,12 @@ function ListProduct_New()
             <SafeAreaView style={{flex:1}}>
               {/* ----------------------------------------------------------- */}
               <ScrollView
-                refreshControl=
-                {
-                  <RefreshControl/>
-                }
+                 refreshControl=
+                 {
+                   <RefreshControl
+                   refreshing={refresh}
+                   onPress={()=> pullMe()}/>
+                 }
               >
 
 
