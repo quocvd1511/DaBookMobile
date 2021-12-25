@@ -32,9 +32,9 @@ export default function SearchBook(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.5:3000/search/' + name)
-      setBook(request.data.books)
-      return request.data.books
+      const request = await axios.get('http://192.168.43.180:3000/search/' + name)
+      setBook(request.data)
+      return request.data
     }
     fetchData();
 
@@ -52,7 +52,7 @@ export default function SearchBook(){
           Book.map((item)=>
           {
             return(
-              <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
+              <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('BookDetail', {tensach: item.tensach})}>
                 <Image style={styles.image} source={{uri:item.hinhanh}}/>
                 <View  style={{paddingLeft:5 }}>
                   <Text style={styles.book_name}
