@@ -28,7 +28,7 @@ export default function VoucherScreen() {
       {
         async function fetchData()
       {
-          const request = await axios.get('http://192.168.1.9:3000/danhsachvoucher_all')
+          const request = await axios.get('http://192.168.1.2:3000/danhsachvoucher_all')
           console.log(request.data)
           for(var i=0;i<request.data.length;i++)
           {
@@ -46,11 +46,11 @@ export default function VoucherScreen() {
       }
       fetchData()
     
-      },['http://192.168.1.9:3000/'])
+      },['http://192.168.1.2:3000/'])
 
       function addVoucher(index){
         console.log(username + ' ' + Voucher[index].manhap + ' ' + Voucher[index].makm)
-        const request = axios.get('http://192.168.1.9:3000/luukhuyenmai/' + username + '/' + Voucher[index].makm + '/' + Voucher[index].manhap);
+        const request = axios.get('http://192.168.1.2:3000/luukhuyenmai/' + username + '/' + Voucher[index].makm + '/' + Voucher[index].manhap);
       }
 
   return (
@@ -89,9 +89,8 @@ export default function VoucherScreen() {
 
                   <View style={{marginLeft:10}}>
                       <Text style={{color:'black', fontSize: 14}}>{item.loai}</Text>
-                      <Text style={{color:'black', fontSize: 14}}>{item.noidung}</Text>
-                      <Text style={{color: 'black', fontSize: 15, fontWeight: 'bold'}}>Giảm {item.phantram}</Text>
-                      <Text style={{color: 'black', fontSize: 12}}>Mã Nhập {item.manhap}</Text>
+                      <Text style={{color: 'black', fontSize: 15, fontWeight: 'bold'}}>Giảm: {item.phantram}%</Text>
+                      <Text style={{color: 'black', fontSize: 12}}>Mã Nhập: {item.manhap}</Text>
                       <Text style={{color: 'black', fontSize: 12}}>HSD: {item.ngaykt}</Text>
                   </View>
                   <Pressable
@@ -104,7 +103,7 @@ export default function VoucherScreen() {
                     ]}
                     onPress={()=> addVoucher(index)}
                     >
-                    <Text style={{color:'white', fontSize: 16, fontWeight: '500'}}>Lưu</Text>
+                    <Text style={{color:'white', fontSize: 16, fontWeight: '500', alignSelf:'center', marginBottom: 8}}>Lưu</Text>
                   </Pressable>
               </View>
             )
@@ -129,13 +128,15 @@ const styles = StyleSheet.create({
   },
 
   button_save: {
+    display: 'flex',
+    position:'absolute',
+    justifyContent:'flex-end',
     backgroundColor: 'dodgerblue',
-    padding:5,
-    paddingLeft:20,
-    paddingRight:20,
+    width: 60,
+    height: 36,
     borderRadius:5,
-    marginLeft:30,
-    marginTop:45,
+    right: 10,
+    bottom: 5,
   },
 
   main_sale:{
@@ -244,6 +245,7 @@ const styles = StyleSheet.create({
     borderRadius:5,
     paddingLeft: 0,
     paddingRight:0,
+    position: 'relative',
     flexDirection: 'row',
     alignItems: 'center',
     flex:0.8,

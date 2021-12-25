@@ -4,6 +4,7 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const flexDirections = ['row', 'row-reverse', 'column', 'column-reverse'];
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import CountDown from 'react-native-countdown-component';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
@@ -26,21 +27,35 @@ function ListTop()
   
   const navigation = useNavigation(); 
   const [Book,setBook] = React.useState([])
+  
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.5:3000/')
+      const request = await axios.get('http://192.168.1.2:3000/')
       setBook(request.data.flash_sales)
       return request.data.flash_sales
     }
     fetchData();
 
-  },['http://192.168.1.5:3000/'])
+  },['http://192.168.1.2:3000/'])
+
   return (
       <View style={styles.container}>
         <View style = {styles.flash_sale}>
-          <Image style = {styles.flash} source={require('../asset/icon/flash.png')}/>  
-          <Text style={{paddingLeft: 5, color:'red', fontWeight:'600',fontSize:18,}}>FLASH SALE</Text>
+          {/* <Image style = {styles.flash} source={require('../asset/icon/flash.png')}/>   */}
+          <Text style={{paddingLeft: 5, color:'red', fontWeight:'600',fontSize:20,}}>FLASH SALE </Text>
+          <CountDown
+            size={14}
+            until={86400}
+            onFinish={() => alert('Finished')}
+            digitStyle={{backgroundColor: 'red'}}
+            digitTxtStyle={{color: '#fff'}}
+            timeLabelStyle={{color: 'red', fontWeight: 'bold'}}
+            separatorStyle={{color: '#000'}}
+            timeToShow={['H', 'M', 'S']}
+            timeLabels={{m: null, s: null}}
+            showSeparator
+          />
         </View>
 
       <ScrollView horizontal={true}>
@@ -113,6 +128,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems: 'center',
     display: 'flex',
+    padding: 10,
     flexDirection: flexDirections[0],
     backgroundColor: '#fff',
   },

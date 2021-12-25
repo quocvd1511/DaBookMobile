@@ -11,6 +11,7 @@ import {
   TextInput,
   Dimensions,
   RefreshControl,
+  Pressable,
   ToastAndroid
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
@@ -242,7 +243,21 @@ function ListProduct_New()
               
 
               {/* //-------------------------- */}
-              <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
+              <View style={{display: 'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between', height: 40, margin:5, marginRight: 10}}>
+                <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 0}}>Thông tin giỏ hàng</Text>
+                <Pressable
+                    style={
+                        ({pressed}) =>[{
+
+                            opacity: pressed ? 0.5:1
+                        },
+                        styles.qtyminus
+                    ]}
+                    >
+                    <Text style={{color:'#fff', fontSize: 18, marginTop: 6, textAlign:'center', alignItems: 'center'}} >Refresh</Text>
+                </Pressable>
+              </View>
+
               {
                   ListProduct.map((item,index) =>
                     {
@@ -358,7 +373,7 @@ function ListProduct_New()
                 {/* //-------------------------- */}
                 <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
                 {
-                     <Text style={{alignSelf: 'center'}}>Chưa có sản phẩm nào trong giỏ hành nha !!</Text>
+                     <Text style={{alignSelf: 'center'}}>Chưa có sản phẩm nào trong giỏ hàng!!</Text>
                 }
               </ScrollView>
               {/* ---------------------------------------------------------------------- */}
@@ -521,6 +536,14 @@ change: {
     marginLeft: 20,
 },
 
+qtyminus: {
+  backgroundColor:'#FF6600',
+  width: 100,
+  height: 40,
+  marginBottom: -5,
+  marginTop: -5,
+  borderRadius: 5,
+},
   
 });
 

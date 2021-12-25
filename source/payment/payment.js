@@ -27,14 +27,44 @@ export default function Payment()
 
   var ListBuyed = route.params.BuyedProduct
   var UserInfor = route.params.UserInfor
+  var ListVoucher = route.params.ListVoucher
+  let Temp = route.params.TongTien
+  var TempListVoucher = ListVoucher
+  const[TongTien, setTongTien] = React.useState(route.params.TongTien)
+  //var TongTien = route.params.TongTien
+  const[MaNhap, setMaNhap] = React.useState('')
+  const[temp, settemp] = React.useState(0)
+  console.log(TongTien)
+  //setTongTien(Temp)
+  //console.log('Voucher nèeeeeeeeeeeeeeee')
+  //console.log(TempListVoucher)
+  function CheckVoucher(MaNhap)
+  {
+      console.log('Check Voucher nè')
+      console.log(TempListVoucher)
+        var flag=false
+        for(var i=0;i<TempListVoucher.length;i++)
+        {
+          if(TempListVoucher[i].manhap===MaNhap)
+          {
+            flag=true
+            setTongTien(TongTien - (parseInt(TempListVoucher[i].phantram)/100)*TongTien)
+            console.log(TongTien)
+            TempListVoucher[i].manhap+="######"
+            setMaNhap('')
+            settemp(temp-1)
+          } 
+        }
+  }
 
+  
   for(var i=0;i<ListBuyed.length;i++)
   {
     ListBuyed[i].TongTien=parseInt(ListBuyed[i].giaban)*parseInt(ListBuyed[i].SoLuong)
   }
 
   //console.log(ListBuyed)
-  console.log(route.params.TongTien)
+  //console.log(route.params.TongTien)
   renderItem = ({ item, index }) => {
     return (
       <TouchableOpacity>
@@ -56,8 +86,6 @@ export default function Payment()
       </TouchableOpacity>
     );
   };
-
-  var TongTien = route.params.TongTien
 
 
   async function createBill(){
@@ -150,15 +178,17 @@ export default function Payment()
             </View> */}
 
             <View style={styles.View_sum}>
-              <TextInput style={styles.text_input} placeholder='Nhập mã khuyến mãi'></TextInput>
-              <TouchableOpacity style={styles.salebutton} >                                                          
+              <TextInput value={MaNhap} onChangeText={(text) => setMaNhap(text)} style={styles.text_input} placeholder='Nhập mã khuyến mãi'></TextInput>
+              <TouchableOpacity style={styles.salebutton}
+                onPress={() => CheckVoucher(MaNhap)}
+              >                                                          
                   <Text style={{fontSize: 18, fontWeight: '600', color: '#C84B31'}}>Áp dụng</Text>
               </TouchableOpacity>
             </View>  
             <View style={styles.bottomView}>
               <View style={styles.textBottom}>
                 <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
-                <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{route.params.TongTien} đ</Text>
+                <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{TongTien} đ</Text>
               </View>
               <View>
                 <TouchableOpacity style={styles.buyButton} 

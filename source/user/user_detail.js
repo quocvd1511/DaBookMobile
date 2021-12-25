@@ -29,7 +29,7 @@ export default function user_detail()
     React.useEffect(() => 
     {
         async function fetchData(){
-            const request = await axios.get('http://192.168.1.9:3000/chitiettk?matk='+username)
+            const request = await axios.get('http://192.168.1.5:3000/chitiettk?matk='+username)
             setUsername(request.data.matk)
             setName(request.data.hoten)
             setPhoneNumber(request.data.sodt)
@@ -42,12 +42,12 @@ export default function user_detail()
         }
         fetchData();
 
-    },['http://192.168.1.9:3000/'])
+    },['http://192.168.1.5:3000/'])
 
     async function UpdateThongTinTK(Pattern)
     {
         console.log(Pattern)
-        const request = await axios.post('http://192.168.1.9:3000/updatethongtintk',{data: Pattern})
+        const request = await axios.post('http://192.168.1.5:3000/updatethongtintk',{data: Pattern})
         ToastAndroid.show(request.data.message, ToastAndroid.SHORT)
     }
 
@@ -109,21 +109,45 @@ export default function user_detail()
                     <Text style={styles.tiletext}>Địa chỉ email</Text>
                     <TextInput editable={OpenUpdate} value={Email} onChangeText={(text) => setEmail(text)} placeholder='Chưa cập nhật' style={styles.textinput}/>
                 </View>
+                
+                <View style={styles.button_change}>
+                    <Pressable
+                        style={
+                            ({pressed}) =>[{
+        
+                                opacity: pressed ? 0.5:1
+                            },
+                            //styles.button_login
+                        ]}
+                    >
+                            <Text style={{color:'black', fontWeight: 'bold'}}>Đổi mật khẩu </Text>
+                    </Pressable>
+                </View>
+
                 <View style={styles.line_address}>
                     <Text style={styles.tiletext_address}>Địa chỉ</Text>
                     <View style={{marginLeft: 10}}>
-                        <Text style={{fontWeight: '600', marginTop: 5}}>Tỉnh/Thành phố</Text>
-                        <TextInput editable={OpenUpdate} value={Tinh} onChangeText={(text) => setTinh(text)} style={styles.textinput_2} placeholder='Chưa cập nhật' />
-                        <Text style={{fontWeight: '600'}}>Quận/Huyện</Text>
-                        <TextInput editable={OpenUpdate} value={Huyen} onChangeText={(text) => setHuyen(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
-                        <Text style={{fontWeight: '600'}}>Phường/Xã</Text>
-                        <TextInput editable={OpenUpdate} value={Xa} onChangeText={(text) => setXa(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
-                        <Text style={{fontWeight: '600'}}>Chi tiết</Text>
-                        <TextInput editable={OpenUpdate} value={ChiTiet} onChangeText={(text) => setChiTiet(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
+                        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems:'center'}}>
+                            <Text style={{fontWeight: '600', marginTop: 5, width: 100}}>Tỉnh/Thành phố</Text>
+                            <TextInput editable={OpenUpdate} value={Tinh} onChangeText={(text) => setTinh(text)} style={styles.textinput_2} placeholder='Chưa cập nhật' />
+                        </View>
+                        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems:'center'}}>
+                            <Text style={{fontWeight: '600'}}>Quận/Huyện</Text>
+                            <TextInput editable={OpenUpdate} value={Huyen} onChangeText={(text) => setHuyen(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
+                        </View>
+                        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems:'center'}}>
+                            <Text style={{fontWeight: '600'}}>Phường/Xã</Text>
+                            <TextInput editable={OpenUpdate} value={Xa} onChangeText={(text) => setXa(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
+                        </View>
+                        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between',alignItems:'center'}}>
+                            <Text style={{fontWeight: '600'}}>Chi tiết</Text>
+                            <TextInput editable={OpenUpdate} value={ChiTiet} onChangeText={(text) => setChiTiet(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
+                        </View>
                     </View>
                 </View>  
             </View>
-            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
+            
+            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 0}}>
 
                 <View style={styles.button}>
                     <Pressable
@@ -217,7 +241,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 5,
         height: 36,
-        width: 280,
+        width: 210,
         borderWidth: 0.5,
     },
 
@@ -254,22 +278,37 @@ const styles = StyleSheet.create({
     },
 
     line_address:{
-
         backgroundColor: 'white',
         width: 350,
         marginTop: 10,
         borderBottomRightRadius: 20,
         borderTopRightRadius: 20,
         paddingBottom: 10,
+        marginBottom: 0,
+        height: 280,
     },
 
     button:{
         justifyContent: 'center', 
         alignItems: 'center', 
-        backgroundColor: 'dodgerblue', 
+        backgroundColor: '#FF6600', 
         borderRadius: 10,
         margin: 10,
         flex: 0.5,
         padding: 10,
+        marginTop: 0,
+    },
+
+    button_change: {
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        alignSelf: 'center',
+        backgroundColor: '#FF6600', 
+        borderRadius: 10,
+        margin: 10,
+        flex: 0.5,
+        padding: 10,
+        marginTop: 20,
+        width: 130,
     }
 }) 
