@@ -44,16 +44,19 @@ function ListProduct_New()
     //---------------Xu ly So luong------------------------
     //const [SoLuong, setSoLuong] = useState(1)
     var username=route.params.username
+    console.log(username, '  giohang')
     //console.log('skdslkadjlkasjdlkasjdlkasjdlksjlkdjaslkdjlaksjdlka'+username)
 
     const [UserInfor, setUserInfor] = useState('')
     const [ListVoucher, setListVoucher] = useState('')
+    const [refresh, SetRefresh] = useState(false)
+
     React.useEffect(() => 
     {
       async function fetchData() 
       {
         //-----------------------------Lay Thong Tin User---------------
-        var request = await axios.get('http://192.168.1.9:3000/chitiettk_voucher?matk='+username)
+        var request = await axios.get('http://192.168.43.180:3000/chitiettk_voucher?matk='+username)
         console.log(request.data)
         setUserInfor(request.data.taikhoan)
         if (request.data.taikhoan.giohang)
@@ -76,6 +79,7 @@ function ListProduct_New()
   
     },['http://192.168.1.9:3000/'])
 
+    console.log(ListProduct)
     const[TongTien, setTongTien] = useState(0)
     const[MaNhap, setMaNhap] = useState('')
     var TempListVoucher = ListVoucher
@@ -203,6 +207,14 @@ function ListProduct_New()
         navigation.navigate('Payment',{BuyedProduct,TongTien,UserInfor,ListVoucher})
       } else ToastAndroid.show('Không có sản phẩm nào được chọn',ToastAndroid.SHORT)
     }
+
+    function pullMe(){
+        SetRefresh(true)
+        
+        setTimeout(() => {                                                                
+          SetRefresh(false)
+        },1000)
+    }
     //------------------------------------------------------
     if(ListProduct)
     {
@@ -212,11 +224,11 @@ function ListProduct_New()
             <ScrollView
               refreshControl=
               {
-                <RefreshControl/>
+                <RefreshControl
+                refreshing={refresh}
+                onRefresh={()=> pullMe()}/>
               }
             >
-
-
               {/* //------------------------- */}
 
               <View>
@@ -276,7 +288,7 @@ function ListProduct_New()
                                   <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
                                 </TouchableOpacity>
 
-                                <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:15, color: '#333'}}>{ListProduct[index].SoLuong}</Text>
+                                <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:15, color: '#333'}}>{ListProduct[index].soluong}</Text>
 
                                 <TouchableOpacity 
                                 onPress={() => TangSoLuong(index)}
@@ -324,10 +336,12 @@ function ListProduct_New()
             <SafeAreaView style={{flex:1}}>
               {/* ----------------------------------------------------------- */}
               <ScrollView
-                refreshControl=
-                {
-                  <RefreshControl/>
-                }
+                 refreshControl=
+                 {
+                   <RefreshControl
+                   refreshing={refresh}
+                   onPress={()=> pullMe()}/>
+                 }
               >
 
 

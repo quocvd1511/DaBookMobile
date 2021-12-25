@@ -11,6 +11,7 @@ import ConfirmDetail from './confirm_detail';
 import HistoryLookup from './history_lookup';
 import VoucherDetail from './voucher_detail';
 import Login from '../login/login';
+import ChangePass from './change_pass';
 import { useRoute } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
@@ -51,6 +52,9 @@ export default function StackUserScreen() {
       <Stack.Screen 
         name='VoucherDetail'
         component={VoucherDetail}/>
+       <Stack.Screen 
+        name='ChangePassWord'
+        component={ChangePass}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

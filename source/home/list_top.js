@@ -29,7 +29,7 @@ function ListTop()
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.5:3000/')
+      const request = await axios.get('http://192.168.43.180:3000/')
       setBook(request.data.flash_sales)
       return request.data.flash_sales
     }

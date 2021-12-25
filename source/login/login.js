@@ -24,7 +24,7 @@ export default function Login()
         }
       else
       {
-        const request = await axios.post('http://192.168.1.9:3000',{
+        const request = await axios.post('http://192.168.43.180:3000',{
                 username: Username,
                 password: Password,
         })
@@ -40,7 +40,7 @@ export default function Login()
             setUsername('')
             setPassword('')
             navigation.navigate('TabScreen',{username: Username})
-            // navigation.navigate('book_detail',{user_session: request.data.user_session})
+            //navigation.navigate('book_detail',{user_session: Username})
         }
     }
     }
