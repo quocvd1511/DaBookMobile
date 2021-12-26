@@ -33,7 +33,7 @@ export default function StackUserScreen() {
       >
       <Stack.Screen
         name='UserScreen'
-        component={UserScreen} />
+        component={UserScreen} initialParams={{username: route.params.username}}/>
       <Stack.Screen
         name='UserDetail'
         component={user_detail} />

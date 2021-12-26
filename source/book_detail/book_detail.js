@@ -36,12 +36,12 @@ export default function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.1.2:3000/chitietsach/' + tensach )
       setBook(request.data.list_book)
       return request.data.list_book
     }
     fetchData();
-    },['http://192.168.1.5:3000/chitietsach'])
+    },['http://192.168.1.2:3000/chitietsach'])
 
 
     // Lấy dữ liệu của chi tiết sách
@@ -53,7 +53,7 @@ export default function book_detail_home(){
       return request.data.book
     }
     fetchData();
-    },['http://192.168.1.5:3000/chitietsach' + tensach])
+    },['http://192.168.1.2:3000/chitietsach' + tensach])
 	 console.log(detail_book);
 
         
@@ -80,7 +80,7 @@ export default function book_detail_home(){
 
     function addProduct(soluong){
             console.log(username + ' ' + detail_book.tensach + ' ' + soluong)
-            const request = axios.get('http://192.168.43.180:3000/themgiohang?username=' + username + '&tensach=' + detail_book.tensach + '&hinhanh=' + detail_book.hinhanh + '&giaban=' + detail_book.giaban + '&theloai=' + detail_book.theloai + '&soluong=' + soluong);
+            const request = axios.get('http://192.168.43.180:3000/themgiohang/' + username + '/' + detail_book.tensach + '/' + soluong);
            console.log(request.status);
     }
     
@@ -133,7 +133,7 @@ export default function book_detail_home(){
                             style={
                                 ({pressed}) =>[{
 
-                                    opacity: pressed ? 0.5:1
+                                    opacity: pressed ? 0.25:1
                                 },
                                 styles.add_cart
                             ]}
@@ -262,8 +262,8 @@ const styles = StyleSheet.create({
     add_cart: {
         backgroundColor: '#ff424e',
         height: 40,
-        marginBottom: -5,
-        marginTop: -5,
+        // marginBottom: -5,
+        // marginTop: -5,
         borderRadius: 5,
     },
 

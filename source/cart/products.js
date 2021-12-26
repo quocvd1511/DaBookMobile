@@ -11,6 +11,7 @@ import {
   TextInput,
   Dimensions,
   RefreshControl,
+  Pressable,
   ToastAndroid
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
@@ -44,8 +45,7 @@ function ListProduct_New()
     //---------------Xu ly So luong------------------------
     //const [SoLuong, setSoLuong] = useState(1)
     var username=route.params.username
-    console.log(username, '  giohang')
-    //console.log('skdslkadjlkasjdlkasjdlkasjdlksjlkdjaslkdjlaksjdlka'+username)
+    console.log('skdslkadjlkasjdlkasjdlkasjdlksjlkdjaslkdjlaksjdlka'+username)
 
     const [UserInfor, setUserInfor] = useState('')
     const [ListVoucher, setListVoucher] = useState('')
@@ -56,7 +56,7 @@ function ListProduct_New()
       async function fetchData() 
       {
         //-----------------------------Lay Thong Tin User---------------
-        var request = await axios.get('http://192.168.43.180:3000/chitiettk_voucher?matk='+username)
+        var request = await axios.get('http://192.168.1.5:3000/chitiettk_voucher?matk='+username)
         console.log(request.data)
         setUserInfor(request.data.taikhoan)
         if (request.data.taikhoan.giohang)
@@ -77,7 +77,7 @@ function ListProduct_New()
 
       fetchData()
   
-    },['http://192.168.1.9:3000/'])
+    },['http://192.168.1.5:3000/'])
 
     console.log(ListProduct)
     const[TongTien, setTongTien] = useState(0)
@@ -87,7 +87,7 @@ function ListProduct_New()
 
     // console.log('Temp List Voucher Nèeeeeeeeeeeee')
     // console.log(TempListVoucher)
-    //console.log(ListProduct)
+    console.log(ListProduct)
 
     function CheckVoucher(MaNhap)
     {
@@ -254,7 +254,21 @@ function ListProduct_New()
               
 
               {/* //-------------------------- */}
-              <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
+              <View style={{display: 'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between', height: 40, margin:5, marginRight: 10}}>
+                <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 0}}>Thông tin giỏ hàng</Text>
+                <Pressable
+                    style={
+                        ({pressed}) =>[{
+
+                            opacity: pressed ? 0.5:1
+                        },
+                        styles.qtyminus
+                    ]}
+                    >
+                    <Text style={{color:'#fff', fontSize: 18, marginTop: 6, textAlign:'center', alignItems: 'center'}} >Refresh</Text>
+                </Pressable>
+              </View>
+
               {
                   ListProduct.map((item,index) =>
                     {
@@ -372,7 +386,7 @@ function ListProduct_New()
                 {/* //-------------------------- */}
                 <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
                 {
-                     <Text style={{alignSelf: 'center'}}>Chưa có sản phẩm nào trong giỏ hành nha !!</Text>
+                     <Text style={{alignSelf: 'center'}}>Chưa có sản phẩm nào trong giỏ hàng!!</Text>
                 }
               </ScrollView>
               {/* ---------------------------------------------------------------------- */}
@@ -535,6 +549,14 @@ change: {
     marginLeft: 20,
 },
 
+qtyminus: {
+  backgroundColor:'#FF6600',
+  width: 100,
+  height: 40,
+  marginBottom: -5,
+  marginTop: -5,
+  borderRadius: 5,
+},
   
 });
 

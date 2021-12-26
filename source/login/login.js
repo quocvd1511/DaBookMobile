@@ -36,7 +36,7 @@ export default function Login()
             setUsername('')
             setPassword('')
         } else{
-            ToastAndroid.show("Xác thực thành công", ToastAndroid.SHORT)
+            ToastAndroid.show("Đăng nhập thành công", ToastAndroid.SHORT)
             setUsername('')
             setPassword('')
             navigation.navigate('TabScreen',{username: Username})

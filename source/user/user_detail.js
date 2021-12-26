@@ -47,7 +47,7 @@ export default function user_detail()
     async function UpdateThongTinTK(Pattern)
     {
         console.log(Pattern)
-        const request = await axios.post('http://192.168.1.5:3000/updatethongtintk',{data: Pattern})
+        const request = await axios.post('http://192.168.43.180:3000/updatethongtintk',{data: Pattern})
         ToastAndroid.show(request.data.message, ToastAndroid.SHORT)
     }
 
@@ -119,7 +119,7 @@ export default function user_detail()
                             },
                             //styles.button_login
                         ]}
-                        onPress={() => navigation.navigate('ChangePassword', {username: route.params.username})}
+                        onPress={() => navigation.navigate('ChangePassWord', {username: route.params.username})}
                     >
                             <Text style={{color:'black', fontWeight: 'bold'}}>Đổi mật khẩu </Text>
                     </Pressable>

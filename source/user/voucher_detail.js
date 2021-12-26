@@ -19,7 +19,7 @@ export default function VoucherDetail()
       React.useEffect(() => 
       {
         async function fetchData(){
-          const request = await axios.get('http://192.168.1.9:3000/danhsachvoucher/' + username)
+          const request = await axios.get('http://192.168.1.5:3000/danhsachvoucher/' + username)
           // setUser(request.data)
           setVoucher(request.data)
           // return request.data.thongtintk
@@ -27,7 +27,7 @@ export default function VoucherDetail()
         }
         fetchData();
     
-      },['http://192.168.1.9:3000/'])
+      },['http://192.168.1.5:3000/'])
 
       console.log('ahihi', Voucher)
 
