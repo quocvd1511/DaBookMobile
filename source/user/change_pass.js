@@ -4,10 +4,14 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import CheckBox from '@react-native-community/checkbox';
 import { TextInput } from 'react-native-gesture-handler'
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute} from '@react-navigation/native';
 
 export default function Logup()
 {
+
+    const route = useRoute()
+    var username=route.params.username
+    console.log(username, '  changepass')
 
     return(
         <View  style={styles.main}>

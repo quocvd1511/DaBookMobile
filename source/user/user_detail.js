@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Image, Dimensions, Pressable, ImageBackground, 
 
 import { Avatar } from 'react-native-elements/dist/avatar/Avatar';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -13,7 +13,7 @@ import axios from 'axios';
 export default function user_detail()
 {
 
-    
+    const navigation = useNavigation()
     const route = useRoute()
     const username = route.params.username
     const [Username, setUsername] = React.useState('')
@@ -29,7 +29,7 @@ export default function user_detail()
     React.useEffect(() => 
     {
         async function fetchData(){
-            const request = await axios.get('http://192.168.1.5:3000/chitiettk?matk='+username)
+            const request = await axios.get('http://192.168.43.180:3000/chitiettk?matk='+username)
             setUsername(request.data.matk)
             setName(request.data.hoten)
             setPhoneNumber(request.data.sodt)
@@ -119,6 +119,7 @@ export default function user_detail()
                             },
                             //styles.button_login
                         ]}
+                        onPress={() => navigation.navigate('ChangePassword', {username: route.params.username})}
                     >
                             <Text style={{color:'black', fontWeight: 'bold'}}>Đổi mật khẩu </Text>
                     </Pressable>

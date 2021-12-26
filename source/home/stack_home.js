@@ -3,7 +3,7 @@ import { Text, View, LogBox } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack'
 import { useEffect } from 'react';
-import { useRoute } from '@react-navigation/native';
+import {useNavigation, useRoute } from '@react-navigation/native';
 import book_detail_home from '../book_detail/book_detail';
 import SearchBar from './searchbar';
 import SearchBook from '../search_book/search_book';
@@ -11,11 +11,14 @@ import ListTop from './list_top';
 import Slider from './slider';
 import HomeScreen from './home';
 import VoucherScreen from '../voucher/voucher';
+import ListBook from './list_book';
+
 
 const Stack = createStackNavigator();
 export default function StackCatregory(){
 
     const route = useRoute();
+    const navigation = useNavigation();
 
      
   // const navigation = useNavigation(); 
@@ -34,17 +37,20 @@ export default function StackCatregory(){
           name='HomeScreen'
           component={HomeScreen} initialParams={{username: route.params.username}}/>
           <Stack.Screen
-          name='BookDetail'
-          component={book_detail_home} initialParams={{username: route.params.username}}/>
-          <Stack.Screen
           name='SearchBar'
           component={SearchBar} initialParams={{username: route.params.username}}/>
+          <Stack.Screen
+          name='ListBook'
+          component={ListBook} initialParams={{username: route.params.username}}/>
           <Stack.Screen
           name='ListTop'
           component={ListTop} initialParams={{username: route.params.username}}/>
           <Stack.Screen
           name='SearchBook'
           component={SearchBook} initialParams={{username: route.params.username}}/>
+           <Stack.Screen
+          name='BookDetail'
+          component={book_detail_home} initialParams={{username: route.params.username}}/>
           <Stack.Screen
           name='Slider'
           component={Slider} initialParams={{username: route.params.username}}/>
