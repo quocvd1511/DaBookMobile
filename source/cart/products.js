@@ -56,7 +56,7 @@ function ListProduct_New()
       async function fetchData() 
       {
         //-----------------------------Lay Thong Tin User---------------
-        var request = await axios.get('http://192.168.1.5:3000/chitiettk_voucher?matk='+username)
+        var request = await axios.get('http://192.168.1.3:3000/chitiettk_voucher?matk='+username)
         console.log(request.data)
         setUserInfor(request.data.taikhoan)
         if (request.data.taikhoan.giohang)
@@ -77,7 +77,7 @@ function ListProduct_New()
 
       fetchData()
   
-    },['http://192.168.1.5:3000/'])
+    },['http://192.168.1.3:3000/'])
 
     console.log(ListProduct)
     const[TongTien, setTongTien] = useState(0)

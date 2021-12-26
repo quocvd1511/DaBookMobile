@@ -3,6 +3,7 @@ import { SafeAreaView, View, FlatList, StyleSheet, Pressable, Text, TextInput, S
 import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import TabScreens from '../tab_src/tab';
+import Rating from 'react-simple-star-rating'
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -36,24 +37,24 @@ export default function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.2:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.1.3:3000/chitietsach/' + tensach )
       setBook(request.data.list_book)
       return request.data.list_book
     }
     fetchData();
-    },['http://192.168.1.2:3000/chitietsach'])
+    },['http://192.168.1.3:3000/chitietsach'])
 
 
     // Lấy dữ liệu của chi tiết sách
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.2:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.1.3:3000/chitietsach/' + tensach )
       setdetail_book(request.data.book)
       return request.data.book
     }
     fetchData();
-    },['http://192.168.1.2:3000/chitietsach' + tensach])
+    },['http://192.168.1.3:3000/chitietsach' + tensach])
 	 console.log(detail_book);
 
         
@@ -80,7 +81,7 @@ export default function book_detail_home(){
 
     function addProduct(soluong){
             console.log(username + ' ' + detail_book.tensach + ' ' + soluong)
-            const request = axios.get('http://192.168.1.2:3000/themgiohang/' + username + '/' + detail_book.tensach + '/' + soluong);
+            const request = axios.get('http://192.168.1.3:3000/themgiohang/' + username + '/' + detail_book.tensach + '/' + soluong);
            console.log(request.status);
     }
     
