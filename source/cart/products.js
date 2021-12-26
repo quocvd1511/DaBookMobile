@@ -77,7 +77,7 @@ function ListProduct_New()
 
       fetchData()
   
-    },['http://192.168.1.5:3000/'])
+    },['http://192.168.1.3:3000/'])
 
     console.log(ListProduct)
     const[TongTien, setTongTien] = useState(0)

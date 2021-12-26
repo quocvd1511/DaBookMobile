@@ -166,7 +166,7 @@ export default function UserScreen()
               </View>
               <View style={styles.caring_button_caring}>
                   <Image style={styles.icon_style_caring} source={require('../asset/icon/watch.png')}/>
-                  <Text style={styles.text_style_caring}>Sách Đã Xem</Text>
+                  <Text style={styles.text_style_caring}  onPress={() => navigation.navigate('BookHistory',{username: username})}>Sách Đã Xem</Text>
               </View>
           </View>
 

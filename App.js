@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import Home from './source/home/home';
 import Rank from './source/rank/tabs_rank';
-import book_detail from './source/book_detail/book_detail';
+import BookDetailHomeScreen from './source/book_detail/BookDetail_Home';
 import SearchBook from './source/search_book/search_book';
 import Voucher from './source/voucher/voucher';
 import Login from './source/login/login';
@@ -56,8 +56,8 @@ export default function App() {
         name='Rank'
         component={Rank}/>
       <Stack.Screen 
-        name='book_detail'
-        component={book_detail}/>
+        name='BookDetailHomeScreen'
+        component={BookDetailHomeScreen}/>
       <Stack.Screen 
         name='SearchBook'
         component={SearchBook}/>

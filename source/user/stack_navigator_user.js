@@ -10,8 +10,10 @@ import ShippingDetail from './shipping_detail';
 import ConfirmDetail from './confirm_detail';
 import Detail_History_Lookup from './detail_history_lookup';
 // import List_History_Lookup from './confirm_detail';
+import BookHistory from './book_history';
 import VoucherDetail from './voucher_detail';
 import ChangePass from './change_pass';
+
 import { useNavigation, useRoute} from '@react-navigation/native';
 
 const Stack = createStackNavigator();
@@ -57,6 +59,9 @@ export default function StackUserScreen() {
        <Stack.Screen 
         name='ChangePassWord' initialParams={{username: route.params.username}}
         component={ChangePass}/>
+       <Stack.Screen 
+        name='BookHistory'
+        component={BookHistory} initialParams={{username: route.params.username}}/>
       </Stack.Navigator>
   );
 

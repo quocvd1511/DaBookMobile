@@ -26,7 +26,7 @@ function ListBook()
     }
     fetchData();
 
-  },['http://192.168.1.2:3000/'])
+  },['http://192.168.1.3:3000/'])
 
   //---------------------------------------------------------------
    console.log(Book)
@@ -39,7 +39,7 @@ function ListBook()
           Book.map((item)=>
           {
             return(
-              <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('BookDetail', {tensach: item.tensach, username: username})}>
+              <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('BookDetailHomeScreen', {tensach: item.tensach, username: username})}>
                 <Image style={styles.image} source={{uri:item.hinhanh}}/>
                 <View  style={{paddingLeft:5 }}>
                   <Text style={styles.book_name}

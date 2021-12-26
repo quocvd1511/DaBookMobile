@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import * as React from 'react';
 import { ScrollView, StyleSheet, Text, View, LogBox } from 'react-native'
 import SearchBar from './searchbar'
 import TabType from './typetab';
