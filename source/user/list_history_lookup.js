@@ -5,27 +5,30 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 
 
+
 export default function List_History_Lookup() {
+
+  const route = useRoute()
+  const navigation = useNavigation()
+  const matk = route.params.username
+  const tinhtrang = 'giao hàng thành công'
+
   const [Book, setBook] = React.useState([])
   const [Donhang, setDonhang] = React.useState([])
   const [Thongtintk, setThongtintk] = React.useState([])
   const [Soluong, setSoluong] = React.useState([0])
-  const route = useRoute()
-  const matk = route.params.username
-  const tinhtrang = ['giao hàng thành công', 'giao hàng thất bại']
 
-    React.useEffect(() => 
-    {
-      async function fetchData()
-    {
-        const Sum = 0;
-        const request = await axios.get('http://192.168.1.3:3000/danhsachdonhang&matk=' + matk + '&tinhtrang=' + tinhtrang)
-        setDonhang(request.data.donhang_x)
-        setThongtintk(request.data.thongtintk)
-        setBook(request.data.book)
+  console.log(matk, tinhtrang)
+  React.useEffect(() => 
+  {
+    async function fetchData(){
+      const request = await axios.get('http://192.168.1.3:3000/danhsachdonhang/' + matk + '/' + tinhtrang)
+      setDonhang(request.data.donhang)
+      return request.data.donhang
     }
-    fetchData()
-    },['http://192.168.1.3:3000/'])
+    fetchData();
+
+  },['http://192.168.1.3:3000/'])
 
     console.log(Donhang)
 
@@ -34,7 +37,7 @@ export default function List_History_Lookup() {
         <View style={styles.container}>
               <ScrollView>
               <View style={styles.main}>
-              <Image style={styles.logo_header} source={require('../asset/icon/confirm.png')}/>
+              <Image style={styles.logo_header} source={require('../asset/icon/invoice.png')}/>
               <Text style={styles.text_header}>Đơn hàng của bạn</Text>
               </View>
                 {
@@ -43,18 +46,19 @@ export default function List_History_Lookup() {
                     <View key={item.id} style={styles.item}>
                         <View style={{flexDirection:'row', alignItems: 'center'}}>  
                             <View style={{backgroundColor: 'dodgerblue', padding: 25, borderRadius:5, margin: 10}}>
-                                <Image style={{height:50, width:50,tintColor: 'white'}} source={require('../asset/icon/check-bill.png')}/>
+                                <Image style={{height:50, width:50,tintColor: '#fff'}} source={require('../asset/icon/invoice.png')}/>
                             </View>
 
-                            <View style={{marginLeft:10}}>
-                                {/* <Text style={{color:'black', fontSize: 12}}>ID đơn hàng: {item.id}</Text> */}
-                                <Text style={{color:'black', fontSize: 16,}}>Ngày đặt hàng: {item.ngaylap}</Text>
+                            <View style={{marginLeft:5}}>
+                                <Text style={{color:'black', fontSize: 16}}>Mã đơn hàng: {item.madh}</Text>
                                 <Text style={{color: 'black', fontSize: 16}}>Giá tiền: {item.tongtien}</Text>
-                                <View style={{backgroundColor:'dodgerblue', margin:24, justifyContent:'center', borderRadius: 5, width: 100, marginBottom: 0, marginLeft: 90}}>
+                                <Text style={{color:'black', fontSize: 16,}}>Ngày đặt hàng: {item.ngaylap}</Text>
+                                <View style={{backgroundColor:'dodgerblue', margin:10, justifyContent:'center', borderRadius: 5, width: 100, marginBottom: 0, marginLeft: 90}}>
                                   <Pressable
                                     width={100}
                                     padding={5}
                                     alignItems={'center'}
+                                    onPress={() => navigation.navigate('Detail_HistoryLookup', {username: matk, madh: item.madh})}
                                   >
                                     <Text style={{color:'#fff', fontWeight:'500', fontSize: 15 }}>Chi Tiết</Text>
                                   </Pressable>
@@ -79,6 +83,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'dodgerblue',
         height: 100,
         margin: 5,
+        paddingLeft: 5,
         borderRadius: 5,
         flexDirection: 'row',
         alignItems: 'center'
@@ -123,15 +128,16 @@ const styles = StyleSheet.create({
     },
 
     logo_header:{
-        height: 80,
-        width: 80,
+        height: 70,
+        width: 70,
         marginLeft: 5,
+        tintColor: '#fff'
     },
 
     text_header:{
         marginLeft: 20,
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 20,
         color:'white'
     },
 

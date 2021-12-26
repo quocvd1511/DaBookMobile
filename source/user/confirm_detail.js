@@ -19,10 +19,8 @@ export default function PackingDetail() {
       async function fetchData()
     {
         const Sum = 0;
-        const request = await axios.get('http://192.168.43.180:3000/danhsachdonhang&matk=' + matk + '&tinhtrang=' + tinhtrang)
-        setDonhang(request.data.donhang_x)
-        setThongtintk(request.data.thongtintk)
-        setBook(request.data.book)
+        const request = await axios.get('http://192.168.43.180:3000/danhsachdonhang/' + matk + '/' + tinhtrang)
+        setDonhang(request.data.donhang)
     }
     fetchData()
     },['http://192.168.43.180:3000/'])
@@ -43,14 +41,14 @@ export default function PackingDetail() {
                     <View key={item.id} style={styles.item}>
                         <View style={{flexDirection:'row', alignItems: 'center'}}>  
                             <View style={{backgroundColor: 'dodgerblue', padding: 25, borderRadius:5, margin: 10}}>
-                                <Image style={{height:50, width:50,tintColor: 'white'}} source={require('../asset/icon/packing.png')}/>
+                                <Image style={{height:50, width:50,tintColor: 'white'}} source={require('../asset/icon/confirm.png')}/>
                             </View>
 
-                            <View style={{marginLeft:10}}>
-                                {/* <Text style={{color:'black', fontSize: 12}}>ID đơn hàng: {item.id}</Text> */}
-                                <Text style={{color:'black', fontSize: 16,}}>Ngày đặt hàng: {item.ngaylap}</Text>
+                            <View style={{marginLeft:5}}>
+                                <Text style={{color:'black', fontSize: 16}}>Mã đơn hàng: {item.madh}</Text>
                                 <Text style={{color: 'black', fontSize: 16}}>Giá tiền: {item.tongtien}</Text>
-                                <View style={{backgroundColor:'dodgerblue', margin:24, justifyContent:'center', borderRadius: 5, width: 100, marginBottom: 0, marginLeft: 90}}>
+                                <Text style={{color:'black', fontSize: 16,}}>Ngày đặt hàng: {item.ngaylap}</Text>
+                                <View style={{backgroundColor:'dodgerblue', margin:10, justifyContent:'center', borderRadius: 5, width: 100, marginBottom: 0, marginLeft: 90}}>
                                   <Pressable
                                     width={100}
                                     padding={5}

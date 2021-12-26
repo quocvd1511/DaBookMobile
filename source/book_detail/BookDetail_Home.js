@@ -8,8 +8,10 @@ import Rating from './ratings';
 export default function BookDetailHomeScreen() {
     return (
       <View style={{flex:1}}>
+        {/* <ScrollView> */}
               <BookDetail/>
               <Rating/>
+        {/* </ScrollView> */}
       </View>
     );
   }

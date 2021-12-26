@@ -11,7 +11,7 @@ import Tuoiteen from './Tuoiteen';
 import Ngontinh from './Ngontinh';
 import KinhDi from './Kinhdi';
 import PhongSu from './Phongsu';
-import book_detail_home from '../book_detail/book_detail';
+import BookDetailHomeScreen from '../book_detail/BookDetail_Home';
 import TabRanks from './tabs_rank';
 
 const Stack = createStackNavigator();
@@ -57,8 +57,8 @@ const Stack = createStackNavigator();
         name='Kinhdi'
         component={KinhDi} initialParams={{username: route.params.username}}/>
     <Stack.Screen 
-        name='BookDetail'
-        component={book_detail_home} initialParams={{username: route.params.username}}/>
+        name='BookDetailHomeScreen'
+        component={BookDetailHomeScreen} initialParams={{username: route.params.username}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
