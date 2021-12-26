@@ -28,7 +28,7 @@ export default function VoucherScreen() {
       {
         async function fetchData()
       {
-          const request = await axios.get('http://192.168.1.2:3000/danhsachvoucher_all')
+          const request = await axios.get('http://192.168.43.180:3000/danhsachvoucher_all')
           console.log(request.data)
           for(var i=0;i<request.data.length;i++)
           {

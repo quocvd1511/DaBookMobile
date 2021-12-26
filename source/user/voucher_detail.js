@@ -19,11 +19,11 @@ export default function VoucherDetail()
       React.useEffect(() => 
       {
         async function fetchData(){
-          const request = await axios.get('http://192.168.1.5:3000/danhsachvoucher/' + username)
+          const request = await axios.get('http://192.168.43.180:3000/danhsachvoucher/' + username)
           // setUser(request.data)
-          setVoucher(request.data)
+          setVoucher(request.data.khuyenmai)
           // return request.data.thongtintk
-          console.log(request.data)
+          console.log(request.data.khuyenmai)
         }
         fetchData();
     
@@ -44,7 +44,7 @@ export default function VoucherDetail()
                       return(
                       <View key={item.id} style={styles.item}>
                           <View style={{backgroundColor: 'dodgerblue', padding: 25, borderRadius:5, margin: 10}}>
-                              <Image style={{height:50, width:50, tintColor: '#ffd79d'}} source={{uri:item.img}}/>
+                              <Image style={{height:50, width:50, tintColor: '#ffd79d'}} source={require('../asset/icon/sale.png')}/>
                           </View>
 
                           <View style={{margin:3}}>
