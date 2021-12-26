@@ -14,6 +14,7 @@ import Login from './source/login/login';
 import Logup from './source/login/logup';
 import Payment from './source/payment/payment'
 import Cart from './source/cart/cart';
+import StackUserScreen from './source/user/stack_navigator_user';
 
 // import ListRank from './source/rank/list_rank';
 
@@ -36,15 +37,18 @@ export default function App() {
     <NavigationContainer  independent={true}>
       <Stack.Navigator
       screenOptions={{headerShown: false}}>
-        <Stack.Screen
+      <Stack.Screen
         name='Login'
         component={Login}/>
       <Stack.Screen
         name='Logup'
         component={Logup}/>
       <Stack.Screen 
-      name='TabScreen' 
-      component={TabScreen}/>
+        name='TabScreen' 
+        component={TabScreen}/>
+      <Stack.Screen
+      name='User'
+      component={StackUserScreen}/>
       <Stack.Screen
         name='Home'
         component={Home}/>

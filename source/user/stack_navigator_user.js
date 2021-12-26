@@ -27,7 +27,6 @@ export default function StackUserScreen() {
   }, [])
 
   return (
-    <NavigationContainer independent={true}>
       <Stack.Navigator
       screenOptions={{headerShown: false}}
       >
@@ -56,7 +55,6 @@ export default function StackUserScreen() {
         name='ChangePassWord' initialParams={{username: route.params.username}}
         component={ChangePass}/>
       </Stack.Navigator>
-    </NavigationContainer>
   );
 
 
