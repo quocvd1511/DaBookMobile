@@ -38,7 +38,7 @@ return (
       Book.map((item)=>
       {
         return(
-          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('book_detail', {tensach: item.tensach, username: username})}>
+          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('BookDetailHomeScreen', {tensach: item.tensach, username: username})}>
             <Image style={styles.image} source={{uri:item.hinhanh}}/>
             <View  style={{paddingLeft:5 }}>
               <Text style={styles.book_name}

@@ -9,7 +9,7 @@ import PackingDetail from './packing_detail';
 import ShippingDetail from './shipping_detail';
 import ConfirmDetail from './confirm_detail';
 import Detail_History_Lookup from './detail_history_lookup';
-// import List_History_Lookup from './confirm_detail';
+import List_History_Lookup from './list_history_lookup';
 import BookHistory from './book_history';
 import VoucherDetail from './voucher_detail';
 import ChangePass from './change_pass';
@@ -47,12 +47,12 @@ export default function StackUserScreen() {
       <Stack.Screen 
         name='ConfirmDetail'
         component={ConfirmDetail}/>
-      {/* <Stack.Screen 
+      <Stack.Screen 
         name='List_HistoryLookup'
-        component={List_History_Lookup}/> */}
-      {/* <Stack.Screen 
+        component={List_History_Lookup}/>
+      <Stack.Screen 
         name='Detail_HistoryLookup'
-        component={Detail_History_Lookup}/> */}
+        component={Detail_History_Lookup}/>
       <Stack.Screen 
         name='VoucherDetail'
         component={VoucherDetail} initialParams={{username: route.params.username}}/>
