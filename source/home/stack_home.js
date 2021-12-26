@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack'
 import { useEffect } from 'react';
 import {useNavigation, useRoute } from '@react-navigation/native';
-import book_detail_home from '../book_detail/book_detail';
+import BookDetailHomeScreen from '../book_detail/BookDetail_Home';
 import SearchBar from './searchbar';
 import SearchBook from '../search_book/search_book';
 import ListTop from './list_top';
@@ -49,8 +49,8 @@ export default function StackCatregory(){
           name='SearchBook'
           component={SearchBook} initialParams={{username: route.params.username}}/>
            <Stack.Screen
-          name='BookDetail'
-          component={book_detail_home} initialParams={{username: route.params.username}}/>
+          name='BookDetailHomeScreen'
+          component={BookDetailHomeScreen} initialParams={{username: route.params.username}}/>
           <Stack.Screen
           name='Slider'
           component={Slider} initialParams={{username: route.params.username}}/>
