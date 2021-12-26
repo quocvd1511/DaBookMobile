@@ -19,7 +19,7 @@ export default function PackingDetail() {
       async function fetchData()
     {
         const Sum = 0;
-        const request = await axios.get('http://192.168.43.180:3000/danhsachdonhang/' + matk + '/' + tinhtrang)
+        const request = await axios.get('http://192.168.43.180:3000/danhsachdonhang&matk=' + matk + '&tinhtrang=' + tinhtrang)
         setDonhang(request.data.donhang_x)
         setThongtintk(request.data.thongtintk)
         setBook(request.data.book)

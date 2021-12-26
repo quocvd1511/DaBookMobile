@@ -8,9 +8,9 @@ import user_detail from './user_detail';
 import PackingDetail from './packing_detail';
 import ShippingDetail from './shipping_detail';
 import ConfirmDetail from './confirm_detail';
-import HistoryLookup from './history_lookup';
+import Detail_History_Lookup from './detail_history_lookup';
+// import List_History_Lookup from './confirm_detail';
 import VoucherDetail from './voucher_detail';
-import Login from '../login/login';
 import ChangePass from './change_pass';
 import { useNavigation, useRoute} from '@react-navigation/native';
 
@@ -45,9 +45,12 @@ export default function StackUserScreen() {
       <Stack.Screen 
         name='ConfirmDetail'
         component={ConfirmDetail}/>
-      <Stack.Screen 
-        name='HistoryLookup'
-        component={HistoryLookup}/>
+      {/* <Stack.Screen 
+        name='List_HistoryLookup'
+        component={List_History_Lookup}/> */}
+      {/* <Stack.Screen 
+        name='Detail_HistoryLookup'
+        component={Detail_History_Lookup}/> */}
       <Stack.Screen 
         name='VoucherDetail'
         component={VoucherDetail} initialParams={{username: route.params.username}}/>
