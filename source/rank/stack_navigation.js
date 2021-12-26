@@ -33,7 +33,7 @@ const Stack = createStackNavigator();
       <Stack.Navigator
       screenOptions={{headerShown: false}}>
       <Stack.Screen
-      name='Tab_Screem'
+      name='Tab_Screen'
       component={TabRanks}/>
       <Stack.Screen
         name='Vanhoc'

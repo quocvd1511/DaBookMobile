@@ -4,10 +4,54 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import CheckBox from '@react-native-community/checkbox';
 import { TextInput } from 'react-native-gesture-handler'
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute} from '@react-navigation/native';
 
 export default function Logup()
 {
+
+    const route = useRoute()
+    var username=route.params.username
+    console.log(username, '  changepass')
+    const [Password, setPassword] = React.useState('')
+    const [Check_Password, setCheck_Password] = React.useState('')
+    const [New_PassWord, setNew_PassWord] = React.useState('')
+    const [Confirm_PassWord, setConfirmNew_PassWord] = React.useState('')
+    const [OpenUpdate, setOpenUpdate] = React.useState(false)
+    
+
+    
+    React.useEffect(() => 
+    {
+        async function fetchData(){
+            const request = await axios.get('http://192.168.43.180:3000/chitiettk?matk='+username)
+            setPassword(request.data.matkhau)
+            setOpenUpdate(false)
+        }
+        fetchData();
+
+    },['http://192.168.1.5:3000/'])
+
+    function XuLyXacNhan(){
+        console.log(Password, New_PassWord, New_PassWord, Confirm_PassWord)
+        if(!Check_Password){
+            ToastAndroid.show("Vui lòng nhập mật khẩu cũ", ToastAndroid.SHORT)
+        } else if(!New_PassWord){
+            ToastAndroid.show("Vui lòng nhập mật khẩu mới", ToastAndroid.SHORT)
+        }
+        else if(!Confirm_PassWord){
+            ToastAndroid.show("Vui lòng nhập xác nhận mật khẩu", ToastAndroid.SHORT)
+        } else if(Confirm_PassWord != New_PassWord){
+            ToastAndroid.show("Xác nhận mật khẩu không khớp", ToastAndroid.SHORT)
+        }
+        else if(Check_Password != Password)
+        {
+            ToastAndroid.show("Mật khẩu hiện tại không đúng", ToastAndroid.SHORT)
+        }else{
+            const request = axios.get('http://192.168.43.180:3000/capnhatmatkhau?username='+username +'&matkhau=' + New_PassWord)
+            ToastAndroid.show("Cập nhật thành công", ToastAndroid.SHORT)
+        }
+    }
+
 
     return(
         <View  style={styles.main}>
@@ -18,12 +62,12 @@ export default function Logup()
                 </View>
 
                 <View>
-                    <Text style={{marginBottom:5, marginTop: 25, color: '#000', fontSize: 16 }}> Nhập mật khẩu cũ</Text>
+                    <Text style={{marginBottom:5, marginTop: 25, color: '#000', fontSize: 16 }} > Nhập mật khẩu cũ</Text>
                     <View style={{flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333'}} source={require('../asset/icon/password.png')}/>
                         </View>
-                        <TextInput secureTextEntry={true} style={styles.pass_input} placeholder='Mật khẩu'></TextInput>
+                        <TextInput secureTextEntry={true} style={styles.pass_input} onChangeText={(text) => setCheck_Password(text)} placeholder='Mật khẩu'></TextInput>
                     </View>
                 </View>
 
@@ -33,7 +77,7 @@ export default function Logup()
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333'}} source={require('../asset/icon/password.png')}/>
                         </View>
-                        <TextInput secureTextEntry={true} style={styles.pass_input} placeholder='Mật khẩu'></TextInput>
+                        <TextInput secureTextEntry={true} style={styles.pass_input} placeholder='Mật khẩu' onChangeText={(text) => setNew_PassWord(text)}></TextInput>
                     </View>
                 </View>
 
@@ -43,7 +87,7 @@ export default function Logup()
                         <View style={styles.icon_input}>
                             <Image style={{height: 20, width: 20,marginLeft:5, tintColor:'#333',}} source={require('../asset/icon/password.png')}/>
                         </View>
-                        <TextInput secureTextEntry={true} style={styles.pass_input} placeholder='Mật khẩu'></TextInput>
+                        <TextInput secureTextEntry={true} style={styles.pass_input} placeholder='Mật khẩu'  onChangeText={(text) => setConfirmNew_PassWord(text)}></TextInput>
                     </View>
                 </View>
 
@@ -56,6 +100,7 @@ export default function Logup()
                     },
                     styles.button_login
                 ]}
+                onPress={XuLyXacNhan}
                 >
                 <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white',}}>Xác nhận</Text>
             </Pressable>

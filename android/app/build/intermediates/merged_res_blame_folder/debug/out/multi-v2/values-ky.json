@@ -1,6 +1,7 @@
 {
     "logs": [
         {
+<<<<<<< HEAD
             "outputFile": "D:\\Mobile\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ky\\values-ky.xml",
             "map": [
                 {
@@ -15,6 +16,12 @@
                 },
                 {
                     "source": "C:\\Users\\TanTh\\.gradle\\caches\\transforms-3\\5646db46e2cfb43e7b3d42f3054c498c\\transformed\\core-1.5.0\\res\\values-ky\\values-ky.xml",
+=======
+            "outputFile": "D:\\CODE_APP_DABOOK\\DaBookMobile\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ky\\values-ky.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\USER\\.gradle\\caches\\transforms-3\\5646db46e2cfb43e7b3d42f3054c498c\\transformed\\core-1.5.0\\res\\values-ky\\values-ky.xml",
+>>>>>>> 624bac106f3ee7178cf13f1d38de6d2b7b0d1cd4
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

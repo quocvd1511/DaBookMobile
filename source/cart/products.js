@@ -56,7 +56,11 @@ function ListProduct_New()
       async function fetchData() 
       {
         //-----------------------------Lay Thong Tin User---------------
+<<<<<<< HEAD
         var request = await axios.get('http://192.168.1.3:3000/chitiettk_voucher?matk='+username)
+=======
+        var request = await axios.get('http://192.168.43.180:3000/chitiettk_voucher?matk='+username)
+>>>>>>> 624bac106f3ee7178cf13f1d38de6d2b7b0d1cd4
         console.log(request.data)
         setUserInfor(request.data.taikhoan)
         if (request.data.taikhoan.giohang)

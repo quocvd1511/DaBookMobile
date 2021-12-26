@@ -12,12 +12,12 @@ import HistoryLookup from './history_lookup';
 import VoucherDetail from './voucher_detail';
 import Login from '../login/login';
 import ChangePass from './change_pass';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute} from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 export default function StackUserScreen() {
 
-  // const navigation = useNavigation(); 
+  const navigation = useNavigation(); 
   const route = useRoute()
   // console.log("Thông tin từ Stack")
   // console.log(route)
@@ -27,7 +27,6 @@ export default function StackUserScreen() {
   }, [])
 
   return (
-    <NavigationContainer independent={true}>
       <Stack.Navigator
       screenOptions={{headerShown: false}}
       >
@@ -51,12 +50,11 @@ export default function StackUserScreen() {
         component={HistoryLookup}/>
       <Stack.Screen 
         name='VoucherDetail'
-        component={VoucherDetail}/>
+        component={VoucherDetail} initialParams={{username: route.params.username}}/>
        <Stack.Screen 
-        name='ChangePassWord'
+        name='ChangePassWord' initialParams={{username: route.params.username}}
         component={ChangePass}/>
       </Stack.Navigator>
-    </NavigationContainer>
   );
 
 
