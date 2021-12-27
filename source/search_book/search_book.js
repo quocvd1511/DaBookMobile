@@ -26,13 +26,14 @@ export default function SearchBook(){
   const navigation = useNavigation();
   const route = useRoute();
   const name = route.params.name;
+  const username = route.params.username;
   console.log(name);
   
     const [Book,setBook] = React.useState([])
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.3:3000/search/' + name)
+      const request = await axios.get('http://192.168.43.180:3000/search/' + name)
       setBook(request.data.books)
       return request.data.books
     }
@@ -41,6 +42,13 @@ export default function SearchBook(){
     },['http://192.168.1.3:3000/search/name'])
 
 	 console.log(Book);
+
+   function BookViewed(index){
+    console.log(username + ' SÁCH ĐÃ XEM ' + Book[index].tensach)
+    const request = axios.get('http://192.168.43.180:3000/sachdaxem?username=' + username + '&tensach=' + Book[index].tensach + '&hinhanh=' + Book[index].hinhanh + '&giaban=' + Book[index].giaban);
+   console.log(request.data);
+   navigation.navigate('BookDetailHomeScreen', {tensach: Book[index].tensach, username: username})
+  }
     
     return(
         <ScrollView style = {styles.views}>
@@ -49,10 +57,10 @@ export default function SearchBook(){
       <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15,marginTop: 30}}>Kết quả tìm kiếm</Text>
       <ScrollView contentContainerStyle={styles.container}>
           {
-          Book.map((item)=>
+          Book.map((item, index)=>
           {
             return(
-              <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('BookDetailHomeScreen', {tensach: item.tensach})}>
+              <TouchableOpacity style={styles.item} onPress={() => BookViewed(index)}>
                 <Image style={styles.image} source={{uri:item.hinhanh}}/>
                 <View  style={{paddingLeft:5 }}>
                   <Text style={styles.book_name}

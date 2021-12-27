@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CountDown from 'react-native-countdown-component';
 import NumberFormat from 'react-number-format';
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const fontWeights = [
   "normal",
@@ -26,7 +26,9 @@ const fontWeights = [
 function ListTop() 
 {
   
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
+  const route = useRoute();
+  const username = route.params.username;
   const [Book,setBook] = React.useState([])
   
   React.useEffect(() => 
@@ -38,7 +40,15 @@ function ListTop()
     }
     fetchData();
 
-  },['http://192.168.1.3:3000/'])
+  },['http://192.168.1.6:3000/'])
+
+  function BookViewed(index){
+    console.log(username + ' SÁCH ĐÃ XEM ' + Book[index].tensach)
+    const request = axios.get('http://192.168.43.180:3000/sachdaxem?username=' + username + '&tensach=' + Book[index].tensach + '&hinhanh=' + Book[index].hinhanh + '&giaban=' + Book[index].giaban);
+   console.log(request.data);
+   navigation.navigate('BookDetailHomeScreen', {tensach: Book[index].tensach, username: username})
+  }
+
   return (
       <View style={styles.container}>
         <View style = {styles.flash_sale}>
@@ -60,9 +70,9 @@ function ListTop()
 
       <ScrollView horizontal={true}>
         { 
-          Book.map((item) => {
+          Book.map((item, index) => {
             return(
-              <TouchableOpacity onPress={() => navigation.navigate('book_detail', {tensach: item.tensach})}>
+              <TouchableOpacity onPress={() => BookViewed(index)}>
                 <View style={styles.item}>
                   <Image style={styles.img} source={{uri:item.hinhanh}}/>
                   <Text 

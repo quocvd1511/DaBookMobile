@@ -29,6 +29,13 @@ function ListBook()
 
   },['http://192.168.1.3:3000/'])
 
+  function BookViewed(index){
+    console.log(username + ' SÁCH ĐÃ XEM ' + Book[index].tensach)
+    const request = axios.get('http://192.168.43.180:3000/sachdaxem?username=' + username + '&tensach=' + Book[index].tensach + '&hinhanh=' + Book[index].hinhanh + '&giaban=' + Book[index].giaban);
+   console.log(request.data);
+   navigation.navigate('BookDetailHomeScreen', {tensach: Book[index].tensach, username: username})
+  }
+
   //---------------------------------------------------------------
    console.log(Book)
    console.log(windowWidth)
@@ -38,10 +45,10 @@ function ListBook()
       <Text style={{padding: 10, color:'blue', fontWeight:'600',fontSize:18, marginTop: 5, backgroundColor:'#fff', textAlign:'center'}}>Tất cả các sách</Text>
       <ScrollView contentContainerStyle={styles.container}>
           {
-          Book.map((item)=>
+          Book.map((item, index)=>
           {
             return(
-              <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('BookDetailHomeScreen', {tensach: item.tensach, username: username})}>
+              <TouchableOpacity style={styles.item} onPress={() => BookViewed(index)}>
                 <Image style={styles.image} source={{uri:item.hinhanh}}/>
                 <View  style={{paddingLeft:5 }}>
                   <Text style={styles.book_name}
