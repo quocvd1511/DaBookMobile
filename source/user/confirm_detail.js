@@ -3,6 +3,8 @@ import { Text, View, StyleSheet,Image, ScrollView, Pressable} from 'react-native
 import { color } from 'react-native-reanimated';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
+import NumberFormat from 'react-number-format';
+
 
 
 export default function PackingDetail() {
@@ -48,7 +50,9 @@ export default function PackingDetail() {
 
                             <View style={{marginLeft:5}}>
                                 <Text style={{color:'black', fontSize: 16}}>Mã đơn hàng: {item.madh}</Text>
-                                <Text style={{color: 'black', fontSize: 16}}>Giá tiền: {item.tongtien}</Text>
+                                <NumberFormat value={item.tongtien} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                renderText={(value) => <Text style={{color: 'black', fontSize: 16}}>Giá tiền: {value}</Text>}/> 
+                                {/* <Text style={{color: 'black', fontSize: 16}}>Giá tiền: {item.tongtien}</Text> */}
                                 <Text style={{color:'black', fontSize: 16,}}>Ngày đặt hàng: {item.ngaylap}</Text>
                                 <View style={{backgroundColor:'dodgerblue', margin:10, justifyContent:'center', borderRadius: 5, width: 100, marginBottom: 0, marginLeft: 90}}>
                                   <Pressable

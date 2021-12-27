@@ -5,6 +5,7 @@ import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimen
 //import {MapTag, ColorProfile} from 'glamorous'
 import axios from 'axios';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import NumberFormat from 'react-number-format';
 const windowWidth = Dimensions.get('window').width;
 
 
@@ -20,7 +21,7 @@ function ListBook()
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.6:3000/')
+      const request = await axios.get('http://192.168.43.180:3000/')
       setBook(request.data.books)
       return request.data.books
     }
@@ -47,7 +48,9 @@ function ListBook()
                         ellipsizeMode='tail'>{item.tensach}</Text>
                   <View style={{margin:10, marginTop:6, flexDirection:'row', alignItems:'center'}}>
                     <Image style={{height:22,width:22,tintColor:'dodgerblue'}} source={require('../asset/icon/cost.png')}/>
-                    <Text style={styles.book_price}> {item.giaban}đ</Text>
+                    <NumberFormat value={item.giaban} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                renderText={(value) => <Text style={styles.book_price}> {value}</Text>}/>
+                    {/* <Text style={styles.book_price}> {item.giaban}đ</Text> */}
                     <View style={styles.sale_off}>
                       <Text style={styles.sale_off_percent}> -{item.giamgia}%</Text>
                     </View>

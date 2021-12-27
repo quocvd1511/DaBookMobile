@@ -5,6 +5,7 @@ import axios from 'axios';
 import TabScreens from '../tab_src/tab';
 import Rating from 'react-simple-star-rating';
 import RatingScreen from './ratings';
+import NumberFormat from 'react-number-format';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -37,7 +38,7 @@ function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.6:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
       setBook(request.data.list_book)
       return request.data.list_book
     }
@@ -49,7 +50,7 @@ function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.6:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
       setdetail_book(request.data.book)
       return request.data.book
     }
@@ -94,8 +95,13 @@ function book_detail_home(){
             <Image style = {styles.image} source={{uri:detail_book.hinhanh}}/>
             <View style = {styles.view}>
                 <Text style = {styles.name}>{detail_book.tensach}</Text>
-                <Text style = {styles.newprice}>{detail_book.giaban} đ     
-                <Text style = {styles.price}>  {detail_book.giagoc} </Text></Text>
+                <NumberFormat value={detail_book.giagoc} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                renderText={(value) => <Text style = {styles.newprice}>{value}</Text>}/>
+                <NumberFormat value={detail_book.giaban} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                renderText={(value) => <Text style = {styles.price}>  {value} </Text>}/>
+                {/* <Text style = {styles.newprice}>{detail_book.giaban} đ     
+                <Text style = {styles.price}>  {detail_book.giagoc} </Text>
+                </Text> */}
                 <View style = {styles.viewstar}>
                     <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
                     <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
@@ -218,7 +224,9 @@ function book_detail_home(){
                                 numberOfLines={2}
                                 ellipsizeMode='tail'>{item.tensach}</Text>
                                 <View style={styles.viewinfo}>
-                                    <Text style={styles.bprice}>{item.giaban} đ</Text>
+                                <NumberFormat value={item.giaban} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                renderText={(value) => <Text style={styles.bprice}>{value}</Text>}/>
+                                    {/* <Text style={styles.bprice}>{item.giaban} đ</Text> */}
                                 </View>
                             </View>
                         </TouchableOpacity>

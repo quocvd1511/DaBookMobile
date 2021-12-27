@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Text, View, StyleSheet,Image, ScrollView, Pressable, TextInput} from 'react-native';
 import axios from 'axios';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import NumberFormat from 'react-number-format';
+
 
 export default function HistoryLookup()
 {
@@ -22,11 +24,11 @@ export default function HistoryLookup()
       {
         async function fetchData()
       {
-          const Sum = 0;
-          const request = await axios.get('http://192.168.1.6:3000/lichsudonhang/' + matk)
-          setDonhang(request.data.donhang_x)
-          setThongtintk(request.data.thongtintk)
-          //setBook(request.data.donhang_x.ds_sach)
+          const request = await axios.get('http://192.168.43.180:3000/chitietdonhang/' + matk + '/' + madh)
+          setDonhang(request.data.donhang)
+          setThongtintk(request.data.taikhoan)
+          setBook(request.data.books)
+          return request.data
       }
       fetchData()
       },['http://192.168.43.180:3000/'])
@@ -72,74 +74,29 @@ export default function HistoryLookup()
                 </View>
 
             {
-                Donhang.map((item) => 
-                {
-                        <View style={{paddingTop: 20}}>
-                        <View style={{backgroundColor:'#f0f8ff', borderRadius:5, borderWidth: 1, borderColor: '#1ba8ff', margin:5,}}>
-                        <Text style={styles.text_style}>Mã đơn hàng:  {Donhang.madh}</Text>
-                        <Text style={styles.text_style}>Ngày đặt hàng:  {Donhang.ngaylap}</Text>
-                        <Text style={styles.text_style}>Địa chỉ người nhận: {Donhang.thongtindonhang}</Text>
-                            <View style={{backgroundColor:'#f0f8ff'}}>
-                                <View style={styles.main}>
-                                    <View style={styles.type_user}>
-                                        <Image style={styles.icon_style} source={require('../asset/icon/location.png')}/>
-                                        <Text style={{fontSize: 16, color: '#444'}}>{Thongtintk.hoten}</Text>
-                                    </View>
-
-                                    <View style={styles.type_numberphone}>
-                                        <Text style={{fontSize: 16, color: '#444'}}>SĐT: {Thongtintk.sodt}</Text>
-                                    </View>
-                                </View>
-                                <View style={styles.address}>
-                                    <Text style={{fontSize: 16, color: '#444'}}>Địa chỉ: {Thongtintk.diachigoc}</Text>
-                                </View>
-                            </View>
-                        <View style={styles.deli_dabook}>
-                            <Text style={styles.text_style}>Được giao bởi: </Text>
-                            <Image style={styles.deli_style} source={require('../asset/icon/dabook_deli.png')}/>
-                        </View>
-                    </View>
-
-                {
-                    Book.map((item) => {
-                        return(
-                            <View style = {styles.view1}>
-                            <Image style = {styles.img_book} source={{uri:item.hinhanh}}/>    
-                            <View>
-                                <Text style={styles.book_name} numberOfLines={2}
-                                    ellipsizeMode='tail'>{item.tensach}</Text>
-                                <View style={{display: 'flex', flexDirection: 'row', marginTop: 10, marginRight:10,}}>
-                                    <Text style = {styles.price}>SL: {item.SoLuong} </Text>
-                                    <Text style={styles.newprice}>{item.giaban} đ</Text>
-                                </View>
+                Book.map((item) => {
+                    return(
+                        <View style = {styles.view1}>
+                        <Image style = {styles.img_book} source={{uri:item.hinhanh}}/>    
+                        <View>
+                            <Text style={styles.book_name} numberOfLines={2}
+                                ellipsizeMode='tail'>{item.tensach}</Text>
+                            <View style={{display: 'flex', flexDirection: 'row', marginTop: 10, marginRight:10,}}>
+                                <Text style = {styles.price}>SL: {item.soluong} </Text>
+                                <NumberFormat value={item.giaban} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                renderText={(value) => <Text style={styles.newprice}>{value}</Text>}/> 
+                                {/* <Text style={styles.newprice}>{item.giaban}</Text> */}
                             </View>
                         </View>
-                        )
-                    })
-                }
-                    <View style = {styles.view2}>
-                        <Text style={{fontSize: 16, color: 'blue'}}>{Donhang.soluongsach} sản phẩm</Text>
-                        <Text style={{fontSize: 16}}>Thành tiền:<Text style={styles.newprice}> {Donhang.tongtien} đ</Text></Text>
                     </View>
-                    <View style = {styles.view3}>
-                        <Text style={{fontSize: 17, color: 'green'}}>{Donhang.tinhtrangdonhang}</Text>
-                        <Pressable 
-                            backgroundColor={'#FF6600'}
-                            width={100}
-                            height={34}
-                            marginBottom={-5}
-                            marginTop={-5}
-                            borderRadius={5}>
-                            <Text style={{color:'#fff', fontSize: 17, margin: 5, textAlign:'center'}} >Mua lại</Text>
-                        </Pressable>
-                    </View>
-                </View>
-
-            })
+                    )
+                })
             }
                 <View style = {styles.view2}>
                     <Text style={{fontSize: 16, color: 'blue'}}>Voucher: {Voucher}</Text>
-                    <Text style={{fontSize: 16}}>Thành tiền:<Text style={styles.newprice}> {Donhang.tongtien} đ</Text></Text>
+                    <NumberFormat value={Donhang.tongtien} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                renderText={(value) =<Text style={{fontSize: 16}}>Thành tiền: <Text style={styles.newprice}>{value}</Text></Text>}/> 
+                    {/* <Text style={{fontSize: 16}}>Thành tiền:<Text style={styles.newprice}> {Donhang.tongtien} đ</Text></Text> */}
                 </View>
                 <View style = {styles.view3}>
                     <Text style={{fontSize: 17, color: 'green'}}>{Donhang.tinhtrangdonhang}</Text>

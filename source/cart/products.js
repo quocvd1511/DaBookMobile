@@ -19,7 +19,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation, useRoute} from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useFocusEffect } from '@react-navigation/native';
-
+import NumberFormat from 'react-number-format';
 const windowWidth = Dimensions.get('window').width;
 
 // const navigation = useNavigation(); 
@@ -34,20 +34,19 @@ const ListProduct_New = ({navigation, route}) =>
 {
     const[Refresh, setRefresh] = useState(1)
     const[temp, settemp] = useState(0)
-    console.log("CMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMm")
     const [ListProduct, setProduct] = useState([
-      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1, Pick: false},
-      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1, Pick: false},
-      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1, Pick: false},
-      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1, Pick: false},
-      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1, Pick: false},
-      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1, Pick: false},
-      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1, Pick: false}
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', soluong: 1, Pick: false},
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', soluong: 1, Pick: false},
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', soluong: 1, Pick: false},
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', soluong: 1, Pick: false},
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', soluong: 1, Pick: false},
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', soluong: 1, Pick: false},
+      {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', soluong: 1, Pick: false}
     ])
     //---------------Xu ly So luong------------------------
     //const [SoLuong, setSoLuong] = useState(1)
     var username=route.params.username
-    console.log('skdslkadjlkasjdlkasjdlkasjdlksjlkdjaslkdjlaksjdlka'+username)
+    console.log('skdslkadjlkasjdlkasjdlkasjdlksjlkdjaslkdjlaksjdlka   '+username)
 
     const [UserInfor, setUserInfor] = useState('')
     const [ListVoucher, setListVoucher] = useState('')
@@ -58,8 +57,7 @@ const ListProduct_New = ({navigation, route}) =>
       async function fetchData() 
       {
         //-----------------------------Lay Thong Tin User---------------
-        var request = await axios.get('http://192.168.1.6:3000/chitiettk_voucher?matk='+username)
-        console.log(request.data)
+        var request = await axios.get('http://192.168.43.180:3000/chitiettk_voucher?matk='+username)
         setUserInfor(request.data.taikhoan)
         if (request.data.taikhoan.giohang)
         {
@@ -82,7 +80,6 @@ const ListProduct_New = ({navigation, route}) =>
 
     // console.log('Temp List Voucher Nèeeeeeeeeeeee')
     // console.log(TempListVoucher)
-    console.log(ListProduct)
 
     function CheckVoucher(MaNhap)
     {
@@ -120,14 +117,16 @@ const ListProduct_New = ({navigation, route}) =>
 
     function Cal(index)
     {
-      // console.log(isChecked(index))
+
+      console.log('Nhân Zooooooooooooooooo ', ListProduct[index].giaban*ListProduct[index].soluong)
+
       if(isChecked(index))
       {
         ListProduct[index].Pick = false
         //setProduct(ListProduct)
          console.log(ListProduct[index].Pick)
         //ListProduct[index].SoLuong===0) ListProduct[index].SoLuong=1
-        setTongTien(TongTien-(parseInt(ListProduct[index].giaban)*ListProduct[index].SoLuong))
+        setTongTien(TongTien-(ListProduct[index].giaban*ListProduct[index].soluong))
         settemp(temp+1)
       } else
       {
@@ -135,17 +134,18 @@ const ListProduct_New = ({navigation, route}) =>
         //setProduct(ListProduct)
         console.log(ListProduct[index])
         // console.log(ListProduct[index].Pick)
-         if(ListProduct[index].SoLuong===0) ListProduct[index].SoLuong=1
-        setTongTien(TongTien+(parseInt(ListProduct[index].giaban)*ListProduct[index].SoLuong))
+         if(ListProduct[index].soluong===0) ListProduct[index].soluong=1
+        setTongTien(TongTien+(ListProduct[index].giaban*ListProduct[index].soluong))
         settemp(temp+1)
       }
+      console.log('Tổng tiền nèeeeeeeeeeeeee', TongTien)
     }
 
     function TangSoLuong(index)
     {
-        let soluong = parseInt(ListProduct[index].SoLuong);
+        let soluong = parseInt(ListProduct[index].soluong);
         soluong = soluong + 1;
-        ListProduct[index].SoLuong = soluong;
+        ListProduct[index].soluong = soluong;
         setProduct(ListProduct)
         if(isChecked(index))
         {
@@ -157,13 +157,13 @@ const ListProduct_New = ({navigation, route}) =>
 
     function GiamSoLuong(index)
     {
-      if(ListProduct[index].SoLuong>0)
+      if(ListProduct[index].soluong>0)
       {
-      ListProduct[index].SoLuong-=1
+      ListProduct[index].soluong-=1
       setProduct(ListProduct)
       if(isChecked(index))
         {
-          if(ListProduct[index].SoLuong===0)
+          if(ListProduct[index].soluong===0)
           {
             ListProduct[index].Pick=false
           }
@@ -177,7 +177,7 @@ const ListProduct_New = ({navigation, route}) =>
     {
       if(isChecked(index))
       {
-        setTongTien(TongTien-ListProduct[index].SoLuong*parseInt(ListProduct[index].giaban))
+        setTongTien(TongTien-ListProduct[index].soluong*parseInt(ListProduct[index].giaban))
       }
       //console.log('Haaaaaaaaaaaaaaaaaaaa' + UserInfor.matk +" " + ListProduct[index].tensach)
       var request = axios.get('http://192.168.1.9:3000/xoasanpham/' + UserInfor.matk + '/' + ListProduct[index].tensach)
@@ -278,9 +278,12 @@ const ListProduct_New = ({navigation, route}) =>
                                 ellipsizeMode='tail' >{item.tensach}</Text>
                             </View>
                             <View style={styles.end}>
-                              <Text style={styles.priceStyle}>
+                            <NumberFormat value={item.giaban} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                             renderText={(value) => <Text style={styles.priceStyle}> {value} </Text>}/>
+
+                              {/* <Text style={styles.priceStyle}>
                               {item.giaban} đ
-                              </Text>
+                              </Text> */}
                             </View>
                             <View style={{display:'flex', flexDirection:'row', justifyContent: 'space-between',  alignItems:'center',  marginRight: -10, padding: 15, paddingRight: 0 }}>
                               <View style={{display:'flex', flexDirection:'row', alignItems: 'center'}}>
@@ -320,7 +323,9 @@ const ListProduct_New = ({navigation, route}) =>
             <View style={styles.bottomView}>
               <View style={styles.textBottom}>
                 <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
-                <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{TongTien} đ</Text>
+                <NumberFormat value={TongTien} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                             renderText={(value) => <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{value}</Text>}/>
+                {/* <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{TongTien} đ</Text> */}
               </View>
               <View>
                 <TouchableOpacity style={styles.buyButton} 

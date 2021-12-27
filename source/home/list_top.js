@@ -5,6 +5,7 @@ const windowHeight = Dimensions.get('window').height;
 const flexDirections = ['row', 'row-reverse', 'column', 'column-reverse'];
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CountDown from 'react-native-countdown-component';
+import NumberFormat from 'react-number-format';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
@@ -31,7 +32,7 @@ function ListTop()
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.6:3000/')
+      const request = await axios.get('http://192.168.43.180:3000/')
       setBook(request.data.flash_sales)
       return request.data.flash_sales
     }
@@ -68,8 +69,12 @@ function ListTop()
                   style={styles.name_item}
                   numberOfLines={2}
                   ellipsizeMode='tail'>{item.tensach}</Text>
-                  <Text style={styles.newprice}>{item.giaban} đ</Text>
-                  <Text style = {styles.price}>  {item.giagoc} </Text>
+                  <NumberFormat value={item.giaban} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                renderText={(value) => <Text style={styles.newprice}> {value}</Text>}/>
+                  <NumberFormat value={item.giagoc} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                renderText={(value) => <Text style={styles.price}> {value}</Text>}/>
+                  {/* <Text style={styles.newprice}>{item.giaban} đ</Text>
+                  <Text style = {styles.price}>  {item.giagoc} </Text> */}
                   <View style={styles.sale_off}>
                       <Text style={styles.sale_off_percent}> -{item.giamgia}%</Text>
                     </View>

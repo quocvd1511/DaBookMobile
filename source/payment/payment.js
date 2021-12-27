@@ -6,6 +6,7 @@ import Info_User from './info_ad';
 import { useRoute, useNavigation} from '@react-navigation/native';
 import { RadioButton } from 'react-native-paper';
 import axios from 'axios';
+import NumberFormat from 'react-number-format';
 const windowWidth = Dimensions.get('window').width;
 
 export default function Payment() 
@@ -233,7 +234,9 @@ export default function Payment()
                         </View>
                         <View style={styles.end}>
                           <Text>SL: {item.SoLuong}</Text>
-                          <Text style={styles.priceStyle}>{item.TongTien} đ</Text>
+                          <NumberFormat value={item.TongTien} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                renderText={(value) => <Text style={styles.priceStyle}>Giá tiền: {value}</Text>}/> 
+                          {/* <Text style={styles.priceStyle}>{item.TongTien} đ</Text> */}
                         </View>
                       </View>
                     </View>
