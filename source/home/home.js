@@ -15,8 +15,8 @@ export default function HomeScreen() {
     <View style={{flex:1}}>
         <HeaderHome/>
         <ScrollView>
-            <ListTop/>
             <Slider/>
+            <ListTop/>
             <ListTopSale/>
             <ListBook/>
         </ScrollView>

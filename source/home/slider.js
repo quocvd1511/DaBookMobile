@@ -6,12 +6,12 @@ import { useNavigation } from '@react-navigation/native';
 
 
 const {width} = Dimensions.get("window")
-const height = width * 0.4
+const height = width * 0.33333333
 
 let list_slide=[
-    <Image source={require('../asset/icon/banner6.png')}/>,
-    <Image source={require('../asset/icon/banner7.png')}/>,
-    <Image source={require('../asset/icon/banner8.png')}/>
+    <Image source={require('../asset/icon/banner5.png')}/>,
+    <Image source={require('../asset/icon/banner4.png')}/>,
+    // <Image source={require('../asset/icon/banner8.png')}/>
 ]
 
 export default function Slider()
@@ -26,8 +26,8 @@ export default function Slider()
                 style={{width, height}}
                 showsHorizontalScrollIndicator={false}
                 >
-                <Image style={{width, height}} source={require('../asset/icon/banner6.png')}/>
-                <Image style={{width, height}} source={require('../asset/icon/banner7.png')}/>
+                <Image style={{width, height}} source={require('../asset/icon/banner5.png')}/>
+                <Image style={{width, height}} source={require('../asset/icon/banner4.png')}/>
                 <Image style={{width, height}} source={require('../asset/icon/banner8.png')}/>
             </ScrollView>
             <View style={{flexDirection: 'row', position:'absolute', bottom:0, alignSelf:'center'}}>
