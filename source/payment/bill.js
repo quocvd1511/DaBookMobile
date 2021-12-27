@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Text, View, StyleSheet,Image, ScrollView, Pressable, TextInput} from 'react-native';
 import { useRoute, useNavigation, NavigationContainer } from '@react-navigation/native';
+import NumberFormat from 'react-number-format';
+
 
 export default function BillUp()
 {

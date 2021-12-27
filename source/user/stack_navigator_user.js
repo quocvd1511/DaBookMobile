@@ -64,7 +64,7 @@ export default function StackUserScreen() {
        <Stack.Screen 
         name='BookHistory'
         component={BookHistory} initialParams={{username: route.params.username}}/>
-       <Stack.Screen 
+       <Stack.Screen
         name='Cart'
         component={StackCartScreen} initialParams={{username: route.params.username}}/>
       </Stack.Navigator>
