@@ -86,7 +86,7 @@ function book_detail_home(){
 
     function addProduct(soluong){
             console.log(username + ' ' + detail_book.tensach + ' ' + soluong)
-            const request = axios.get('http://192.168.1.6:3000/themgiohang/' + username + '/' + detail_book.tensach + '/' + soluong);
+            const request = axios.get('http://192.168.43.180:3000/themgiohang?username=' + username + '&tensach=' + detail_book.tensach + '&soluong=' + soluong + '&theloai=' + detail_book.theloai + '&hinhanh=' + detail_book.hinhanh + '&giaban=' + detail_book.giaban);
            console.log(request.status);
     }
     

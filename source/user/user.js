@@ -159,10 +159,16 @@ export default function UserScreen()
         {/* //=====================Caring---------------------------- */}
         <View>
               <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15, margin: 10,}}>Quan Tâm</Text>
-              <View style={styles.caring_button_caring}>
-                  <Image style={styles.icon_heart_caring} source={require('../asset/icon/heart.png')}/>
-                  <Text style={styles.text_style_caring}>Sách Đã Thích</Text>
-              </View>
+              <Pressable style={styles.caring_button_caring} style={
+                    ({pressed}) =>[{
+
+                        opacity: pressed ? 0.5:1
+                    },
+                    styles.searching_history
+                ]}  onPress={() => navigation.navigate('Cart',{username: username})}>
+                  <Image style={styles.icon_heart_caring} source={require('../asset/icon/cart.png')}/>
+                  <Text style={styles.text_style_caring} >Giỏ hàng của bạn</Text>
+              </Pressable>
               <View style={styles.caring_button_caring}>
                   <Image style={styles.icon_style_caring} source={require('../asset/icon/watch.png')}/>
                   <Text style={styles.text_style_caring}  onPress={() => navigation.navigate('BookHistory',{username: username})}>Sách Đã Xem</Text>

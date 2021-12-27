@@ -62,16 +62,16 @@ export default function TabScreen() {
                 )
                 break;
 
-                case "Cart":
-                  iconName= focused ? 'cart':'cart-outline'
-                  size = focused ? 25 : 24
-                  return(
-                    <Ionicons
-                    name={iconName}
-                    size={size}
-                    />
-                  )
-                  break;
+                // case "Cart":
+                //   iconName= focused ? 'cart':'cart-outline'
+                //   size = focused ? 25 : 24
+                //   return(
+                //     <Ionicons
+                //     name={iconName}
+                //     size={size}
+                //     />
+                //   )
+                //   break;
 
               case "User":
                 iconName= focused ? 'ios-person':'ios-person-outline'
@@ -102,7 +102,7 @@ export default function TabScreen() {
           <Tab.Screen name="Home" component={HomeScreen} initialParams={{username: user_session}} />
           <Tab.Screen name="Category" component={CategoryScreen} initialParams={{username: user_session}}/>
           <Tab.Screen name="Voucher" component={VoucherScreen} initialParams={{username: user_session}}/>
-          <Tab.Screen name="Cart" component={StackCartScreen} initialParams={{username: user_session}}/>
+          {/* <Tab.Screen name="Cart" component={StackCartScreen} initialParams={{username: user_session}}/> */}
           <Tab.Screen name="User" component={StackUserScreen} initialParams={{username: user_session}}/>
         </Tab.Navigator>
     );

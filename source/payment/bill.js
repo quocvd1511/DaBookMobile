@@ -37,7 +37,7 @@ export default function BillUp()
                                 </View>
                             </View>
                             <View style={styles.address}>
-                                <Text style={{fontSize: 16}}>Địa chỉ: {UserInfor.diachigoc}</Text>
+                                <Text style={{fontSize: 16}}>Địa chỉ: {UserInfor.diachi}</Text>
                             </View>
                         </View>
                     <View style={styles.deli_dabook}>

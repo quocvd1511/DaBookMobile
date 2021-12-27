@@ -193,7 +193,7 @@ export default function Payment()
                   </View>
                   
                   <View style={styles.address}>
-                      <Text style={styles.text_style}>Địa chỉ: {UserInfor.diachigoc}</Text>
+                      <Text style={styles.text_style}>Địa chỉ: {UserInfor.diachi}</Text>
                   </View>
                   <View style={{backgroundColor: '#fff', padding: 10}}>
                       <Text style={styles.change}>Thay đổi</Text>
@@ -233,8 +233,8 @@ export default function Payment()
                               ellipsizeMode='tail'>{item.tensach}</Text>
                         </View>
                         <View style={styles.end}>
-                          <Text>SL: {item.SoLuong}</Text>
-                          <NumberFormat value={item.TongTien} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                          <Text>SL: {item.soluong}</Text>
+                          <NumberFormat value={item.tongtien} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
                                 renderText={(value) => <Text style={styles.priceStyle}>Giá tiền: {value}</Text>}/> 
                           {/* <Text style={styles.priceStyle}>{item.TongTien} đ</Text> */}
                         </View>
@@ -286,7 +286,9 @@ export default function Payment()
             <View style={styles.bottomView}>
               <View style={styles.textBottom}>
                 <Text style={{fontSize: 18, color: 'black'}}>Tổng cộng</Text>
-                <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{TongTien} đ</Text>
+                <NumberFormat value={TongTien} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                    renderText={(value) => <Text style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{value}</Text>}/> 
+                {/* <Text  style={{fontSize: 25, fontWeight: 'bold', color: '#C84B31'}}>{TongTien} đ</Text> */}
               </View>
               <View>
                 <TouchableOpacity style={styles.buyButton} 
