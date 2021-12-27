@@ -33,7 +33,7 @@ export default function SearchBook(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.43.180:3000/search/' + name)
+      const request = await axios.get('http://192.168.1.3:3000/search/' + name)
       setBook(request.data.books)
       return request.data.books
     }
