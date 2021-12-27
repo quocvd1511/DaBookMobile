@@ -25,7 +25,6 @@ export default function UserScreen()
               </View>
               <View style={styles.name_point}>
                   <Text style={styles.username}>{username}</Text>
-                  <Text style={styles.userpoint}>Điểm tích lũy: 100000000</Text>
               </View>
           </View>
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View, ScrollView, SafeAreaView, Image, StyleSheet,TextInput, Dimensions , FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, ScrollView, SafeAreaView, Image, StyleSheet,TextInput, Dimensions , FlatList, TouchableOpacity, ToastAndroid } from 'react-native';
 import HeaderCart from './header_pm';
 import ListProduct from './list_product';
 import Info_User from './info_ad';
@@ -27,33 +27,85 @@ export default function Payment()
 
   var ListBuyed = route.params.BuyedProduct
   var UserInfor = route.params.UserInfor
-  var ListVoucher = route.params.ListVoucher
+  const [ListVoucher, setListVoucher] = React.useState([])
+
+  React.useEffect(() => 
+  {
+    async function fetchData() 
+    {
+      //-----------------------------Lay Thong Tin User---------------
+      var request = await axios.get('http://192.168.1.9:3000/chitiettk_voucher?matk='+UserInfor.matk)
+      setListVoucher(request.data.khuyenmai)
+
+      //-------------------------------Lay Thong Voucher--------------------------------------
+    }
+
+    fetchData()
+
+  },['http://192.168.1.9:3000/'])
+
   let Temp = route.params.TongTien
   var TempListVoucher = ListVoucher
+  var TempListVoucher_2 = TempListVoucher
   const[TongTien, setTongTien] = React.useState(route.params.TongTien)
+  const[TienGiam, setTienGiam] = React.useState(0)
   //var TongTien = route.params.TongTien
   const[MaNhap, setMaNhap] = React.useState('')
   const[temp, settemp] = React.useState(0)
-  console.log(TongTien)
+  //console.log(TongTien)
   //setTongTien(Temp)
   //console.log('Voucher nèeeeeeeeeeeeeeee')
   //console.log(TempListVoucher)
+    // today = new Date()
+    // console.log(today)
+  function CheckDate(date)
+  {
+    var today = new Date()
+    //var today_p = today.getDate()+'/'+today.getMonth() + '/' + today.getFullYear()
+    //console.log(today_p)
+    // console.log(date)
+    date = Date.parse(date)
+    var today_p = Date.parse(today)
+    // console.log(today_p)
+    // console.log(date)
+     if(date<=today_p) return false
+     return true
+  }
+
   function CheckVoucher(MaNhap)
   {
       console.log('Check Voucher nè')
       console.log(TempListVoucher)
+      //console.log(typeof TempListVoucher[0].ngaykt)
         var flag=false
+        var flag1=false
         for(var i=0;i<TempListVoucher.length;i++)
         {
           if(TempListVoucher[i].manhap===MaNhap)
           {
             flag=true
-            setTongTien(TongTien - (parseInt(TempListVoucher[i].phantram)/100)*TongTien)
-            console.log(TongTien)
-            TempListVoucher[i].manhap+="######"
-            setMaNhap('')
-            settemp(temp-1)
+            //console.log(CheckDate(TempListVoucher[i].ngaykt))
+            if(CheckDate(TempListVoucher[i].ngaykt))
+            {
+              setTongTien(TongTien - (parseInt(TempListVoucher[i].phantram)/100)*TongTien)
+              setTienGiam(TienGiam+(parseInt(TempListVoucher[i].phantram)/100)*TongTien)
+              console.log(TongTien)
+              TempListVoucher[i].manhap+="######"
+              setMaNhap('')
+              settemp(temp-1)
+            } else 
+            {
+              flag1=true
+            }
           } 
+        }
+
+        if(flag1===true)
+        {
+          ToastAndroid.show("Voucher đã hết hạn", ToastAndroid.SHORT)
+        } else if(flag===false)
+        {
+          ToastAndroid.show("Voucher đã sử dụng được áp dụng hoặc không tồn tại", ToastAndroid.SHORT)
         }
   }
 
@@ -65,41 +117,57 @@ export default function Payment()
 
   //console.log(ListBuyed)
   //console.log(route.params.TongTien)
-  renderItem = ({ item, index }) => {
-    return (
-      <TouchableOpacity>
-        <View style={styles.row}>
-        <Image source={{uri:item.hinhanh}} style={styles.imageStyle} />
-          <View>
-            <View style={styles.nameContainer}>
-              <Text style={styles.nameTxt}  
-                  numberOfLines={2}
-                  ellipsizeMode='tail'>{item.tensach}</Text>
-            </View>
-            <View style={styles.end}>
-              <Text>SL: {item.SoLuong}</Text>
-              <Text style={styles.priceStyle}>{item.TongTien} đ</Text>
-            </View>
+  // renderItem = ({ item, index }) => {
+  //   return (
+  //     <TouchableOpacity>
+  //       <View style={styles.row}>
+  //       <Image source={{uri:item.hinhanh}} style={styles.imageStyle} />
+  //         <View>
+  //           <View style={styles.nameContainer}>
+  //             <Text style={styles.nameTxt}  
+  //                 numberOfLines={2}
+  //                 ellipsizeMode='tail'>{item.tensach}</Text>
+  //           </View>
+  //           <View style={styles.end}>
+  //             <Text>SL: {item.SoLuong}</Text>
+  //             <Text style={styles.priceStyle}>{item.TongTien} đ</Text>
+  //           </View>
             
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  };
-
+  //         </View>
+  //       </View>
+  //     </TouchableOpacity>
+  //   );
+  // };
+  
+  var RestVoucher = []
+  var nVoucher = 0
+  // console.log('Helloooooooooooooooooooooo')
 
   async function createBill(){
-    console.log('Hello')
-    const request = await axios.post('http://192.168.1.9:3000/taodonhang',{
+    //console.log('Hello')
+    //console.log(ListVoucher)
+    for(var i=0;i<ListVoucher.length;i++)
+    {
+        var Temp = ListVoucher[i].manhap.length
+        if(ListVoucher[i].manhap[Temp-1]!='#')
+        {
+          RestVoucher[nVoucher] = ListVoucher[i].makm
+          nVoucher+=1
+        }
+    }
+    console.log('RestVoucher ne')
+    console.log(RestVoucher)
+    const request = await axios.post('http://192.168.1.6:3000/taodonhang',{
             matk: UserInfor.matk,
             listbuyed: ListBuyed,
             tongtien: TongTien,
             thanhtoan: value,
+            danhsach_km: RestVoucher
     })
     if(request.data.status==='Success')
     {
       var madh= request.data.madh
-      navigation.navigate('BillUp',{ListBuyed,TongTien,UserInfor,madh})
+      navigation.navigate('BillUp',{ListBuyed,TongTien,UserInfor,madh,TienGiam})
     }
   }
   
@@ -139,15 +207,42 @@ export default function Payment()
           <Image style={styles.icon_dabookdeli} source={require('../asset/icon/dabook_deli.png')}/>
           Giao hàng trong vòng 5 ngày
         </Text>
-
-        <FlatList style={{marginBottom: 5}}
+        {/* ------------------------------------------------------- */}
+        {/* <FlatList style={{marginBottom: 5}}
           // extraData={this.state}
           data={ListBuyed}
           keyExtractor={(item) => {
             return `${item.id}`;
           }}
           renderItem={renderItem}
-        />
+        /> */}
+
+        <ScrollView>
+          {
+            ListBuyed.map((item) =>
+            {
+              return(
+                  <TouchableOpacity>
+                    <View style={styles.row}>
+                    <Image source={{uri:item.hinhanh}} style={styles.imageStyle} />
+                      <View>
+                        <View style={styles.nameContainer}>
+                          <Text style={styles.nameTxt}  
+                              numberOfLines={2}
+                              ellipsizeMode='tail'>{item.tensach}</Text>
+                        </View>
+                        <View style={styles.end}>
+                          <Text>SL: {item.SoLuong}</Text>
+                          <Text style={styles.priceStyle}>{item.TongTien} đ</Text>
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                  )
+            })
+          }
+        </ScrollView>
+        {/* ------------------------------------------------------------ */}
          <View style={{backgroundColor: '#FFF'}}>
         <Text style={{paddingLeft: 10, color:'black', fontWeight:'700',fontSize:20,marginTop: 10, marginBottom: 5}}>Chọn hình thức thanh toán</Text>
         <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>

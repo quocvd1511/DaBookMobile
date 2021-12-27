@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Text, View, StyleSheet,Image, ScrollView, Pressable, TextInput} from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation, NavigationContainer } from '@react-navigation/native';
 
 export default function BillUp()
 {
     const route = useRoute()
+    const navigation = useNavigation()
     console.log(route.params)
     const ListBuy = route.params.ListBuyed
     const UserInfor = route.params.UserInfor
@@ -100,8 +101,16 @@ export default function BillUp()
                         height={34}
                         marginBottom={-5}
                         marginTop={-5}
-                        borderRadius={5}>
-                        <Text style={{color:'#fff', fontSize: 17, margin: 5, textAlign:'center'}} >Mua lại</Text>
+                        borderRadius={5}
+                        style={
+                            ({pressed}) =>[{
+        
+                                opacity: pressed ? 0.5:1
+                            },
+                            //styles.button_login
+                        ]}
+                        onPress={() => {navigation.popToTop()}}>
+                        <Text style={{color:'#fff', fontSize: 17, margin: 5, textAlign:'center'}}>Về giỏ hàng</Text>
                     </Pressable>
                 </View>
             </View>

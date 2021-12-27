@@ -11,12 +11,15 @@ import {
   TextInput,
   Dimensions,
   RefreshControl,
+  Pressable,
   ToastAndroid
 } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation, useRoute} from '@react-navigation/native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { useFocusEffect } from '@react-navigation/native';
+
 const windowWidth = Dimensions.get('window').width;
 
 // const navigation = useNavigation(); 
@@ -27,11 +30,11 @@ const windowWidth = Dimensions.get('window').width;
 //     return username;
 // }
 
-function ListProduct_New()
+const ListProduct_New = ({navigation, route}) =>
 {
-    const route = useRoute()
-    const navigation = useNavigation()
-
+    const[Refresh, setRefresh] = useState(1)
+    const[temp, settemp] = useState(0)
+    console.log("CMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMm")
     const [ListProduct, setProduct] = useState([
       {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1, Pick: false},
       {tensach: "Hello", giaban: "100000", hinhanh: 'https://cdn-amz.fadoglobal.io/images/I/710ESoXqVPL.jpg', SoLuong: 1, Pick: false},
@@ -44,46 +47,43 @@ function ListProduct_New()
     //---------------Xu ly So luong------------------------
     //const [SoLuong, setSoLuong] = useState(1)
     var username=route.params.username
-    //console.log('skdslkadjlkasjdlkasjdlkasjdlksjlkdjaslkdjlaksjdlka'+username)
 
     const [UserInfor, setUserInfor] = useState('')
     const [ListVoucher, setListVoucher] = useState('')
-    React.useEffect(() => 
-    {
-      async function fetchData() 
+
+      React.useEffect(() =>
       {
-        //-----------------------------Lay Thong Tin User---------------
-        var request = await axios.get('http://192.168.1.9:3000/chitiettk_voucher?matk='+username)
-        console.log(request.data)
-        setUserInfor(request.data.taikhoan)
-        if (request.data.taikhoan.giohang)
-        {
-          setProduct(request.data.taikhoan.giohang)
-        }
+          //-----------------------------Lay Thong Tin User---------------
+            navigation.addListener('focus', async () =>
+            {
+            console.log('Suuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
+            var request = await axios.get('http://192.168.1.6:3000/chitiettk_voucher?matk='+username)
+            console.log(request.data)
+            setUserInfor(request.data.taikhoan)
+            if (request.data.taikhoan.giohang)
+            {
+              setProduct(request.data.taikhoan.giohang)
+            }
+    
+            for(var i=0; i<ListProduct.length ;i++)
+            {
+              ListProduct[i].Pick=false
+              ListProduct[i].SoLuong = parseInt(ListProduct[i].SoLuong)
+            }
 
-        for(var i=0; i<ListProduct.length ;i++)
-        {
-          ListProduct[i].Pick=false
-          ListProduct[i].SoLuong = parseInt(ListProduct[i].SoLuong)
-        }
+            setListVoucher(request.data.khuyenmai)
 
-        setListVoucher(request.data.khuyenmai)
-
-        //-------------------------------Lay Thong Voucher--------------------------------------
-      }
-
-      fetchData()
-  
-    },['http://192.168.1.9:3000/'])
+          })
+      },['http://192.168.1.6:3000/'])
+   
 
     const[TongTien, setTongTien] = useState(0)
     const[MaNhap, setMaNhap] = useState('')
     var TempListVoucher = ListVoucher
-    const[temp, settemp] = useState(0)
 
     // console.log('Temp List Voucher Nèeeeeeeeeeeee')
     // console.log(TempListVoucher)
-    //console.log(ListProduct)
+    console.log(ListProduct)
 
     function CheckVoucher(MaNhap)
     {
@@ -180,6 +180,8 @@ function ListProduct_New()
       {
         setTongTien(TongTien-ListProduct[index].SoLuong*parseInt(ListProduct[index].giaban))
       }
+      //console.log('Haaaaaaaaaaaaaaaaaaaa' + UserInfor.matk +" " + ListProduct[index].tensach)
+      var request = axios.get('http://192.168.1.9:3000/xoasanpham/' + UserInfor.matk + '/' + ListProduct[index].tensach)
       ListProduct.splice(index,1)
       //console.log(ListProduct)
       settemp(temp+1)
@@ -203,20 +205,19 @@ function ListProduct_New()
         navigation.navigate('Payment',{BuyedProduct,TongTien,UserInfor,ListVoucher})
       } else ToastAndroid.show('Không có sản phẩm nào được chọn',ToastAndroid.SHORT)
     }
+
+    function ReLoad()
+    {
+      settemp(temp-1)
+    }
+
     //------------------------------------------------------
     if(ListProduct)
     {
         return (
           <SafeAreaView style={{flex:1}}>
             {/* ----------------------------------------------------------- */}
-            <ScrollView
-              refreshControl=
-              {
-                <RefreshControl/>
-              }
-            >
-
-
+            <ScrollView>
               {/* //------------------------- */}
 
               <View>
@@ -233,7 +234,7 @@ function ListProduct_New()
                   </View>
                   
                   <View style={styles.address}>
-                      <Text style={styles.text_style}>Địa chỉ: {UserInfor.diachigoc}</Text>
+                      <Text style={styles.text_style}>Địa chỉ: {UserInfor.diachi}</Text>
                   </View>
                   <View style={{backgroundColor: '#fff', padding: 10}}>
                       <Text style={styles.change}>Thay đổi</Text>
@@ -242,7 +243,22 @@ function ListProduct_New()
               
 
               {/* //-------------------------- */}
-              <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
+              <View style={{display: 'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between', height: 40, margin:5, marginRight: 10}}>
+                <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 0}}>Thông tin giỏ hàng</Text>
+                <Pressable
+                    style={
+                        ({pressed}) =>[{
+
+                            opacity: pressed ? 0.5:1
+                        },
+                        styles.qtyminus,
+                    ]}
+                    onPress={ReLoad}
+                    >
+                    <Text style={{color:'#fff', fontSize: 18, marginTop: 6, textAlign:'center', alignItems: 'center'}} >Refresh</Text>
+                </Pressable>
+              </View>
+
               {
                   ListProduct.map((item,index) =>
                     {
@@ -521,6 +537,14 @@ change: {
     marginLeft: 20,
 },
 
+qtyminus: {
+  backgroundColor:'#FF6600',
+  width: 100,
+  height: 40,
+  marginBottom: -5,
+  marginTop: -5,
+  borderRadius: 5,
+},
   
 });
 

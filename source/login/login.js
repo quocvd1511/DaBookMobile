@@ -16,7 +16,8 @@ export default function Login()
     const [User,setUser] = React.useState([])
     const navigation = useNavigation();
 
-    async function checkLogin(){
+    async function checkLogin()
+    {
         Keyboard.dismiss()
         if(Username ==='' || Password ==='')
         {
@@ -24,7 +25,7 @@ export default function Login()
         }
       else
       {
-        const request = await axios.post('http://192.168.1.9:3000',{
+        const request = await axios.post('http://192.168.1.6:3000',{
                 username: Username,
                 password: Password,
         })
@@ -35,7 +36,9 @@ export default function Login()
             ToastAndroid.show("Thông tin đăng nhập không chính xác", ToastAndroid.SHORT)
             setUsername('')
             setPassword('')
-        } else{
+        } 
+        else
+        {
             ToastAndroid.show("Xác thực thành công", ToastAndroid.SHORT)
             setUsername('')
             setPassword('')

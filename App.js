@@ -29,8 +29,9 @@ export default function App() {
     LogBox.ignoreLogs(['Reanimated 2']);
     LogBox.ignoreLogs(['Possible Unhandled Promise Rejection'])
     LogBox.ignoreLogs(['Each child in a list should have a unique "key" prop'])
-    LogBox.ignoreLogs(['Fail prop type'])
+    LogBox.ignoreLogs(['Failed prop type'])
     LogBox.ignoreLogs(['Encountered two children with the same key'])
+    LogBox.ignoreLogs(['Require cycle'])
   }, [])
 
   return (

@@ -5,24 +5,25 @@ import axios from 'axios';
 
 export default function Info()
 {
-//     const navigation = useNavigation();
-//     const route = useRoute();
-//     // const username = route.params.username;
-//     const username = 'hongcute';
-//     console.log(username);
-    
-//     const [User,setUser] = React.useState([])
-//     React.useEffect(() => 
-//   {
-//     async function fetchData(){
-//       const request = await axios.get('http://192.168.43.180:3000/chitietgiohang/' + username)
-//       setUser(request.data.thongtintk)
-//       return request.data.thongtintk
-//     }
-//     fetchData();
-//     },['http://192.168.43.180:3000/chitietgiohang/' + username])
 
-// 	 console.log(User);
+    const navigation = useNavigation();
+    const route = useRoute();
+    // const username = route.params.username;
+    const username = 'hongcute';
+    console.log(username);
+    
+    const [User,setUser] = React.useState([])
+    React.useEffect(() => 
+  {
+    async function fetchData(){
+      const request = await axios.get('http://192.168.1.6:3000/chitietgiohang/' + username)
+      setUser(request.data.thongtintk)
+      return request.data.thongtintk
+    }
+    fetchData();
+    },['http://192.168.1.6:3000/chitietgiohang/' + username])
+
+	 console.log(User);
 
     return(
         <View>
