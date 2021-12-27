@@ -59,6 +59,7 @@ export default function PackingDetail() {
                                     width={100}
                                     padding={5}
                                     alignItems={'center'}
+                                    onPress={() => navigation.navigate('Detail_HistoryLookup', {username: matk, madh: item.madh})}
                                   >
                                     <Text style={{color:'#fff', fontWeight:'500', fontSize: 15 }}>Chi Tiết</Text>
                                   </Pressable>

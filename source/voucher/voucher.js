@@ -60,9 +60,9 @@ export default function VoucherScreen() {
         <Image style={styles.logo_header} source={require('../asset/icon/logo.png')}/>
         <Text style={styles.text_header}>Kho Voucher{"\n"}Siêu Khủng !!!</Text>
       </View>
-      <View>
+      <TouchableOpacity onPress={() => navigation.navigate('VoucherDetail',{username: username})}>
         <Image style={styles.my_voucher} source={require('../asset/icon/My_voucher.png')} />
-      </View>
+      </TouchableOpacity>
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
         <View style={styles.main_sale}>
           <Image style={styles.logo_sale_header} source={require('../asset/icon/sale.png')}/>
