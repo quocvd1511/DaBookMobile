@@ -29,7 +29,7 @@ export default function user_detail()
     React.useEffect(() => 
     {
         async function fetchData(){
-            const request = await axios.get('http://192.168.1.6:3000/chitiettk?matk='+username)
+            const request = await axios.get('http://192.168.1.3:3000/chitiettk?matk='+username)
             setUsername(request.data.matk)
             setName(request.data.hoten)
             setPhoneNumber(request.data.sodt)
@@ -42,12 +42,12 @@ export default function user_detail()
         }
         fetchData();
 
-    },['http://192.168.1.6:3000/'])
+    },['http://192.168.1.3:3000/'])
 
     async function UpdateThongTinTK(Pattern)
     {
         console.log(Pattern)
-        const request = await axios.post('http://192.168.1.6:3000/updatethongtintk',{data: Pattern})
+        const request = await axios.post('http://192.168.1.3:3000/updatethongtintk',{data: Pattern})
         ToastAndroid.show(request.data.message, ToastAndroid.SHORT)
     }
 
@@ -88,10 +88,9 @@ export default function user_detail()
     //setOpenUpdate(false)
     //console.log(UserInfor)
     return(
-        <ImageBackground source={require('../asset/icon/land3.jpg')} style={{width: '100%', height: '100%'}}>
-            <ScrollView>
-              <View style={{justifyContent: 'center'}}>
-                <Text style={{fontSize: 20, color: '#fff', fontWeight: 'bold', marginLeft: 5, marginTop: 10, marginBottom: 0,}}>THÔNG TIN CÁ NHÂN</Text>
+        <ScrollView style={{backgroundColor:'#B0E2FF'}}>
+            <View style={{justifyContent: 'center'}}>
+                <Text style={{fontSize: 20, color: '#333', fontWeight: 'bold', marginLeft: 5, marginTop: 10, marginBottom: 0,}}>THÔNG TIN CÁ NHÂN</Text>
             </View>
             <View style={styles.bodypart}>
                 <View style={styles.line}>
@@ -122,7 +121,7 @@ export default function user_detail()
                         ]}
                         onPress={() => navigation.navigate('ChangePassWord', {username: route.params.username})}
                     >
-                            <Text style={{color:'black', fontWeight: 'bold'}}>Đổi mật khẩu </Text>
+                            <Text style={{color:'#fff', fontWeight: 'bold'}}>Đổi mật khẩu </Text>
                     </Pressable>
                 </View>
 
@@ -163,7 +162,7 @@ export default function user_detail()
                         onPress={UpdateThongTin}
                         disabled={false}
                     >
-                            <Text style={{color:'black', fontWeight: 'bold'}}>Chỉnh sửa thông tin</Text>
+                            <Text style={{color:'#fff', fontWeight: 'bold'}}>Chỉnh sửa thông tin</Text>
                     </Pressable>
                 </View>
 
@@ -178,13 +177,12 @@ export default function user_detail()
                         ]}
                         onPress={XuLyXacNhan}
                     >
-                        <Text style={{color:'black', fontWeight: 'bold'}}>Xác nhận thay đổi</Text>
+                        <Text style={{color:'#fff', fontWeight: 'bold'}}>Xác nhận thay đổi</Text>
                     </Pressable>
                 </View>
 
             </View>  
             </ScrollView>
-        </ImageBackground>
         
     )
 }

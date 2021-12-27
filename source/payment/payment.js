@@ -35,7 +35,7 @@ export default function Payment()
     async function fetchData() 
     {
       //-----------------------------Lay Thong Tin User---------------
-      var request = await axios.get('http://192.168.1.9:3000/chitiettk_voucher?matk='+UserInfor.matk)
+      var request = await axios.get('http://192.168.1.3:3000/chitiettk_voucher?matk='+UserInfor.matk)
       setListVoucher(request.data.khuyenmai)
 
       //-------------------------------Lay Thong Voucher--------------------------------------
@@ -43,7 +43,7 @@ export default function Payment()
 
     fetchData()
 
-  },['http://192.168.1.9:3000/'])
+  },['http://192.168.1.3:3000/'])
 
   let Temp = route.params.TongTien
   var TempListVoucher = ListVoucher
@@ -175,7 +175,7 @@ export default function Payment()
 
 
     return (
-      <SafeAreaView style={{flex:1}}>
+      <SafeAreaView style={{flex:1, backgroundColor:'#B0E2FF'}}>
       <ScrollView>
         <HeaderCart/>
         {/* //---------------------------------------------- */}
@@ -461,7 +461,6 @@ export default function Payment()
       backgroundColor: 'white',
       flexDirection: 'row',
       alignItems: 'center',
-      
       paddingLeft: 30,
       paddingRight: 20,
       marginBottom: 0,

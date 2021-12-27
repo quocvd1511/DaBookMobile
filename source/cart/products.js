@@ -57,7 +57,7 @@ const ListProduct_New = ({navigation, route}) =>
       async function fetchData() 
       {
         //-----------------------------Lay Thong Tin User---------------
-        var request = await axios.get('http://192.168.43.180:3000/chitiettk_voucher?matk='+username)
+        var request = await axios.get('http://192.168.1.3:3000/chitiettk_voucher?matk='+username)
         setUserInfor(request.data.taikhoan)
         if (request.data.taikhoan.giohang)
         {
@@ -180,7 +180,7 @@ const ListProduct_New = ({navigation, route}) =>
         setTongTien(TongTien-ListProduct[index].soluong*parseInt(ListProduct[index].giaban))
       }
       //console.log('Haaaaaaaaaaaaaaaaaaaa' + UserInfor.matk +" " + ListProduct[index].tensach)
-      var request = axios.get('http://192.168.1.9:3000/xoasanpham/' + UserInfor.matk + '/' + ListProduct[index].tensach)
+      var request = axios.get('http://192.168.1.3:3000/xoasanpham/' + UserInfor.matk + '/' + ListProduct[index].tensach)
       ListProduct.splice(index,1)
       //console.log(ListProduct)
       settemp(temp+1)
@@ -214,7 +214,7 @@ const ListProduct_New = ({navigation, route}) =>
     if(ListProduct)
     {
         return (
-          <SafeAreaView style={{flex:1}}>
+          <SafeAreaView style={{flex:1, backgroundColor: '#B0E2FF'}}>
             {/* ----------------------------------------------------------- */}
             <ScrollView>
               {/* //------------------------- */}
@@ -244,17 +244,7 @@ const ListProduct_New = ({navigation, route}) =>
               {/* //-------------------------- */}
               <View style={{display: 'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between', height: 40, margin:5, marginRight: 10}}>
                 <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 0}}>Thông tin giỏ hàng</Text>
-                <Pressable
-                    style={
-                        ({pressed}) =>[{
-
-                            opacity: pressed ? 0.5:1
-                        },
-                        styles.qtyminus
-                    ]}
-                    >
-                    <Text style={{color:'#fff', fontSize: 18, marginTop: 6, textAlign:'center', alignItems: 'center'}} >Refresh</Text>
-                </Pressable>
+                
               </View>
 
               {
@@ -488,6 +478,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    borderTopRightRadius: 28,
+    borderTopLeftRadius: 28,
 },
 
 address:{

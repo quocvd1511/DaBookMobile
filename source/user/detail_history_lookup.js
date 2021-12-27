@@ -24,7 +24,7 @@ export default function HistoryLookup()
       {
         async function fetchData()
       {
-          const request = await axios.get('http://192.168.43.180:3000/chitietdonhang/' + matk + '/' + madh)
+          const request = await axios.get('http://192.168.1.3:3000/chitietdonhang/' + matk + '/' + madh)
           setDonhang(request.data.donhang)
           setThongtintk(request.data.taikhoan)
           setBook(request.data.books)

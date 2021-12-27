@@ -39,7 +39,7 @@ export default function SearchBook(){
     }
     fetchData();
 
-    },['http://192.168.1.2:3000/search/name'])
+    },['http://192.168.1.3:3000/search/name'])
 
 	 console.log(Book);
 
