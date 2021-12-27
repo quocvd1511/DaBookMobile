@@ -7,13 +7,14 @@ import { useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import Home from './source/home/home';
 import Rank from './source/rank/tabs_rank';
-import book_detail from './source/book_detail/book_detail';
+import BookDetailHomeScreen from './source/book_detail/BookDetail_Home';
 import SearchBook from './source/search_book/search_book';
 import Voucher from './source/voucher/voucher';
 import Login from './source/login/login';
 import Logup from './source/login/logup';
 import Payment from './source/payment/payment'
 import Cart from './source/cart/cart';
+import StackUserScreen from './source/user/stack_navigator_user';
 
 // import ListRank from './source/rank/list_rank';
 
@@ -21,7 +22,6 @@ const Stack = createStackNavigator();
 export default function App() {
 
   // const navigation = useNavigation();
- 
 
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function App() {
   }, [])
 
   return (
-    <NavigationContainer>
+    <NavigationContainer  independent={true}>
       <Stack.Navigator
       screenOptions={{headerShown: false}}>
       <Stack.Screen
@@ -45,8 +45,11 @@ export default function App() {
         name='Logup'
         component={Logup}/>
       <Stack.Screen 
-      name='TabScreen' 
-      component={TabScreen}/>
+        name='TabScreen' 
+        component={TabScreen}/>
+      <Stack.Screen
+      name='User'
+      component={StackUserScreen}/>
       <Stack.Screen
         name='Home'
         component={Home}/>
@@ -54,8 +57,8 @@ export default function App() {
         name='Rank'
         component={Rank}/>
       <Stack.Screen 
-        name='book_detail'
-        component={book_detail}/>
+        name='BookDetailHomeScreen'
+        component={BookDetailHomeScreen}/>
       <Stack.Screen 
         name='SearchBook'
         component={SearchBook}/>

@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, Image, Dimensions, Pressable, ImageBackground, 
 
 import { Avatar } from 'react-native-elements/dist/avatar/Avatar';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -13,7 +13,7 @@ import axios from 'axios';
 export default function user_detail()
 {
 
-    
+    const navigation = useNavigation()
     const route = useRoute()
     const username = route.params.username
     const [Username, setUsername] = React.useState('')
@@ -110,21 +110,46 @@ export default function user_detail()
                     <Text style={styles.tiletext}>Địa chỉ email</Text>
                     <TextInput editable={OpenUpdate} value={Email} onChangeText={(text) => setEmail(text)} placeholder='Chưa cập nhật' style={styles.textinput}/>
                 </View>
+                
+                <View style={styles.button_change}>
+                    <Pressable
+                        style={
+                            ({pressed}) =>[{
+        
+                                opacity: pressed ? 0.5:1
+                            },
+                            //styles.button_login
+                        ]}
+                        onPress={() => navigation.navigate('ChangePassWord', {username: route.params.username})}
+                    >
+                            <Text style={{color:'black', fontWeight: 'bold'}}>Đổi mật khẩu </Text>
+                    </Pressable>
+                </View>
+
                 <View style={styles.line_address}>
                     <Text style={styles.tiletext_address}>Địa chỉ</Text>
                     <View style={{marginLeft: 10}}>
-                        <Text style={{fontWeight: '600', marginTop: 5}}>Tỉnh/Thành phố</Text>
-                        <TextInput editable={OpenUpdate} value={Tinh} onChangeText={(text) => setTinh(text)} style={styles.textinput_2} placeholder='Chưa cập nhật' />
-                        <Text style={{fontWeight: '600'}}>Quận/Huyện</Text>
-                        <TextInput editable={OpenUpdate} value={Huyen} onChangeText={(text) => setHuyen(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
-                        <Text style={{fontWeight: '600'}}>Phường/Xã</Text>
-                        <TextInput editable={OpenUpdate} value={Xa} onChangeText={(text) => setXa(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
-                        <Text style={{fontWeight: '600'}}>Chi tiết</Text>
-                        <TextInput editable={OpenUpdate} value={ChiTiet} onChangeText={(text) => setChiTiet(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
+                        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems:'center'}}>
+                            <Text style={{fontWeight: '600', marginTop: 5, width: 100}}>Tỉnh/Thành phố</Text>
+                            <TextInput editable={OpenUpdate} value={Tinh} onChangeText={(text) => setTinh(text)} style={styles.textinput_2} placeholder='Chưa cập nhật' />
+                        </View>
+                        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems:'center'}}>
+                            <Text style={{fontWeight: '600'}}>Quận/Huyện</Text>
+                            <TextInput editable={OpenUpdate} value={Huyen} onChangeText={(text) => setHuyen(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
+                        </View>
+                        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems:'center'}}>
+                            <Text style={{fontWeight: '600'}}>Phường/Xã</Text>
+                            <TextInput editable={OpenUpdate} value={Xa} onChangeText={(text) => setXa(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
+                        </View>
+                        <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between',alignItems:'center'}}>
+                            <Text style={{fontWeight: '600'}}>Chi tiết</Text>
+                            <TextInput editable={OpenUpdate} value={ChiTiet} onChangeText={(text) => setChiTiet(text)} style={styles.textinput_2} placeholder='Chưa cập nhật'/>
+                        </View>
                     </View>
                 </View>  
             </View>
-            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center',}}>
+            
+            <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 0}}>
 
                 <View style={styles.button}>
                     <Pressable
@@ -218,7 +243,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 5,
         height: 36,
-        width: 280,
+        width: 210,
         borderWidth: 0.5,
     },
 
@@ -255,22 +280,37 @@ const styles = StyleSheet.create({
     },
 
     line_address:{
-
         backgroundColor: 'white',
         width: 350,
         marginTop: 10,
         borderBottomRightRadius: 20,
         borderTopRightRadius: 20,
         paddingBottom: 10,
+        marginBottom: 0,
+        height: 280,
     },
 
     button:{
         justifyContent: 'center', 
         alignItems: 'center', 
-        backgroundColor: 'dodgerblue', 
+        backgroundColor: '#FF6600', 
         borderRadius: 10,
         margin: 10,
         flex: 0.5,
         padding: 10,
+        marginTop: 0,
+    },
+
+    button_change: {
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        alignSelf: 'center',
+        backgroundColor: '#FF6600', 
+        borderRadius: 10,
+        margin: 10,
+        flex: 0.5,
+        padding: 10,
+        marginTop: 20,
+        width: 130,
     }
 }) 

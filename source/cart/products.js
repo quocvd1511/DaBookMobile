@@ -47,36 +47,35 @@ const ListProduct_New = ({navigation, route}) =>
     //---------------Xu ly So luong------------------------
     //const [SoLuong, setSoLuong] = useState(1)
     var username=route.params.username
+    console.log('skdslkadjlkasjdlkasjdlkasjdlksjlkdjaslkdjlaksjdlka'+username)
 
     const [UserInfor, setUserInfor] = useState('')
     const [ListVoucher, setListVoucher] = useState('')
+    const [refresh, SetRefresh] = useState(false)
 
-      React.useEffect(() =>
+    React.useEffect(() => 
+    {
+      async function fetchData() 
       {
-          //-----------------------------Lay Thong Tin User---------------
-            navigation.addListener('focus', async () =>
-            {
-            console.log('Suuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu')
-            var request = await axios.get('http://192.168.1.6:3000/chitiettk_voucher?matk='+username)
-            console.log(request.data)
-            setUserInfor(request.data.taikhoan)
-            if (request.data.taikhoan.giohang)
-            {
-              setProduct(request.data.taikhoan.giohang)
-            }
-    
-            for(var i=0; i<ListProduct.length ;i++)
-            {
-              ListProduct[i].Pick=false
-              ListProduct[i].SoLuong = parseInt(ListProduct[i].SoLuong)
-            }
+        //-----------------------------Lay Thong Tin User---------------
+        var request = await axios.get('http://192.168.1.6:3000/chitiettk_voucher?matk='+username)
+        console.log(request.data)
+        setUserInfor(request.data.taikhoan)
+        if (request.data.taikhoan.giohang)
+        {
+          setProduct(request.data.taikhoan.giohang)
+        }
+        setListVoucher(request.data.khuyenmai)
+        setListVoucher(request.data.khuyenmai)
 
-            setListVoucher(request.data.khuyenmai)
+        //-------------------------------Lay Thong Voucher--------------------------------------
+      }
 
-          })
-      },['http://192.168.1.6:3000/'])
-   
+      fetchData()
+  
+    },['http://192.168.1.3:3000/'])
 
+    console.log(ListProduct)
     const[TongTien, setTongTien] = useState(0)
     const[MaNhap, setMaNhap] = useState('')
     var TempListVoucher = ListVoucher
@@ -251,9 +250,8 @@ const ListProduct_New = ({navigation, route}) =>
 
                             opacity: pressed ? 0.5:1
                         },
-                        styles.qtyminus,
+                        styles.qtyminus
                     ]}
-                    onPress={ReLoad}
                     >
                     <Text style={{color:'#fff', fontSize: 18, marginTop: 6, textAlign:'center', alignItems: 'center'}} >Refresh</Text>
                 </Pressable>
@@ -292,7 +290,7 @@ const ListProduct_New = ({navigation, route}) =>
                                   <Icon name="ios-remove-circle" size={30} color={"#33c37d"} />
                                 </TouchableOpacity>
 
-                                <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:15, color: '#333'}}>{ListProduct[index].SoLuong}</Text>
+                                <Text style={{paddingHorizontal:8, fontWeight:'bold', fontSize:15, color: '#333'}}>{ListProduct[index].soluong}</Text>
 
                                 <TouchableOpacity 
                                 onPress={() => TangSoLuong(index)}
@@ -340,10 +338,12 @@ const ListProduct_New = ({navigation, route}) =>
             <SafeAreaView style={{flex:1}}>
               {/* ----------------------------------------------------------- */}
               <ScrollView
-                refreshControl=
-                {
-                  <RefreshControl/>
-                }
+                 refreshControl=
+                 {
+                   <RefreshControl
+                   refreshing={refresh}
+                   onPress={()=> pullMe()}/>
+                 }
               >
 
 
@@ -374,7 +374,7 @@ const ListProduct_New = ({navigation, route}) =>
                 {/* //-------------------------- */}
                 <Text style={{paddingLeft: 10, color:'black', fontWeight:'800',fontSize:20,marginTop: 5}}>Thông tin giỏ hàng</Text>
                 {
-                     <Text style={{alignSelf: 'center'}}>Chưa có sản phẩm nào trong giỏ hành nha !!</Text>
+                     <Text style={{alignSelf: 'center'}}>Chưa có sản phẩm nào trong giỏ hàng!!</Text>
                 }
               </ScrollView>
               {/* ---------------------------------------------------------------------- */}

@@ -43,7 +43,7 @@ export default function Login()
             setUsername('')
             setPassword('')
             navigation.navigate('TabScreen',{username: Username})
-            // navigation.navigate('book_detail',{user_session: request.data.user_session})
+            //navigation.navigate('book_detail',{user_session: Username})
         }
     }
     }

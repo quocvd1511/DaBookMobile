@@ -11,15 +11,17 @@ import Tuoiteen from './Tuoiteen';
 import Ngontinh from './Ngontinh';
 import KinhDi from './Kinhdi';
 import PhongSu from './Phongsu';
-import book_detail_home from '../book_detail/book_detail';
+import BookDetailHomeScreen from '../book_detail/BookDetail_Home';
+import TabRanks from './tabs_rank';
 
 const Stack = createStackNavigator();
  export default function StackCatregory(){
 
     const route = useRoute();
+
      
   // const navigation = useNavigation(); 
-  // console.log("Thông tin từ Stack")
+  console.log("Thông tin từ Stack", route.params.username)
   // console.log(route)
   useEffect(() => {
     //LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
@@ -27,34 +29,36 @@ const Stack = createStackNavigator();
   }, [])
 
   return (
-    <NavigationContainer>
+    <NavigationContainer independent={true}>
       <Stack.Navigator
-      screenOptions={{headerShown: false}}
-      >
+      screenOptions={{headerShown: false}}>
+      <Stack.Screen
+      name='Tab_Screen'
+      component={TabRanks}/>
       <Stack.Screen
         name='Vanhoc'
-        component={Vanhoc}/>
+        component={Vanhoc} initialParams={{username: route.params.username}}/>
       <Stack.Screen
         name='Trinhtham'
-        component={Trinhtham}/>
+        component={Trinhtham} initialParams={{username: route.params.username}}/>
       <Stack.Screen 
       name='Tuoiteen' 
-      component={Tuoiteen}/>
+      component={Tuoiteen} initialParams={{username: route.params.username}}/>
       <Stack.Screen 
         name='Haihuoc' 
-        component={Tuoiteen}/>
+        component={Tuoiteen} initialParams={{username: route.params.username}}/>
       <Stack.Screen
         name='Ngontinh'
-        component={Ngontinh}/>
+        component={Ngontinh} initialParams={{username: route.params.username}}/>
       <Stack.Screen 
         name='Phongsu'
-        component={PhongSu}/>
+        component={PhongSu} initialParams={{username: route.params.username}}/>
       <Stack.Screen 
         name='Kinhdi'
-        component={KinhDi}/>
+        component={KinhDi} initialParams={{username: route.params.username}}/>
     <Stack.Screen 
-        name='BookDetail'
-        component={book_detail_home}/>
+        name='BookDetailHomeScreen'
+        component={BookDetailHomeScreen} initialParams={{username: route.params.username}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

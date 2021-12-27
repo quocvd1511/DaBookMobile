@@ -8,15 +8,18 @@ import user_detail from './user_detail';
 import PackingDetail from './packing_detail';
 import ShippingDetail from './shipping_detail';
 import ConfirmDetail from './confirm_detail';
-import HistoryLookup from './history_lookup';
+import Detail_History_Lookup from './detail_history_lookup';
+import List_History_Lookup from './list_history_lookup';
+import BookHistory from './book_history';
 import VoucherDetail from './voucher_detail';
-import Login from '../login/login';
-import { useRoute } from '@react-navigation/native';
+import ChangePass from './change_pass';
+
+import { useNavigation, useRoute} from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 export default function StackUserScreen() {
 
-  // const navigation = useNavigation(); 
+  const navigation = useNavigation(); 
   const route = useRoute()
   // console.log("Thông tin từ Stack")
   // console.log(route)
@@ -26,7 +29,6 @@ export default function StackUserScreen() {
   }, [])
 
   return (
-    <NavigationContainer independent={true}>
       <Stack.Navigator
       screenOptions={{headerShown: false}}
       >
@@ -46,13 +48,21 @@ export default function StackUserScreen() {
         name='ConfirmDetail'
         component={ConfirmDetail}/>
       <Stack.Screen 
-        name='HistoryLookup'
-        component={HistoryLookup}/>
+        name='List_HistoryLookup'
+        component={List_History_Lookup}/>
+      <Stack.Screen 
+        name='Detail_HistoryLookup'
+        component={Detail_History_Lookup}/>
       <Stack.Screen 
         name='VoucherDetail'
-        component={VoucherDetail}/>
+        component={VoucherDetail} initialParams={{username: route.params.username}}/>
+       <Stack.Screen 
+        name='ChangePassWord' initialParams={{username: route.params.username}}
+        component={ChangePass}/>
+       <Stack.Screen 
+        name='BookHistory'
+        component={BookHistory} initialParams={{username: route.params.username}}/>
       </Stack.Navigator>
-    </NavigationContainer>
   );
 
 

@@ -92,6 +92,7 @@ export default function UserScreen()
                   <Text style={{paddingRight: 5, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5, marginLeft: -5}}> Đang đóng gói</Text>
                 </Pressable>
 
+               
                 <Pressable
                   style={
                       ({pressed}) =>[{
@@ -105,7 +106,8 @@ export default function UserScreen()
                   <Image style={styles.each_category_icon} source={require('../asset/icon/delivery.png')}/>
                   <Text style={{paddingRight: 10, color:'#555', fontWeight:'600',fontSize:14, marginTop: 5}}>Vận chuyển</Text>
                 </Pressable>
-              {/* </View>
+{/*                 
+              <View>
               <Pressable
                 style={
                     ({pressed}) =>[{
@@ -114,29 +116,27 @@ export default function UserScreen()
                     },
                     styles.searching_history
                 ]}
-                onPress={() => navigation.navigate('HistoryLookup')}
+                onPress={() => navigation.navigate('List_HistoryLookup',{username: username})}
                 >
                 <Image style={styles.icon_style} source={require('../asset/icon/history.png')}/>
-                <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 5, marginBottom: 3,marginRight: 5}}>Tra cứu lịch sử đơn hàng</Text>
+                <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 10, marginBottom: 3,marginRight: 5}}>Tra cứu lịch sử đơn hàng</Text>
               </Pressable>
-          </View> */}
+              </View> */}
 
             </View>
             <Pressable
-             style={
-              ({pressed}) =>[{
+                style={
+                    ({pressed}) =>[{
 
-                  opacity: pressed ? 0.5:1
-              },
-              styles.searching_history
-          ]}
-          onPress={() => navigation.navigate('HistoryLookup')}
-              style={styles.searching_history}
-              onPress={() => navigation.navigate('HistoryLookup',{username: username})}
-            >
-                  <Image style={styles.icon_style} source={require('../asset/icon/history.png')}/>
-                  <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 5, marginBottom: 3,marginRight: 5}}>Tra cứu lịch sử đơn hàng</Text>
-            </Pressable>
+                        opacity: pressed ? 0.5:1
+                    },
+                    styles.searching_history
+                ]}
+                onPress={() => navigation.navigate('List_HistoryLookup',{username: username})}
+                >
+                <Image style={styles.icon_style} source={require('../asset/icon/history.png')}/>
+                <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:15,marginTop: 10, marginBottom: 3,marginRight: 5}}>Tra cứu lịch sử đơn hàng</Text>
+              </Pressable>
         </View>
 
           <View>
@@ -165,7 +165,7 @@ export default function UserScreen()
               </View>
               <View style={styles.caring_button_caring}>
                   <Image style={styles.icon_style_caring} source={require('../asset/icon/watch.png')}/>
-                  <Text style={styles.text_style_caring}>Sách Đã Xem</Text>
+                  <Text style={styles.text_style_caring}  onPress={() => navigation.navigate('BookHistory',{username: username})}>Sách Đã Xem</Text>
               </View>
           </View>
 

@@ -3,11 +3,11 @@ import { Text, View } from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import HomeScreen from '../home/home';
+import HomeScreen from '../home/stack_home';
 // import SearchScreen fr
 import CategoryScreen from '../rank/tabs_rank';
 import VoucherScreen from '../voucher/voucher';
-import UserScreen from '../user/user';
+import UserScreen from '../user/stack_navigator_user';
 import CartScreen from '../cart/cart';
 import StackUserScreen from '../user/stack_navigator_user'
 import StackCartScreen from '../cart/stack_cart_payment';

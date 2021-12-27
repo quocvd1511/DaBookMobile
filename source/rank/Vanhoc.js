@@ -21,7 +21,7 @@ export default function VanHoc(){
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.5:3000/theloai/' + value)
+      const request = await axios.get('http://192.168.43.180:3000/theloai/' + value)
       setBook(request.data.books)
       return request.data.books
     }
@@ -38,7 +38,7 @@ return (
       Book.map((item)=>
       {
         return(
-          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('book_detail', {tensach: item.tensach, username: username})}>
+          <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('BookDetailHomeScreen', {tensach: item.tensach, username: username})}>
             <Image style={styles.image} source={{uri:item.hinhanh}}/>
             <View  style={{paddingLeft:5 }}>
               <Text style={styles.book_name}

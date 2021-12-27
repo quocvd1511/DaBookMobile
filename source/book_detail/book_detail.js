@@ -3,7 +3,8 @@ import { SafeAreaView, View, FlatList, StyleSheet, Pressable, Text, TextInput, S
 import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import TabScreens from '../tab_src/tab';
-
+import Rating from 'react-simple-star-rating';
+import RatingScreen from './ratings';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -22,14 +23,14 @@ const fontWeights = [
     "900"
   ];
 
-export default function book_detail_home(){
+function book_detail_home(){
 
   const navigation = useNavigation();
   const route = useRoute();
   const tensach = route.params.tensach;
   const username = route.params.username;
   const [detail_book, setdetail_book]  = useState('')
-  //console.log("Hellooooooooooooooooooooooooooooooooooooooooooooooo"+username);
+  console.log("Hellooooooooooooooooooooooooooooooooooooooooooooooo"+username);
 
     // Lấy danh sách sách liên quan
     const [Book, setBook]  = useState([])
@@ -137,7 +138,7 @@ export default function book_detail_home(){
                             style={
                                 ({pressed}) =>[{
 
-                                    opacity: pressed ? 0.5:1
+                                    opacity: pressed ? 0.25:1
                                 },
                                 styles.add_cart
                             ]}
@@ -227,17 +228,6 @@ export default function book_detail_home(){
                 </ScrollView>
             </View>
 
-            <View style = {styles.view}>
-                <Text style={{marginTop: 10, paddingLeft: 5, color:'black', fontWeight:'600',fontSize:14}}>Đánh giá sản phẩm</Text>
-                <View style = {styles.viewstar}>
-                    <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
-                    <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
-                    <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
-                    <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
-                    <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
-                    <Text style={{ fontWeight:'400', fontSize:15}}>    4.8/5 (27 đánh giá) </Text>
-                </View>
-            </View>
         </ScrollView>
     )
 
@@ -266,8 +256,8 @@ const styles = StyleSheet.create({
     add_cart: {
         backgroundColor: '#ff424e',
         height: 40,
-        marginBottom: -5,
-        marginTop: -5,
+        // marginBottom: -5,
+        // marginTop: -5,
         borderRadius: 5,
     },
 
@@ -447,3 +437,5 @@ const styles = StyleSheet.create({
       }
 
 })
+
+export default book_detail_home
