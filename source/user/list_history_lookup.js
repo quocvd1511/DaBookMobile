@@ -24,7 +24,7 @@ export default function List_History_Lookup() {
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.43.180:3000/danhsachdonhang/' + matk + '/' + tinhtrang)
+      const request = await axios.get('http://192.168.1.3:3000/danhsachdonhang/' + matk + '/' + tinhtrang)
       setDonhang(request.data.donhang)
       return request.data.donhang
     }

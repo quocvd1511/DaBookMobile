@@ -14,6 +14,7 @@ import BookHistory from './book_history';
 import VoucherDetail from './voucher_detail';
 import ChangePass from './change_pass';
 import NumberFormat from 'react-number-format';
+import StackCartScreen from '../cart/stack_cart_payment';
 
 import { useNavigation, useRoute} from '@react-navigation/native';
 
@@ -63,6 +64,9 @@ export default function StackUserScreen() {
        <Stack.Screen 
         name='BookHistory'
         component={BookHistory} initialParams={{username: route.params.username}}/>
+       <Stack.Screen 
+        name='Cart'
+        component={StackCartScreen} initialParams={{username: route.params.username}}/>
       </Stack.Navigator>
   );
 

@@ -21,16 +21,17 @@ function ListBook()
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.43.180:3000/')
+      const request = await axios.get('http://192.168.1.3:3000/')
       setBook(request.data.books)
       return request.data.books
     }
     fetchData();
 
-  },['http://192.168.1.6:3000/'])
+  },['http://192.168.1.3:3000/'])
 
   //---------------------------------------------------------------
    console.log(Book)
+   console.log(windowWidth)
 
    return (
     <View style={{backgroundColor:'#f3f3f3', flex:1}}>
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     margin: 3,
     borderRadius: 3,
     alignItems: 'center',
-    marginBottom: 15,
+    marginBottom: 0,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

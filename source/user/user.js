@@ -20,7 +20,7 @@ export default function UserScreen()
               <Avatar
                   rounded
                   source={require('../asset/icon/doremon.png')}
-                  size={80}
+                  size={60}
               />
               </View>
               <View style={styles.name_point}>
@@ -55,13 +55,13 @@ export default function UserScreen()
               ]}
               onPress={() => navigation.navigate('Login')}
               >
-                <Image style={styles.icon_style_user} source={require('../asset/icon/logout.png')}/>
+                <Image style={styles.icon_style_logout} source={require('../asset/icon/logout.png')}/>
                 <Text style={{fontWeight: 'bold', color: '#fff'}}>Đăng Xuất</Text>
             </Pressable>
           </View>
 
           {/* //-----Order--------------------------------------------------------- */}
-          <View>
+          <View style={{marginTop: 20}}>
               <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15, margin: 10, marginBottom: 0, marginTop: 20}}>Đơn hàng của tôi</Text>
               <View style={styles.main_order}>
                 <Pressable
@@ -74,7 +74,7 @@ export default function UserScreen()
                   ]}
                   onPress={() => navigation.navigate('ConfirmDetail',{username: username})}
                   >
-                  <Image style={styles.each_category_icon} source={require('../asset/icon/confirm.png')}/>
+                  <Image style={styles.each_confirm_icon} source={require('../asset/icon/confirm.png')}/>
                   <Text style={{paddingLeft: 0, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5}}>Chờ xác nhận</Text>
                 </Pressable>
 
@@ -88,7 +88,7 @@ export default function UserScreen()
                   ]}
                   onPress={() => navigation.navigate('PackingDetail',{username: username})}
                   >
-                  <Image style={styles.each_category_icon} source={require('../asset/icon/packing.png')}/>
+                  <Image style={styles.each_pack_icon} source={require('../asset/icon/packing.png')}/>
                   <Text style={{paddingRight: 5, color:'#555', fontWeight:'600',fontSize:14,marginTop: 5, marginLeft: -5}}> Đang đóng gói</Text>
                 </Pressable>
 
@@ -159,10 +159,16 @@ export default function UserScreen()
         {/* //=====================Caring---------------------------- */}
         <View>
               <Text style={{paddingLeft: 5, color:'black', fontWeight:'600',fontSize:15, margin: 10,}}>Quan Tâm</Text>
-              <View style={styles.caring_button_caring}>
-                  <Image style={styles.icon_heart_caring} source={require('../asset/icon/heart.png')}/>
-                  <Text style={styles.text_style_caring}>Sách Đã Thích</Text>
-              </View>
+              <Pressable style={styles.caring_button_caring} style={
+                    ({pressed}) =>[{
+
+                        opacity: pressed ? 0.5:1
+                    },
+                    styles.searching_history
+                ]}  onPress={() => navigation.navigate('Cart',{username: username})}>
+                  <Image style={styles.icon_heart_caring} source={require('../asset/icon/cart.png')}/>
+                  <Text style={styles.text_style_caring} >Giỏ hàng của bạn</Text>
+              </Pressable>
               <View style={styles.caring_button_caring}>
                   <Image style={styles.icon_style_caring} source={require('../asset/icon/watch.png')}/>
                   <Text style={styles.text_style_caring}  onPress={() => navigation.navigate('BookHistory',{username: username})}>Sách Đã Xem</Text>
@@ -178,10 +184,14 @@ export default function UserScreen()
 const styles=StyleSheet.create({
   main_header:{
       backgroundColor: '#1E90FF',
+      position:'relative',
       height: 120,
       flexDirection: 'row',
       alignContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      paddingBottom: 20,
+      borderBottomRightRadius: 40,
+      borderBottomLeftRadius: 40,
   },
 
   username:{
@@ -213,11 +223,14 @@ const styles=StyleSheet.create({
 },
 
 type_user:{
+    position: 'absolute',
+    left: 10,
+    top: -26,
     flexDirection: 'row',
-    backgroundColor: '#1E90FF',
+    backgroundColor: '#FF9900',
     height: 50,
     width:'50%',
-    borderRadius: 5,
+    borderRadius: 10,
     justifyContent:'center',
     alignItems: 'center',
     marginRight:15,
@@ -233,11 +246,14 @@ type_user:{
 },
 
 user_point:{
+    right: 10,
+    position: 'absolute',
+    top: -26,
     flexDirection: 'row',
-    backgroundColor:'#1E90FF',
+    backgroundColor:'#FF9900',
     height: 50,
     width:'40%',
-    borderRadius: 5,
+    borderRadius: 10,
     justifyContent:'center',
     alignItems: 'center',
     shadowColor: "#000",
@@ -257,6 +273,15 @@ icon_style_user:
     width: 30,
     marginRight: 10,
 },
+
+icon_style_logout:
+{
+    height: 30,
+    width: 30,
+    marginRight: 10,
+    tintColor: '#333',
+},
+
 
 //--------------------------------
 
@@ -302,7 +327,19 @@ searching_history:{
 each_category_icon:{
   height: 40, 
   width: 40,
+  tintColor:'#10d038',
+},
+
+each_confirm_icon:{
+  height: 40, 
+  width: 40,
   tintColor:'#333',
+},
+
+each_pack_icon:{
+  height: 40, 
+  width: 40,
+  tintColor:'#db3e00',
 },
 
 main_category:{
@@ -387,7 +424,7 @@ icon_style_voucher:{
   width: 30,
   marginRight: 10,
   marginLeft:15,
-  tintColor: '#333',
+  tintColor: '#1E90FF',
 },
 
 text_style_voucher:{

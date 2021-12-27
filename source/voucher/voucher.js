@@ -28,7 +28,7 @@ export default function VoucherScreen() {
       {
         async function fetchData()
       {
-          const request = await axios.get('http://192.168.1.6:3000/danhsachvoucher_all')
+          const request = await axios.get('http://192.168.1.3:3000/danhsachvoucher_all')
           console.log(request.data)
           for(var i=0;i<request.data.length;i++)
           {
@@ -46,19 +46,22 @@ export default function VoucherScreen() {
       }
       fetchData()
     
-      },['http://192.168.1.2:3000/'])
+      },['http://192.168.1.3:3000/'])
 
       function addVoucher(index){
         console.log(username + ' ' + Voucher[index].manhap + ' ' + Voucher[index].makm)
-        const request = axios.get('http://192.168.1.2:3000/luukhuyenmai/' + username + '/' + Voucher[index].makm + '/' + Voucher[index].manhap);
+        const request = axios.get('http://192.168.1.3:3000/luukhuyenmai/' + username + '/' + Voucher[index].makm + '/' + Voucher[index].manhap);
       }
 
   return (
     <ScrollView>
-      <View style={{backgroundColor:'#FFD39B'}}>
+      <View style={{backgroundColor: '#B0E2FF'}}>
       <View style={styles.main}>
         <Image style={styles.logo_header} source={require('../asset/icon/logo.png')}/>
         <Text style={styles.text_header}>Kho Voucher{"\n"}Siêu Khủng !!!</Text>
+      </View>
+      <View>
+        <Image style={{width: 360, height: 160, marginBottom: 10}} source={require('../asset/icon/banner_km.png')}/>
       </View>
       <View>
         <Image style={styles.my_voucher} source={require('../asset/icon/My_voucher.png')} />
@@ -232,7 +235,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding:10,
-    backgroundColor:'#FFD39B',
+    backgroundColor: '#B0E2FF',
   },
 
   item: {

@@ -32,20 +32,20 @@ function ListTop()
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.43.180:3000/')
+      const request = await axios.get('http://192.168.1.3:3000/')
       setBook(request.data.flash_sales)
       return request.data.flash_sales
     }
     fetchData();
 
-  },['http://192.168.1.6:3000/'])
+  },['http://192.168.1.3:3000/'])
   return (
       <View style={styles.container}>
         <View style = {styles.flash_sale}>
           {/* <Image style = {styles.flash} source={require('../asset/icon/flash.png')}/>   */}
-          <Text style={{paddingLeft: 5, color:'red', fontWeight:'600',fontSize:20,}}>FLASH SALE </Text>
+          <Text style={{paddingLeft: 5, color:'#FF6600', fontWeight:'600',fontSize:18,}}>FLASH SALE </Text>
           <CountDown
-            size={14}
+            size={12}
             until={86400}
             onFinish={() => alert('Finished')}
             digitStyle={{backgroundColor: 'red'}}
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     padding: 5,
     marginLeft: 5,
     borderRadius: 3,
-    marginBottom: 5,
+    marginBottom: 0,
     alignItems: 'center',
   },
 
@@ -125,14 +125,14 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: flexDirections[0],
     backgroundColor: '#E0FFFF',
-    marginBottom: 5,
+    marginBottom: 0,
   },
 
   flash_sale: {
     justifyContent:'center',
     alignItems: 'center',
     display: 'flex',
-    padding: 10,
+    padding: 5,
     flexDirection: flexDirections[0],
     backgroundColor: '#fff',
   },
@@ -143,9 +143,12 @@ const styles = StyleSheet.create({
   },
 
   icon:{
-    margin: 11,
-    width: 50,
-    height: 50,
+    marginTop: 10,
+    marginBottom: 10, 
+    marginRight: 16,
+    marginLeft: 16,
+    width: 40,
+    height: 40,
   },
 
   newprice: {

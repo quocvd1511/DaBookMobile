@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     margin: 3,
     borderRadius: 3,
     alignItems: 'center',
-    marginBottom: 15,
+    marginBottom: 0,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,

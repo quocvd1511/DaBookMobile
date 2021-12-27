@@ -20,7 +20,7 @@ function ListTopSale()
 
   return (
       <View style={styles.container}>
-        <Text style={{padding:10, color:'red', fontWeight:'600',fontSize:18, backgroundColor: '#fff', textAlign: 'center', marginTop:5}}>Top sách bán chạy </Text>
+        <Text style={{padding:10, color:'red', fontWeight:'600',fontSize:18, backgroundColor: '#fff', textAlign: 'center', marginTop:0}}>Top sách bán chạy </Text>
         <ScrollView horizontal={true}>
           {
             Book.map((item) => {
