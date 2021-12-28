@@ -38,7 +38,7 @@ function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.3:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.1.6:3000/chitietsach/' + tensach )
       setBook(request.data.list_book)
       return request.data.list_book
     }
@@ -50,18 +50,94 @@ function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.3:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.1.6:3000/chitietsach/' + tensach )
       setdetail_book(request.data.book)
       return request.data.book
     }
     fetchData();
     },['http://192.168.1.3:3000/chitietsach' + tensach])
-	 console.log(detail_book);
+	 //console.log(detail_book);
 
      for(var i=0;i<detail_book.length;i++)
      {
          detail_book[i].soluong=1
      }
+
+     //Calculate so sao------------------------
+     var danhgia = detail_book.danhgia
+     var tongdiem=0
+     var danhgiatb=0
+     var NoneChoose=require('../asset/icon/vote_star.png')
+     var Chosen =require('../asset/icon/yellowstar.png')
+     var Star1= NoneChoose,Star2= NoneChoose,Star3= NoneChoose,Star4= NoneChoose,Star5=NoneChoose
+     if(Boolean(danhgia)===true && danhgia.length>0)
+     {
+        for(var i=0;i<danhgia.length;i++)
+        {
+            tongdiem=danhgia[i].sao
+        }
+
+        danhgiatb=tongdiem/detail_book.soluotdanhgia
+        danhgiatb=danhgiatb.toFixed(1)
+        var star = Math.ceil(danhgiatb)
+
+        if(star===1)
+        {
+            Star1= Chosen
+            Star2= NoneChoose
+            Star3= NoneChoose
+            Star4= NoneChoose
+            Star5= NoneChoose
+
+        }
+        else if(star===2)
+        {
+            Star1= Chosen
+            Star2= Chosen
+            Star3= NoneChoose
+            Star4= NoneChoose
+            Star5= NoneChoose
+
+        } else if(star===3)
+        {
+            Star1= Chosen
+            Star2= Chosen
+            Star3= Chosen
+            Star4= NoneChoose
+            Star5= NoneChoose
+
+        } else if(star===4)
+        {
+            Star1= Chosen
+            Star2= Chosen
+            Star3= Chosen
+            Star4= Chosen
+            Star5= NoneChoose
+
+        } else if(star===5)
+        {
+            Star1= Chosen
+            Star2= Chosen
+            Star3= Chosen
+            Star4= Chosen
+            Star5= Chosen
+
+        }
+        else
+        {
+            Star1= NoneChoose
+            Star2= NoneChoose
+            Star3= NoneChoose
+            Star4= NoneChoose
+            Star5= NoneChoose
+
+        }
+
+    }
+     
+
+
+     //-------------------------------
         
     const[temp, settemp] = useState(1)
     function quantyplus(){
@@ -86,7 +162,7 @@ function book_detail_home(){
 
     function addProduct(soluong){
             console.log(username + ' ' + detail_book.tensach + ' ' + soluong)
-            const request = axios.get('http://192.168.1.3:3000/themgiohang?username=' + username + '&tensach=' + detail_book.tensach + '&soluong=' + soluong + '&theloai=' + detail_book.theloai + '&hinhanh=' + detail_book.hinhanh + '&giaban=' + detail_book.giaban);
+            const request = axios.get('http://192.168.1.6:3000/themgiohang?username=' + username + '&tensach=' + detail_book.tensach + '&soluong=' + soluong + '&theloai=' + detail_book.theloai + '&hinhanh=' + detail_book.hinhanh + '&giaban=' + detail_book.giaban);
            console.log(request.status);
     }
     
@@ -103,12 +179,12 @@ function book_detail_home(){
                 <Text style = {styles.price}>  {detail_book.giagoc} </Text>
                 </Text> */}
                 <View style = {styles.viewstar}>
-                    <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
-                    <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
-                    <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
-                    <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
-                    <Image style = {styles.star} source={require('../asset/icon/star.png')}/>
-                    <Text style={{ fontWeight:'400', fontSize:15}}> 4.8 (27 đánh giá) </Text>
+                    <Image style = {styles.star} source={Star1}/>
+                    <Image style = {styles.star} source={Star2}/>
+                    <Image style = {styles.star} source={Star3}/>
+                    <Image style = {styles.star} source={Star4}/>
+                    <Image style = {styles.star} source={Star5}/>
+                    <Text style={{ fontWeight:'400', fontSize:15}}> {danhgiatb} ({detail_book.soluotdanhgia} đánh giá) </Text>
                 </View>
                 <View style = {styles.button}>
                     <View style = {styles.quantity}>
@@ -235,6 +311,9 @@ function book_detail_home(){
                 }
                 </ScrollView>
             </View>
+                
+            <RatingScreen/>
+            
 
         </ScrollView>
     )
