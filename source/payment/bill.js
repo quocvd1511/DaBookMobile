@@ -17,7 +17,7 @@ export default function BillUp()
     const now = d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear()
     for(var i=0;i<ListBuy.length;i++)
     {
-        SoLuong+=parseInt(ListBuy[i].SoLuong)
+        SoLuong+=parseInt(ListBuy[i].soluong)
     }
     // console.log(SoLuong)
     return(
@@ -43,7 +43,7 @@ export default function BillUp()
                             </View>
                         </View>
                     <View style={styles.deli_dabook}>
-                        <Text style={styles.text_style}>Được giao bởi: </Text>
+                        <Text style={styles.text_style}>Được giao bởi:</Text>
                         <Image style={styles.deli_style} source={require('../asset/icon/dabook_deli.png')}/>
                     </View>
                 </View>
@@ -57,8 +57,8 @@ export default function BillUp()
                                 <Text style={styles.book_name} numberOfLines={2}
                                     ellipsizeMode='tail'>{item.tensach}</Text>
                                 <View style={{display: 'flex', flexDirection: 'row', marginTop: 10, marginRight:10,}}>
-                                    <Text style = {styles.price}> SL: {item.SoLuong}</Text>
-                                    <Text style={styles.newprice}>{item.TongTien} đ</Text>
+                                    <Text style = {styles.price}> SL: {item.soluong}</Text>
+                                    <Text style={styles.newprice}>{item.tongtien} đ</Text>
                                 </View>
                             </View>
                         </View>

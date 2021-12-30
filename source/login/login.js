@@ -1,10 +1,11 @@
 import * as React from 'react'
-import {View,Text, Image,StyleSheet, Pressable, ToastAndroid, Keyboard} from 'react-native'
+import {View,Text, Image,StyleSheet, Pressable, ToastAndroid, Keyboard, Modal} from 'react-native'
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import CheckBox from '@react-native-community/checkbox';
 import { TextInput } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
+import ModalSuccess from './modal_fail';
 
 export default function Login()
 {
@@ -15,6 +16,8 @@ export default function Login()
     const [Password, setPassword] = React.useState('')
     const [User,setUser] = React.useState([])
     const navigation = useNavigation();
+    const [modalVisible_Fail, setModalVisible_Fail] = React.useState(false);
+    const [modalVisible_True, setModalVisible_True] = React.useState(false);
 
     async function checkLogin()
     {
@@ -33,17 +36,19 @@ export default function Login()
         console.log(request.data)
         if(request.data.status==='Failed')
         {
-            ToastAndroid.show("Thông tin đăng nhập không chính xác", ToastAndroid.SHORT)
+            //ToastAndroid.show("Thông tin đăng nhập không chính xác", ToastAndroid.SHORT)
+            setModalVisible_Fail(true)
             setUsername('')
             setPassword('')
         } 
         else
         {
-            ToastAndroid.show("Xác thực thành công", ToastAndroid.SHORT)
+            //ToastAndroid.show("Xác thực thành công", ToastAndroid.SHORT)
+            setModalVisible_True(true)
+            setTimeout(() => 2000)
+            navigation.navigate('TabScreen',{username: Username})
             setUsername('')
             setPassword('')
-            navigation.navigate('TabScreen',{username: Username})
-            //navigation.navigate('book_detail',{user_session: Username})
         }
     }
     }
@@ -53,9 +58,73 @@ export default function Login()
         val=''
     }
 
+    function ConfirmSuccess()
+    {
+        setModalVisible_True(!modalVisible_True)
+        navigation.navigate('TabScreen',{username: Username})
+    }
+
 
     return(
         <View  style={styles.main}>
+            {/* ------------------------------Modal Fail--------------------------------------------- */}
+             <Modal
+                animationType="fade"
+                visible={modalVisible_Fail}
+                transparent={true}
+                onRequestClose={() =>
+                {
+                    setModalVisible_Fail(true);
+                }}
+            >
+                <View style={{flex: 1, backgroundColor: "#00000099"}}>
+                    <View style={styles.view}>
+                        <View style={styles.view2}></View>
+                        <View style={styles.view3}>
+                            <Image style={{marginTop:10, width: 80, height: 80, alignSelf:'center', marginBottom: 10}} source={require('../asset/icon/fail.png')}/>
+                            <Text style={{fontSize: 18, fontWeight: '600', color:'#333'}}>Đăng nhập không thành công!</Text>
+                        </View>
+                        <Pressable
+                            style={[styles.button, styles.buttonClose]}
+                            onPress={() => setModalVisible_Fail(!modalVisible_Fail)}
+                            >
+                            <Text style={styles.textStyle}>OK</Text>
+                        </Pressable>
+
+                    </View>
+                </View>
+
+            </Modal>
+
+            {/* ------------------------------Modal Success--------------------------------------------- */}
+            <Modal
+                animationType="fade"
+                visible={modalVisible_True}
+                transparent={true}
+                onRequestClose={() =>
+                {
+                    setModalVisible_True(true);
+                }}
+            >
+                <View style={{flex: 1, backgroundColor: "#00000099"}}>
+                    <View style={styles.view}>
+                    <View style={styles.view2}></View>
+                        <View style={styles.view3}>
+                            <Image style={{width: 100, height: 100, alignSelf:'center'}} source={require('../asset/icon/success.png')}/>
+                            <Text style={{fontSize: 20, fontWeight: '600', color:'#333'}}>Đăng nhập thành công!</Text>
+                        </View>
+                        <Pressable
+                            style={[styles.button, styles.buttonClose]}
+                            onPress={() => {setModalVisible_True(!modalVisible_True)}}
+                        >
+                                <Text style={styles.textStyle}>OK</Text>
+                        </Pressable>
+                    </View>
+                </View>
+            </Modal>
+            
+            {/* --------------------------------------Modal----------------------------------------------------------------------- */}
+
             <View>
 
                 <View style={{alignSelf: 'center'}}>
@@ -249,6 +318,54 @@ const styles= StyleSheet.create({
         height: 50, 
         width: 50, 
         marginTop: 10
-    }
+    },
+
+    view: {
+        alignSelf:'center',
+        width:300, 
+        height: 190, 
+        borderColor: 'red',
+        borderRadius: 10,
+        marginTop: 250,
+        shadowColor: "#fff",
+        shadowOffset: {
+            width: 0,
+            height: 9,
+        },
+        shadowOpacity: 0.48,
+        shadowRadius: 11.95,
+        elevation: 18,
+        backgroundColor: '#fff'
+    },
+
+    view2: {
+        width: 300,
+        height: 40,
+        backgroundColor:'#eb4924', 
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,  
+    },
+
+    view3: {
+        alignSelf:'center',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,  
+    },
+
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2
+      },
+
+    buttonClose: {
+        backgroundColor: "#2196F3",
+      },
+      textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+      },
+   
 
 })

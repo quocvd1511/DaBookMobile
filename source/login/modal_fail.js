@@ -1,16 +1,28 @@
 import * as React from 'react';
-import { Text, View, StyleSheet,Image, ScrollView, Pressable, TextInput} from 'react-native';
+import { Text, View, StyleSheet,Image, ScrollView, Pressable, TextInput, Modal} from 'react-native';
 
-export default function HistoryLookup()
+export default function ModalSuccess()
 {
+    const [modalVisible, setModalVisible] = React.useState(false);
     return(
-        <View style={styles.view}>
+        <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+          <View style={styles.view}>
             <View style={styles.view2}></View>
             <View style={styles.view3}>
                 <Image style={{marginTop:10, width: 80, height: 80, alignSelf:'center', marginBottom: 10}} source={require('../asset/icon/fail.png')}/>
                 <Text style={{fontSize: 18, fontWeight: '600', color:'#333'}}>Đăng nhập không thành công!</Text>
             </View>
         </View>
+
+      </Modal>
     )
 }
 

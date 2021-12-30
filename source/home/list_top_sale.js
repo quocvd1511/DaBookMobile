@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar, Image, Dimensions, ScrollView } from 'react-native';
-
+import axios from 'axios';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const flexDirections = ['row', 'row-reverse', 'column', 'column-reverse'];
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
 
 function ListTopSale() 
 {
@@ -18,6 +17,17 @@ function ListTopSale()
     {id: 6, name: 'Harry Potter 3', price:'100000', img:'https://i.pinimg.com/originals/9e/dc/30/9edc30d2b8a20c5f4893977e80e80cbc.jpg'},
   ])
 
+  React.useEffect(() => 
+  {
+    async function fetchData(){
+      const request = await axios.get('http://192.168.1.6:3000/laytopsale')
+      setBook(request.data.listsach)
+    }
+    fetchData();
+
+  },['http://192.168.1.3:3000/'])
+
+
   return (
       <View style={styles.container}>
         <Text style={{padding:10, color:'red', fontWeight:'600',fontSize:18, backgroundColor: '#fff', textAlign: 'center', marginTop:0}}>Top sách bán chạy </Text>
@@ -27,14 +37,14 @@ function ListTopSale()
               return(
                 <View key={item.id}>
                   <View style={styles.item}>
-                    <Image style={styles.img} source={{uri:item.img}}/>
+                    <Image style={styles.img} source={{uri:item.hinhanh}}/>
                     <Text 
                     style={styles.name_item}
                     numberOfLines={2}
-                    ellipsizeMode='tail'>{item.name}</Text>
+                    ellipsizeMode='tail'>{item.tensach}</Text>
                     <View style={styles.viewinfo}>
-                      <Text style={styles.newprice}>179.000 đ</Text>
-                      <Text style={styles.qtysale}>Đã bán 78</Text>
+                      <Text style={styles.newprice}>{item.giaban} đ</Text>
+                      <Text style={styles.qtysale}>Đã bán {item.soluongdaban}</Text>
                     </View>
                   </View>
                 </View>

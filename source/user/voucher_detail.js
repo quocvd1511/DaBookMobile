@@ -18,18 +18,20 @@ export default function VoucherDetail()
 
       React.useEffect(() => 
       {
-        async function fetchData(){
-          const request = await axios.get('http://192.168.1.3:3000/danhsachvoucher/' + username)
+          async function fetchData()
+        {
+          const request = await axios.get('http://192.168.1.6:3000/danhsachvoucher/' + username)
           // setUser(request.data)
           setVoucher(request.data.khuyenmai)
           // return request.data.thongtintk
-          console.log(request.data.khuyenmai)
+          //console.log(request.data.khuyenmai)
         }
         fetchData();
     
       },['http://192.168.1.3:3000/'])
 
-      console.log('ahihi', Voucher)
+      //console.log('ahihi', Voucher)
+      //console.log(Voucher)
 
   return (
     <View style={{backgroundColor:'#B0E2FF'}}>
@@ -44,14 +46,14 @@ export default function VoucherDetail()
                       return(
                       <View key={item.id} style={styles.item}>
                           <View style={{backgroundColor: 'dodgerblue', padding: 25, borderRadius:5, margin: 10}}>
-                              <Image style={{height:50, width:50, tintColor: '#ffd79d'}} source={require('../asset/icon/sale.png')}/>
+                              <Image style={{height:50, width:50, tintColor: '#ffd79d'}} source={{uri: item.img}}/>
                           </View>
 
                           <View style={{margin:3}}>
-                              <Text style={{color: 'black', fontSize: 16, fontWeight: '500'}}>Mã nhập: {item.manhap}</Text>
-                              <Text style={{color: 'black', fontSize: 16, fontWeight: '500'}}>Nội dung: {item.noidung}</Text>
-                              <Text style={{color: 'black', fontSize: 16, fontWeight: '500'}}>Giảm: {item.phantram}%</Text>
-                              <Text style={{color: 'black', fontSize: 16, fontWeight: '500'}}>HSD: {item.ngaykt}</Text>
+                              <Text style={{color: 'black', fontSize: 14, fontWeight: '500'}}>Mã nhập: {item.manhap}</Text>
+                              <Text style={{color: 'black', fontSize: 14, fontWeight: '500'}}>Giảm: {item.phantram}%</Text>
+                              <Text style={{color: 'black', fontSize: 14, fontWeight: '500'}}>Mức áp dụng: {item.dieukien}</Text>
+                              <Text style={{color: 'black', fontSize: 14, fontWeight: '500'}}>HSD: {item.ngaykt}</Text>
                           </View>
                       </View>
                       )

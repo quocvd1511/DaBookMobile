@@ -28,16 +28,22 @@ export default function Payment()
 
   var ListBuyed = route.params.BuyedProduct
   var UserInfor = route.params.UserInfor
+  var ShipMoney =0
   const [ListVoucher, setListVoucher] = React.useState([])
-
+  if(UserInfor.diachigoc[0]==="Hồ Chí Minh")
+  {
+    ShipMoney = 20000
+  }
+  else ShipMoney = 40000
+  console.log(ShipMoney)
   React.useEffect(() => 
   {
     async function fetchData() 
     {
       //-----------------------------Lay Thong Tin User---------------
-      var request = await axios.get('http://192.168.1.3:3000/chitiettk_voucher?matk='+UserInfor.matk)
+      var request = await axios.get('http://192.168.1.6:3000/chitiettk_voucher?matk='+UserInfor.matk)
       setListVoucher(request.data.khuyenmai)
-
+      console.log(request.data.khuyenmai)
       //-------------------------------Lay Thong Voucher--------------------------------------
     }
 
@@ -75,33 +81,46 @@ export default function Payment()
 
   function CheckVoucher(MaNhap)
   {
-      console.log('Check Voucher nè')
-      console.log(TempListVoucher)
+      //console.log('Check Voucher nè')
+      //console.log(TempListVoucher)
       //console.log(typeof TempListVoucher[0].ngaykt)
         var flag=false
         var flag1=false
+        var flag2=false
         for(var i=0;i<TempListVoucher.length;i++)
         {
           if(TempListVoucher[i].manhap===MaNhap)
           {
             flag=true
-            //console.log(CheckDate(TempListVoucher[i].ngaykt))
             if(CheckDate(TempListVoucher[i].ngaykt))
             {
-              setTongTien(TongTien - (parseInt(TempListVoucher[i].phantram)/100)*TongTien)
-              setTienGiam(TienGiam+(parseInt(TempListVoucher[i].phantram)/100)*TongTien)
-              console.log(TongTien)
-              TempListVoucher[i].manhap+="######"
-              setMaNhap('')
-              settemp(temp-1)
+                if(TempListVoucher[i].loai==='Sale')
+                {
+                setTongTien(TongTien - Math.round(TempListVoucher[i].phantram/100*TongTien))
+                //console.log((TempListVoucher[i].phantram/100)*TongTien)
+                setTienGiam(TienGiam+ (TempListVoucher[i].phantram/100)*TongTien)
+                TempListVoucher[i].manhap+="######"
+                setMaNhap('')
+                settemp(temp-1)
+                }
+                else {
+                  ShipMoney = ShipMoney - Math.round(ShipMoney *TempListVoucher[i].phantram/1000)
+                  TempListVoucher[i].manhap+="######"
+                  setMaNhap('')
+                  settemp(temp-1)
+                }
+
             } else 
             {
               flag1=true
             }
           } 
         }
-
-        if(flag1===true)
+        if(flag2===true)
+        {
+          ToastAndroid.show("Voucher chỉ áp dụng cho đơn hàng từ" + temp + "trở lên")
+        }
+        else if(flag1===true)
         {
           ToastAndroid.show("Voucher đã hết hạn", ToastAndroid.SHORT)
         } else if(flag===false)
@@ -113,7 +132,7 @@ export default function Payment()
   
   for(var i=0;i<ListBuyed.length;i++)
   {
-    ListBuyed[i].TongTien=parseInt(ListBuyed[i].giaban)*parseInt(ListBuyed[i].SoLuong)
+    ListBuyed[i].tongtien=parseInt(ListBuyed[i].giaban)*parseInt(ListBuyed[i].soluong)
   }
 
   //console.log(ListBuyed)
@@ -144,7 +163,8 @@ export default function Payment()
   var nVoucher = 0
   // console.log('Helloooooooooooooooooooooo')
 
-  async function createBill(){
+  async function createBill()
+  {
     //console.log('Hello')
     //console.log(ListVoucher)
     for(var i=0;i<ListVoucher.length;i++)
@@ -156,19 +176,22 @@ export default function Payment()
           nVoucher+=1
         }
     }
-    console.log('RestVoucher ne')
-    console.log(RestVoucher)
+    //TongTien=TongTien+ShipMoney
+    //console.log(ListBuyed)
+    //console.log('RestVoucher ne')
+    //console.log(RestVoucher)
     const request = await axios.post('http://192.168.1.6:3000/taodonhang',{
             matk: UserInfor.matk,
             listbuyed: ListBuyed,
             tongtien: TongTien,
             thanhtoan: value,
-            danhsach_km: RestVoucher
+            danhsach_km: RestVoucher,
+            tienship: ShipMoney,
     })
     if(request.data.status==='Success')
     {
       var madh= request.data.madh
-      navigation.navigate('BillUp',{ListBuyed,TongTien,UserInfor,madh,TienGiam})
+      navigation.navigate('BillUp',{ListBuyed,TongTien,UserInfor,madh,TienGiam,ShipMoney})
     }
   }
   

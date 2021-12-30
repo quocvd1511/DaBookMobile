@@ -70,11 +70,12 @@ function book_detail_home(){
      var NoneChoose=require('../asset/icon/vote_star.png')
      var Chosen =require('../asset/icon/yellowstar.png')
      var Star1= NoneChoose,Star2= NoneChoose,Star3= NoneChoose,Star4= NoneChoose,Star5=NoneChoose
+     const [modalVisible_Fail, setModalVisible_Fail] = React.useState(false);
      if(Boolean(danhgia)===true && danhgia.length>0)
      {
         for(var i=0;i<danhgia.length;i++)
         {
-            tongdiem=danhgia[i].sao
+            tongdiem+=danhgia[i].sao
         }
 
         danhgiatb=tongdiem/detail_book.soluotdanhgia
@@ -168,6 +169,25 @@ function book_detail_home(){
     
     return(
         <ScrollView style = {styles.views}>
+            {/* --------------------------------------Modal add to cart------------------------------------------------------ */}
+            {/* <Modal
+                animationType="fade"
+                visible={modalVisible_True}
+                transparent={true}
+                onRequestClose={() =>
+                {
+                    setModalVisible(true);
+                }}
+            >
+                <View style={styles.view}>
+                    <View style={styles.view3}>
+                        <Image style={{width: 80, height: 80, alignSelf:'center'}} source={require('../asset/icon/success.png')}/>
+                        <Text style={{fontSize: 18, fontWeight: '600', color:'#333'}}>Thêm vào giỏ hàng thành công!</Text>
+                    </View>
+                </View>
+            </Modal> */}
+
+
             <Image style = {styles.image} source={{uri:detail_book.hinhanh}}/>
             <View style = {styles.view}>
                 <Text style = {styles.name}>{detail_book.tensach}</Text>
@@ -186,6 +206,7 @@ function book_detail_home(){
                     <Image style = {styles.star} source={Star5}/>
                     <Text style={{ fontWeight:'400', fontSize:15}}> {danhgiatb} ({detail_book.soluotdanhgia} đánh giá) </Text>
                 </View>
+                <Text style={{ fontWeight:'400', fontSize:15}}> Đã bán {detail_book.soluongdaban} sách </Text>
                 <View style = {styles.button}>
                     <View style = {styles.quantity}>
                         <Pressable

@@ -10,7 +10,7 @@ export default function VoucherScreen() {
   const navigation = useNavigation();
   const route = useRoute();
   const username = route.params.username;
-  console.log(username)
+  //console.log(username)
 
 
   const [Voucher, setVoucher] = React.useState([
@@ -24,33 +24,84 @@ export default function VoucherScreen() {
     {id :8, name: 'Sale', price:'100%', img:'https://cdn2.iconfinder.com/data/icons/solid-black-labels/128/sale_copy-512.png'},
   ])
 
+
+  const [userVoucher, setuserVoucher] = React.useState([
+    {id :1, name: 'Vận chuyển', price:'100%', img:'https://cdn.shopify.com/s/files/1/0194/4221/products/shipping-free-512_grande.png?v=1587611827'},
+    {id :2, name: 'Sale', price:'10%', img:'https://cdn2.iconfinder.com/data/icons/solid-black-labels/128/sale_copy-512.png'},
+    {id :3, name: 'Vận chuyển', price:'20.000 đ', img:'https://cdn.shopify.com/s/files/1/0194/4221/products/shipping-free-512_grande.png?v=1587611827'},
+    {id :4, name: 'Sale', price:'10%', img:'https://cdn2.iconfinder.com/data/icons/solid-black-labels/128/sale_copy-512.png'},
+    {id :5, name: 'Vận chuyển', price:'30', img:'https://cdn.shopify.com/s/files/1/0194/4221/products/shipping-free-512_grande.png?v=1587611827'},
+    {id :6, name: 'Sale', price:'100%', img:'https://cdn2.iconfinder.com/data/icons/solid-black-labels/128/sale_copy-512.png'},
+    {id :7, name: 'Vận chuyển', price:'100%', img:'https://cdn.shopify.com/s/files/1/0194/4221/products/shipping-free-512_grande.png?v=1587611827'},
+    {id :8, name: 'Sale', price:'100%', img:'https://cdn2.iconfinder.com/data/icons/solid-black-labels/128/sale_copy-512.png'},
+  ])
+
+
   React.useEffect(() => 
       {
         async function fetchData()
-      {
-          const request = await axios.get('http://192.168.1.3:3000/danhsachvoucher_all')
-          console.log(request.data)
-          for(var i=0;i<request.data.length;i++)
-          {
-              request.data[i].ngaykt = request.data[i].ngaykt.toString("dd/mm/yyyy")
-              if(request.data[i].loai==='Sale')
-              {
-                request.data[i].img='https://www.pngrepo.com/png/222733/512/voucher-coupon.png'
-              } else
-              {
-                request.data[i].img='https://cdn.shopify.com/s/files/1/0194/4221/products/shipping-free-512_grande.png?v=1587611827'
-              }
-          }
-          console.log(request.data)
-          setVoucher(request.data)
-      }
+        {
+            const request = await axios.get('http://192.168.1.6:3000/danhsachvoucher_all?username='+username)
+            //console.log(request.data)
+            for(var i=0;i<request.data.listvoucher.length;i++)
+            {
+                //request.data[i].ngaykt = request.data[i].ngaykt.toString("dd/mm/yyyy")
+                if(request.data.listvoucher[i].loai==='Sale')
+                {
+                  request.data.listvoucher[i].img='https://www.pngrepo.com/png/222733/512/voucher-coupon.png'
+                } else
+                {
+                  request.data.listvoucher[i].img='https://cdn.shopify.com/s/files/1/0194/4221/products/shipping-free-512_grande.png?v=1587611827'
+                }
+            }
+            setVoucher(request.data.listvoucher)
+            setuserVoucher(request.data.ds_km)
+            //console.log(request.data)
+      
+        }
       fetchData()
     
-      },['http://192.168.1.3:3000/'])
+      },['http://192.168.1.6:3000/'])
 
-      function addVoucher(index){
-        console.log(username + ' ' + Voucher[index].manhap + ' ' + Voucher[index].makm)
-        const request = axios.get('http://192.168.1.3:3000/luukhuyenmai/' + username + '/' + Voucher[index].makm + '/' + Voucher[index].manhap);
+      for(var i=0;i<Voucher.length;i++)
+      {
+        Voucher[i].nd_button = 'Lưu'
+        Voucher[i].dis_button=false
+      }
+
+      const [temp,settemp] = React.useState(1)
+      
+      for(var i=0;i<Voucher.length;i++)
+      {
+        for(var k=0;k<userVoucher.length;k++)
+        {
+            if(Voucher[i].makm === userVoucher[k].makm)
+            {
+              Voucher[i].nd_button = 'Đã lưu'
+              Voucher[i].dis_button=true
+            }
+        }
+      }
+      //console.log(Voucher)
+      //console.log(tempVoucher)
+
+      function addVoucher(index)
+      {
+        const request = axios.post('http://192.168.1.6:3000/luukhuyenmai',
+        {
+            username: username,
+            makm: Voucher[index].makm,
+            manhap: Voucher[index].manhap,
+            phantram: Voucher[index].phantram,
+            dieukien: Voucher[index].dieukien,
+            img: Voucher[index].img
+        })
+
+        //Voucher[index].nd_button = 'Đã lưu'
+        //Voucher[index].dis_button = true
+        userVoucher.push(Voucher[index])
+        settemp(temp-1)
+                //console.log(Voucher[index].ngaykt)
       }
 
   return (
@@ -84,7 +135,10 @@ export default function VoucherScreen() {
       <View style={styles.container}>
       <ScrollView>
         {
-          Voucher.map((item, index) => {
+          Voucher.map((item, index) => 
+          {
+            if(item.dis_button===true)
+            {}
             return(
               <View key={item.id} style={styles.item}>
                   <View style={{backgroundColor: '#33CC00', padding: 20, marginLeft: 5, borderRadius:5}}>
@@ -92,8 +146,8 @@ export default function VoucherScreen() {
                   </View>
 
                   <View style={{marginLeft:10}}>
-                      <Text style={{color:'black', fontSize: 14}}>{item.loai}</Text>
                       <Text style={{color: 'black', fontSize: 15, fontWeight: 'bold'}}>Giảm: {item.phantram}%</Text>
+                      <Text style={{color: 'black', fontSize: 12}}>Áp dụng tối thiểu {item.dieukien}</Text>
                       <Text style={{color: 'black', fontSize: 12}}>Mã Nhập: {item.manhap}</Text>
                       <Text style={{color: 'black', fontSize: 12}}>HSD: {item.ngaykt}</Text>
                   </View>
@@ -105,9 +159,10 @@ export default function VoucherScreen() {
                         },
                         styles.button_save
                     ]}
+                    disabled={item.dis_button}
                     onPress={()=> addVoucher(index)}
                     >
-                    <Text style={{color:'white', fontSize: 16, fontWeight: '500', alignSelf:'center', marginBottom: 8}}>Lưu</Text>
+                    <Text style={{color:'white', fontSize: 16, fontWeight: '500', alignSelf:'center', marginBottom: 8}}>{item.nd_button}</Text>
                   </Pressable>
               </View>
             )
