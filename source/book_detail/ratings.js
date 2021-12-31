@@ -32,7 +32,7 @@ export default function HomeScreen()
     {
         async function fetchData()
         {
-            const request = await axios.get('http://192.168.1.4:3000/danhsachcomment?tensach='+ route.params.tensach +'&matk='+route.params.username)
+            const request = await axios.get('http://192.168.43.180:3000/danhsachcomment?tensach='+ route.params.tensach +'&matk='+route.params.username)
             console.log(request.data.danhsachdanhgia)
             setListCom(request.data.danhsachdanhgia)
             setRated(request.data.sosaodanhgia)

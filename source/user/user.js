@@ -169,10 +169,16 @@ export default function UserScreen()
                   <Image style={styles.icon_heart_caring} source={require('../asset/icon/cart.png')}/>
                   <Text style={styles.text_style_caring} >Giỏ hàng của bạn</Text>
               </Pressable>
-              <View style={styles.caring_button_caring}>
+              <Pressable style={styles.caring_button_caring} style={
+                    ({pressed}) =>[{
+
+                        opacity: pressed ? 0.5:1
+                    },
+                    styles.searching_history
+                ]}>
                   <Image style={styles.icon_style_caring} source={require('../asset/icon/watch.png')}/>
                   <Text style={styles.text_style_caring}  onPress={() => navigation.navigate('BookHistory',{username: username})}>Sách Đã Xem</Text>
-              </View>
+              </Pressable>
           </View>
 
       </ScrollView>

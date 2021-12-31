@@ -38,7 +38,7 @@ function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.4:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
       setBook(request.data.list_book)
       return request.data.list_book
     }
@@ -50,7 +50,7 @@ function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.4:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
       setdetail_book(request.data.book)
       return request.data.book
     }
@@ -163,7 +163,7 @@ function book_detail_home(){
 
     function addProduct(soluong){
             console.log(username + ' ' + detail_book.tensach + ' ' + soluong)
-            const request = axios.get('http://192.168.1.4:3000/themgiohang?username=' + username + '&tensach=' + detail_book.tensach + '&soluong=' + soluong + '&theloai=' + detail_book.theloai + '&hinhanh=' + detail_book.hinhanh + '&giaban=' + detail_book.giaban);
+            const request = axios.get('http://192.168.43.180:3000/themgiohang?username=' + username + '&tensach=' + detail_book.tensach + '&soluong=' + soluong + '&theloai=' + detail_book.theloai + '&hinhanh=' + detail_book.hinhanh + '&giaban=' + detail_book.giaban);
            console.log(request.status);
     }
     

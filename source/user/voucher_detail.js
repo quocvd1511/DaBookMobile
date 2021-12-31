@@ -20,7 +20,7 @@ export default function VoucherDetail()
       {
           async function fetchData()
         {
-          const request = await axios.get('http://192.168.1.4:3000/danhsachvoucher/' + username)
+          const request = await axios.get('http://192.168.43.180:3000/danhsachvoucher/' + username)
           // setUser(request.data)
           setVoucher(request.data.khuyenmai)
           // return request.data.thongtintk

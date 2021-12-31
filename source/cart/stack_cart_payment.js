@@ -24,7 +24,7 @@ export default function StackCartScreen()
   }, [])
   console.log('Hello'+route.params.name)
   return (
-    <NavigationContainer independent={true}>
+    // <NavigationContainer independent={true}>
       <Stack.Navigator
       screenOptions={{headerShown: false}}
       >
@@ -38,7 +38,7 @@ export default function StackCartScreen()
         name='BillUp'
         component={BillUp}/>
       </Stack.Navigator>
-    </NavigationContainer>
+    // </NavigationContainer>
   );
 
 

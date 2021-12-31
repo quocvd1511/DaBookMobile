@@ -38,6 +38,7 @@ export default function TabScreen() {
                   <Ionicons
                     name={iconName}
                     size={size}
+                    color={'white'}
                   />
               )
                 break;
@@ -48,6 +49,7 @@ export default function TabScreen() {
                     <Ionicons
                       name={iconName}
                       size={size}
+                      color={'white'}
                     />
               )
                 break;
@@ -58,6 +60,7 @@ export default function TabScreen() {
                   <MaterialCommunityIcons
                     name={iconName}
                     size={size}
+                    color={'white'}
                   />
                 )
                 break;
@@ -80,6 +83,7 @@ export default function TabScreen() {
                   <Ionicons
                   name={iconName}
                   size={size}
+                  color={'white'}
                   />
                 )
                 break;
@@ -89,8 +93,9 @@ export default function TabScreen() {
 
           tabBarStyle:
           {
-            backgroundColor: 'dodgerblue',
+            backgroundColor: 'black',
             paddingTop: 5,
+          
             
           },
           headerShown: false,

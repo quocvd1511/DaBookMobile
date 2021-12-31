@@ -21,7 +21,7 @@ export default  function BookHistory(){
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.4:3000/ds_sachdaxem?username=' + matk )
+      const request = await axios.get('http://192.168.43.180:3000/ds_sachdaxem?username=' + matk )
       setBook(request.data.books)
       return request.data.books
     }

@@ -41,7 +41,7 @@ export default function VoucherScreen() {
       {
         async function fetchData()
         {
-            const request = await axios.get('http://192.168.1.4:3000/danhsachvoucher_all?username='+username)
+            const request = await axios.get('http://192.168.43.180:3000/danhsachvoucher_all?username='+username)
             //console.log(request.data)
             for(var i=0;i<request.data.listvoucher.length;i++)
             {
@@ -87,7 +87,7 @@ export default function VoucherScreen() {
 
       function addVoucher(index)
       {
-        const request = axios.post('http://192.168.1.4:3000/luukhuyenmai',
+        const request = axios.post('http://192.168.43.180:3000/luukhuyenmai',
         {
             username: username,
             makm: Voucher[index].makm,
@@ -111,11 +111,11 @@ export default function VoucherScreen() {
         <Image style={styles.logo_header} source={require('../asset/icon/logo.png')}/>
         <Text style={styles.text_header}>Kho Voucher{"\n"}Siêu Khủng !!!</Text>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate('VoucherDetail',{username: username})}>
       <View>
         <Image style={{width: 360, height: 160, marginBottom: 10}} source={require('../asset/icon/banner_km.png')}/>
       </View>
       {/* <View> */}
+      <TouchableOpacity onPress={() => navigation.navigate('VoucherDetail',{username: username})}>
         <Image style={styles.my_voucher} source={require('../asset/icon/My_voucher.png')} />
       </TouchableOpacity>
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>

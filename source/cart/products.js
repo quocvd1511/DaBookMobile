@@ -21,6 +21,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useFocusEffect } from '@react-navigation/native';
 import NumberFormat from 'react-number-format';
 const windowWidth = Dimensions.get('window').width;
+// import { useNavigation, useRoute } from '@react-navigation/native';
 
 // const navigation = useNavigation(); 
 
@@ -57,7 +58,7 @@ const ListProduct_New = ({navigation, route}) =>
       async function fetchData() 
       {
         //-----------------------------Lay Thong Tin User---------------
-        var request = await axios.get('http://192.168.1.4:3000/chitiettk_voucher?matk='+username)
+        var request = await axios.get('http://192.168.43.180:3000/chitiettk_voucher?matk='+username)
         setUserInfor(request.data.taikhoan)
         if (request.data.taikhoan.giohang)
         {
@@ -180,9 +181,8 @@ const ListProduct_New = ({navigation, route}) =>
         setTongTien(TongTien-ListProduct[index].soluong*parseInt(ListProduct[index].giaban))
       }
       //console.log('Haaaaaaaaaaaaaaaaaaaa' + UserInfor.matk +" " + ListProduct[index].tensach)
-      var request = axios.get('http://192.168.1.4:3000/xoasanpham/' + UserInfor.matk + '/' + ListProduct[index].tensach)
+      var request = axios.get('http://192.168.43.180:3000/xoasanpham/' + UserInfor.matk + '/' + ListProduct[index].tensach)
       ListProduct.splice(index,1)
-      ToastAndroid.show(request.data.status, ToastAndroid.SHORT)
       settemp(temp+1)
     }
 
@@ -235,9 +235,9 @@ const ListProduct_New = ({navigation, route}) =>
                   <View style={styles.address}>
                       <Text style={styles.text_style}>Địa chỉ: {UserInfor.diachi}</Text>
                   </View>
-                  <View style={{backgroundColor: '#fff', padding: 10}}>
+                  <TouchableOpacity style={{backgroundColor: '#fff', padding: 10}} onPress={() => navigation.navigate('UserDetail',{username: username})} >
                       <Text style={styles.change}>Thay đổi</Text>
-                  </View>
+                  </TouchableOpacity>
                 </View>
               
 
