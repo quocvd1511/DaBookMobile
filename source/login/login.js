@@ -28,7 +28,7 @@ export default function Login()
         }
       else
       {
-        const request = await axios.post('http://192.168.1.6:3000',{
+        const request = await axios.post('http://192.168.1.4:3000',{
                 username: Username,
                 password: Password,
         })
@@ -81,7 +81,7 @@ export default function Login()
                     <View style={styles.view}>
                         <View style={styles.view2}></View>
                         <View style={styles.view3}>
-                            <Image style={{marginTop:10, width: 80, height: 80, alignSelf:'center', marginBottom: 10}} source={require('../asset/icon/fail.png')}/>
+                            <Image style={{marginTop:10, width: 70, height: 70, alignSelf:'center', marginBottom: 10}} source={require('../asset/icon/fail.png')}/>
                             <Text style={{fontSize: 18, fontWeight: '600', color:'#333'}}>Đăng nhập không thành công!</Text>
                         </View>
                         <Pressable
@@ -107,10 +107,10 @@ export default function Login()
                 }}
             >
                 <View style={{flex: 1, backgroundColor: "#00000099"}}>
-                    <View style={styles.view}>
-                    <View style={styles.view2}></View>
-                        <View style={styles.view3}>
-                            <Image style={{width: 100, height: 100, alignSelf:'center'}} source={require('../asset/icon/success.png')}/>
+                    <View style={styles.views}>
+                    <View style={styles.view2s}></View>
+                        <View style={styles.view3s}>
+                            <Image style={{width: 90, height: 90, alignSelf:'center'}} source={require('../asset/icon/success.png')}/>
                             <Text style={{fontSize: 20, fontWeight: '600', color:'#333'}}>Đăng nhập thành công!</Text>
                         </View>
                         <Pressable
@@ -323,7 +323,7 @@ const styles= StyleSheet.create({
     view: {
         alignSelf:'center',
         width:300, 
-        height: 190, 
+        height: 210, 
         borderColor: 'red',
         borderRadius: 10,
         marginTop: 250,
@@ -353,13 +353,16 @@ const styles= StyleSheet.create({
     },
 
     button: {
-        borderRadius: 20,
+        borderRadius: 10,
         padding: 10,
         elevation: 2
       },
 
     buttonClose: {
+        marginTop: 10,
         backgroundColor: "#2196F3",
+        width: 60, 
+        alignSelf: 'center',
       },
       textStyle: {
         color: "white",
@@ -367,5 +370,36 @@ const styles= StyleSheet.create({
         textAlign: "center"
       },
    
+    views: {
+        alignSelf:'center',
+        width:300, 
+        height: 210, 
+        backgroundColor:'#fff', 
+        borderColor: 'red',
+        borderRadius: 10,
+        marginTop: 100,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 9,
+        },
+        shadowOpacity: 0.48,
+        shadowRadius: 11.95,
+        elevation: 18,
+    },
+
+    view2s: {
+        width: 300,
+        height: 40,
+        backgroundColor:'#00BB00', 
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,  
+    },
+
+    view3s: {
+        alignSelf:'center',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,  
+    }
 
 })

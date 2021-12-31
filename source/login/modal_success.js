@@ -16,7 +16,7 @@ export default function HistoryLookup()
 
 
 const styles=StyleSheet.create({
-    view: {
+    views: {
         alignSelf:'center',
         width:300, 
         height: 190, 
@@ -34,7 +34,7 @@ const styles=StyleSheet.create({
         elevation: 18,
     },
 
-    view2: {
+    view2s: {
         width: 300,
         height: 40,
         backgroundColor:'#00BB00', 
@@ -42,7 +42,7 @@ const styles=StyleSheet.create({
         borderTopRightRadius: 10,  
     },
 
-    view3: {
+    view3s: {
         alignSelf:'center',
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,  

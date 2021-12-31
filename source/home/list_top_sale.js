@@ -20,12 +20,12 @@ function ListTopSale()
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.6:3000/laytopsale')
+      const request = await axios.get('http://192.168.1.4:3000/laytopsale')
       setBook(request.data.listsach)
     }
     fetchData();
 
-  },['http://192.168.1.3:3000/'])
+  },['http://192.168.1.4:3000/'])
 
 
   return (

@@ -29,7 +29,7 @@ export default function user_detail()
     React.useEffect(() => 
     {
         async function fetchData(){
-            const request = await axios.get('http://192.168.1.3:3000/chitiettk?matk='+username)
+            const request = await axios.get('http://192.168.1.4:3000/chitiettk?matk='+username)
             setUsername(request.data.matk)
             setName(request.data.hoten)
             setPhoneNumber(request.data.sodt)
@@ -42,12 +42,12 @@ export default function user_detail()
         }
         fetchData();
 
-    },['http://192.168.1.3:3000/'])
+    },['http://192.168.1.4:3000/'])
 
     async function UpdateThongTinTK(Pattern)
     {
         console.log(Pattern)
-        const request = await axios.post('http://192.168.1.3:3000/updatethongtintk',{data: Pattern})
+        const request = await axios.post('http://192.168.1.4:3000/updatethongtintk',{data: Pattern})
         ToastAndroid.show(request.data.message, ToastAndroid.SHORT)
     }
 

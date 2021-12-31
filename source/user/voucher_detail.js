@@ -20,7 +20,7 @@ export default function VoucherDetail()
       {
           async function fetchData()
         {
-          const request = await axios.get('http://192.168.1.6:3000/danhsachvoucher/' + username)
+          const request = await axios.get('http://192.168.1.4:3000/danhsachvoucher/' + username)
           // setUser(request.data)
           setVoucher(request.data.khuyenmai)
           // return request.data.thongtintk
@@ -28,7 +28,7 @@ export default function VoucherDetail()
         }
         fetchData();
     
-      },['http://192.168.1.3:3000/'])
+      },['http://192.168.1.4:3000/'])
 
       //console.log('ahihi', Voucher)
       //console.log(Voucher)
