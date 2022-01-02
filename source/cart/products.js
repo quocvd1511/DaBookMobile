@@ -182,7 +182,7 @@ const ListProduct_New = ({navigation, route}) =>
       //console.log('Haaaaaaaaaaaaaaaaaaaa' + UserInfor.matk +" " + ListProduct[index].tensach)
       var request = axios.get('http://192.168.1.6:3000/xoasanpham/' + UserInfor.matk + '/' + ListProduct[index].tensach)
       ListProduct.splice(index,1)
-      ToastAndroid.show(request.data.status, ToastAndroid.SHORT)
+      //ToastAndroid.show(request.data.status, ToastAndroid.SHORT)
       settemp(temp+1)
     }
 
