@@ -14,7 +14,7 @@ export default function BillUp()
     //console.log(ListBuy)
     var SoLuong=0
     const d = new Date()
-    const now = d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear()
+    const now = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear()
     for(var i=0;i<ListBuy.length;i++)
     {
         SoLuong+=parseInt(ListBuy[i].soluong)
@@ -58,7 +58,9 @@ export default function BillUp()
                                     ellipsizeMode='tail'>{item.tensach}</Text>
                                 <View style={{display: 'flex', flexDirection: 'row', marginTop: 10, marginRight:10,}}>
                                     <Text style = {styles.price}> SL: {item.soluong}</Text>
-                                    <Text style={styles.newprice}>{item.tongtien} đ</Text>
+                                    <NumberFormat value={item.tongtien} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                    renderText={(value) => <Text style={styles.newprice}>Tổng tiền: {value}</Text>}/>
+                                    {/* <Text style={styles.newprice}>Tổng tiền: {item.tongtien} đ</Text> */}
                                 </View>
                             </View>
                         </View>
@@ -93,7 +95,9 @@ export default function BillUp()
                 </View> */}
                 <View style = {styles.view2}>
                     <Text style={{fontSize: 16, color: 'blue'}}>{SoLuong} sản phẩm</Text>
-                    <Text style={{fontSize: 16}}>Thành tiền:<Text style={styles.newprice}>{route.params.TongTien}</Text></Text>
+                    <NumberFormat value={route.params.TongTien} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                    renderText={(value) => <Text style={{fontSize: 16}}>Thành tiền:<Text style={styles.newprice}>{value}</Text></Text>}/>
+                    {/* <Text style={{fontSize: 16}}>Thành tiền:<Text style={styles.newprice}>{route.params.TongTien}</Text></Text> */}
                 </View>
                 <View style = {styles.view3}>
                     <Text style={{fontSize: 17, color: 'green'}}>Đang chờ xác nhận</Text>

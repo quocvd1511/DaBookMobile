@@ -49,7 +49,7 @@ export default function Payment()
 
     fetchData()
 
-  },['http://192.168.1.3:3000/'])
+  },['http://192.168.1.4:3000/'])
 
   let Temp = route.params.TongTien
   var TempListVoucher = ListVoucher
@@ -57,7 +57,7 @@ export default function Payment()
   const[TongTien, setTongTien] = React.useState(route.params.TongTien)
   const[TienGiam, setTienGiam] = React.useState(0)
   //var TongTien = route.params.TongTien
-  const[MaNhap, setMaNhap] = React.useState('')
+  const[MaNhap, setMaNhap] = React.useState([])
   const[temp, settemp] = React.useState(0)
   //console.log(TongTien)
   //setTongTien(Temp)
@@ -170,7 +170,7 @@ export default function Payment()
     for(var i=0;i<ListVoucher.length;i++)
     {
         var Temp = ListVoucher[i].manhap.length
-        if(ListVoucher[i].manhap[Temp-1]!='#')
+        if(TempListVoucher[i].manhap[Temp-1]!='#')
         {
           RestVoucher[nVoucher] = ListVoucher[i].makm
           nVoucher+=1
@@ -178,9 +178,10 @@ export default function Payment()
     }
     //TongTien=TongTien+ShipMoney
     //console.log(ListBuyed)
-    //console.log('RestVoucher ne')
-    //console.log(RestVoucher)
-    const request = await axios.post('http://192.168.1.6:3000/taodonhang',{
+    console.log('RestVoucher ne')
+    console.log(RestVoucher)
+    const request = await axios.post('http://192.168.1.6:3000/taodonhang',
+    {
             matk: UserInfor.matk,
             listbuyed: ListBuyed,
             tongtien: TongTien,

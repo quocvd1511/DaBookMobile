@@ -24,7 +24,7 @@ export default function HomeScreen()
     const[Star5,setStar5]= useState(NoneChoose)
 
     const[listComment, setListCom] = useState([
-        {"_id": "61ca8e61e10d167b7fd68201", "matk": "vdq1511", "ngaydg": "28/11/2021", "noidung": "Sách hay vl", "sao": 1}
+        {"_id": "61ca8e61e10d167b7fd68201", "matk": "vdq1511", "ngaydg": "28/11/2021", "noidung": "Sách hay ghê", "sao": 1}
     ])
     const[Rated, setRated] = useState(0)
 
@@ -40,7 +40,7 @@ export default function HomeScreen()
         }
         fetchData();
 
-    },['http://192.168.1.3:3000/'])
+    },['http://192.168.1.4:3000/'])
 
     //console.log(listComment)
     var danhsachComment = listComment
@@ -123,7 +123,7 @@ export default function HomeScreen()
         })
 
         var today = new Date()
-        today = today.getDate().toString() + "/" + today.getMonth().toString() + "/" + today.getFullYear().toString()
+        today = today.getDate().toString() + "/" + (today.getMonth().toString()+1) + "/" + today.getFullYear().toString()
         var new_comment = {
             matk: route.params.username,
             ngaydg: today,
@@ -139,9 +139,8 @@ export default function HomeScreen()
     //console.log("Hahahahahahaah"+route.params.username)
     return (
     <View>
-        <Text>RATING NÈ</Text>
         <View style = {styles.view}>
-            <Text style={{marginTop: 10, paddingLeft: 5, color:'black', fontWeight:'600',fontSize:14}}>Đánh giá sản phẩm</Text>
+            <Text style={{marginTop: 10, paddingLeft: 10, color:'black', fontWeight:'600',fontSize:14}}>Đánh giá sản phẩm</Text>
             <View >
                 <View style = {styles.viewstar}>
                     <TouchableOpacity
@@ -192,7 +191,7 @@ export default function HomeScreen()
                 <Text style={{fontSize: 16, fontWeight: 'bold', color: 'white',}}>Gửi</Text>
             </Pressable>
             
-            <ScrollView>
+            <ScrollView style={{backgroundColor:'#fff', margin: -10,}}>
                 {
                     danhsachComment.map((item,index) =>
                     {
@@ -209,7 +208,7 @@ export default function HomeScreen()
                                             <Image style = {styles.star} source={NoneChoose}/>
                                         </View>
                                         <Text>{item.noidung}</Text>
-                                        <Text>{item.ngaydg}</Text>
+                                        <Text style = {{marginBottom:15, marginTop: 8}}>{item.ngaydg}</Text>
                                 </View>
                             )
                         } else if(item.sao===2)
@@ -218,14 +217,14 @@ export default function HomeScreen()
                                 <View style={styles.comment_frame}>
                                         <Text>{item.matk}</Text>
                                         <View style = {styles.viewstar2}>
-                                            <Image  style = {styles.star} source={Chosen}/>
+                                            <Image style = {styles.star} source={Chosen}/>
                                             <Image style = {styles.star} source={Chosen}/>
                                             <Image style = {styles.star} source={NoneChoose}/>
                                             <Image style = {styles.star} source={NoneChoose}/>
                                             <Image style = {styles.star} source={NoneChoose}/>
                                         </View>
                                         <Text>{item.noidung}</Text>
-                                        <Text>{item.ngaydg}</Text>
+                                        <Text style = {{marginBottom:15, marginTop: 8}}>{item.ngaydg}</Text>
                                 </View>
                             )
                         }
@@ -242,7 +241,7 @@ export default function HomeScreen()
                                             <Image style = {styles.star} source={NoneChoose}/>
                                         </View>
                                         <Text>{item.noidung}</Text>
-                                        <Text>{item.ngaydg}</Text>
+                                        <Text style = {{marginBottom:15, marginTop: 8}}>{item.ngaydg}</Text>
                                 </View>
                             )
                         } else if(item.sao===4)
@@ -258,7 +257,7 @@ export default function HomeScreen()
                                             <Image style = {styles.star} source={NoneChoose}/>
                                         </View>
                                         <Text>{item.noidung}</Text>
-                                        <Text>{item.ngaydg}</Text>
+                                        <Text style = {{marginBottom:15, marginTop: 8}}>{item.ngaydg}</Text>
                                 </View>
                             )
                         } else
@@ -274,7 +273,7 @@ export default function HomeScreen()
                                             <Image style = {styles.star} source={Chosen}/>
                                         </View>
                                         <Text>{item.noidung}</Text>
-                                        <Text>{item.ngaydg}</Text>
+                                        <Text style = {{marginBottom:15, marginTop: 8}}>{item.ngaydg}</Text>
                                 </View>
                             )
                         }
@@ -291,6 +290,10 @@ export default function HomeScreen()
     )}
 
 const styles= StyleSheet.create({
+    view:{
+        padding:10,
+    },
+
     viewstar :{
         alignItems: 'center',
         display: 'flex',
@@ -321,7 +324,7 @@ const styles= StyleSheet.create({
         margin: 10,
         marginTop: 0,
         backgroundColor: '#fff',
-        width: windowWidth - 20,
+        width: windowWidth - 40,
         color: '#333',
         textDecorationLine:'none',
         fontSize: 16,
@@ -345,7 +348,7 @@ const styles= StyleSheet.create({
         borderRadius: 8,
         fontSize: 16,
         marginTop: 0,
-        marginLeft: 270,
+        marginLeft: 250,
         height: 40,
         alignItems:'center',
         justifyContent: 'center',
@@ -354,6 +357,12 @@ const styles= StyleSheet.create({
     },
 
     comment_frame:{
-        margin: 15,
+        backgroundColor:'#fff',
+        margin: 20,
+        marginTop: 10,
+        marginBottom: 10,
+        borderBottomWidth:0.5,
+        borderBottomColor: '#999'
+        
     }
 })

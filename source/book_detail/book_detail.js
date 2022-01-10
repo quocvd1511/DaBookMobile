@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Pressable, Text, TextInput, StatusBar, Image, Dimensions, ScrollView, TouchableOpacity, ToastAndroid } from 'react-native';
+import { SafeAreaView, View, FlatList, StyleSheet, Pressable, Text, TextInput, StatusBar, Image, Dimensions, ScrollView, TouchableOpacity, ToastAndroid, Modal } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import axios from 'axios';
 import TabScreens from '../tab_src/tab';
@@ -38,12 +38,12 @@ function book_detail_home(){
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.6:3000/chitietsach/' + tensach )
+      const request = await axios.get('http://192.168.43.180:3000/chitietsach/' + tensach )
       setBook(request.data.list_book)
       return request.data.list_book
     }
     fetchData();
-    },['http://192.168.1.3:3000/chitietsach'])
+    },['http://192.168.1.4:3000/chitietsach'])
 
 
     // Lấy dữ liệu của chi tiết sách
@@ -55,7 +55,7 @@ function book_detail_home(){
       return request.data.book
     }
     fetchData();
-    },['http://192.168.1.3:3000/chitietsach' + tensach])
+    },['http://192.168.1.4:3000/chitietsach' + tensach])
 	 //console.log(detail_book);
 
      for(var i=0;i<detail_book.length;i++)
@@ -70,7 +70,7 @@ function book_detail_home(){
      var NoneChoose=require('../asset/icon/vote_star.png')
      var Chosen =require('../asset/icon/yellowstar.png')
      var Star1= NoneChoose,Star2= NoneChoose,Star3= NoneChoose,Star4= NoneChoose,Star5=NoneChoose
-     const [modalVisible_Fail, setModalVisible_Fail] = React.useState(false);
+     const[temp, settemp] = useState(1)
      if(Boolean(danhgia)===true && danhgia.length>0)
      {
         for(var i=0;i<danhgia.length;i++)
@@ -140,7 +140,6 @@ function book_detail_home(){
 
      //-------------------------------
         
-    const[temp, settemp] = useState(1)
     function quantyplus(){
         console.log('Hihihihihi')
         settemp(temp+1)
@@ -161,40 +160,54 @@ function book_detail_home(){
         } 
     }
 
-    function addProduct(soluong){
+    function addProduct(soluong)
+    {
+            setmodalVisible(true);
             console.log(username + ' ' + detail_book.tensach + ' ' + soluong)
             const request = axios.get('http://192.168.1.6:3000/themgiohang?username=' + username + '&tensach=' + detail_book.tensach + '&soluong=' + soluong + '&theloai=' + detail_book.theloai + '&hinhanh=' + detail_book.hinhanh + '&giaban=' + detail_book.giaban);
-           console.log(request.status);
+            console.log(request.status);
+            settemp(1)
     }
+
+    const [modalVisible, setmodalVisible] = React.useState(false)
     
     return(
         <ScrollView style = {styles.views}>
             {/* --------------------------------------Modal add to cart------------------------------------------------------ */}
-            {/* <Modal
+            <Modal
                 animationType="fade"
-                visible={modalVisible_True}
+                visible={modalVisible}
                 transparent={true}
                 onRequestClose={() =>
                 {
-                    setModalVisible(true);
+                    setmodalVisible(true);
                 }}
             >
-                <View style={styles.view}>
+                <View style={styles.view_modal}>
                     <View style={styles.view3}>
                         <Image style={{width: 80, height: 80, alignSelf:'center'}} source={require('../asset/icon/success.png')}/>
                         <Text style={{fontSize: 18, fontWeight: '600', color:'#333'}}>Thêm vào giỏ hàng thành công!</Text>
                     </View>
+
+                    <Pressable
+                            style={[styles.button_modal, styles.buttonClose]}
+                            onPress={() => setmodalVisible(!modalVisible)}
+                            >
+                            <Text style={styles.textStyle}>OK</Text>
+                    </Pressable>
                 </View>
-            </Modal> */}
+            </Modal>
 
 
             <Image style = {styles.image} source={{uri:detail_book.hinhanh}}/>
             <View style = {styles.view}>
                 <Text style = {styles.name}>{detail_book.tensach}</Text>
-                <NumberFormat value={detail_book.giagoc} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
-                                renderText={(value) => <Text style = {styles.newprice}>{value}</Text>}/>
-                <NumberFormat value={detail_book.giaban} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
-                                renderText={(value) => <Text style = {styles.price}>  {value} </Text>}/>
+                <View style={{ display:'flex', flexDirection:'row'}}>
+                    <NumberFormat value={detail_book.giagoc} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                    renderText={(value) => <Text style = {styles.newprice}>{value}</Text>}/>
+                    <NumberFormat value={detail_book.giaban} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                    renderText={(value) => <Text style = {styles.price}>  {value} </Text>}/>
+                </View>
                 {/* <Text style = {styles.newprice}>{detail_book.giaban} đ     
                 <Text style = {styles.price}>  {detail_book.giagoc} </Text>
                 </Text> */}
@@ -407,7 +420,7 @@ const styles = StyleSheet.create({
 
     price: {
         color: '#666',
-        marginLeft: 120,
+        marginLeft: 40,
         marginRight: 10,
         fontSize: 15,
         fontWeight: fontWeights[6],
@@ -418,7 +431,7 @@ const styles = StyleSheet.create({
         margin: 2,
         width: 18,
         height: 18,
-        tintColor: '#FFCC00',
+        tintColor: '#333',
     },
 
     viewstar :{
@@ -542,7 +555,44 @@ const styles = StyleSheet.create({
         // shadowOpacity: 0.48,
         // shadowRadius: 11.95,
         // elevation: 18,
-      }
+      },
+
+      view_modal: {
+        alignSelf:'center',
+        width:300, 
+        height: 126, 
+        backgroundColor:'#fff', 
+        borderColor: 'red',
+        borderRadius: 10,
+        marginTop: 100,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 9,
+        },
+        shadowOpacity: 0.48,
+        shadowRadius: 11.95,
+        elevation: 18,
+    },
+
+    view3: {
+        alignSelf:'center',
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10,  
+    },
+    
+    button_modal: {
+        borderRadius: 10,
+        padding: 10,
+        elevation: 2
+      },
+
+    buttonClose: {
+        marginTop: 10,
+        backgroundColor: "#2196F3",
+        width: 60, 
+        alignSelf: 'center',
+      },
 
 })
 

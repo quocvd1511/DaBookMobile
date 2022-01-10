@@ -5,9 +5,18 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const flexDirections = ['row', 'row-reverse', 'column', 'column-reverse'];
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import NumberFormat from 'react-number-format';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
+
 
 function ListTopSale() 
 {
+  const navigation = useNavigation(); 
+  const route = useRoute()
+  const username = route.params.username;
+
   const [Book, setBook] = useState([
     {id :1, name: 'Harry Potter And Something Else I Known', price:'100000', img:'https://www.archipanic.com/wp-content/uploads/2021/05/Harry-Potter-book-cover-by-AMDL-Circle-for-Salani-Editore-VII.jpg'},
     {id :2, name: 'Harry Potter và Bảo bối tử thần', price:'100000', img:'https://m.media-amazon.com/images/I/71Q1Iu4suSL._AC_SL1000_.jpg'},
@@ -25,7 +34,14 @@ function ListTopSale()
     }
     fetchData();
 
-  },['http://192.168.1.3:3000/'])
+  },['http://192.168.1.4:3000/'])
+
+  function BookViewed(index){
+    console.log(username + ' SÁCH ĐÃ XEM ' + Book[index].tensach)
+    const request = axios.get('http://192.168.1.6:3000/sachdaxem?username=' + username + '&tensach=' + Book[index].tensach + '&hinhanh=' + Book[index].hinhanh + '&giaban=' + Book[index].giaban);
+   console.log(request.data);
+   navigation.navigate('BookDetailHomeScreen', {tensach: Book[index].tensach, username: username})
+  }
 
 
   return (
@@ -33,9 +49,9 @@ function ListTopSale()
         <Text style={{padding:10, color:'red', fontWeight:'600',fontSize:18, backgroundColor: '#fff', textAlign: 'center', marginTop:0}}>Top sách bán chạy </Text>
         <ScrollView horizontal={true}>
           {
-            Book.map((item) => {
+            Book.map((item, index) => {
               return(
-                <View key={item.id}>
+                <TouchableOpacity key={item.id} onPress={() => BookViewed(index)}>
                   <View style={styles.item}>
                     <Image style={styles.img} source={{uri:item.hinhanh}}/>
                     <Text 
@@ -43,11 +59,13 @@ function ListTopSale()
                     numberOfLines={2}
                     ellipsizeMode='tail'>{item.tensach}</Text>
                     <View style={styles.viewinfo}>
-                      <Text style={styles.newprice}>{item.giaban} đ</Text>
+                    <NumberFormat value={item.giaban} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
+                                renderText={(value) => <Text style={styles.newprice}> {value}</Text>}/>
+                      {/* <Text style={styles.newprice}>{item.giaban} đ</Text> */}
                       <Text style={styles.qtysale}>Đã bán {item.soluongdaban}</Text>
                     </View>
                   </View>
-                </View>
+                </TouchableOpacity>
               )
             })
             
@@ -113,7 +131,7 @@ const styles = StyleSheet.create({
     //lineHeight: 15,
     height: 40,
     marginLeft: 4,
-    marginTop: -8,
+    marginTop: -4,
     marginRight: -4,
     alignItems: 'center',
     color: '#333',

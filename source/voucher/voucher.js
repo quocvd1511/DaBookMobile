@@ -61,7 +61,7 @@ export default function VoucherScreen() {
         }
       fetchData()
     
-      },['http://192.168.1.6:3000/'])
+      },['http://192.168.1.4:3000/'])
 
       for(var i=0;i<Voucher.length;i++)
       {
@@ -94,7 +94,8 @@ export default function VoucherScreen() {
             manhap: Voucher[index].manhap,
             phantram: Voucher[index].phantram,
             dieukien: Voucher[index].dieukien,
-            img: Voucher[index].img
+            img: Voucher[index].img,
+            loai: Voucher[index].loai,
         })
 
         //Voucher[index].nd_button = 'Đã lưu'
@@ -111,11 +112,11 @@ export default function VoucherScreen() {
         <Image style={styles.logo_header} source={require('../asset/icon/logo.png')}/>
         <Text style={styles.text_header}>Kho Voucher{"\n"}Siêu Khủng !!!</Text>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate('VoucherDetail',{username: username})}>
       <View>
         <Image style={{width: 360, height: 160, marginBottom: 10}} source={require('../asset/icon/banner_km.png')}/>
       </View>
       {/* <View> */}
+      <TouchableOpacity onPress={() => navigation.navigate('VoucherDetail',{username: username})}>
         <Image style={styles.my_voucher} source={require('../asset/icon/My_voucher.png')} />
       </TouchableOpacity>
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
