@@ -41,7 +41,7 @@ export default function Payment()
     async function fetchData() 
     {
       //-----------------------------Lay Thong Tin User---------------
-      var request = await axios.get('http://192.168.1.6:3000/chitiettk_voucher?matk='+UserInfor.matk)
+      var request = await axios.get('http://192.168.43.180:3000/chitiettk_voucher?matk='+UserInfor.matk)
       setListVoucher(request.data.khuyenmai)
       console.log(request.data.khuyenmai)
       //-------------------------------Lay Thong Voucher--------------------------------------
@@ -180,7 +180,7 @@ export default function Payment()
     //console.log(ListBuyed)
     console.log('RestVoucher ne')
     console.log(RestVoucher)
-    const request = await axios.post('http://192.168.1.6:3000/taodonhang',
+    const request = await axios.post('http://192.168.43.180:3000/taodonhang',
     {
             matk: UserInfor.matk,
             listbuyed: ListBuyed,

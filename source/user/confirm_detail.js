@@ -13,6 +13,7 @@ export default function PackingDetail() {
   const [Thongtintk, setThongtintk] = React.useState([])
   const [Soluong, setSoluong] = React.useState([0])
   const route = useRoute()
+  const navigation = useNavigation()
   const matk = route.params.username
   const tinhtrang = 'chờ xác nhận'
 
@@ -22,7 +23,7 @@ export default function PackingDetail() {
     {
         const Sum = 0;
         const request = await axios.get('http://192.168.43.180:3000/danhsachdonhang/' + matk + '/' + tinhtrang)
-        setDonhang(request.data.donhang_x)
+        setDonhang(request.data.donhang)
         setThongtintk(request.data.thongtintk)
         setBook(request.data.book)
     }
@@ -59,7 +60,7 @@ export default function PackingDetail() {
                                     width={100}
                                     padding={5}
                                     alignItems={'center'}
-                                    onPress={() => navigation.navigate('Detail_HistoryLookup', {username: matk, madh: item.madh})}
+                                    onPress={() => navigation.navigate('Detail_History_Lookup', {username: matk, madh: item.madh})}
                                   >
                                     <Text style={{color:'#fff', fontWeight:'500', fontSize: 15 }}>Chi Tiết</Text>
                                   </Pressable>

@@ -34,7 +34,7 @@ function ListTop()
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.6:3000/')
+      const request = await axios.get('http://192.168.43.180:3000/')
       setBook(request.data.flash_sales)
       return request.data.flash_sales
     }
@@ -44,7 +44,7 @@ function ListTop()
 
   function BookViewed(index){
     console.log(username + ' SÁCH ĐÃ XEM ' + Book[index].tensach)
-    const request = axios.get('http://192.168.1.6:3000/sachdaxem?username=' + username + '&tensach=' + Book[index].tensach + '&hinhanh=' + Book[index].hinhanh + '&giaban=' + Book[index].giaban);
+    const request = axios.get('http://192.168.43.180:3000/sachdaxem?username=' + username + '&tensach=' + Book[index].tensach + '&hinhanh=' + Book[index].hinhanh + '&giaban=' + Book[index].giaban);
    console.log(request.data);
    navigation.navigate('BookDetailHomeScreen', {tensach: Book[index].tensach, username: username})
   }
