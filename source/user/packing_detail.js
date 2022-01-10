@@ -23,7 +23,7 @@ export default function PackingDetail() {
     {
         const Sum = 0;
         const request = await axios.get('http://192.168.43.180:3000/danhsachdonhang/' + matk + '/' + tinhtrang)
-        setDonhang(request.data.donhang_x)
+        setDonhang(request.data.donhang)
         setThongtintk(request.data.thongtintk)
         setBook(request.data.book)
     }
