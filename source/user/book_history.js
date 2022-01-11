@@ -27,7 +27,7 @@ export default  function BookHistory(){
     }
     fetchData();
 
-  },['http://192.168.1.4:3000/'])
+  },['http://192,168.1.8:3000/'])
 
     console.log(Book)
 

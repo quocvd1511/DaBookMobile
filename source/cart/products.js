@@ -58,7 +58,7 @@ const ListProduct_New = ({navigation, route}) =>
       async function fetchData() 
       {
         //-----------------------------Lay Thong Tin User---------------
-        var request = await axios.get('http://192.168.1.6:3000/chitiettk_voucher?matk='+username)
+        var request = await axios.get('http://192.168.1.8:3000/chitiettk_voucher?matk='+username)
         setUserInfor(request.data.taikhoan)
         if (request.data.taikhoan.giohang)
         {
@@ -72,7 +72,7 @@ const ListProduct_New = ({navigation, route}) =>
 
       fetchData()
   
-    },['http://192.168.1.4:3000/'])
+    },['http://192,168.1.8:3000/'])
 
     console.log(ListProduct)
     const[TongTien, setTongTien] = useState(0)
@@ -181,7 +181,7 @@ const ListProduct_New = ({navigation, route}) =>
         setTongTien(TongTien-ListProduct[index].soluong*parseInt(ListProduct[index].giaban))
       }
       //console.log('Haaaaaaaaaaaaaaaaaaaa' + UserInfor.matk +" " + ListProduct[index].tensach)
-      var request = axios.get('http://192.168.1.6:3000/xoasanpham/' + UserInfor.matk + '/' + ListProduct[index].tensach)
+      var request = axios.get('http://192.168.1.8:3000/xoasanpham/' + UserInfor.matk + '/' + ListProduct[index].tensach)
       ListProduct.splice(index,1)
       settemp(temp+1)
     }

@@ -40,7 +40,7 @@ function ListTop()
     }
     fetchData();
 
-  },['http://192.168.1.4:3000/'])
+  },['http://192,168.1.8:3000/'])
 
   function BookViewed(index){
     console.log(username + ' SÁCH ĐÃ XEM ' + Book[index].tensach)

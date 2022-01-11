@@ -24,13 +24,13 @@ export default function List_History_Lookup() {
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.4:3000/danhsachdonhang/' + matk + '/' + tinhtrang)
+      const request = await axios.get('http://192,168.1.8:3000/danhsachdonhang/' + matk + '/' + tinhtrang)
       setDonhang(request.data.donhang)
       return request.data.donhang
     }
     fetchData();
 
-  },['http://192.168.1.4:3000/'])
+  },['http://192,168.1.8:3000/'])
 
     console.log(Donhang)
 

@@ -16,12 +16,12 @@ export default function Info()
     React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.4:3000/chitietgiohang/' + username)
+      const request = await axios.get('http://192,168.1.8:3000/chitietgiohang/' + username)
       setUser(request.data.thongtintk)
       return request.data.thongtintk
     }
     fetchData();
-    },['http://192.168.1.4:3000/chitietgiohang/' + username])
+    },['http://192,168.1.8:3000/chitietgiohang/' + username])
 
 	 console.log(User);
 

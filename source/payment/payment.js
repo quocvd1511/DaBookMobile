@@ -41,7 +41,7 @@ export default function Payment()
     async function fetchData() 
     {
       //-----------------------------Lay Thong Tin User---------------
-      var request = await axios.get('http://192.168.1.6:3000/chitiettk_voucher?matk='+UserInfor.matk)
+      var request = await axios.get('http://192.168.1.8:3000/chitiettk_voucher?matk='+UserInfor.matk)
       setListVoucher(request.data.khuyenmai)
       console.log(request.data.khuyenmai)
       //-------------------------------Lay Thong Voucher--------------------------------------
@@ -49,12 +49,12 @@ export default function Payment()
 
     fetchData()
 
-  },['http://192.168.1.4:3000/'])
+  },['http://192,168.1.8:3000/'])
 
   let Temp = route.params.TongTien
   var TempListVoucher = ListVoucher
   var TempListVoucher_2 = TempListVoucher
-  const[TongTien, setTongTien] = React.useState(route.params.TongTien)
+  const[TongTien, setTongTien] = React.useState(route.params.TongTien + ShipMoney)
   const[TienGiam, setTienGiam] = React.useState(0)
   //var TongTien = route.params.TongTien
   const[MaNhap, setMaNhap] = React.useState([])
@@ -68,15 +68,10 @@ export default function Payment()
   function CheckDate(date)
   {
     var today = new Date()
-    //var today_p = today.getDate()+'/'+today.getMonth() + '/' + today.getFullYear()
-    //console.log(today_p)
-    // console.log(date)
     date = Date.parse(date)
     var today_p = Date.parse(today)
-    // console.log(today_p)
-    // console.log(date)
-     if(date<=today_p) return false
-     return true
+    if(date<=today_p) return false
+    return true
   }
 
   function CheckVoucher(MaNhap)
@@ -91,42 +86,50 @@ export default function Payment()
         {
           if(TempListVoucher[i].manhap===MaNhap)
           {
-            flag=true
             if(CheckDate(TempListVoucher[i].ngaykt))
-            {
-                if(TempListVoucher[i].loai==='Sale')
+            {   
+                if(TongTien < (TempListVoucher[i].dieukien)*1000)
                 {
-                setTongTien(TongTien - Math.round(TempListVoucher[i].phantram/100*TongTien))
-                //console.log((TempListVoucher[i].phantram/100)*TongTien)
-                setTienGiam(TienGiam+ (TempListVoucher[i].phantram/100)*TongTien)
-                TempListVoucher[i].manhap+="######"
-                setMaNhap('')
-                settemp(temp-1)
+                  flag=true
+                  var temp = ((TempListVoucher[i].dieukien)*1000).toString()
+                  ToastAndroid.show("Voucher áp dụng cho mức tối thiểu là "+ temp ,ToastAndroid.SHORT)
+                  break;
                 }
-                else {
-                  ShipMoney = ShipMoney - Math.round(ShipMoney *TempListVoucher[i].phantram/1000)
+                else
+                {
+                  if(TempListVoucher[i].loai!='Free Ship')
+                  {
+                  flag=true
+                  setTongTien(TongTien - Math.round(TempListVoucher[i].phantram/100*TongTien))
+                  //console.log((TempListVoucher[i].phantram/100)*TongTien)
+                  setTienGiam(TienGiam+ (TempListVoucher[i].phantram/100)*TongTien)
                   TempListVoucher[i].manhap+="######"
                   setMaNhap('')
                   settemp(temp-1)
-                }
+                  ToastAndroid.show("Áp dụng thành công !!", ToastAndroid.SHORT)
+                  break
+                  }
+                  else {
+                    ShipMoney = ShipMoney - Math.round(ShipMoney *TempListVoucher[i].phantram/1000)
+                    TempListVoucher[i].manhap+="######"
+                    setMaNhap('')
+                    settemp(temp-1)
+                    ToastAndroid.show("Áp dụng thành công !!", ToastAndroid.SHORT)
+                    flag=true
+                    break
+                  }
+              }
 
             } else 
             {
+              ToastAndroid.show("Voucher đã hết hạn", ToastAndroid.SHORT)
               flag1=true
+              break
             }
           } 
         }
-        if(flag2===true)
-        {
-          ToastAndroid.show("Voucher chỉ áp dụng cho đơn hàng từ" + temp + "trở lên")
-        }
-        else if(flag1===true)
-        {
-          ToastAndroid.show("Voucher đã hết hạn", ToastAndroid.SHORT)
-        } else if(flag===false)
-        {
-          ToastAndroid.show("Voucher đã sử dụng được áp dụng hoặc không tồn tại", ToastAndroid.SHORT)
-        }
+        
+          if(flag===false && flag1===false) ToastAndroid.show("Voucher đã được áp dụng hoặc không tồn tại", ToastAndroid.SHORT)
   }
 
   
@@ -165,6 +168,8 @@ export default function Payment()
 
   async function createBill()
   {
+    console.log(UserInfor.diachi.length)
+
     //console.log('Hello')
     //console.log(ListVoucher)
     for(var i=0;i<ListVoucher.length;i++)
@@ -180,7 +185,7 @@ export default function Payment()
     //console.log(ListBuyed)
     console.log('RestVoucher ne')
     console.log(RestVoucher)
-    const request = await axios.post('http://192.168.1.6:3000/taodonhang',
+    const request = await axios.post('http://192.168.1.8:3000/taodonhang',
     {
             matk: UserInfor.matk,
             listbuyed: ListBuyed,

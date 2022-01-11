@@ -41,7 +41,7 @@ export default function VoucherScreen() {
       {
         async function fetchData()
         {
-            const request = await axios.get('http://192.168.1.6:3000/danhsachvoucher_all?username='+username)
+            const request = await axios.get('http://192.168.1.8:3000/danhsachvoucher_all?username='+username)
             //console.log(request.data)
             for(var i=0;i<request.data.listvoucher.length;i++)
             {
@@ -61,7 +61,7 @@ export default function VoucherScreen() {
         }
       fetchData()
     
-      },['http://192.168.1.4:3000/'])
+      },['http://192,168.1.8:3000/'])
 
       for(var i=0;i<Voucher.length;i++)
       {
@@ -87,7 +87,7 @@ export default function VoucherScreen() {
 
       function addVoucher(index)
       {
-        const request = axios.post('http://192.168.1.6:3000/luukhuyenmai',
+        const request = axios.post('http://192.168.1.8:3000/luukhuyenmai',
         {
             username: username,
             makm: Voucher[index].makm,

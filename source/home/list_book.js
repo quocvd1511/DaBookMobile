@@ -21,13 +21,13 @@ function ListBook()
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.1.6:3000/')
+      const request = await axios.get('http://192.168.1.8:3000/')
       setBook(request.data.books)
       return request.data.books
     }
     fetchData();
 
-  },['http://192.168.1.4:3000/'])
+  },['http://192,168.1.8:3000/'])
 
   function BookViewed(index){
     console.log(username + ' SÁCH ĐÃ XEM ' + Book[index].tensach)

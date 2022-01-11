@@ -29,7 +29,7 @@ export default function Logup()
         }
         fetchData();
 
-    },['http://192.168.1.4:3000/'])
+    },['http://192,168.1.8:3000/'])
 
     function XuLyXacNhan(){
         console.log(Password, New_PassWord, New_PassWord, Confirm_PassWord)
@@ -47,7 +47,7 @@ export default function Logup()
         {
             ToastAndroid.show("Mật khẩu hiện tại không đúng", ToastAndroid.SHORT)
         }else{
-            const request = axios.get('http://192.168.1.4:3000/capnhatmatkhau?username='+username +'&matkhau=' + New_PassWord)
+            const request = axios.get('http://192,168.1.8:3000/capnhatmatkhau?username='+username +'&matkhau=' + New_PassWord)
             ToastAndroid.show("Cập nhật thành công", ToastAndroid.SHORT)
         }
     }

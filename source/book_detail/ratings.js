@@ -32,7 +32,7 @@ export default function HomeScreen()
     {
         async function fetchData()
         {
-            const request = await axios.get('http://192.168.1.6:3000/danhsachcomment?tensach='+ route.params.tensach +'&matk='+route.params.username)
+            const request = await axios.get('http://192.168.1.8:3000/danhsachcomment?tensach='+ route.params.tensach +'&matk='+route.params.username)
             console.log(request.data.danhsachdanhgia)
             setListCom(request.data.danhsachdanhgia)
             setRated(request.data.sosaodanhgia)
@@ -40,7 +40,7 @@ export default function HomeScreen()
         }
         fetchData();
 
-    },['http://192.168.1.4:3000/'])
+    },['http://192,168.1.8:3000/'])
 
     //console.log(listComment)
     var danhsachComment = listComment
@@ -115,7 +115,7 @@ export default function HomeScreen()
         Keyboard.dismiss()
         //console.log(Comment)
         setComment('')
-        const request = axios.post('http://192.168.1.6:3000/guicomment',{
+        const request = axios.post('http://192.168.1.8:3000/guicomment',{
             tensach: route.params.tensach,
             username: route.params.username,
             noidung: Comment,
