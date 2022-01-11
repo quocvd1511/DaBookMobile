@@ -47,7 +47,7 @@ export default function user_detail()
     async function UpdateThongTinTK(Pattern)
     {
         console.log(Pattern)
-        const request = await axios.post('http://192.168.43.180:3000/updatethongtintk',{data: Pattern})
+        const request = await axios.post('http://192.168.1.8:3000/updatethongtintk',{data: Pattern})
         ToastAndroid.show(request.data.message, ToastAndroid.SHORT)
     }
 
@@ -80,7 +80,7 @@ export default function user_detail()
                 diachi: ChiTiet + "," + Xa + "," + Huyen + "," + Tinh
             }
             UpdateThongTinTK(Pattern)
-            //const request = await axios.post('http://192.168.1.9:3000/updatethontintik',{data: Pattern})
+            //const request = await axios.post('http://192.168.1.8:3000/updatethontintik',{data: Pattern})
 
 
         }

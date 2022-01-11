@@ -17,11 +17,10 @@ export default  function BookHistory(){
   const route = useRoute()
   const matk = route.params.username;
 
-  console.log(matk, 'BOOK HISTORYYYYYYYYYYYYYYYYY')
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.43.180:3000/ds_sachdaxem?username=' + matk )
+      const request = await axios.get('http://192.168.1.8:3000/ds_sachdaxem?username=' + matk )
       setBook(request.data.books)
       return request.data.books
     }

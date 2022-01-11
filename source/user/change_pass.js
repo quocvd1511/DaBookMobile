@@ -19,20 +19,18 @@ export default function Logup()
     const [OpenUpdate, setOpenUpdate] = React.useState(false)
     
 
-    
     React.useEffect(() => 
     {
         async function fetchData(){
-            const request = await axios.get('http://192.168.43.180:3000/chitiettk?matk='+username)
+            const request = await axios.get('http://192.168.1.8:3000/chitiettk?matk='+username)
             setPassword(request.data.matkhau)
-            setOpenUpdate(false)
         }
         fetchData();
 
     },['http://192,168.1.8:3000/'])
 
     function XuLyXacNhan(){
-        console.log(Password, New_PassWord, New_PassWord, Confirm_PassWord)
+        console.log(Password, New_PassWord, Confirm_PassWord)
         if(!Check_Password){
             ToastAndroid.show("Vui lòng nhập mật khẩu cũ", ToastAndroid.SHORT)
         } else if(!New_PassWord){

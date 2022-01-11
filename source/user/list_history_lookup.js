@@ -24,13 +24,13 @@ export default function List_History_Lookup() {
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192,168.1.8:3000/danhsachdonhang/' + matk + '/' + tinhtrang)
+      const request = await axios.get('http://192.168.1.8:3000/danhsachdonhang/' + matk + '/' + tinhtrang)
       setDonhang(request.data.donhang)
       return request.data.donhang
     }
     fetchData();
 
-  },['http://192,168.1.8:3000/'])
+  },['http://192.168.1.8:3000/'])
 
     console.log(Donhang)
 
@@ -62,7 +62,7 @@ export default function List_History_Lookup() {
                                     width={100}
                                     padding={5}
                                     alignItems={'center'}
-                                    onPress={() => navigation.navigate('Detail_HistoryLookup', {username: matk, madh: item.madh})}
+                                    onPress={() => navigation.navigate('Detail_History_Lookup', {username: matk, madh: item.madh})}
                                   >
                                     <Text style={{color:'#fff', fontWeight:'500', fontSize: 15 }}>Chi Tiết</Text>
                                   </Pressable>

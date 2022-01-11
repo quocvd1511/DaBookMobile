@@ -168,7 +168,8 @@ export default function Payment()
 
   async function createBill()
   {
-    console.log(UserInfor.diachi.length)
+      console.log(value);
+    //console.log(UserInfor.diachi.length)
 
     //console.log('Hello')
     //console.log(ListVoucher)
@@ -279,12 +280,12 @@ export default function Payment()
         <Text style={{paddingLeft: 10, color:'black', fontWeight:'700',fontSize:20,marginTop: 10, marginBottom: 5}}>Chọn hình thức thanh toán</Text>
         <RadioButton.Group onValueChange={newValue => setValue(newValue)} value={value}>
         <View style={styles.select_pay}>
-            <RadioButton onPress={() => setValue('first')} value="first" />
+            <RadioButton onValueChange={() => setValue('first')} value="first" />
             <Image style={styles.icon_pay} source={require('../asset/icon/pay.png')}/> 
             <Text style={{fontSize: 16, marginLeft: 5}} >Thanh toán bằng tiền mặt</Text>
         </View>
         <View style={styles.select_pay}>
-            <RadioButton onPress={() => setValue('second')} value="second" />
+            <RadioButton onValueChange={() => setValue('second')} value="second" />
             <Image style={styles.icon_paymomo} source={require('../asset/icon/MoMo_Logo.png')}/> 
             <Text style={{fontSize: 16, marginLeft: 5}} > Thanh toán bằng ví Momo</Text>
         </View>

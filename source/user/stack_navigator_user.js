@@ -32,6 +32,7 @@ export default function StackUserScreen() {
 
   return (
       <Stack.Navigator
+      independent={true}
       screenOptions={{headerShown: false}}
       >
       <Stack.Screen
@@ -53,7 +54,7 @@ export default function StackUserScreen() {
         name='List_HistoryLookup'
         component={List_History_Lookup}/>
       <Stack.Screen 
-        name='Detail_HistoryLookup'
+        name='Detail_History_Lookup'
         component={Detail_History_Lookup}/>
       <Stack.Screen 
         name='VoucherDetail'

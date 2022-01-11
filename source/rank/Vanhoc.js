@@ -23,19 +23,19 @@ export default function VanHoc(){
   React.useEffect(() => 
   {
     async function fetchData(){
-      const request = await axios.get('http://192.168.43.180:3000/theloai/' + value)
+      const request = await axios.get('http://192.168.1.8:3000/theloai/' + value)
       setBook(request.data.books)
       return request.data.books
     }
     fetchData();
 
-  },['http://192.168.1.5:3000/'])
+  },['http://192.168.1.8:3000/'])
   //---------------------------------------------------------------
    console.log(Book)
 
    function BookViewed(index){
     console.log(username + ' SÁCH ĐÃ XEM ' + Book[index].tensach)
-    const request = axios.get('http://192.168.43.180:3000/sachdaxem?username=' + username + '&tensach=' + Book[index].tensach + '&hinhanh=' + Book[index].hinhanh + '&giaban=' + Book[index].giaban);
+    const request = axios.get('http://192.168.1.8:3000/sachdaxem?username=' + username + '&tensach=' + Book[index].tensach + '&hinhanh=' + Book[index].hinhanh + '&giaban=' + Book[index].giaban);
    console.log(request.data);
    navigation.navigate('BookDetailHomeScreen', {tensach: Book[index].tensach, username: username})
   }

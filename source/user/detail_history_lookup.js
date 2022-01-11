@@ -95,7 +95,7 @@ export default function HistoryLookup()
                 <View style = {styles.view2}>
                     <Text style={{fontSize: 16, color: 'blue'}}>Voucher: {Voucher}</Text>
                     <NumberFormat value={Donhang.tongtien} displayType={'text'} thousandSeparator={true} suffix={' đ'} 
-                                renderText={(value) =<Text style={{fontSize: 16}}>Thành tiền: <Text style={styles.newprice}>{value}</Text></Text>}/> 
+                                renderText={(value) => <Text style={{fontSize: 16}}>Thành tiền: <Text style={styles.newprice}>{value}</Text></Text>}/> 
                     {/* <Text style={{fontSize: 16}}>Thành tiền:<Text style={styles.newprice}> {Donhang.tongtien} đ</Text></Text> */}
                 </View>
                 <View style = {styles.view3}>
